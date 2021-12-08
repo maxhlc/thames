@@ -49,3 +49,6 @@ _deps
 
 # Build directory
 build/
+
+# Binary directory
+bin/
