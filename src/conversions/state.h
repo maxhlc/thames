@@ -8,6 +8,8 @@ using namespace thames::types;
 
 namespace thames::conversions::state{
 
-    Vector6 cartesian_to_keplerian(const Vector3 &R, const Vector3 &V, const double &mu);
+    Vector6 cartesian_to_keplerian(const Vector6 &RV, const double &mu);
+
+    Vector6 keplerian_to_cartesian(const Vector6 &keplerian, const double &mu);
 
 }

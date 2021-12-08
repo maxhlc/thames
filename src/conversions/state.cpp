@@ -1,6 +1,3 @@
-#include <array>
-#include <iostream>
-
 #include <eigen3/Eigen/Core>
 #include <eigen3/Eigen/Geometry>
 
@@ -11,8 +8,13 @@ using namespace thames::types;
 
 namespace thames::conversions::state{
 
-    Vector6 cartesian_to_keplerian(const Vector3 &R, const Vector3 &V, const double &mu){
+    Vector6 cartesian_to_keplerian(const Vector6 &RV, const double &mu){
         // TODO: Documentation
+
+        // Extract position and velocity vectors
+        Vector3 R, V;
+        R[0] = RV[0]; R[1] = RV[1]; R[2] = RV[2];
+        V[0] = RV[3]; V[1] = RV[4]; V[2] = RV[5];
         
         // Declare units vectors
         const Vector3 I = {1.0f, 0.0f, 0.0f};
@@ -96,15 +98,54 @@ namespace thames::conversions::state{
         }
 
         // Store elements in the Keplerian elements vector
-        keplerian[0] = sma;
-        keplerian[1] = e;
-        keplerian[2] = inc;
-        keplerian[3] = raan;
-        keplerian[4] = aop;
-        keplerian[5] = ta;
+        keplerian << sma, e, inc, raan, aop, ta;
 
         // Return Keplerian elements vector
         return keplerian;
+    }
+
+    Vector6 keplerian_to_cartesian(const Vector6 &keplerian, const double &mu){
+        // TODO: documentation
+
+        // Extract Keplerian elements
+        double sma = keplerian[0];
+        double e = keplerian[1];
+        double inc = keplerian[2];
+        double raan = keplerian[3];
+        double aop = keplerian[4];
+        double ta = keplerian[5];
+
+        // Calculate angle trig
+        double cinc = cos(inc), sinc = sin(inc);
+        double craan = cos(raan), sraan = sin(raan);
+        double caop = cos(aop), saop = sin(aop);
+        double cta = cos(ta), sta = sin(ta);
+
+        // Calculate eccentric anomaly
+        double E = 2.0f*atan(sqrt((1.0f - e)/(1.0f + e))*tan(ta/2.0f));
+
+        // Calculate radial distance
+        double r = sma*(1.0f - pow(e, 2.0f))/(1.0f + e*cta);
+
+        // Calculate position and velocity vectors in the orbital frame
+        Vector3 o;
+        o << r*cta, r*sta, 0.0f;
+
+        Vector3 dodt;
+        double fac = sqrt(mu*sma)/r;
+        dodt << -fac*sin(E), fac*sqrt(1.0f - pow(e, 2.0f))*cos(E), 0.0f;
+
+        // Transform the position and velocity vectors to the inertial frame
+        Vector6 RV;
+        RV[0] = o[0]*(caop*craan - saop*cinc*sraan) - o[1]*(saop*craan + caop*cinc*sraan);
+        RV[1] = o[0]*(caop*sraan + saop*cinc*craan) + o[1]*(caop*cinc*craan - saop*sraan);
+        RV[2] = o[0]*(saop*sinc) + o[1]*(caop*sinc);
+        RV[3] = dodt[0]*(caop*craan - saop*cinc*sraan) - dodt[1]*(saop*craan + caop*cinc*sraan);
+        RV[4] = dodt[0]*(caop*sraan + saop*cinc*craan) + dodt[1]*(caop*cinc*craan - saop*sraan);
+        RV[5] = dodt[0]*(saop*sinc) + dodt[1]*(caop*sinc);
+
+        // Return Cartesian state
+        return RV;
     }
 
 }
