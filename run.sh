@@ -1,2 +1,2 @@
 #!/bin/bash
-./build/thames
+./bin/thames
