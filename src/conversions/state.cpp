@@ -2,6 +2,7 @@
 #include <eigen3/Eigen/Geometry>
 
 #include "state.h"
+#include "util.h"
 #include "../types.h"
 
 using namespace thames::types;
@@ -58,7 +59,7 @@ namespace thames::conversions::state{
         } else {
             raan = acos(I.dot(N)/n);
             if(J.dot(N) < 0.0f){
-                raan = 2*M_PI - raan;
+                raan = 2.0f*M_PI - raan;
             }
         }
 
@@ -69,12 +70,12 @@ namespace thames::conversions::state{
         } else if (inc_near) {
             aop = atan2(E[1], E[0]);
             if(H[2] < 0.0f){
-                aop = 2*M_PI - aop;
+                aop = 2.0f*M_PI - aop;
             }
         } else {
             aop = acos(N.dot(E)/(n*e));
             if(K.dot(E) < 0.0){
-                aop = 2*M_PI - aop;
+                aop = 2.0f*M_PI - aop;
             }
         }
 
@@ -83,17 +84,17 @@ namespace thames::conversions::state{
         if (inc_near & e_near) {
             ta = acos(R[0]/r);
             if (V[0] > 0.0f) {
-                ta = 2*M_PI - ta;
+                ta = 2.0f*M_PI - ta;
             }
         } else if (e_near) {
             ta = acos(N.dot(R)/(n*r));
             if (R[2] < 0.0f) {
-                ta = 2*M_PI - ta;
+                ta = 2.0f*M_PI - ta;
             }
         } else {
             ta = acos(E.dot(R)/(e*r));
             if (R.dot(V) < 0.0f) {
-                ta = 2*M_PI - ta;
+                ta = 2.0f*M_PI - ta;
             }
         }
 
@@ -115,10 +116,7 @@ namespace thames::conversions::state{
         double aop = keplerian[4];
         double ta = keplerian[5];
 
-        // Calculate angle trig
-        double cinc = cos(inc), sinc = sin(inc);
-        double craan = cos(raan), sraan = sin(raan);
-        double caop = cos(aop), saop = sin(aop);
+        // Calculate true anomaly trigs
         double cta = cos(ta), sta = sin(ta);
 
         // Calculate eccentric anomaly
@@ -135,14 +133,16 @@ namespace thames::conversions::state{
         double fac = sqrt(mu*sma)/r;
         dodt << -fac*sin(E), fac*sqrt(1.0f - pow(e, 2.0f))*cos(E), 0.0f;
 
+        // Calculate rotation matrix
+        Matrix33 rot = thames::conversions::util::rot_z(raan)*
+                       thames::conversions::util::rot_x(inc)*
+                       thames::conversions::util::rot_z(aop);
+
         // Transform the position and velocity vectors to the inertial frame
+        Vector3 R = rot*o;
+        Vector3 V = rot*dodt;
         Vector6 RV;
-        RV[0] = o[0]*(caop*craan - saop*cinc*sraan) - o[1]*(saop*craan + caop*cinc*sraan);
-        RV[1] = o[0]*(caop*sraan + saop*cinc*craan) + o[1]*(caop*cinc*craan - saop*sraan);
-        RV[2] = o[0]*(saop*sinc) + o[1]*(caop*sinc);
-        RV[3] = dodt[0]*(caop*craan - saop*cinc*sraan) - dodt[1]*(saop*craan + caop*cinc*sraan);
-        RV[4] = dodt[0]*(caop*sraan + saop*cinc*craan) + dodt[1]*(caop*cinc*craan - saop*sraan);
-        RV[5] = dodt[0]*(saop*sinc) + dodt[1]*(caop*sinc);
+        RV << R[0], R[1], R[2], V[0], V[1], V[2];
 
         // Return Cartesian state
         return RV;
