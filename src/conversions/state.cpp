@@ -148,7 +148,7 @@ namespace thames::conversions::state{
         return RV;
     }
 
-    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, const std::function<double (double, Vector6)> &te, const std::function<double (double, Vector6)> &ueff){
+    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, const std::function<double (double, Vector3)> &U){
         // TODO: documentation
 
         // Extract position and velocity vectors
@@ -160,8 +160,15 @@ namespace thames::conversions::state{
         double r = R.norm();
         double drdt = R.dot(V)/r;
 
-        // Calculate energy
-        double e = te(t, RV);
+        // Calculate the angular momentum
+        Vector3 H = R.cross(V);
+        double h = H.norm();
+
+        // Calculate the effective potential energy
+        double ueff = pow(h, 2.0f)/(2.0f*pow(r, 2.0f)) + U(t, R);
+
+        // Calculate the total energy
+        double e = 0.5f*pow(drdt, 2.0f) - mu/r + ueff;
 
         // Calculate the generalised mean motion
         double nu = 1.0f/mu*pow(-2.0f*e, 1.5f);
@@ -189,7 +196,7 @@ namespace thames::conversions::state{
         double sl = er.dot(ey);
 
         // Calculate the generalised angular momentum
-        double c = sqrt(2.0f*pow(r, 2.0f)*ueff(t, RV));
+        double c = sqrt(2.0f*pow(r, 2.0f)*ueff);
 
         // Calculate the generalised semi-latus rectum
         double p = pow(c, 2.0f)/mu;
@@ -213,12 +220,7 @@ namespace thames::conversions::state{
 
         // Construct GEqOE state vector
         Vector6 GEqOE;
-        GEqOE[0] = nu;
-        GEqOE[1] = p1;
-        GEqOE[2] = p2;
-        GEqOE[3] = L;
-        GEqOE[4] = q1;
-        GEqOE[5] = q2;
+        GEqOE << nu, p1, p2, L, q1, q2;
 
         // Return GEqOE state vector
         return GEqOE;

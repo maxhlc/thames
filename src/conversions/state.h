@@ -10,6 +10,6 @@ namespace thames::conversions::state{
 
     Vector6 keplerian_to_cartesian(const Vector6 &keplerian, const double &mu);
 
-    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, const std::function<double (double, Vector6)> &te, const std::function<double (double, Vector6)> &ueff);
+    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, const std::function<double (double, Vector3)> &U);
 
 }
