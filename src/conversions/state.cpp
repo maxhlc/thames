@@ -142,10 +142,86 @@ namespace thames::conversions::state{
         Vector3 R = rot*o;
         Vector3 V = rot*dodt;
         Vector6 RV;
-        RV << R[0], R[1], R[2], V[0], V[1], V[2];
+        RV << R, V;
 
         // Return Cartesian state
         return RV;
+    }
+
+    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, const std::function<double (double, Vector6)> &te, const std::function<double (double, Vector6)> &ueff){
+        // TODO: documentation
+
+        // Extract position and velocity vectors
+        Vector3 R, V;
+        R = RV(Eigen::seq(0,2));
+        V = RV(Eigen::seq(3,5));
+
+        // Calculate range and range rate
+        double r = R.norm();
+        double drdt = R.dot(V)/r;
+
+        // Calculate energy
+        double e = te(t, RV);
+
+        // Calculate the generalised mean motion
+        double nu = 1.0f/mu*pow(-2.0f*e, 1.5f);
+
+        // Calculate Keplerian elements, and extract angles
+        Vector6 keplerian = cartesian_to_keplerian(RV, mu);
+        double sma = keplerian[0];
+        double inc = keplerian[2];
+        double raan = keplerian[3];
+
+        // Calculate plane orientation parameters
+        double q1 = tan(inc/2.0f)*sin(raan);
+        double q2 = tan(inc/2.0f)*cos(raan);
+
+        // Calculate equinocital reference frame unit vectors
+        double efac = 1.0f/(1.0f + pow(q1, 2.0f) + pow(q2, 2.0f));
+        Vector3 ex, ey;
+        ex << efac*(1.0f - pow(q1, 2.0f) + pow(q2, 2.0f)), efac*(2.0f*q1*q2), efac*(-2.0f*q1);
+        ey << efac*(2.0f*q1*q2), efac*(1.0f + pow(q1, 2.0f) - pow(q2, 2.0f)), efac*(2.0f*q2);
+
+        // Calculate radial unit vector
+        Vector3 er = R.normalized();
+
+        // Calculate trig of the true longitude
+        double cl = er.dot(ex);
+        double sl = er.dot(ey);
+
+        // Calculate the generalised angular momentum
+        double c = sqrt(2.0f*pow(r, 2.0f)*ueff(t, RV));
+
+        // Calculate the generalised semi-latus rectum
+        double p = pow(c, 2.0f)/mu;
+
+        // Calculate remaining non-osculating ellipse parameters
+        double pfac1 = (p/r - 1.0f);
+        double pfac2 = c*drdt/mu;
+        double p1 = pfac1*sl - pfac2*cl;
+        double p2 = pfac1*cl + pfac2*drdt/mu*sl;
+
+        // Calculate velocity
+        double w = sqrt(mu/sma);
+
+        // Calculate generalised mean longitude
+        double SCfac1 = mu + c*w - r*pow(drdt, 2.0f);
+        double SCfac2 = drdt*(c + w*r);
+        double S = SCfac1*sl - SCfac2*cl;
+        double C = SCfac1*cl + SCfac2*sl;
+        double L = atan2(S, C) + (C*p1 - S*p2)/(mu + c*w);
+
+        // Construct GEqOE state vector
+        Vector6 GEqOE;
+        GEqOE[0] = nu;
+        GEqOE[1] = p1;
+        GEqOE[2] = p2;
+        GEqOE[3] = L;
+        GEqOE[4] = q1;
+        GEqOE[5] = q2;
+
+        // Return GEqOE state vector
+        return GEqOE;
     }
 
 }
