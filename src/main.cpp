@@ -1,7 +1,7 @@
 #include <array>
 #include <iostream>
 
-#include <eigen3/Eigen/Core>
+#include <Eigen/Core>
 
 #include "conversions/state.h"
 #include "types.h"

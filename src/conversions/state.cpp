@@ -1,5 +1,5 @@
-#include <eigen3/Eigen/Core>
-#include <eigen3/Eigen/Geometry>
+#include <Eigen/Core>
+#include <Eigen/Geometry>
 
 #include "state.h"
 #include "util.h"
@@ -14,8 +14,8 @@ namespace thames::conversions::state{
 
         // Extract position and velocity vectors
         Vector3 R, V;
-        R[0] = RV[0]; R[1] = RV[1]; R[2] = RV[2];
-        V[0] = RV[3]; V[1] = RV[4]; V[2] = RV[5];
+        R = RV(Eigen::seq(0,2));
+        V = RV(Eigen::seq(3,5));
         
         // Declare units vectors
         const Vector3 I = {1.0f, 0.0f, 0.0f};
