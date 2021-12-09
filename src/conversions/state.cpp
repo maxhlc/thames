@@ -168,7 +168,6 @@ namespace thames::conversions::state{
 
         // Calculate Keplerian elements, and extract angles
         Vector6 keplerian = cartesian_to_keplerian(RV, mu);
-        double sma = keplerian[0];
         double inc = keplerian[2];
         double raan = keplerian[3];
 
@@ -201,8 +200,9 @@ namespace thames::conversions::state{
         double p1 = pfac1*sl - pfac2*cl;
         double p2 = pfac1*cl + pfac2*drdt/mu*sl;
 
-        // Calculate velocity
-        double w = sqrt(mu/sma);
+        // Calculate generalised semi-major axis and velocity
+        double a = pow(mu/pow(nu, 2.0f), 1.0f/3.0f);
+        double w = sqrt(mu/a);
 
         // Calculate generalised mean longitude
         double SCfac1 = mu + c*w - r*pow(drdt, 2.0f);
