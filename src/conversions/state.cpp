@@ -137,9 +137,9 @@ namespace thames::conversions::state{
         dodt << -fac*sin(E), fac*sqrt(1.0f - pow(e, 2.0f))*cos(E), 0.0f;
 
         // Calculate rotation matrix
-        Matrix33 rot = thames::conversions::util::rot_z(raan)*
-                       thames::conversions::util::rot_x(inc)*
-                       thames::conversions::util::rot_z(aop);
+        Matrix33 rot = thames::conversions::util::rot_z(-raan)*
+                       thames::conversions::util::rot_x(-inc)*
+                       thames::conversions::util::rot_z(-aop);
 
         // Transform the position and velocity vectors to the inertial frame
         Vector3 R = rot*o;
