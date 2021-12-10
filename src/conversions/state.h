@@ -12,4 +12,6 @@ namespace thames::conversions::state{
 
     Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, const std::function<double (double, Vector3)> &U);
 
+    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &GEqOE, const double &mu, const std::function<double (double, Vector3)> &U);
+
 }

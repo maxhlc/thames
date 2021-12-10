@@ -1,9 +1,12 @@
+#include <functional>
+
 #include <Eigen/Core>
 #include <Eigen/Geometry>
 
 #include "state.h"
 #include "util.h"
 #include "../types.h"
+#include "../util/root.h"
 
 using namespace thames::types;
 
@@ -171,7 +174,7 @@ namespace thames::conversions::state{
         double e = 0.5f*pow(drdt, 2.0f) - mu/r + ueff;
 
         // Calculate the generalised mean motion
-        double nu = 1.0f/mu*pow(-2.0f*e, 1.5f);
+        double nu = pow(-2.0f*e, 1.5f)/mu;
 
         // Calculate Keplerian elements, and extract angles
         Vector6 keplerian = cartesian_to_keplerian(RV, mu);
@@ -219,11 +222,70 @@ namespace thames::conversions::state{
         double L = atan2(S, C) + (C*p1 - S*p2)/(mu + c*w);
 
         // Construct GEqOE state vector
-        Vector6 GEqOE;
-        GEqOE << nu, p1, p2, L, q1, q2;
+        Vector6 geqoe;
+        geqoe << nu, p1, p2, L, q1, q2;
 
         // Return GEqOE state vector
-        return GEqOE;
+        return geqoe;
+    }
+
+    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, const std::function<double (double, Vector3)> &U){
+        // TODO: documentation
+
+        // Extract elements
+        double nu = geqoe[0];
+        double p1 = geqoe[1];
+        double p2 = geqoe[2];
+        double L = geqoe[3];
+        double q1 = geqoe[4];
+        double q2 = geqoe[5];
+
+        // Calculate generalised eccentric longitude
+        std::function<double (double)> fk = [p1, p2, L](double k) {return (k + p1*cos(k) - p2*sin(k) - L);};
+        double k = thames::util::root::golden_section_search(fk, -M_PI, M_PI);
+        double sink = sin(k);
+        double cosk = cos(k);
+
+        // Calculate generalised semi-major axis
+        double a = pow(mu/pow(nu, 2.0f), 1.0f/3.0f);
+
+        // Calculate range and range rate
+        double r = a*(1.0f - p1*sink - p2*cosk);
+        double drdt = sqrt(mu*a)/r*(p2*sink - p1*cosk);
+
+        // Calculate trig of the true longitude
+        double alpha = 1.0f/(1.0f + sqrt(1.0f - pow(p1, 2.0f) - pow(p2, 2.0f)));
+        double sinl = a/r*(alpha*p1*p2*cosk + (1.0f - alpha*pow(p2, 2.0f))*sink - p1);
+        double cosl = a/r*(alpha*p1*p2*sink + (1.0f - alpha*pow(p1, 2.0f))*cosk - p2);
+
+        // Calculate equinocital reference frame unit vectors
+        double efac = 1.0f/(1.0f + pow(q1, 2.0f) + pow(q2, 2.0f));
+        Vector3 ex, ey;
+        ex << efac*(1.0f - pow(q1, 2.0f) + pow(q2, 2.0f)), efac*(2.0f*q1*q2), efac*(-2.0f*q1);
+        ey << efac*(2.0f*q1*q2), efac*(1.0f + pow(q1, 2.0f) - pow(q2, 2.0f)), efac*(2.0f*q2);
+
+        // Calculate orbital basis vectors
+        Vector3 er = ex*cosl + ey*sinl;
+        Vector3 ef = ey*cosl - ex*sinl;
+
+        // Calculate position
+        Vector3 R = r*er;
+
+        // Calculate generalised angular momentum
+        double c = pow(pow(mu, 2.0f)/nu, 1.0f/3.0f)*sqrt(1.0f - pow(p1, 2.0f) - pow(p2, 2.0f));
+
+        // Calculate angular momentum
+        double h = sqrt(pow(c, 2.0f) - 2.0f*pow(r, 2.0f)*U(t, R));
+
+        // Calculate velocity
+        Vector3 V = drdt*er + h/r*ef;
+
+        // Construct Cartesian state vector
+        Vector6 RV;
+        RV << R, V;
+
+        // Return Cartesian state vector
+        return RV;
     }
 
 }
