@@ -9,7 +9,7 @@ namespace thames::util::optimise{
         // TODO: documentation
 
         // Set parameters
-        const double gr = 0.5f*(sqrt(5.0f) + 1);
+        const double gr = 0.5*(sqrt(5.0) + 1);
         const double tol = 1e-14;
 
         // Calculate test points
@@ -31,7 +31,7 @@ namespace thames::util::optimise{
         }
 
         // Return converged value
-        return (0.5f*(a + b));
+        return (0.5*(a + b));
     }
 
 }

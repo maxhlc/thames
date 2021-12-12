@@ -14,7 +14,7 @@ double U(double t, Vector3 R){
 
 int main(){
     Vector6 RV;
-    RV << 7100.0f, 0.0f, 1300.0f, 0.3f, 7.35f, 1.0f;
+    RV << 7100.0, 0.0, 1300.0, 0.3, 7.35, 1.0;
     double mu = 3.986e5;
 
     Vector3 R = RV(Eigen::seq(0,2));

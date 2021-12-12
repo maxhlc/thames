@@ -21,9 +21,9 @@ namespace thames::conversions::state{
         V = RV(Eigen::seq(3,5));
         
         // Declare units vectors
-        const Vector3 I = {1.0f, 0.0f, 0.0f};
-        const Vector3 J = {0.0f, 1.0f, 0.0f};
-        const Vector3 K = {0.0f, 0.0f, 1.0f};
+        const Vector3 I = {1.0, 0.0, 0.0};
+        const Vector3 J = {0.0, 1.0, 0.0};
+        const Vector3 K = {0.0, 0.0, 1.0};
 
         // Set constants
         const double atol = 1e-12;
@@ -36,7 +36,7 @@ namespace thames::conversions::state{
         double v = V.norm();
 
         // Calculate semi-major axis
-        double sma = 1.0f/(2.0f/r - pow(v, 2.0f)/mu);
+        double sma = 1.0/(2.0/r - pow(v, 2.0)/mu);
 
         // Calculate angular momentum vector and magnitude
         Vector3 H = R.cross(V);
@@ -58,27 +58,27 @@ namespace thames::conversions::state{
         float n = N.norm();
         float raan;
         if (inc_near) {
-            raan = 0.0f;
+            raan = 0.0;
         } else {
             raan = acos(I.dot(N)/n);
-            if(J.dot(N) < 0.0f){
-                raan = 2.0f*M_PI - raan;
+            if(J.dot(N) < 0.0){
+                raan = 2.0*M_PI - raan;
             }
         }
 
         // Calculate argument of periapsis
         float aop;
         if (inc_near & e_near) {
-            aop = 0.0f;
+            aop = 0.0;
         } else if (inc_near) {
             aop = atan2(E[1], E[0]);
-            if(H[2] < 0.0f){
-                aop = 2.0f*M_PI - aop;
+            if(H[2] < 0.0){
+                aop = 2.0*M_PI - aop;
             }
         } else {
             aop = acos(N.dot(E)/(n*e));
             if(K.dot(E) < 0.0){
-                aop = 2.0f*M_PI - aop;
+                aop = 2.0*M_PI - aop;
             }
         }
 
@@ -86,18 +86,18 @@ namespace thames::conversions::state{
         float ta;
         if (inc_near & e_near) {
             ta = acos(R[0]/r);
-            if (V[0] > 0.0f) {
-                ta = 2.0f*M_PI - ta;
+            if (V[0] > 0.0) {
+                ta = 2.0*M_PI - ta;
             }
         } else if (e_near) {
             ta = acos(N.dot(R)/(n*r));
-            if (R[2] < 0.0f) {
-                ta = 2.0f*M_PI - ta;
+            if (R[2] < 0.0) {
+                ta = 2.0*M_PI - ta;
             }
         } else {
             ta = acos(E.dot(R)/(e*r));
-            if (R.dot(V) < 0.0f) {
-                ta = 2.0f*M_PI - ta;
+            if (R.dot(V) < 0.0) {
+                ta = 2.0*M_PI - ta;
             }
         }
 
@@ -123,18 +123,18 @@ namespace thames::conversions::state{
         double cta = cos(ta), sta = sin(ta);
 
         // Calculate eccentric anomaly
-        double E = 2.0f*atan(sqrt((1.0f - e)/(1.0f + e))*tan(ta/2.0f));
+        double E = 2.0*atan(sqrt((1.0 - e)/(1.0 + e))*tan(ta/2.0));
 
         // Calculate radial distance
-        double r = sma*(1.0f - pow(e, 2.0f))/(1.0f + e*cta);
+        double r = sma*(1.0 - pow(e, 2.0))/(1.0 + e*cta);
 
         // Calculate position and velocity vectors in the orbital frame
         Vector3 o;
-        o << r*cta, r*sta, 0.0f;
+        o << r*cta, r*sta, 0.0;
 
         Vector3 dodt;
         double fac = sqrt(mu*sma)/r;
-        dodt << -fac*sin(E), fac*sqrt(1.0f - pow(e, 2.0f))*cos(E), 0.0f;
+        dodt << -fac*sin(E), fac*sqrt(1.0 - pow(e, 2.0))*cos(E), 0.0;
 
         // Calculate rotation matrix
         Matrix33 rot = thames::conversions::util::rot_z(-raan)*
@@ -168,13 +168,13 @@ namespace thames::conversions::state{
         double h = H.norm();
 
         // Calculate the effective potential energy
-        double ueff = pow(h, 2.0f)/(2.0f*pow(r, 2.0f)) + U(t, R);
+        double ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + U(t, R);
 
         // Calculate the total energy
-        double e = 0.5f*pow(drdt, 2.0f) - mu/r + ueff;
+        double e = 0.5*pow(drdt, 2.0) - mu/r + ueff;
 
         // Calculate the generalised mean motion
-        double nu = pow(-2.0f*e, 1.5f)/mu;
+        double nu = pow(-2.0*e, 1.5)/mu;
 
         // Calculate Keplerian elements, and extract angles
         Vector6 keplerian = cartesian_to_keplerian(RV, mu);
@@ -182,14 +182,14 @@ namespace thames::conversions::state{
         double raan = keplerian[3];
 
         // Calculate plane orientation parameters
-        double q1 = tan(inc/2.0f)*sin(raan);
-        double q2 = tan(inc/2.0f)*cos(raan);
+        double q1 = tan(inc/2.0)*sin(raan);
+        double q2 = tan(inc/2.0)*cos(raan);
 
         // Calculate equinocital reference frame unit vectors
-        double efac = 1.0f/(1.0f + pow(q1, 2.0f) + pow(q2, 2.0f));
+        double efac = 1.0/(1.0 + pow(q1, 2.0) + pow(q2, 2.0));
         Vector3 ex, ey;
-        ex << efac*(1.0f - pow(q1, 2.0f) + pow(q2, 2.0f)), efac*(2.0f*q1*q2), efac*(-2.0f*q1);
-        ey << efac*(2.0f*q1*q2), efac*(1.0f + pow(q1, 2.0f) - pow(q2, 2.0f)), efac*(2.0f*q2);
+        ex << efac*(1.0 - pow(q1, 2.0) + pow(q2, 2.0)), efac*(2.0*q1*q2), efac*(-2.0*q1);
+        ey << efac*(2.0*q1*q2), efac*(1.0 + pow(q1, 2.0) - pow(q2, 2.0)), efac*(2.0*q2);
 
         // Calculate radial unit vector
         Vector3 er = R.normalized();
@@ -199,23 +199,23 @@ namespace thames::conversions::state{
         double sl = er.dot(ey);
 
         // Calculate the generalised angular momentum
-        double c = sqrt(2.0f*pow(r, 2.0f)*ueff);
+        double c = sqrt(2.0*pow(r, 2.0)*ueff);
 
         // Calculate the generalised semi-latus rectum
-        double p = pow(c, 2.0f)/mu;
+        double p = pow(c, 2.0)/mu;
 
         // Calculate remaining non-osculating ellipse parameters
-        double pfac1 = (p/r - 1.0f);
+        double pfac1 = (p/r - 1.0);
         double pfac2 = c*drdt/mu;
         double p1 = pfac1*sl - pfac2*cl;
         double p2 = pfac1*cl + pfac2*drdt/mu*sl;
 
         // Calculate generalised semi-major axis and velocity
-        double a = pow(mu/pow(nu, 2.0f), 1.0f/3.0f);
+        double a = pow(mu/pow(nu, 2.0), 1.0/3.0);
         double w = sqrt(mu/a);
 
         // Calculate generalised mean longitude
-        double SCfac1 = mu + c*w - r*pow(drdt, 2.0f);
+        double SCfac1 = mu + c*w - r*pow(drdt, 2.0);
         double SCfac2 = drdt*(c + w*r);
         double S = SCfac1*sl - SCfac2*cl;
         double C = SCfac1*cl + SCfac2*sl;
@@ -247,22 +247,22 @@ namespace thames::conversions::state{
         double cosk = cos(k);
 
         // Calculate generalised semi-major axis
-        double a = pow(mu/pow(nu, 2.0f), 1.0f/3.0f);
+        double a = pow(mu/pow(nu, 2.0), 1.0/3.0);
 
         // Calculate range and range rate
-        double r = a*(1.0f - p1*sink - p2*cosk);
+        double r = a*(1.0 - p1*sink - p2*cosk);
         double drdt = sqrt(mu*a)/r*(p2*sink - p1*cosk);
 
         // Calculate trig of the true longitude
-        double alpha = 1.0f/(1.0f + sqrt(1.0f - pow(p1, 2.0f) - pow(p2, 2.0f)));
-        double sinl = a/r*(alpha*p1*p2*cosk + (1.0f - alpha*pow(p2, 2.0f))*sink - p1);
-        double cosl = a/r*(alpha*p1*p2*sink + (1.0f - alpha*pow(p1, 2.0f))*cosk - p2);
+        double alpha = 1.0/(1.0 + sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0)));
+        double sinl = a/r*(alpha*p1*p2*cosk + (1.0 - alpha*pow(p2, 2.0))*sink - p1);
+        double cosl = a/r*(alpha*p1*p2*sink + (1.0 - alpha*pow(p1, 2.0))*cosk - p2);
 
         // Calculate equinocital reference frame unit vectors
-        double efac = 1.0f/(1.0f + pow(q1, 2.0f) + pow(q2, 2.0f));
+        double efac = 1.0/(1.0 + pow(q1, 2.0) + pow(q2, 2.0));
         Vector3 ex, ey;
-        ex << efac*(1.0f - pow(q1, 2.0f) + pow(q2, 2.0f)), efac*(2.0f*q1*q2), efac*(-2.0f*q1);
-        ey << efac*(2.0f*q1*q2), efac*(1.0f + pow(q1, 2.0f) - pow(q2, 2.0f)), efac*(2.0f*q2);
+        ex << efac*(1.0 - pow(q1, 2.0) + pow(q2, 2.0)), efac*(2.0*q1*q2), efac*(-2.0*q1);
+        ey << efac*(2.0*q1*q2), efac*(1.0 + pow(q1, 2.0) - pow(q2, 2.0)), efac*(2.0*q2);
 
         // Calculate orbital basis vectors
         Vector3 er = ex*cosl + ey*sinl;
@@ -272,10 +272,10 @@ namespace thames::conversions::state{
         Vector3 R = r*er;
 
         // Calculate generalised angular momentum
-        double c = pow(pow(mu, 2.0f)/nu, 1.0f/3.0f)*sqrt(1.0f - pow(p1, 2.0f) - pow(p2, 2.0f));
+        double c = pow(pow(mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
 
         // Calculate angular momentum
-        double h = sqrt(pow(c, 2.0f) - 2.0f*pow(r, 2.0f)*U(t, R));
+        double h = sqrt(pow(c, 2.0) - 2.0*pow(r, 2.0)*U(t, R));
 
         // Calculate velocity
         Vector3 V = drdt*er + h/r*ef;
