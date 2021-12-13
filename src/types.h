@@ -1,3 +1,5 @@
+#include <functional>
+
 #include <Eigen/Core>
 
 namespace thames::types {
@@ -9,4 +11,9 @@ namespace thames::types {
     // Define matrix types
     typedef Eigen::Matrix<double, 3, 3> Matrix33;
 
+    // Function types
+    typedef std::function<double (double, Vector3)> Potential;
+    typedef std::function<double (double, Vector3, Vector3)> PotentialDerivative;
+    typedef std::function<Vector3 (double, Vector3, Vector3)> Force;
+    
 }

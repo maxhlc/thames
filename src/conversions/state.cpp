@@ -151,7 +151,7 @@ namespace thames::conversions::state{
         return RV;
     }
 
-    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, const std::function<double (double, Vector3)> &U){
+    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, const Potential &U){
         // TODO: documentation
 
         // Extract position and velocity vectors
@@ -229,7 +229,7 @@ namespace thames::conversions::state{
         return geqoe;
     }
 
-    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, const std::function<double (double, Vector3)> &U){
+    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, const Potential &U){
         // TODO: documentation
 
         // Extract elements
