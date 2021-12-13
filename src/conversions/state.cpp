@@ -208,7 +208,7 @@ namespace thames::conversions::state{
         double pfac1 = (p/r - 1.0);
         double pfac2 = c*drdt/mu;
         double p1 = pfac1*sl - pfac2*cl;
-        double p2 = pfac1*cl + pfac2*drdt/mu*sl;
+        double p2 = pfac1*cl + pfac2*sl;
 
         // Calculate generalised semi-major axis and velocity
         double a = pow(mu/pow(nu, 2.0), 1.0/3.0);
