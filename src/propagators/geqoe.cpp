@@ -1,5 +1,3 @@
-#include <functional>
-
 #include "geqoe.h"
 #include "../types.h"
 #include "../conversions/state.h"
