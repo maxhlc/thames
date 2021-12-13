@@ -4,4 +4,5 @@ add_executable(${PROJECT_NAME}
                conversions/util.cpp
                util/root.cpp
                util/optimise.cpp
+               propagators/geqoe.cpp
                )
