@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['geqoe_5fto_5fcartesian_3',['geqoe_to_cartesian',['../namespacethames_1_1conversions_1_1state.html#a26b58a5130488d470bb893f5400dd701',1,'thames::conversions::state']]],
-  ['golden_5fsection_5fsearch_4',['golden_section_search',['../namespacethames_1_1util_1_1optimise.html#a9db9c65a2da8e2acc935c835d60ec7c6',1,'thames::util::optimise::golden_section_search()'],['../namespacethames_1_1util_1_1root.html#afa633689231ad247a8018cc08a780dca',1,'thames::util::root::golden_section_search()']]]
+  ['derivative_3',['derivative',['../namespacethames_1_1propagators_1_1geqoe.html#a38bc5b91b9e9c0b046a63b9b96f922af',1,'thames::propagators::geqoe::derivative(const Vector6 &amp;geqoe, Vector6 &amp;geqoedot, const double t, const double &amp;mu, Potential &amp;U_func, PotentialDerivative &amp;Ut_func, Force &amp;F_func, Force &amp;P_func)'],['../namespacethames_1_1propagators_1_1geqoe.html#a25ad80d0537aee0dde40ea6302b7bb34',1,'thames::propagators::geqoe::derivative(const Vector6 &amp;Y, Vector6 &amp;Ydot, const double t)']]]
 ];

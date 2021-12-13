@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['vector3_60',['Vector3',['../namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88',1,'thames::types']]],
-  ['vector6_61',['Vector6',['../namespacethames_1_1types.html#a8e9c7d8c821fe73e1a0ff2843d383eeb',1,'thames::types']]]
+  ['matrix33_73',['Matrix33',['../namespacethames_1_1types.html#ad1c5fc048545d6e5a27b0cdde8ccc348',1,'thames::types']]]
 ];
