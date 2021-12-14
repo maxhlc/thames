@@ -1,3 +1,6 @@
+#ifndef TYPES
+#define TYPES
+
 #include <functional>
 
 #include <Eigen/Core>
@@ -17,3 +20,5 @@ namespace thames::types {
     typedef std::function<Vector3 (double, Vector3, Vector3)> Force;
     
 }
+
+#endif

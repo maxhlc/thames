@@ -1,3 +1,6 @@
+#ifndef CONVERSIONS_STATE
+#define CONVERSIONS_STATE
+
 #include <Eigen/Core>
 
 #include "../types.h"
@@ -15,3 +18,5 @@ namespace thames::conversions::state{
     Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, const std::function<double (double, Vector3)> &U);
 
 }
+
+#endif
