@@ -7,7 +7,7 @@ using namespace thames::types;
 
 namespace thames::propagators::geqoe{
 
-    Vector6 derivative(const Vector6 &Y, Vector6 &Ydot, const double t);
+    void derivative(const Vector6 &geqoe, Vector6 &geqoedot, const double t, const double &mu, const Potential &U_func, const PotentialDerivative &Ut_func, const Force &F_func, const Force &P_func);
 
 }
 
