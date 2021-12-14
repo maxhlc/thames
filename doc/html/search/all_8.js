@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['root_2ecpp_17',['root.cpp',['../root_8cpp.html',1,'']]],
-  ['root_2eh_18',['root.h',['../root_8h.html',1,'']]],
-  ['rot_5fx_19',['rot_x',['../namespacethames_1_1conversions_1_1util.html#a7686c626d50be6eb729dc5587fb374cc',1,'thames::conversions::util']]],
-  ['rot_5fy_20',['rot_y',['../namespacethames_1_1conversions_1_1util.html#a0396ccf4b89211de66e9f8ff8bf688a8',1,'thames::conversions::util']]],
-  ['rot_5fz_21',['rot_z',['../namespacethames_1_1conversions_1_1util.html#a2e3206c1e02163b8eaf673cad5952df9',1,'thames::conversions::util']]]
+  ['potential_22',['Potential',['../namespacethames_1_1types.html#a20850705e8987a1486acddbd3b0eeda8',1,'thames::types']]],
+  ['potentialderivative_23',['PotentialDerivative',['../namespacethames_1_1types.html#ab028636774f4e616e2a8f63566179210',1,'thames::types']]]
 ];

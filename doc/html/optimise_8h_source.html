@@ -69,14 +69,19 @@ $(function() {
 <div class="title">optimise.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="optimise_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;math.h&gt;</span></div>
+<a href="optimise_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef THAMES_UTIL_OPTIMISE</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define THAMES_UTIL_OPTIMISE</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacethames_1_1util_1_1optimise.html">thames::util::optimise</a>{</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="namespacethames_1_1util_1_1optimise.html#a9db9c65a2da8e2acc935c835d60ec7c6">golden_section_search</a>(std::function&lt;<span class="keywordtype">double</span> (<span class="keywordtype">double</span>)&gt; func, <span class="keywordtype">double</span> a, <span class="keywordtype">double</span> b);</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;}</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;math.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacethames_1_1util_1_1optimise.html">thames::util::optimise</a>{</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="namespacethames_1_1util_1_1optimise.html#a9db9c65a2da8e2acc935c835d60ec7c6">golden_section_search</a>(std::function&lt;<span class="keywordtype">double</span> (<span class="keywordtype">double</span>)&gt; func, <span class="keywordtype">double</span> a, <span class="keywordtype">double</span> b);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anamespacethames_1_1util_1_1optimise_html"><div class="ttname"><a href="namespacethames_1_1util_1_1optimise.html">thames::util::optimise</a></div><div class="ttdef"><b>Definition:</b> optimise.cpp:6</div></div>
 <div class="ttc" id="anamespacethames_1_1util_1_1optimise_html_a9db9c65a2da8e2acc935c835d60ec7c6"><div class="ttname"><a href="namespacethames_1_1util_1_1optimise.html#a9db9c65a2da8e2acc935c835d60ec7c6">thames::util::optimise::golden_section_search</a></div><div class="ttdeci">double golden_section_search(std::function&lt; double(double)&gt; func, double a, double b)</div><div class="ttdef"><b>Definition:</b> optimise.cpp:8</div></div>

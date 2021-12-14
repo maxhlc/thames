@@ -69,22 +69,27 @@ $(function() {
 <div class="title">util.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="util_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;../types.h&quot;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacethames_1_1types.html">thames::types</a>;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacethames_1_1conversions_1_1util.html">thames::conversions::util</a> {</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <a class="code" href="namespacethames_1_1types.html#ad1c5fc048545d6e5a27b0cdde8ccc348">Matrix33</a> <a class="code" href="namespacethames_1_1conversions_1_1util.html#a7686c626d50be6eb729dc5587fb374cc">rot_x</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ang);</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <a class="code" href="namespacethames_1_1types.html#ad1c5fc048545d6e5a27b0cdde8ccc348">Matrix33</a> <a class="code" href="namespacethames_1_1conversions_1_1util.html#a0396ccf4b89211de66e9f8ff8bf688a8">rot_y</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ang);</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="namespacethames_1_1types.html#ad1c5fc048545d6e5a27b0cdde8ccc348">Matrix33</a> <a class="code" href="namespacethames_1_1conversions_1_1util.html#a2e3206c1e02163b8eaf673cad5952df9">rot_z</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ang);</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;}</div>
+<a href="util_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef THAMES_CONVERSIONS_UTIL</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define THAMES_CONVERSIONS_UTIL</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;../types.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacethames_1_1types.html">thames::types</a>;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacethames_1_1conversions_1_1util.html">thames::conversions::util</a> {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="namespacethames_1_1types.html#ad1c5fc048545d6e5a27b0cdde8ccc348">Matrix33</a> <a class="code" href="namespacethames_1_1conversions_1_1util.html#a7686c626d50be6eb729dc5587fb374cc">rot_x</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ang);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="namespacethames_1_1types.html#ad1c5fc048545d6e5a27b0cdde8ccc348">Matrix33</a> <a class="code" href="namespacethames_1_1conversions_1_1util.html#a0396ccf4b89211de66e9f8ff8bf688a8">rot_y</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ang);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="namespacethames_1_1types.html#ad1c5fc048545d6e5a27b0cdde8ccc348">Matrix33</a> <a class="code" href="namespacethames_1_1conversions_1_1util.html#a2e3206c1e02163b8eaf673cad5952df9">rot_z</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ang);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="anamespacethames_1_1types_html"><div class="ttname"><a href="namespacethames_1_1types.html">thames::types</a></div><div class="ttdef"><b>Definition:</b> types.h:5</div></div>
-<div class="ttc" id="anamespacethames_1_1types_html_ad1c5fc048545d6e5a27b0cdde8ccc348"><div class="ttname"><a href="namespacethames_1_1types.html#ad1c5fc048545d6e5a27b0cdde8ccc348">thames::types::Matrix33</a></div><div class="ttdeci">Eigen::Matrix&lt; double, 3, 3 &gt; Matrix33</div><div class="ttdef"><b>Definition:</b> types.h:12</div></div>
+<div class="ttc" id="anamespacethames_1_1types_html"><div class="ttname"><a href="namespacethames_1_1types.html">thames::types</a></div><div class="ttdef"><b>Definition:</b> types.h:8</div></div>
+<div class="ttc" id="anamespacethames_1_1types_html_ad1c5fc048545d6e5a27b0cdde8ccc348"><div class="ttname"><a href="namespacethames_1_1types.html#ad1c5fc048545d6e5a27b0cdde8ccc348">thames::types::Matrix33</a></div><div class="ttdeci">Eigen::Matrix&lt; double, 3, 3 &gt; Matrix33</div><div class="ttdef"><b>Definition:</b> types.h:15</div></div>
 <div class="ttc" id="anamespacethames_1_1conversions_1_1util_html_a0396ccf4b89211de66e9f8ff8bf688a8"><div class="ttname"><a href="namespacethames_1_1conversions_1_1util.html#a0396ccf4b89211de66e9f8ff8bf688a8">thames::conversions::util::rot_y</a></div><div class="ttdeci">Matrix33 rot_y(const double &amp;ang)</div><div class="ttdef"><b>Definition:</b> util.cpp:23</div></div>
 <div class="ttc" id="anamespacethames_1_1conversions_1_1util_html_a7686c626d50be6eb729dc5587fb374cc"><div class="ttname"><a href="namespacethames_1_1conversions_1_1util.html#a7686c626d50be6eb729dc5587fb374cc">thames::conversions::util::rot_x</a></div><div class="ttdeci">Matrix33 rot_x(const double &amp;ang)</div><div class="ttdef"><b>Definition:</b> util.cpp:8</div></div>
 <div class="ttc" id="anamespacethames_1_1conversions_1_1util_html"><div class="ttname"><a href="namespacethames_1_1conversions_1_1util.html">thames::conversions::util</a></div><div class="ttdef"><b>Definition:</b> util.cpp:6</div></div>

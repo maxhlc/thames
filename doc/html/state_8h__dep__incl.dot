@@ -5,9 +5,15 @@ digraph "src/conversions/state.h"
   node [fontname="Helvetica",fontsize="10",shape=record];
   Node1 [label="src/conversions/state.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="src/conversions/state.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$state_8cpp.html",tooltip=" "];
+  Node2 [label="src/conversions/dimensional.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$dimensional_8h.html",tooltip=" "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="src/conversions/dimensional.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$dimensional_8cpp.html",tooltip=" "];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="src/main.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip=" "];
   Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="src/main.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="src/conversions/state.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$state_8cpp.html",tooltip=" "];
   Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="src/propagators/geqoe.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$geqoe_8cpp.html",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="src/propagators/geqoe.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$geqoe_8cpp.html",tooltip=" "];
 }

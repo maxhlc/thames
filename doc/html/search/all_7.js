@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['potential_15',['Potential',['../namespacethames_1_1types.html#a20850705e8987a1486acddbd3b0eeda8',1,'thames::types']]],
-  ['potentialderivative_16',['PotentialDerivative',['../namespacethames_1_1types.html#ab028636774f4e616e2a8f63566179210',1,'thames::types']]]
+  ['optimise_2ecpp_20',['optimise.cpp',['../optimise_8cpp.html',1,'']]],
+  ['optimise_2eh_21',['optimise.h',['../optimise_8h.html',1,'']]]
 ];
