@@ -19,6 +19,14 @@ namespace thames::types {
     typedef std::function<double (double, Vector3, Vector3)> PotentialDerivative;
     typedef std::function<Vector3 (double, Vector3, Vector3)> Force;
     
+    // Dimensional factors structure
+    typedef struct {
+        double time;
+        double length;
+        double velocity;
+        double grav;
+    } DimensionalFactors;
+    
 }
 
 #endif

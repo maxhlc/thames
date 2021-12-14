@@ -1,5 +1,6 @@
 add_executable(${PROJECT_NAME}
                main.cpp
+               conversions/dimensional.cpp
                conversions/state.cpp
                conversions/util.cpp
                util/root.cpp
