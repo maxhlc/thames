@@ -53,7 +53,7 @@ int main(){
 
     Vector6 state_prop = thames::propagators::cowell::propagate(0.0, 86400.0, 1.0, state, mu, F_func);
 
-    std::cout << state_prop << vel2_error << std::endl;
+    std::cout << state_prop << std::endl;
 
     std::cout << "THAMES executed successfully" << std::endl;
 

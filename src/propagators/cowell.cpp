@@ -42,8 +42,11 @@ namespace thames::propagators::cowell{
             derivative(x, dxdt, time, mu, F_func);
         };
 
+        // Declare stepper
+        boost::numeric::odeint::runge_kutta_cash_karp54<Vector6> stepper;
+
         // Propagate orbit
-        boost::numeric::odeint::integrate(derivative_param, RV, tstart, tend, tstep);
+        boost::numeric::odeint::integrate_const(stepper, derivative_param, RV, tstart, tend, tstep);
 
         // Return final state
         return RV;
