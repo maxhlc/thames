@@ -1,5 +1,5 @@
-#ifndef TYPES
-#define TYPES
+#ifndef THAMES_TYPES
+#define THAMES_TYPES
 
 #include <functional>
 
@@ -26,7 +26,7 @@ namespace thames::types {
         double velocity;
         double grav;
     } DimensionalFactors;
-    
+
 }
 
 #endif

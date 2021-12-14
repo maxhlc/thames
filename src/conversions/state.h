@@ -1,5 +1,5 @@
-#ifndef CONVERSIONS_STATE
-#define CONVERSIONS_STATE
+#ifndef THAMES_CONVERSIONS_STATE
+#define THAMES_CONVERSIONS_STATE
 
 #include <Eigen/Core>
 

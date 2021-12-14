@@ -1,5 +1,5 @@
-#ifndef UTIL_OPTIMISE
-#define UTIL_OPTIMISE
+#ifndef THAMES_UTIL_OPTIMISE
+#define THAMES_UTIL_OPTIMISE
 
 #include <functional>
 #include <math.h>

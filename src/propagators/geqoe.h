@@ -1,5 +1,5 @@
-#ifndef PROPAGATORS_GEQOE
-#define PROPAGATORS_GEQOE
+#ifndef THAMES_PROPAGATORS_GEQOE
+#define THAMES_PROPAGATORS_GEQOE
 
 #include "../types.h"
 

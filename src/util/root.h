@@ -1,5 +1,5 @@
-#ifndef UTIL_ROOT
-#define UTIL_ROOT
+#ifndef THAMES_UTIL_ROOT
+#define THAMES_UTIL_ROOT
 
 #include <functional>
 #include <math.h>

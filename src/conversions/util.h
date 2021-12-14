@@ -1,5 +1,5 @@
-#ifndef CONVERSIONS_UTIL
-#define CONVERSIONS_UTIL
+#ifndef THAMES_CONVERSIONS_UTIL
+#define THAMES_CONVERSIONS_UTIL
 
 #include "../types.h"
 
