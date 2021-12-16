@@ -6,6 +6,7 @@
 #include "state.h"
 #include "util.h"
 #include "../types.h"
+#include "../util/angles.h"
 #include "../util/root.h"
 
 using namespace thames::types;
@@ -241,8 +242,9 @@ namespace thames::conversions::state{
         double q2 = geqoe[5];
 
         // Calculate generalised eccentric longitude
-        std::function<double (double)> fk = [p1, p2, L](double k) {return (k + p1*cos(k) - p2*sin(k) - L);};
-        double k = thames::util::root::golden_section_search(fk, -M_PI, M_PI);
+        L = thames::util::angles::angle_wrap(L);
+        auto fk = [p1, p2, L](double k) {return (k + p1*cos(k) - p2*sin(k) - L);};
+        double k = thames::util::root::golden_section_search(fk, -2*M_PI, 2*M_PI);
         double sink = sin(k);
         double cosk = cos(k);
 

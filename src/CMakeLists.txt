@@ -3,6 +3,7 @@ add_executable(${PROJECT_NAME}
                conversions/dimensional.cpp
                conversions/state.cpp
                conversions/util.cpp
+               util/angles.cpp
                util/root.cpp
                util/optimise.cpp
                propagators/cowell.cpp
