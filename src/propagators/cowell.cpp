@@ -34,7 +34,7 @@ namespace thames::propagators::cowell{
         RVdot << V, A;    
     }
 
-    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, Force F_func){
+    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, Force F_func, double atol, double rtol){
         // TODO: documentation
 
         // Declare derivative function wrapper
@@ -44,9 +44,10 @@ namespace thames::propagators::cowell{
 
         // Declare stepper
         boost::numeric::odeint::runge_kutta_cash_karp54<Vector6> stepper;
+        auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
 
         // Propagate orbit
-        boost::numeric::odeint::integrate_const(stepper, derivative_param, RV, tstart, tend, tstep);
+        boost::numeric::odeint::integrate_adaptive(steppercontrolled, derivative_param, RV, tstart, tend, tstep);
 
         // Return final state
         return RV;
