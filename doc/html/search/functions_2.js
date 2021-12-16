@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['geqoe_5fto_5fcartesian_80',['geqoe_to_cartesian',['../namespacethames_1_1conversions_1_1state.html#af7eb8a24db995e8c46615ab59f054f8e',1,'thames::conversions::state::geqoe_to_cartesian(const double &amp;t, const Vector6 &amp;geqoe, const double &amp;mu, const Potential &amp;U)'],['../namespacethames_1_1conversions_1_1state.html#a26b58a5130488d470bb893f5400dd701',1,'thames::conversions::state::geqoe_to_cartesian(const double &amp;t, const Vector6 &amp;geqoe, const double &amp;mu, const std::function&lt; double(double, Vector3)&gt; &amp;U)']]],
-  ['golden_5fsection_5fsearch_81',['golden_section_search',['../namespacethames_1_1util_1_1optimise.html#a9db9c65a2da8e2acc935c835d60ec7c6',1,'thames::util::optimise::golden_section_search()'],['../namespacethames_1_1util_1_1root.html#afa633689231ad247a8018cc08a780dca',1,'thames::util::root::golden_section_search()']]]
+  ['derivative_96',['derivative',['../namespacethames_1_1propagators_1_1cowell.html#ac35b44e71bf66c8419a2ed97f4f238dd',1,'thames::propagators::cowell::derivative()'],['../namespacethames_1_1propagators_1_1geqoe.html#a36a2d8fa52a8c035b3659d6e00ea909d',1,'thames::propagators::geqoe::derivative()']]]
 ];

@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['derivative_79',['derivative',['../namespacethames_1_1propagators_1_1geqoe.html#a38bc5b91b9e9c0b046a63b9b96f922af',1,'thames::propagators::geqoe::derivative(const Vector6 &amp;geqoe, Vector6 &amp;geqoedot, const double t, const double &amp;mu, Potential &amp;U_func, PotentialDerivative &amp;Ut_func, Force &amp;F_func, Force &amp;P_func)'],['../namespacethames_1_1propagators_1_1geqoe.html#a25ad80d0537aee0dde40ea6302b7bb34',1,'thames::propagators::geqoe::derivative(const Vector6 &amp;Y, Vector6 &amp;Ydot, const double t)']]]
+  ['cartesian_5fdimensionalise_92',['cartesian_dimensionalise',['../namespacethames_1_1conversions_1_1dimensional.html#af31f7a6fe7eaa4828fe2f320afac86dc',1,'thames::conversions::dimensional']]],
+  ['cartesian_5fnondimensionalise_93',['cartesian_nondimensionalise',['../namespacethames_1_1conversions_1_1dimensional.html#a6f81c172093cc955eb16fb9dc431d7ba',1,'thames::conversions::dimensional']]],
+  ['cartesian_5fto_5fgeqoe_94',['cartesian_to_geqoe',['../namespacethames_1_1conversions_1_1state.html#ac979d656cd64e83e84a5b1371586e9ea',1,'thames::conversions::state::cartesian_to_geqoe(const double &amp;t, const Vector6 &amp;RV, const double &amp;mu, const Potential &amp;U)'],['../namespacethames_1_1conversions_1_1state.html#aea7026d5fe29844da9b5a9c61fbad1d0',1,'thames::conversions::state::cartesian_to_geqoe(const double &amp;t, const Vector6 &amp;RV, const double &amp;mu, const std::function&lt; double(double, Vector3)&gt; &amp;U)']]],
+  ['cartesian_5fto_5fkeplerian_95',['cartesian_to_keplerian',['../namespacethames_1_1conversions_1_1state.html#a3765e214a688b36b3855ff0e7941c8e0',1,'thames::conversions::state']]]
 ];

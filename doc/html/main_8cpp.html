@@ -74,9 +74,11 @@ $(function() {
 <div class="textblock"><code>#include &lt;array&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;Eigen/Core&gt;</code><br />
+<code>#include &quot;<a class="el" href="types_8h_source.html">types.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="dimensional_8h_source.html">conversions/dimensional.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="state_8h_source.html">conversions/state.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="types_8h_source.html">types.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="cowell_8h_source.html">propagators/cowell.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="geqoe_8h_source.html">propagators/geqoe.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for main.cpp:</div>
 <div class="dyncontent">
@@ -85,12 +87,50 @@ Include dependency graph for main.cpp:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a79c7a912aecf9e88eb421fbfac1d14d8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a79c7a912aecf9e88eb421fbfac1d14d8">U</a> (double t, <a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a> R)</td></tr>
-<tr class="separator:a79c7a912aecf9e88eb421fbfac1d14d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5076c76c3fa181261dc298645191e9b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a5076c76c3fa181261dc298645191e9b7">F_func</a> (double t, <a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a> R, <a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a> V)</td></tr>
+<tr class="separator:a5076c76c3fa181261dc298645191e9b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81abfa016fec305b07ff194b2235fd92"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a81abfa016fec305b07ff194b2235fd92">U_func</a> (double t, <a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a> R)</td></tr>
+<tr class="separator:a81abfa016fec305b07ff194b2235fd92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82a547b3b2822a562e298c076f38a93f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a82a547b3b2822a562e298c076f38a93f">Ut_func</a> (double t, <a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a> R, <a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a> V)</td></tr>
+<tr class="separator:a82a547b3b2822a562e298c076f38a93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a5076c76c3fa181261dc298645191e9b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5076c76c3fa181261dc298645191e9b7">&#9670;&nbsp;</a></span>F_func()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a> F_func </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a>&#160;</td>
+          <td class="paramname"><em>R</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a>&#160;</td>
+          <td class="paramname"><em>V</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
 
@@ -108,14 +148,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a79c7a912aecf9e88eb421fbfac1d14d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79c7a912aecf9e88eb421fbfac1d14d8">&#9670;&nbsp;</a></span>U()</h2>
+<a id="a81abfa016fec305b07ff194b2235fd92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81abfa016fec305b07ff194b2235fd92">&#9670;&nbsp;</a></span>U_func()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double U </td>
+          <td class="memname">double U_func </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>t</em>, </td>
@@ -125,6 +165,40 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype"><a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a>&#160;</td>
           <td class="paramname"><em>R</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a82a547b3b2822a562e298c076f38a93f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82a547b3b2822a562e298c076f38a93f">&#9670;&nbsp;</a></span>Ut_func()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Ut_func </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a>&#160;</td>
+          <td class="paramname"><em>R</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a>&#160;</td>
+          <td class="paramname"><em>V</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
