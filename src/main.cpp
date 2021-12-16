@@ -7,6 +7,7 @@
 #include "conversions/dimensional.h"
 #include "conversions/state.h"
 #include "propagators/cowell.h"
+#include "propagators/geqoe.h"
 
 
 using namespace thames::types;
@@ -17,7 +18,11 @@ Vector3 F_func(double t, Vector3 R, Vector3 V){
     return F;
 }
 
-double U(double t, Vector3 R){
+double U_func(double t, Vector3 R){
+    return 0.0f;
+}
+
+double Ut_func(double t, Vector3 R, Vector3 V){
     return 0.0f;
 }
 
@@ -33,8 +38,8 @@ int main(){
     Vector6 keplerian = thames::conversions::state::cartesian_to_keplerian(RV, mu);
     Vector6 state = thames::conversions::state::keplerian_to_cartesian(keplerian, mu);
 
-    Vector6 geqoe = thames::conversions::state::cartesian_to_geqoe(t, RV, mu, U);
-    Vector6 state2 = thames::conversions::state::geqoe_to_cartesian(t, geqoe, mu, U);
+    Vector6 geqoe = thames::conversions::state::cartesian_to_geqoe(t, RV, mu, U_func);
+    Vector6 state2 = thames::conversions::state::geqoe_to_cartesian(t, geqoe, mu, U_func);
 
     Vector3 R2 = state(Eigen::seq(0,2));
     Vector3 V2 = state(Eigen::seq(3,5));
@@ -51,7 +56,8 @@ int main(){
     std::cout << "Keplerian pos/vel error: " << pos_error << " " << vel_error << std::endl;
     std::cout << "GEqOE pos/vel error: " << pos2_error << " " << vel2_error << std::endl;
 
-    Vector6 state_prop = thames::propagators::cowell::propagate(0.0, 86400.0, 1.0, state, mu, F_func);
+    // Vector6 state_prop = thames::propagators::cowell::propagate(0.0, 86400.0, 1.0, state, mu, F_func);
+    Vector6 state_prop = thames::propagators::geqoe::propagate(0.0, 86400.0, 1.0, state, mu, U_func, Ut_func, F_func, F_func);
 
     std::cout << state_prop << std::endl;
 

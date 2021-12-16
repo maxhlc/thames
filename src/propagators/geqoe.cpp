@@ -1,3 +1,6 @@
+#include <boost/numeric/odeint.hpp>
+#include <boost/numeric/odeint/external/eigen/eigen_algebra.hpp>
+
 #include "geqoe.h"
 #include "../types.h"
 #include "../conversions/state.h"
@@ -99,6 +102,31 @@ namespace thames::propagators::geqoe{
 
         // Store derivatives
         geqoedot << nudot, p1dot, p2dot, Ldot, q1dot, q2dot;
+    }
+
+    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, Potential U_func, PotentialDerivative Ut_func, Force F_func, Force P_func, double atol, double rtol){
+        // TODO: documentation
+
+        // Transform initial state
+        Vector6 geqoe = thames::conversions::state::cartesian_to_geqoe(tstart, RV, mu, U_func);
+
+        // Declare derivative function wrapper
+        auto derivative_param = [&](const Vector6 &x, Vector6 &dxdt, const double time){
+            derivative(x, dxdt, time, mu, U_func, Ut_func, F_func, P_func);
+        };
+
+        // Declare stepper
+        boost::numeric::odeint::runge_kutta_cash_karp54<Vector6> stepper;
+        auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
+
+        // Propagate orbit
+        boost::numeric::odeint::integrate_adaptive(steppercontrolled, derivative_param, geqoe, tstart, tend, tstep);
+
+        // Transform final state
+        RV = thames::conversions::state::geqoe_to_cartesian(tend, geqoe, mu, U_func);
+
+        // Return final state
+        return RV;
     }
 
 }
