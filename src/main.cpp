@@ -4,6 +4,7 @@
 #include <Eigen/Core>
 
 #include "types.h"
+#include "constants/constants.h"
 #include "conversions/conversions.h"
 #include "perturbations/perturbations.h"
 #include "propagators/propagators.h"
@@ -28,10 +29,10 @@ double Ut_func(double t, Vector3 R, Vector3 V){
 int main(){
     Vector6 RV;
     RV << 7100.0, 0.0, 1300.0, 0.0, 7.35, 1.0;
-    double mu = 3.986004414498200E+05;
+    double mu = thames::constants::earth::mu;
     double t = 0.0;
-    double radius = 6378.0;
-    double J2 = 1.082635854E-03;
+    double radius = thames::constants::earth::radius;
+    double J2 = thames::constants::earth::J2;
 
     Vector3 R = RV(Eigen::seq(0,2));
     Vector3 V = RV(Eigen::seq(3,5));
