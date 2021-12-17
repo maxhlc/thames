@@ -75,9 +75,11 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ac35b44e71bf66c8419a2ed97f4f238dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1cowell.html#ac35b44e71bf66c8419a2ed97f4f238dd">derivative</a> (const <a class="el" href="namespacethames_1_1types.html#a8e9c7d8c821fe73e1a0ff2843d383eeb">Vector6</a> &amp;RV, <a class="el" href="namespacethames_1_1types.html#a8e9c7d8c821fe73e1a0ff2843d383eeb">Vector6</a> &amp;RVdot, const double t, const double &amp;mu, const <a class="el" href="namespacethames_1_1types.html#ab622cb5d48c7d53b0f447954d576b413">Force</a> &amp;<a class="el" href="main_8cpp.html#a5076c76c3fa181261dc298645191e9b7">F_func</a>)</td></tr>
+<tr class="memdesc:ac35b44e71bf66c8419a2ed97f4f238dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">State derivative for Cowell's method propagation.  <a href="namespacethames_1_1propagators_1_1cowell.html#ac35b44e71bf66c8419a2ed97f4f238dd">More...</a><br /></td></tr>
 <tr class="separator:ac35b44e71bf66c8419a2ed97f4f238dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21f8a2b3b44994d00e921cc0f72f1b7b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacethames_1_1types.html#a8e9c7d8c821fe73e1a0ff2843d383eeb">Vector6</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1cowell.html#a21f8a2b3b44994d00e921cc0f72f1b7b">propagate</a> (double tstart, double tend, double tstep, <a class="el" href="namespacethames_1_1types.html#a8e9c7d8c821fe73e1a0ff2843d383eeb">Vector6</a> RV, double mu, <a class="el" href="namespacethames_1_1types.html#ab622cb5d48c7d53b0f447954d576b413">Force</a> <a class="el" href="main_8cpp.html#a5076c76c3fa181261dc298645191e9b7">F_func</a>, double atol, double rtol)</td></tr>
-<tr class="separator:a21f8a2b3b44994d00e921cc0f72f1b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a960819c1e8fd6c77fcf7f7465169fe33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacethames_1_1types.html#a8e9c7d8c821fe73e1a0ff2843d383eeb">Vector6</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1cowell.html#a960819c1e8fd6c77fcf7f7465169fe33">propagate</a> (double tstart, double tend, double tstep, <a class="el" href="namespacethames_1_1types.html#a8e9c7d8c821fe73e1a0ff2843d383eeb">Vector6</a> RV, double mu, <a class="el" href="namespacethames_1_1types.html#ab622cb5d48c7d53b0f447954d576b413">Force</a> <a class="el" href="main_8cpp.html#a5076c76c3fa181261dc298645191e9b7">F_func</a>, double atol=1e-10, double rtol=1e-10)</td></tr>
+<tr class="memdesc:a960819c1e8fd6c77fcf7f7465169fe33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagate Cartesian state using Cowell's method.  <a href="namespacethames_1_1propagators_1_1cowell.html#a960819c1e8fd6c77fcf7f7465169fe33">More...</a><br /></td></tr>
+<tr class="separator:a960819c1e8fd6c77fcf7f7465169fe33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ac35b44e71bf66c8419a2ed97f4f238dd"></a>
@@ -124,10 +126,22 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>State derivative for Cowell's method propagation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">RV</td><td>Cartesian state. </td></tr>
+    <tr><td class="paramname">RVdot</td><td>Time derivative of the Cartesian state. </td></tr>
+    <tr><td class="paramname">t</td><td>Current physical time. </td></tr>
+    <tr><td class="paramname">mu</td><td>Central body gravitational parameter. </td></tr>
+    <tr><td class="paramname">F_func</td><td>Perturbing acceleration function. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
-<a id="a21f8a2b3b44994d00e921cc0f72f1b7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21f8a2b3b44994d00e921cc0f72f1b7b">&#9670;&nbsp;</a></span>propagate()</h2>
+<a id="a960819c1e8fd6c77fcf7f7465169fe33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a960819c1e8fd6c77fcf7f7465169fe33">&#9670;&nbsp;</a></span>propagate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -172,13 +186,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>atol</em>, </td>
+          <td class="paramname"><em>atol</em> = <code>1e-10</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>rtol</em>&#160;</td>
+          <td class="paramname"><em>rtol</em> = <code>1e-10</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -187,6 +201,22 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Propagate Cartesian state using Cowell's method. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tstart</td><td>Propagation start time in physical time. </td></tr>
+    <tr><td class="paramname">tend</td><td>Propagation end time in physical time. </td></tr>
+    <tr><td class="paramname">tstep</td><td>Initial timestep for propagation. </td></tr>
+    <tr><td class="paramname">RV</td><td>Initial Cartesian state. </td></tr>
+    <tr><td class="paramname">mu</td><td>Central body gravitational parameter. </td></tr>
+    <tr><td class="paramname">F_func</td><td>Perturbing acceleration function. </td></tr>
+    <tr><td class="paramname">atol</td><td>Solver absolute tolerance. </td></tr>
+    <tr><td class="paramname">rtol</td><td>Solver relative tolerance. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector6 Final Cartesian state. </dd></dl>
 
 </div>
 </div>

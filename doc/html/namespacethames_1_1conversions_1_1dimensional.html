@@ -75,8 +75,10 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a6f81c172093cc955eb16fb9dc431d7ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1dimensional.html#a6f81c172093cc955eb16fb9dc431d7ba">cartesian_nondimensionalise</a> (double &amp;t, <a class="el" href="namespacethames_1_1types.html#a8e9c7d8c821fe73e1a0ff2843d383eeb">Vector6</a> &amp;RV, double &amp;mu, <a class="el" href="structthames_1_1types_1_1DimensionalFactors.html">DimensionalFactors</a> &amp;factors)</td></tr>
+<tr class="memdesc:a6f81c172093cc955eb16fb9dc431d7ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-dimensionalise Cartesian state.  <a href="namespacethames_1_1conversions_1_1dimensional.html#a6f81c172093cc955eb16fb9dc431d7ba">More...</a><br /></td></tr>
 <tr class="separator:a6f81c172093cc955eb16fb9dc431d7ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af31f7a6fe7eaa4828fe2f320afac86dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1dimensional.html#af31f7a6fe7eaa4828fe2f320afac86dc">cartesian_dimensionalise</a> (double &amp;t, <a class="el" href="namespacethames_1_1types.html#a8e9c7d8c821fe73e1a0ff2843d383eeb">Vector6</a> &amp;RV, double &amp;mu, const <a class="el" href="structthames_1_1types_1_1DimensionalFactors.html">DimensionalFactors</a> &amp;factors)</td></tr>
+<tr class="memdesc:af31f7a6fe7eaa4828fe2f320afac86dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dimensionalise Cartesian state.  <a href="namespacethames_1_1conversions_1_1dimensional.html#af31f7a6fe7eaa4828fe2f320afac86dc">More...</a><br /></td></tr>
 <tr class="separator:af31f7a6fe7eaa4828fe2f320afac86dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -118,6 +120,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Dimensionalise Cartesian state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>Current physical time. </td></tr>
+    <tr><td class="paramname">RV</td><td>Current Cartesian state vector (position and velocity). </td></tr>
+    <tr><td class="paramname">mu</td><td>Gravitational parameter. </td></tr>
+    <tr><td class="paramname">factors</td><td>Structure containing the factors for dimensionalisation. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a6f81c172093cc955eb16fb9dc431d7ba"></a>
@@ -157,6 +170,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Non-dimensionalise Cartesian state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>Current physical time. </td></tr>
+    <tr><td class="paramname">RV</td><td>Current Cartesian state vector (position and velocity). </td></tr>
+    <tr><td class="paramname">mu</td><td>Gravitational parameter. </td></tr>
+    <tr><td class="paramname">factors</td><td>Structure containing the factors for non-dimensionalisation. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

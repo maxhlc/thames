@@ -75,10 +75,13 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aff6d5e1d1e1d3889183bb08db3daa2d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1perturbations_1_1geopotential.html#aff6d5e1d1e1d3889183bb08db3daa2d4">J2_acceleration</a> (double t, <a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a> R, <a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a> V, double mu, double J2, double radius)</td></tr>
+<tr class="memdesc:aff6d5e1d1e1d3889183bb08db3daa2d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate perturbing acceleration resulting from the J2 term.  <a href="namespacethames_1_1perturbations_1_1geopotential.html#aff6d5e1d1e1d3889183bb08db3daa2d4">More...</a><br /></td></tr>
 <tr class="separator:aff6d5e1d1e1d3889183bb08db3daa2d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af25442ba9955403f65a35e06af3271ce"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1perturbations_1_1geopotential.html#af25442ba9955403f65a35e06af3271ce">J2_potential</a> (double t, <a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a> R, double mu, double J2, double radius)</td></tr>
+<tr class="memdesc:af25442ba9955403f65a35e06af3271ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate perturbing potential resulting from the J2 term.  <a href="namespacethames_1_1perturbations_1_1geopotential.html#af25442ba9955403f65a35e06af3271ce">More...</a><br /></td></tr>
 <tr class="separator:af25442ba9955403f65a35e06af3271ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84ad0364caf8f86d00b8e09b426041f8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1perturbations_1_1geopotential.html#a84ad0364caf8f86d00b8e09b426041f8">J2_dpotential</a> (double t, <a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a> R, <a class="el" href="namespacethames_1_1types.html#acae7934fbe8379f09c2157de12532e88">Vector3</a> V)</td></tr>
+<tr class="memdesc:a84ad0364caf8f86d00b8e09b426041f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate time derivative of the perturbing potential resulting from the J2 term.  <a href="namespacethames_1_1perturbations_1_1geopotential.html#a84ad0364caf8f86d00b8e09b426041f8">More...</a><br /></td></tr>
 <tr class="separator:a84ad0364caf8f86d00b8e09b426041f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -132,6 +135,20 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Calculate perturbing acceleration resulting from the J2 term. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>Current physical time. </td></tr>
+    <tr><td class="paramname">R</td><td>Position vector. </td></tr>
+    <tr><td class="paramname">V</td><td>Velocity vector. </td></tr>
+    <tr><td class="paramname">mu</td><td>Central body gravitational parameter. </td></tr>
+    <tr><td class="paramname">J2</td><td>Central body J2 term. </td></tr>
+    <tr><td class="paramname">radius</td><td>Central body radius. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Vector3 Perturbing acceleration. </dd></dl>
+
 </div>
 </div>
 <a id="a84ad0364caf8f86d00b8e09b426041f8"></a>
@@ -165,6 +182,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Calculate time derivative of the perturbing potential resulting from the J2 term. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>Current physical time. </td></tr>
+    <tr><td class="paramname">R</td><td>Position vector. </td></tr>
+    <tr><td class="paramname">V</td><td>Velocity vector. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double Time derivative of the perturbing potential. </dd></dl>
 
 </div>
 </div>
@@ -211,6 +239,19 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Calculate perturbing potential resulting from the J2 term. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>Current physical time. </td></tr>
+    <tr><td class="paramname">R</td><td>Position vector. </td></tr>
+    <tr><td class="paramname">mu</td><td>Central body gravitational parameter. </td></tr>
+    <tr><td class="paramname">J2</td><td>Central body J2 term. </td></tr>
+    <tr><td class="paramname">radius</td><td>Central body radius. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double Perturbing potential. </dd></dl>
 
 </div>
 </div>
