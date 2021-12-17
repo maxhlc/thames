@@ -6,8 +6,6 @@
 namespace thames::util::optimise{
 
     double golden_section_search(std::function<double (double)> func, double a, double b){
-        // TODO: documentation
-
         // Set parameters
         const double gr = 0.5*(sqrt(5.0) + 1);
         const double tol = 1e-14;

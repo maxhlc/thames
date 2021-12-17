@@ -7,8 +7,6 @@
 namespace thames::util::root{
 
     double golden_section_search(std::function<double (double)> func, double a, double b){
-        // TODO: documentation
-
         // Declare function for minimisation (root at minimum of absolute of the function)
         std::function<double (double)> f = [func](double x) {return abs(func(x));};
 
