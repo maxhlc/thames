@@ -5,6 +5,7 @@
 
 #include "types.h"
 #include "conversions/conversions.h"
+#include "perturbations/perturbations.h"
 #include "propagators/propagators.h"
 
 
@@ -29,6 +30,8 @@ int main(){
     RV << 7100.0, 0.0, 1300.0, 0.0, 7.35, 1.0;
     double mu = 3.986004414498200E+05;
     double t = 0.0;
+    double radius = 6378.0;
+    double J2 = 1.082635854E-03;
 
     Vector3 R = RV(Eigen::seq(0,2));
     Vector3 V = RV(Eigen::seq(3,5));
@@ -54,8 +57,12 @@ int main(){
     std::cout << "Keplerian pos/vel error: " << pos_error << " " << vel_error << std::endl;
     std::cout << "GEqOE pos/vel error: " << pos2_error << " " << vel2_error << std::endl;
 
-    // Vector6 state_prop = thames::propagators::cowell::propagate(0.0, 86400.0, 1.0, state, mu, F_func);
-    Vector6 state_prop = thames::propagators::geqoe::propagate(0.0, 86400.0, 1.0, state, mu, U_func, Ut_func, F_func, F_func);
+    auto F_J2 = [&](double t, Vector3 R, Vector3 V){return thames::perturbations::geopotential::J2_acceleration(t, R, V, mu, J2, radius);};
+    auto U_J2 = [&](double t, Vector3 R){return thames::perturbations::geopotential::J2_potential(t, R, mu, J2, radius);};
+    auto dU_J2 = [&](double t, Vector3 R, Vector3 V){return thames::perturbations::geopotential::J2_dpotential(t, R, V);};
+
+    // Vector6 state_prop = thames::propagators::cowell::propagate(0.0, 86400.0, 1.0, state, mu, F_J2);
+    Vector6 state_prop = thames::propagators::geqoe::propagate(0.0, 86400.0, 1.0, state, mu, U_J2, dU_J2, F_J2, F_func);
 
     std::cout << state_prop << std::endl;
 

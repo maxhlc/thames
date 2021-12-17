@@ -3,9 +3,10 @@ add_executable(${PROJECT_NAME}
                conversions/dimensional.cpp
                conversions/state.cpp
                conversions/util.cpp
+               perturbations/geopotential.cpp
+               propagators/cowell.cpp
+               propagators/geqoe.cpp
                util/angles.cpp
                util/root.cpp
                util/optimise.cpp
-               propagators/cowell.cpp
-               propagators/geqoe.cpp
                )
