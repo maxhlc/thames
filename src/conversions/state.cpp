@@ -13,8 +13,6 @@ using namespace thames::types;
 namespace thames::conversions::state{
 
     Vector6 cartesian_to_keplerian(const Vector6 &RV, const double &mu){
-        // TODO: Documentation
-
         // Extract position and velocity vectors
         Vector3 R, V;
         R = RV(Eigen::seq(0,2));
@@ -109,8 +107,6 @@ namespace thames::conversions::state{
     }
 
     Vector6 keplerian_to_cartesian(const Vector6 &keplerian, const double &mu){
-        // TODO: documentation
-
         // Extract Keplerian elements
         double sma = keplerian[0];
         double e = keplerian[1];
@@ -152,8 +148,6 @@ namespace thames::conversions::state{
     }
 
     Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, const Potential &U){
-        // TODO: documentation
-
         // Extract position and velocity vectors
         Vector3 R, V;
         R = RV(Eigen::seq(0,2));
@@ -230,8 +224,6 @@ namespace thames::conversions::state{
     }
 
     Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, const Potential &U){
-        // TODO: documentation
-
         // Extract elements
         double nu = geqoe[0];
         double p1 = geqoe[1];

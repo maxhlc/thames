@@ -7,8 +7,6 @@ using namespace thames::types;
 namespace thames::conversions::dimensional{
 
     void cartesian_nondimensionalise(double &t, Vector6 &RV, double &mu, DimensionalFactors &factors){
-        // TODO: documentation
-
         // Extract position and velocity vectors
         Vector3 R, V;
         R = RV(Eigen::seq(0,2));
@@ -36,8 +34,6 @@ namespace thames::conversions::dimensional{
     }
 
     void cartesian_dimensionalise(double &t, Vector6 &RV, double &mu, const DimensionalFactors &factors){
-        // TODO: documentation
-
         // Extract position and velocity vectors
         Vector3 R, V;
         R = RV(Eigen::seq(0,2));

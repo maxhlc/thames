@@ -7,10 +7,28 @@ using namespace thames::types;
 
 namespace thames::conversions::util {
 
+    /**
+     * @brief Generate coordinate system rotation matrix about the x-axis.
+     * 
+     * @param ang Rotation angle.
+     * @return Matrix33 Rotation matrix.
+     */
     Matrix33 rot_x(const double &ang);
 
+    /**
+     * @brief Generate coordinate system rotation matrix about the y-axis.
+     * 
+     * @param ang Rotation angle.
+     * @return Matrix33 Rotation matrix.
+     */
     Matrix33 rot_y(const double &ang);
-    
+
+    /**
+     * @brief Generate coordinate system rotation matrix about the z-axis.
+     * 
+     * @param ang Rotation angle.
+     * @return Matrix33 Rotation matrix.
+     */
     Matrix33 rot_z(const double &ang);
 
 }
