@@ -4,10 +4,8 @@
 #include <Eigen/Core>
 
 #include "types.h"
-#include "conversions/dimensional.h"
-#include "conversions/state.h"
-#include "propagators/cowell.h"
-#include "propagators/geqoe.h"
+#include "conversions/conversions.h"
+#include "propagators/propagators.h"
 
 
 using namespace thames::types;

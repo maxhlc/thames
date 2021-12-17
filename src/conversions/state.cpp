@@ -6,8 +6,7 @@
 #include "state.h"
 #include "util.h"
 #include "../types.h"
-#include "../util/angles.h"
-#include "../util/root.h"
+#include "../util/util.h"
 
 using namespace thames::types;
 

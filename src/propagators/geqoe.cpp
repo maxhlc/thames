@@ -3,7 +3,7 @@
 
 #include "geqoe.h"
 #include "../types.h"
-#include "../conversions/state.h"
+#include "../conversions/conversions.h"
 
 using namespace thames::types;
 
