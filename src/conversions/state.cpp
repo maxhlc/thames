@@ -233,9 +233,9 @@ namespace thames::conversions::state{
         double q2 = geqoe[5];
 
         // Calculate generalised eccentric longitude
-        L = thames::util::angles::angle_wrap(L);
         auto fk = [p1, p2, L](double k) {return (k + p1*cos(k) - p2*sin(k) - L);};
-        double k = thames::util::root::golden_section_search(fk, -2*M_PI, 2*M_PI);
+        auto dfk = [p1, p2, L](double k) {return (1 - p1*sin(k) - p2*cos(k));};
+        double k = thames::util::root::newton_raphson(fk, dfk, L);
         double sink = sin(k);
         double cosk = cos(k);
 

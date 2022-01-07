@@ -17,4 +17,31 @@ namespace thames::util::root{
         return x0;
     }
 
+    double newton_raphson(const std::function<double (double)> &func, const std::function<double (double)> &dfunc, double xn){
+        // Declare approximation variable
+        double xn1;
+
+        // Set converged flag to false
+        bool converged = false;
+
+        // Set tolerance
+        double tol = 1e-10;
+
+        // Iterate until converged
+        while(!converged){
+            // Update approximation
+            xn1 = xn - func(xn)/dfunc(xn);
+
+            // Converged if update is smaller than tolerance
+            if(abs(xn1 - xn) < tol)
+                converged = true;
+
+            // Update previous approximation
+            xn = xn1;
+        }
+
+        // Return root
+        return xn1;
+    }
+
 }
