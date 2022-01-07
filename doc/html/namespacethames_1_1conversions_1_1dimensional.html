@@ -123,10 +123,10 @@ Functions</h2></td></tr>
 <p>Dimensionalise Cartesian state. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td>Current physical time. </td></tr>
-    <tr><td class="paramname">RV</td><td>Current Cartesian state vector (position and velocity). </td></tr>
-    <tr><td class="paramname">mu</td><td>Gravitational parameter. </td></tr>
-    <tr><td class="paramname">factors</td><td>Structure containing the factors for dimensionalisation. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">t</td><td>Current physical time. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">RV</td><td>Current Cartesian state vector (position and velocity). </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">mu</td><td>Gravitational parameter. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>Structure containing the factors for dimensionalisation. </td></tr>
   </table>
   </dd>
 </dl>
@@ -174,10 +174,10 @@ Functions</h2></td></tr>
 <p>Non-dimensionalise Cartesian state. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td>Current physical time. </td></tr>
-    <tr><td class="paramname">RV</td><td>Current Cartesian state vector (position and velocity). </td></tr>
-    <tr><td class="paramname">mu</td><td>Gravitational parameter. </td></tr>
-    <tr><td class="paramname">factors</td><td>Structure containing the factors for non-dimensionalisation. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">t</td><td>Current physical time. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">RV</td><td>Current Cartesian state vector (position and velocity). </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">mu</td><td>Gravitational parameter. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">factors</td><td>Structure containing the factors for non-dimensionalisation. </td></tr>
   </table>
   </dd>
 </dl>

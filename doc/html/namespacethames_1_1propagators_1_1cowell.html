@@ -129,11 +129,11 @@ Functions</h2></td></tr>
 <p>State derivative for Cowell's method propagation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">RV</td><td>Cartesian state. </td></tr>
-    <tr><td class="paramname">RVdot</td><td>Time derivative of the Cartesian state. </td></tr>
-    <tr><td class="paramname">t</td><td>Current physical time. </td></tr>
-    <tr><td class="paramname">mu</td><td>Central body gravitational parameter. </td></tr>
-    <tr><td class="paramname">F_func</td><td>Perturbing acceleration function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">RV</td><td>Cartesian state. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">RVdot</td><td>Time derivative of the Cartesian state. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>Current physical time. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mu</td><td>Central body gravitational parameter. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">F_func</td><td>Perturbing acceleration function. </td></tr>
   </table>
   </dd>
 </dl>
@@ -205,14 +205,14 @@ Functions</h2></td></tr>
 <p>Propagate Cartesian state using Cowell's method. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">tstart</td><td>Propagation start time in physical time. </td></tr>
-    <tr><td class="paramname">tend</td><td>Propagation end time in physical time. </td></tr>
-    <tr><td class="paramname">tstep</td><td>Initial timestep for propagation. </td></tr>
-    <tr><td class="paramname">RV</td><td>Initial Cartesian state. </td></tr>
-    <tr><td class="paramname">mu</td><td>Central body gravitational parameter. </td></tr>
-    <tr><td class="paramname">F_func</td><td>Perturbing acceleration function. </td></tr>
-    <tr><td class="paramname">atol</td><td>Solver absolute tolerance. </td></tr>
-    <tr><td class="paramname">rtol</td><td>Solver relative tolerance. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tstart</td><td>Propagation start time in physical time. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tend</td><td>Propagation end time in physical time. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tstep</td><td>Initial timestep for propagation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">RV</td><td>Initial Cartesian state. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mu</td><td>Central body gravitational parameter. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">F_func</td><td>Perturbing acceleration function. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">atol</td><td>Solver absolute tolerance. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rtol</td><td>Solver relative tolerance. </td></tr>
   </table>
   </dd>
 </dl>

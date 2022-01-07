@@ -11,20 +11,20 @@ namespace thames::conversions::dimensional{
     /**
     * @brief Non-dimensionalise Cartesian state.
     *
-    * @param t Current physical time.
-    * @param RV Current Cartesian state vector (position and velocity).
-    * @param mu Gravitational parameter.
-    * @param factors Structure containing the factors for non-dimensionalisation.
+    * @param[in,out] t Current physical time.
+    * @param[in,out] RV Current Cartesian state vector (position and velocity).
+    * @param[in,out] mu Gravitational parameter.
+    * @param[out] factors Structure containing the factors for non-dimensionalisation.
     */ 
     void cartesian_nondimensionalise(double &t, Vector6 &RV, double &mu, DimensionalFactors &factors);
 
     /**
     * @brief Dimensionalise Cartesian state.
     *
-    * @param t Current physical time.
-    * @param RV Current Cartesian state vector (position and velocity).
-    * @param mu Gravitational parameter.
-    * @param factors Structure containing the factors for dimensionalisation.
+    * @param[in,out] t Current physical time.
+    * @param[in,out] RV Current Cartesian state vector (position and velocity).
+    * @param[in,out] mu Gravitational parameter.
+    * @param[in] factors Structure containing the factors for dimensionalisation.
     */ 
     void cartesian_dimensionalise(double &t, Vector6 &RV, double &mu, const DimensionalFactors &factors);
 
