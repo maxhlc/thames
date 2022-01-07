@@ -8,7 +8,7 @@ namespace thames::util::angles{
      * 
      * @details Method described by: https://stackoverflow.com/a/11498248
      * 
-     * @param theta Angle.
+     * @param[in] theta Angle.
      * @return double Wrapped angle.
      */
     double angle_wrap(double theta);
