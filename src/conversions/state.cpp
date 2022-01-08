@@ -53,8 +53,8 @@ namespace thames::conversions::state{
 
         // Calculate right ascension of the ascending node
         Vector3 N = K.cross(H);
-        float n = N.norm();
-        float raan;
+        double n = N.norm();
+        double raan;
         if (inc_near) {
             raan = 0.0;
         } else {
@@ -65,7 +65,7 @@ namespace thames::conversions::state{
         }
 
         // Calculate argument of periapsis
-        float aop;
+        double aop;
         if (inc_near & e_near) {
             aop = 0.0;
         } else if (inc_near) {
@@ -81,7 +81,7 @@ namespace thames::conversions::state{
         }
 
         // Calculate true anomaly
-        float ta;
+        double ta;
         if (inc_near & e_near) {
             ta = acos(R[0]/r);
             if (V[0] > 0.0) {
