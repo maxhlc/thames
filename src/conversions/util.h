@@ -5,7 +5,7 @@
 
 using namespace thames::types;
 
-namespace thames::conversions::util {
+namespace thames::conversions::util{
 
     /**
      * @brief Generate coordinate system rotation matrix about the x-axis.

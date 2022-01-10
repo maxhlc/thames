@@ -3,7 +3,7 @@
 
 #include "geqoe.h"
 #include "../types.h"
-#include "../conversions/conversions.h"
+#include "../conversions/geqoe.h"
 
 using namespace thames::types;
 
@@ -19,7 +19,7 @@ namespace thames::propagators::geqoe{
         double q2 = geqoe[5];
 
         // Calculate Cartesian state and extract vectors
-        Vector6 RV = thames::conversions::state::geqoe_to_cartesian(t, geqoe, mu, U_func);
+        Vector6 RV = thames::conversions::geqoe::geqoe_to_cartesian(t, geqoe, mu, U_func);
         Vector3 R, V;
         R = RV(Eigen::seq(0,2));
         V = RV(Eigen::seq(3,5));
@@ -103,7 +103,7 @@ namespace thames::propagators::geqoe{
 
     Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, Potential U_func, PotentialDerivative Ut_func, Force F_func, Force P_func, double atol, double rtol){
         // Transform initial state
-        Vector6 geqoe = thames::conversions::state::cartesian_to_geqoe(tstart, RV, mu, U_func);
+        Vector6 geqoe = thames::conversions::geqoe::cartesian_to_geqoe(tstart, RV, mu, U_func);
 
         // Declare derivative function wrapper
         auto derivative_param = [&](const Vector6 &x, Vector6 &dxdt, const double time){
@@ -118,7 +118,7 @@ namespace thames::propagators::geqoe{
         boost::numeric::odeint::integrate_adaptive(steppercontrolled, derivative_param, geqoe, tstart, tend, tstep);
 
         // Transform final state
-        RV = thames::conversions::state::geqoe_to_cartesian(tend, geqoe, mu, U_func);
+        RV = thames::conversions::geqoe::geqoe_to_cartesian(tend, geqoe, mu, U_func);
 
         // Return final state
         return RV;

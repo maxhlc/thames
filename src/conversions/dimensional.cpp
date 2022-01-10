@@ -1,5 +1,5 @@
 #include "dimensional.h"
-#include "state.h"
+#include "keplerian.h"
 #include "../types.h"
 
 using namespace thames::types;
@@ -13,7 +13,7 @@ namespace thames::conversions::dimensional{
         V = RV(Eigen::seq(3,5));
 
         // Calculate length factors (semi-major axis)
-        Vector6 keplerian = thames::conversions::state::cartesian_to_keplerian(RV, mu);
+        Vector6 keplerian = thames::conversions::keplerian::cartesian_to_keplerian(RV, mu);
         factors.length = keplerian[0];
 
         // Calculate velocity factor

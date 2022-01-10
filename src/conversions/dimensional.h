@@ -1,7 +1,6 @@
 #ifndef THAMES_CONVERSIONS_DIMENSIONAL
 #define THAMES_CONVERSIONS_DIMENSIONAL
 
-#include "state.h"
 #include "../types.h"
 
 using namespace thames::types;

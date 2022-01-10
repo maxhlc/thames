@@ -1,7 +1,8 @@
 add_executable(${PROJECT_NAME}
                main.cpp
                conversions/dimensional.cpp
-               conversions/state.cpp
+               conversions/geqoe.cpp
+               conversions/keplerian.cpp
                conversions/util.cpp
                perturbations/geopotential.cpp
                propagators/cowell.cpp
