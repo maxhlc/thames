@@ -14,9 +14,10 @@ namespace thames::util::optimise{
      * @param[in] func Scalar function to be minimised.
      * @param[in] a Left hand boundary.
      * @param[in] b Right hand boundary.
+     * @param[in] tol Solver tolerance.
      * @return double Argument of the minimum.
      */
-    double golden_section_search(std::function<double (double)> func, double a, double b);
+    double golden_section_search(std::function<double (double)> func, double a, double b, double tol = 1e-10);
 
 }
 

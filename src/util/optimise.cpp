@@ -5,10 +5,9 @@
 
 namespace thames::util::optimise{
 
-    double golden_section_search(std::function<double (double)> func, double a, double b){
+    double golden_section_search(std::function<double (double)> func, double a, double b, double tol){
         // Set parameters
         const double gr = 0.5*(sqrt(5.0) + 1);
-        const double tol = 1e-14;
 
         // Calculate test points
         double c = b - (b - a)/gr;
