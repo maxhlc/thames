@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['u_5ffunc_139',['U_func',['../main_8cpp.html#a81abfa016fec305b07ff194b2235fd92',1,'main.cpp']]],
-  ['ut_5ffunc_140',['Ut_func',['../main_8cpp.html#a82a547b3b2822a562e298c076f38a93f',1,'main.cpp']]]
+  ['_7ebaseperturbation_149',['~BasePerturbation',['../classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html#a26e470a9c16e0c57cdff0a46e262f5a8',1,'thames::perturbations::baseperturbation::BasePerturbation']]]
 ];

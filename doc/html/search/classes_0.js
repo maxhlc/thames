@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dimensionalfactors_77',['DimensionalFactors',['../structthames_1_1types_1_1DimensionalFactors.html',1,'thames::types']]]
+  ['baseperturbation_80',['BasePerturbation',['../classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html',1,'thames::perturbations::baseperturbation']]]
 ];
