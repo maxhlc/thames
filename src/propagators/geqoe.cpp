@@ -4,12 +4,14 @@
 #include "geqoe.h"
 #include "../types.h"
 #include "../conversions/geqoe.h"
+#include "../perturbations/baseperturbation.h"
 
 using namespace thames::types;
+using namespace thames::perturbations::baseperturbation;
 
 namespace thames::propagators::geqoe{
 
-    void derivative(const Vector6 &geqoe, Vector6 &geqoedot, const double t, const double &mu, const PotentialFunc &U_func, const PotentialDerivativeFunc &Ut_func, const AccelerationFunc &F_func, const AccelerationFunc &P_func){
+    void derivative(const Vector6 &geqoe, Vector6 &geqoedot, const double t, const double &mu, BasePerturbation &perturbation){
         // Extract elements
         double nu = geqoe[0];
         double p1 = geqoe[1];
@@ -19,7 +21,7 @@ namespace thames::propagators::geqoe{
         double q2 = geqoe[5];
 
         // Calculate Cartesian state and extract vectors
-        Vector6 RV = thames::conversions::geqoe::geqoe_to_cartesian(t, geqoe, mu, U_func);
+        Vector6 RV = thames::conversions::geqoe::geqoe_to_cartesian(t, geqoe, mu, perturbation);
         Vector3 R, V;
         R = RV(Eigen::seq(0,2));
         V = RV(Eigen::seq(3,5));
@@ -29,10 +31,10 @@ namespace thames::propagators::geqoe{
         double drdt = R.dot(V)/r;
 
         // Calculate perturbations
-        double U = U_func(t, R);
-        double Ut = Ut_func(t, R, V);
-        Vector3 F = F_func(t, R, V);
-        Vector3 P = P_func(t, R, V);
+        double U = perturbation.potential(t, R);
+        double Ut = perturbation.potential_derivative(t, R, V);
+        Vector3 F = perturbation.acceleration_total(t, R, V);
+        Vector3 P = perturbation.acceleration_nonpotential(t, R, V);
 
         // Calculate time derivative of total energy
         double edot = Ut + P.dot(V);
@@ -64,7 +66,7 @@ namespace thames::propagators::geqoe{
         Vector3 eh = H.normalized();
 
         // Calculate the effective potential energy
-        double ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + U_func(t, R);
+        double ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + U;
 
         // Calculate the generalised angular momentum
         double c = sqrt(2.0*pow(r, 2.0)*ueff);
@@ -101,13 +103,13 @@ namespace thames::propagators::geqoe{
         geqoedot << nudot, p1dot, p2dot, Ldot, q1dot, q2dot;
     }
 
-    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, PotentialFunc U_func, PotentialDerivativeFunc Ut_func, AccelerationFunc F_func, AccelerationFunc P_func, double atol, double rtol){
+    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, BasePerturbation &perturbation, double atol, double rtol){
         // Transform initial state
-        Vector6 geqoe = thames::conversions::geqoe::cartesian_to_geqoe(tstart, RV, mu, U_func);
+        Vector6 geqoe = thames::conversions::geqoe::cartesian_to_geqoe(tstart, RV, mu, perturbation);
 
         // Declare derivative function wrapper
         auto derivative_param = [&](const Vector6 &x, Vector6 &dxdt, const double time){
-            derivative(x, dxdt, time, mu, U_func, Ut_func, F_func, P_func);
+            derivative(x, dxdt, time, mu, perturbation);
         };
 
         // Declare stepper
@@ -118,7 +120,7 @@ namespace thames::propagators::geqoe{
         boost::numeric::odeint::integrate_adaptive(steppercontrolled, derivative_param, geqoe, tstart, tend, tstep);
 
         // Transform final state
-        RV = thames::conversions::geqoe::geqoe_to_cartesian(tend, geqoe, mu, U_func);
+        RV = thames::conversions::geqoe::geqoe_to_cartesian(tend, geqoe, mu, perturbation);
 
         // Return final state
         return RV;

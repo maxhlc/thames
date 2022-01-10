@@ -3,14 +3,16 @@
 
 #include "geqoe.h"
 #include "keplerian.h"
+#include "../perturbations/baseperturbation.h"
 #include "../util/root.h"
 #include "../types.h"
 
 using namespace thames::types;
+using namespace thames::perturbations::baseperturbation;
 
 namespace thames::conversions::geqoe{
     
-    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, const PotentialFunc &U){
+    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, BasePerturbation &perturbation){
         // Extract position and velocity vectors
         Vector3 R, V;
         R = RV(Eigen::seq(0,2));
@@ -25,7 +27,7 @@ namespace thames::conversions::geqoe{
         double h = H.norm();
 
         // Calculate the effective potential energy
-        double ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + U(t, R);
+        double ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + perturbation.potential(t, R);
 
         // Calculate the total energy
         double e = 0.5*pow(drdt, 2.0) - mu/r + ueff;
@@ -86,7 +88,7 @@ namespace thames::conversions::geqoe{
         return geqoe;
     }
 
-    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, const PotentialFunc &U){
+    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, BasePerturbation &perturbation){
         // Extract elements
         double nu = geqoe[0];
         double p1 = geqoe[1];
@@ -131,7 +133,7 @@ namespace thames::conversions::geqoe{
         double c = pow(pow(mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
 
         // Calculate angular momentum
-        double h = sqrt(pow(c, 2.0) - 2.0*pow(r, 2.0)*U(t, R));
+        double h = sqrt(pow(c, 2.0) - 2.0*pow(r, 2.0)*perturbation.potential(t, R));
 
         // Calculate velocity
         Vector3 V = drdt*er + h/r*ef;

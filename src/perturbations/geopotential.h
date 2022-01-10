@@ -1,46 +1,57 @@
 #ifndef THAMES_PERTURBATIONS_GEOPOTENTIAL
 #define THAMES_PERTURBATIONS_GEOPOTENTIAL
 
+#include "baseperturbation.h"
 #include "../types.h"
 
 using namespace thames::types;
+using namespace thames::perturbations::baseperturbation;
 
 namespace thames::perturbations::geopotential{
 
-    /**
-     * @brief Calculate perturbing acceleration resulting from the J2 term.
-     * 
-     * @param[in] t Current physical time.
-     * @param[in] R Position vector.
-     * @param[in] V Velocity vector.
-     * @param[in] mu Central body gravitational parameter.
-     * @param[in] J2 Central body J2 term.
-     * @param[in] radius Central body radius.
-     * @return Vector3 Perturbing acceleration.
-     */
-    Vector3 J2_acceleration(double t, Vector3 R, Vector3 V, double mu, double J2, double radius);
+    class J2 : public BasePerturbation {
+        private:
 
-    /**
-     * @brief Calculate perturbing potential resulting from the J2 term.
-     * 
-     * @param[in] t Current physical time.
-     * @param[in] R Position vector.
-     * @param[in] mu Central body gravitational parameter.
-     * @param[in] J2 Central body J2 term.
-     * @param[in] radius Central body radius.
-     * @return double Perturbing potential.
-     */
-    double J2_potential(double t, Vector3 R, double mu, double J2, double radius);
+            /// Central body gravitational parameter.
+            double m_mu;
 
-    /**
-     * @brief Calculate time derivative of the perturbing potential resulting from the J2 term.
-     * 
-     * @param[in] t Current physical time.
-     * @param[in] R Position vector.
-     * @param[in] V Velocity vector.
-     * @return double Time derivative of the perturbing potential.
-     */
-    double J2_dpotential(double t, Vector3 R, Vector3 V);
+            /// Central body J2-term.
+            double m_J2;
+
+            /// Central body radius.
+            double m_radius;
+
+        public:
+
+            /**
+             * @brief Construct a new J2 object.
+             * 
+             * @param[in] mu Central body gravitational parameter.
+             * @param[in] J2 Central body J2-term.
+             * @param[in] radius Central body radius.
+             */
+            J2(double mu, double J2, double radius);
+
+            /**
+             * @brief Calculate perturbing acceleration resulting from the J2-term. 
+             * 
+             * @param[in] t Current physical time.
+             * @param[in] R Position vector.
+             * @param[in] V Velocity vector.
+             * @return Vector3 Total perturbing acceleration due to the J2-term.
+             */
+            Vector3 acceleration_total(double t, Vector3 R, Vector3 V) override;
+
+            /**
+             * @brief Calculate perturbing potential resulting from the J2-term. 
+             * 
+             * @param[in] t Current physical time.
+             * @param[in] R Position vector.
+             * @return double Perturbing potential due to the J2-term.
+             */
+            double potential(double t, Vector3 R) override;
+
+    };
 
 }
 
