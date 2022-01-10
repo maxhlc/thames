@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['rot_5fx_134',['rot_x',['../namespacethames_1_1conversions_1_1util.html#a7686c626d50be6eb729dc5587fb374cc',1,'thames::conversions::util']]],
-  ['rot_5fy_135',['rot_y',['../namespacethames_1_1conversions_1_1util.html#a0396ccf4b89211de66e9f8ff8bf688a8',1,'thames::conversions::util']]],
-  ['rot_5fz_136',['rot_z',['../namespacethames_1_1conversions_1_1util.html#a2e3206c1e02163b8eaf673cad5952df9',1,'thames::conversions::util']]]
+  ['propagate_135',['propagate',['../namespacethames_1_1propagators_1_1cowell.html#a960819c1e8fd6c77fcf7f7465169fe33',1,'thames::propagators::cowell::propagate()'],['../namespacethames_1_1propagators_1_1geqoe.html#a146309367d9d223e201ae31e736c24e8',1,'thames::propagators::geqoe::propagate()']]]
 ];

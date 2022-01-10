@@ -9,7 +9,7 @@ namespace thames::util::optimise{
     /**
      * @brief Golden section search to find local minima.
      * 
-     * @details Method descrived by: https://en.wikipedia.org/wiki/Golden-section_search#Iterative_algorithm
+     * @details Method as described by: https://en.wikipedia.org/wiki/Golden-section_search#Iterative_algorithm
      * 
      * @param[in] func Scalar function to be minimised.
      * @param[in] a Left hand boundary.

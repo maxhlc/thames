@@ -74,13 +74,16 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afa633689231ad247a8018cc08a780dca"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1root.html#afa633689231ad247a8018cc08a780dca">golden_section_search</a> (std::function&lt; double(double)&gt; func, double a, double b)</td></tr>
-<tr class="memdesc:afa633689231ad247a8018cc08a780dca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Golden section search for root finding.  <a href="namespacethames_1_1util_1_1root.html#afa633689231ad247a8018cc08a780dca">More...</a><br /></td></tr>
-<tr class="separator:afa633689231ad247a8018cc08a780dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3a46ec88630559f0a70b726d342c90d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1root.html#af3a46ec88630559f0a70b726d342c90d">golden_section_search</a> (std::function&lt; double(double)&gt; func, double a, double b, double tol=1e-10)</td></tr>
+<tr class="memdesc:af3a46ec88630559f0a70b726d342c90d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Golden section search for root finding.  <a href="namespacethames_1_1util_1_1root.html#af3a46ec88630559f0a70b726d342c90d">More...</a><br /></td></tr>
+<tr class="separator:af3a46ec88630559f0a70b726d342c90d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3567d8200f465a4f56a98307f69588fb"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1root.html#a3567d8200f465a4f56a98307f69588fb">newton_raphson</a> (const std::function&lt; double(double)&gt; &amp;func, const std::function&lt; double(double)&gt; &amp;dfunc, double xn, double tol=1e-10)</td></tr>
+<tr class="memdesc:a3567d8200f465a4f56a98307f69588fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Netwon-Raphson method for root finding.  <a href="namespacethames_1_1util_1_1root.html#a3567d8200f465a4f56a98307f69588fb">More...</a><br /></td></tr>
+<tr class="separator:a3567d8200f465a4f56a98307f69588fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="afa633689231ad247a8018cc08a780dca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa633689231ad247a8018cc08a780dca">&#9670;&nbsp;</a></span>golden_section_search()</h2>
+<a id="af3a46ec88630559f0a70b726d342c90d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3a46ec88630559f0a70b726d342c90d">&#9670;&nbsp;</a></span>golden_section_search()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -101,7 +104,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>tol</em> = <code>1e-10</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -117,6 +126,59 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">func</td><td>Scalar function for root finding. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>Left hand boundary. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">b</td><td>Right hand boundary. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tol</td><td>Solver tolerance. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>double Argument of the root. </dd></dl>
+
+</div>
+</div>
+<a id="a3567d8200f465a4f56a98307f69588fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3567d8200f465a4f56a98307f69588fb">&#9670;&nbsp;</a></span>newton_raphson()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double thames::util::root::newton_raphson </td>
+          <td>(</td>
+          <td class="paramtype">const std::function&lt; double(double)&gt; &amp;&#160;</td>
+          <td class="paramname"><em>func</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::function&lt; double(double)&gt; &amp;&#160;</td>
+          <td class="paramname"><em>dfunc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>xn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>tol</em> = <code>1e-10</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Netwon-Raphson method for root finding. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">func</td><td>Scalar function for root finding. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dfunc</td><td>Derivative of scalar function for root finding. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">xn</td><td>Initial guess. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tol</td><td>Solver tolerance. </td></tr>
   </table>
   </dd>
 </dl>
