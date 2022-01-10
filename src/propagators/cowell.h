@@ -16,7 +16,7 @@ namespace thames::propagators::cowell{
      * @param[in] mu Central body gravitational parameter.
      * @param[in] F_func Perturbing acceleration function.
      */
-    void derivative(const Vector6 &RV, Vector6 &RVdot, const double t, const double &mu, const Force &F_func);
+    void derivative(const Vector6 &RV, Vector6 &RVdot, const double t, const double &mu, const AccelerationFunc &F_func);
 
     /**
      * @brief Propagate Cartesian state using Cowell's method.
@@ -31,7 +31,7 @@ namespace thames::propagators::cowell{
      * @param[in] rtol Solver relative tolerance.
      * @return Vector6 Final Cartesian state.
      */
-    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, Force F_func, double atol = 1e-10, double rtol = 1e-10);
+    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, AccelerationFunc F_func, double atol = 1e-10, double rtol = 1e-10);
 
 }
 

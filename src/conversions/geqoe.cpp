@@ -10,7 +10,7 @@ using namespace thames::types;
 
 namespace thames::conversions::geqoe{
     
-    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, const Potential &U){
+    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, const PotentialFunc &U){
         // Extract position and velocity vectors
         Vector3 R, V;
         R = RV(Eigen::seq(0,2));
@@ -86,7 +86,7 @@ namespace thames::conversions::geqoe{
         return geqoe;
     }
 
-    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, const Potential &U){
+    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, const PotentialFunc &U){
         // Extract elements
         double nu = geqoe[0];
         double p1 = geqoe[1];

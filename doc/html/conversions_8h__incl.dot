@@ -7,17 +7,18 @@ digraph "src/conversions/conversions.h"
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="dimensional.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$dimensional_8h.html",tooltip=" "];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="state.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$state_8h.html",tooltip=" "];
+  Node3 [label="../types.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$types_8h.html",tooltip=" "];
   Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="Eigen/Core",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node4 [label="functional",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node3 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="../types.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$types_8h.html",tooltip=" "];
-  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="functional",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
-  Node5 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Eigen/Core",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="geqoe.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$conversions_2geqoe_8h.html",tooltip=" "];
+  Node6 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node7 [label="util.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$conversions_2util_8h.html",tooltip=" "];
-  Node7 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="keplerian.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$keplerian_8h.html",tooltip=" "];
+  Node7 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="util.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$conversions_2util_8h.html",tooltip=" "];
+  Node8 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

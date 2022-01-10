@@ -16,7 +16,7 @@ namespace thames::conversions::geqoe{
      * @param[in] U Perturbing potential function.
      * @return Vector6 GEqOE state.
      */
-    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, const Potential &U);
+    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, const PotentialFunc &U);
 
     /**
      * @brief Convert from Generalised Equinoctial Orbital Elements (GEqOE) to Cartesian state.
@@ -27,7 +27,7 @@ namespace thames::conversions::geqoe{
      * @param[in] U Perturbing potential function.
      * @return Vector6 Cartesian state.
      */
-    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, const Potential &U);
+    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, const PotentialFunc &U);
 
 }
 

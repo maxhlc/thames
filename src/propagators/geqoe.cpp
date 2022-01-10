@@ -9,7 +9,7 @@ using namespace thames::types;
 
 namespace thames::propagators::geqoe{
 
-    void derivative(const Vector6 &geqoe, Vector6 &geqoedot, const double t, const double &mu, const Potential &U_func, const PotentialDerivative &Ut_func, const Force &F_func, const Force &P_func){
+    void derivative(const Vector6 &geqoe, Vector6 &geqoedot, const double t, const double &mu, const PotentialFunc &U_func, const PotentialDerivativeFunc &Ut_func, const AccelerationFunc &F_func, const AccelerationFunc &P_func){
         // Extract elements
         double nu = geqoe[0];
         double p1 = geqoe[1];
@@ -101,7 +101,7 @@ namespace thames::propagators::geqoe{
         geqoedot << nudot, p1dot, p2dot, Ldot, q1dot, q2dot;
     }
 
-    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, Potential U_func, PotentialDerivative Ut_func, Force F_func, Force P_func, double atol, double rtol){
+    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, PotentialFunc U_func, PotentialDerivativeFunc Ut_func, AccelerationFunc F_func, AccelerationFunc P_func, double atol, double rtol){
         // Transform initial state
         Vector6 geqoe = thames::conversions::geqoe::cartesian_to_geqoe(tstart, RV, mu, U_func);
 

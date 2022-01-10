@@ -10,7 +10,7 @@ using namespace thames::types;
 
 namespace thames::propagators::cowell{
 
-    void derivative(const Vector6 &RV, Vector6 &RVdot, const double t, const double &mu, const Force &F_func) {
+    void derivative(const Vector6 &RV, Vector6 &RVdot, const double t, const double &mu, const AccelerationFunc &F_func) {
         // Extract Cartesian state vectors
         Vector3 R, V;
         R = RV(Eigen::seq(0,2));
@@ -32,7 +32,7 @@ namespace thames::propagators::cowell{
         RVdot << V, A;    
     }
 
-    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, Force F_func, double atol, double rtol){
+    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, AccelerationFunc F_func, double atol, double rtol){
         // Declare derivative function wrapper
         auto derivative_param = [&](const Vector6 &x, Vector6 &dxdt, const double time){
             derivative(x, dxdt, time, mu, F_func);
