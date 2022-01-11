@@ -1,8 +1,8 @@
 #ifndef THAMES_PERTURBATIONS_GEOPOTENTIAL
 #define THAMES_PERTURBATIONS_GEOPOTENTIAL
 
-#include "baseperturbation.h"
-#include "../types.h"
+#include "../baseperturbation.h"
+#include "../../types.h"
 
 using namespace thames::types;
 using namespace thames::perturbations::baseperturbation;

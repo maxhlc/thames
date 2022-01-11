@@ -5,7 +5,7 @@ add_executable(${PROJECT_NAME}
                conversions/keplerian.cpp
                conversions/util.cpp
                perturbations/baseperturbation.cpp
-               perturbations/geopotential.cpp
+               perturbations/geopotential/geopotential.cpp
                propagators/cowell.cpp
                propagators/geqoe.cpp
                util/angles.cpp

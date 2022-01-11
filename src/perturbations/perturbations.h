@@ -2,6 +2,6 @@
 #define THAMES_PERTURBATIONS
 
 #include "baseperturbation.h"
-#include "geopotential.h"
+#include "geopotential/geopotential.h"
 
 #endif
