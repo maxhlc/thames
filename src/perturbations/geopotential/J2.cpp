@@ -36,7 +36,7 @@ namespace thames::perturbations::geopotential{
 
     double J2::potential(double t, Vector3 R){
         // Extract position components
-        double x = R[0], y = R[1], z = R[2];
+        double z = R[2];
 
         // Calculate range
         double r = R.norm();

@@ -16,7 +16,6 @@ namespace thames::propagators::geqoe{
         double nu = geqoe[0];
         double p1 = geqoe[1];
         double p2 = geqoe[2];
-        double L = geqoe[3];
         double q1 = geqoe[4];
         double q2 = geqoe[5];
 
@@ -56,8 +55,6 @@ namespace thames::propagators::geqoe{
         double sl = er.dot(ey);
 
         // Calculate equinoctial reference frame velocity components
-        double hwx = cl;
-        double hwy = sl;
         double hwh = q1*cl - q2*sl;
 
         // Calculate angular momentum
