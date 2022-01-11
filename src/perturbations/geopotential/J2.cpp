@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "geopotential.h"
+#include "J2.h"
 #include "../../types.h"
 
 using namespace thames::types;
