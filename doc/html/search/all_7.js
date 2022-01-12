@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['keplerian_2ecpp_31',['keplerian.cpp',['../keplerian_8cpp.html',1,'']]],
-  ['keplerian_2eh_32',['keplerian.h',['../keplerian_8h.html',1,'']]],
-  ['keplerian_5fto_5fcartesian_33',['keplerian_to_cartesian',['../namespacethames_1_1conversions_1_1keplerian.html#ad267a78bed183ae4ac77ba6b13f36072',1,'thames::conversions::keplerian']]]
+  ['j2_34',['J2',['../classthames_1_1perturbations_1_1geopotential_1_1J2.html',1,'thames::perturbations::geopotential::J2&lt; real, vector &gt;'],['../classthames_1_1perturbations_1_1geopotential_1_1J2.html#a693cb766aeff7ff411389a7ce6451b84',1,'thames::perturbations::geopotential::J2::J2()'],['../namespacethames_1_1constants_1_1earth.html#a046a5d85b76e60f10013af278a6b9e23',1,'thames::constants::earth::J2()']]],
+  ['j2_2ecpp_35',['J2.cpp',['../J2_8cpp.html',1,'']]],
+  ['j2_2eh_36',['J2.h',['../J2_8h.html',1,'']]]
 ];

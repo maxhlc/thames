@@ -13,7 +13,7 @@ digraph "src/perturbations/perturbations.h"
   Node3 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node5 [label="Eigen/Core",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="geopotential.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$geopotential_8h.html",tooltip=" "];
+  Node6 [label="geopotential/J2.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$J2_8h.html",tooltip=" "];
   Node6 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node6 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

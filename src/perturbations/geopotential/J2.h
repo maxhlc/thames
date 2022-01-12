@@ -9,6 +9,12 @@ using namespace thames::perturbations::baseperturbation;
 
 namespace thames::perturbations::geopotential{
 
+    /**
+     * @brief Class for the perturbation resulting from the J2-term.
+     * 
+     * @tparam real Type for real numbers (e.g. float, double, etc.)
+     * @tparam vector Type for vector (e.g. std::vector<double, 3>, Eigen::Vector3d)
+     */
     template<class real, class vector>
     class J2 : public BasePerturbation<real, vector> {
         private:
@@ -39,7 +45,7 @@ namespace thames::perturbations::geopotential{
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @param[in] V Velocity vector.
-             * @return Vector3 Total perturbing acceleration due to the J2-term.
+             * @return vector Total perturbing acceleration due to the J2-term.
              */
             vector acceleration_total(real t, vector R, vector V) override;
 
@@ -48,7 +54,7 @@ namespace thames::perturbations::geopotential{
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
-             * @return double Perturbing potential due to the J2-term.
+             * @return real Perturbing potential due to the J2-term.
              */
             real potential(real t, vector R) override;
 

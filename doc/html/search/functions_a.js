@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['rot_5fx_146',['rot_x',['../namespacethames_1_1conversions_1_1util.html#a7686c626d50be6eb729dc5587fb374cc',1,'thames::conversions::util']]],
-  ['rot_5fy_147',['rot_y',['../namespacethames_1_1conversions_1_1util.html#a0396ccf4b89211de66e9f8ff8bf688a8',1,'thames::conversions::util']]],
-  ['rot_5fz_148',['rot_z',['../namespacethames_1_1conversions_1_1util.html#a2e3206c1e02163b8eaf673cad5952df9',1,'thames::conversions::util']]]
+  ['potential_170',['potential',['../classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html#aba23658c7c2e8929aac823563c323560',1,'thames::perturbations::baseperturbation::BasePerturbation::potential()'],['../classthames_1_1perturbations_1_1geopotential_1_1J2.html#ad5294edd7316daedc29a91f3738e82b4',1,'thames::perturbations::geopotential::J2::potential()']]],
+  ['potential_5fderivative_171',['potential_derivative',['../classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html#a362e3764c240f9ffc0a5c0aa08c4c9e9',1,'thames::perturbations::baseperturbation::BasePerturbation']]],
+  ['propagate_172',['propagate',['../namespacethames_1_1propagators_1_1cowell.html#ac06a6119ad4e6c3db5107f5f403b1242',1,'thames::propagators::cowell::propagate()'],['../namespacethames_1_1propagators_1_1geqoe.html#a2fd86a151ac9bfa012bb9e1d765351d6',1,'thames::propagators::geqoe::propagate()']]]
 ];

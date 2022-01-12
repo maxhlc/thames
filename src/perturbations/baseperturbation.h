@@ -7,6 +7,12 @@ using namespace thames::types;
 
 namespace thames::perturbations::baseperturbation{
     
+    /**
+     * @brief Class for the base perturbation.
+     * 
+     * @tparam real Type for real numbers (e.g. float, double, etc.)
+     * @tparam vector Type for vector (e.g. std::vector<double, 3>, Eigen::Vector3d)
+     */
     template<class real, class vector>
     class BasePerturbation{
 
@@ -34,7 +40,7 @@ namespace thames::perturbations::baseperturbation{
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @param[in] V Velocity vector.
-             * @return Vector3 Total perturbing acceleration.
+             * @return vector Total perturbing acceleration.
              */
             virtual vector acceleration_total(real t, vector R, vector V);
 
@@ -46,7 +52,7 @@ namespace thames::perturbations::baseperturbation{
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @param[in] V Velocity vector.
-             * @return Vector3 Non-potential perturbing acceleration.
+             * @return vector Non-potential perturbing acceleration.
              */
             virtual vector acceleration_nonpotential(real t, vector R, vector V);
 
@@ -57,7 +63,7 @@ namespace thames::perturbations::baseperturbation{
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
-             * @return double Perturbing potential.
+             * @return real Perturbing potential.
              */
             virtual real potential(real t, vector R);
 
@@ -69,7 +75,7 @@ namespace thames::perturbations::baseperturbation{
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @param[in] V Velocity vector.
-             * @return double Time derivative of the perturbing potential.
+             * @return real Time derivative of the perturbing potential.
              */
             virtual real potential_derivative(real t, vector R, vector V);
 

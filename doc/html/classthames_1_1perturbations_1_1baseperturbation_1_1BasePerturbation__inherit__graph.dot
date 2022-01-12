@@ -1,9 +1,12 @@
-digraph "thames::perturbations::baseperturbation::BasePerturbation"
+digraph "thames::perturbations::baseperturbation::BasePerturbation&lt; real, vector &gt;"
 {
  // LATEX_PDF_SIZE
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="thames::perturbations\l::baseperturbation::BasePerturbation",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  rankdir="LR";
+  Node1 [label="thames::perturbations\l::baseperturbation::BasePerturbation\l\< real, vector \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Class for the base perturbation."];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="thames::perturbations\l::geopotential::J2",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classthames_1_1perturbations_1_1geopotential_1_1J2.html",tooltip=" "];
+  Node2 [label="thames::perturbations\l::geopotential::HarmonicGeopotential",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classthames_1_1perturbations_1_1geopotential_1_1HarmonicGeopotential.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="thames::perturbations\l::geopotential::J2\< real,\l vector \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classthames_1_1perturbations_1_1geopotential_1_1J2.html",tooltip="Class for the perturbation resulting from the J2-term."];
 }

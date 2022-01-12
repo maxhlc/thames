@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['radius_49',['radius',['../namespacethames_1_1constants_1_1earth.html#a419ed35e0eb49571f71227d6d2a7fa81',1,'thames::constants::earth']]],
-  ['root_2ecpp_50',['root.cpp',['../root_8cpp.html',1,'']]],
-  ['root_2eh_51',['root.h',['../root_8h.html',1,'']]],
-  ['rot_5fx_52',['rot_x',['../namespacethames_1_1conversions_1_1util.html#a7686c626d50be6eb729dc5587fb374cc',1,'thames::conversions::util']]],
-  ['rot_5fy_53',['rot_y',['../namespacethames_1_1conversions_1_1util.html#a0396ccf4b89211de66e9f8ff8bf688a8',1,'thames::conversions::util']]],
-  ['rot_5fz_54',['rot_z',['../namespacethames_1_1conversions_1_1util.html#a2e3206c1e02163b8eaf673cad5952df9',1,'thames::conversions::util']]]
+  ['perturbations_2eh_50',['perturbations.h',['../perturbations_8h.html',1,'']]],
+  ['potential_51',['potential',['../classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html#aba23658c7c2e8929aac823563c323560',1,'thames::perturbations::baseperturbation::BasePerturbation::potential()'],['../classthames_1_1perturbations_1_1geopotential_1_1J2.html#ad5294edd7316daedc29a91f3738e82b4',1,'thames::perturbations::geopotential::J2::potential()']]],
+  ['potential_5fderivative_52',['potential_derivative',['../classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html#a362e3764c240f9ffc0a5c0aa08c4c9e9',1,'thames::perturbations::baseperturbation::BasePerturbation']]],
+  ['potentialderivativefunc_53',['PotentialDerivativeFunc',['../namespacethames_1_1types.html#a3beb8770ad08b7171598560823267428',1,'thames::types']]],
+  ['potentialfunc_54',['PotentialFunc',['../namespacethames_1_1types.html#a7e08bbed319c55d44c9548e360a43a37',1,'thames::types']]],
+  ['propagate_55',['propagate',['../namespacethames_1_1propagators_1_1cowell.html#ac06a6119ad4e6c3db5107f5f403b1242',1,'thames::propagators::cowell::propagate()'],['../namespacethames_1_1propagators_1_1geqoe.html#a2fd86a151ac9bfa012bb9e1d765351d6',1,'thames::propagators::geqoe::propagate()']]],
+  ['propagators_2eh_56',['propagators.h',['../propagators_8h.html',1,'']]]
 ];
