@@ -5,13 +5,14 @@
 
 namespace thames::util::optimise{
 
-    double golden_section_search(std::function<double (double)> func, double a, double b, double tol){
+    template<class real>
+    real golden_section_search(std::function<real (real)> func, real a, real b, real tol){
         // Set parameters
-        const double gr = 0.5*(sqrt(5.0) + 1);
+        const real gr = 0.5*(sqrt(5.0) + 1);
 
         // Calculate test points
-        double c = b - (b - a)/gr;
-        double d = a + (b - a)/gr;
+        real c = b - (b - a)/gr;
+        real d = a + (b - a)/gr;
 
         // Iterate until convergence
         while (abs(b - a) > tol) {
@@ -30,5 +31,6 @@ namespace thames::util::optimise{
         // Return converged value
         return (0.5*(a + b));
     }
+    template double golden_section_search<double>(std::function<double (double)>, double, double, double);
 
 }

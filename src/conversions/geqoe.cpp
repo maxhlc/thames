@@ -100,7 +100,7 @@ namespace thames::conversions::geqoe{
         // Calculate generalised eccentric longitude
         auto fk = [p1, p2, L](double k) {return (k + p1*cos(k) - p2*sin(k) - L);};
         auto dfk = [p1, p2, L](double k) {return (1 - p1*sin(k) - p2*cos(k));};
-        double k = thames::util::root::newton_raphson(fk, dfk, L);
+        double k = thames::util::root::newton_raphson<double>(fk, dfk, L);
         double sink = sin(k);
         double cosk = cos(k);
 

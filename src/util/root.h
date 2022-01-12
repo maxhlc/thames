@@ -9,24 +9,28 @@ namespace thames::util::root{
     /**
      * @brief Golden section search for root finding.
      * 
+     * @tparam real Type for a real number.
      * @param[in] func Scalar function for root finding.
      * @param[in] a Left hand boundary.
      * @param[in] b Right hand boundary.
      * @param[in] tol Solver tolerance.
-     * @return double Argument of the root.
+     * @return real Argument of the root.
      */
-    double golden_section_search(std::function<double (double)> func, double a, double b, double tol = 1e-10);
+    template<class real>
+    real golden_section_search(std::function<real (real)> func, real a, real b, real tol = 1e-10);
 
     /**
      * @brief Netwon-Raphson method for root finding.
      * 
+     * @tparam real Type for a real number.
      * @param[in] func Scalar function for root finding. 
      * @param[in] dfunc Derivative of scalar function for root finding.
      * @param[in] xn Initial guess.
      * @param[in] tol Solver tolerance.
-     * @return double Argument of the root.
+     * @return real Argument of the root.
      */
-    double newton_raphson(const std::function<double (double)> &func, const std::function<double (double)> &dfunc, double xn, double tol = 1e-10);
+    template<class real>
+    real newton_raphson(const std::function<real (real)> &func, const std::function<real (real)> &dfunc, real xn, real tol = 1e-10);
 
 }
 

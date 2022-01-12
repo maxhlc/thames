@@ -2,7 +2,8 @@
 
 namespace thames::util::angles{
 
-    double angle_wrap(double theta){
+    template<class real>
+    real angle_wrap(real theta){
 
         theta = fmod(theta + M_PI, 2*M_PI);
 
@@ -12,5 +13,6 @@ namespace thames::util::angles{
 
         return theta - M_PI;
     }
+    template double angle_wrap<double>(double);
 
 }

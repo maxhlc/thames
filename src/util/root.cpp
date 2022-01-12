@@ -6,20 +6,23 @@
 
 namespace thames::util::root{
 
-    double golden_section_search(std::function<double (double)> func, double a, double b, double tol){
+    template<class real>
+    real golden_section_search(std::function<real (real)> func, real a, real b, real tol){
         // Declare function for minimisation (root at minimum of absolute of the function)
-        std::function<double (double)> f = [func](double x) {return abs(func(x));};
+        std::function<real (real)> f = [func](real x) {return abs(func(x));};
 
         // Minimise function using the golden section search
-        double x0 = thames::util::optimise::golden_section_search(f, a, b, tol);
+        real x0 = thames::util::optimise::golden_section_search(f, a, b, tol);
 
         // Return root
         return x0;
     }
+    template double golden_section_search<double>(std::function<double (double)>, double, double, double);
 
-    double newton_raphson(const std::function<double (double)> &func, const std::function<double (double)> &dfunc, double xn, double tol){
+    template<class real>
+    real newton_raphson(const std::function<real (real)> &func, const std::function<real (real)> &dfunc, real xn, real tol){
         // Declare approximation variable
-        double xn1;
+        real xn1;
 
         // Set converged flag to false
         bool converged = false;
@@ -40,5 +43,6 @@ namespace thames::util::root{
         // Return root
         return xn1;
     }
+    template double newton_raphson<double>(const std::function<double (double)>&, const std::function<double (double)>&, double, double);
 
 }
