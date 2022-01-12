@@ -11,4 +11,5 @@ add_executable(${PROJECT_NAME}
                util/angles.cpp
                util/root.cpp
                util/optimise.cpp
+               util/vector.cpp
                )
