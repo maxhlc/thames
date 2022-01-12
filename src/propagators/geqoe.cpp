@@ -11,7 +11,7 @@ using namespace thames::perturbations::baseperturbation;
 
 namespace thames::propagators::geqoe{
 
-    void derivative(const Vector6 &geqoe, Vector6 &geqoedot, const double t, const double &mu, BasePerturbation &perturbation){
+    void derivative(const Vector6 &geqoe, Vector6 &geqoedot, const double t, const double &mu, BasePerturbation<double, Vector3> &perturbation){
         // Extract elements
         double nu = geqoe[0];
         double p1 = geqoe[1];
@@ -100,7 +100,7 @@ namespace thames::propagators::geqoe{
         geqoedot << nudot, p1dot, p2dot, Ldot, q1dot, q2dot;
     }
 
-    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, BasePerturbation &perturbation, double atol, double rtol){
+    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, BasePerturbation<double, Vector3> &perturbation, double atol, double rtol){
         // Transform initial state
         Vector6 geqoe = thames::conversions::geqoe::cartesian_to_geqoe(tstart, RV, mu, perturbation);
 

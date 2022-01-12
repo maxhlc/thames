@@ -9,17 +9,18 @@ using namespace thames::perturbations::baseperturbation;
 
 namespace thames::perturbations::geopotential{
 
-    class J2 : public BasePerturbation {
+    template<class real, class vector>
+    class J2 : public BasePerturbation<real, vector> {
         private:
 
             /// Central body gravitational parameter.
-            double m_mu;
+            real m_mu;
 
             /// Central body J2-term.
-            double m_J2;
+            real m_J2;
 
             /// Central body radius.
-            double m_radius;
+            real m_radius;
 
         public:
 
@@ -30,7 +31,7 @@ namespace thames::perturbations::geopotential{
              * @param[in] J2 Central body J2-term.
              * @param[in] radius Central body radius.
              */
-            J2(double mu, double J2, double radius);
+            J2(real mu, real J2, real radius);
 
             /**
              * @brief Calculate perturbing acceleration resulting from the J2-term. 
@@ -40,7 +41,7 @@ namespace thames::perturbations::geopotential{
              * @param[in] V Velocity vector.
              * @return Vector3 Total perturbing acceleration due to the J2-term.
              */
-            Vector3 acceleration_total(double t, Vector3 R, Vector3 V) override;
+            vector acceleration_total(real t, vector R, vector V) override;
 
             /**
              * @brief Calculate perturbing potential resulting from the J2-term. 
@@ -49,7 +50,7 @@ namespace thames::perturbations::geopotential{
              * @param[in] R Position vector.
              * @return double Perturbing potential due to the J2-term.
              */
-            double potential(double t, Vector3 R) override;
+            real potential(real t, vector R) override;
 
     };
 

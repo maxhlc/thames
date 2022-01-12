@@ -7,6 +7,7 @@ using namespace thames::types;
 
 namespace thames::perturbations::baseperturbation{
     
+    template<class real, class vector>
     class BasePerturbation{
 
         private:
@@ -35,7 +36,7 @@ namespace thames::perturbations::baseperturbation{
              * @param[in] V Velocity vector.
              * @return Vector3 Total perturbing acceleration.
              */
-            virtual Vector3 acceleration_total(double t, Vector3 R, Vector3 V);
+            virtual vector acceleration_total(real t, vector R, vector V);
 
             /**
              * @brief Default non-potential perturbing acceleration.
@@ -47,7 +48,7 @@ namespace thames::perturbations::baseperturbation{
              * @param[in] V Velocity vector.
              * @return Vector3 Non-potential perturbing acceleration.
              */
-            virtual Vector3 acceleration_nonpotential(double t, Vector3 R, Vector3 V);
+            virtual vector acceleration_nonpotential(real t, vector R, vector V);
 
             /**
              * @brief Default perturbing potential.
@@ -58,7 +59,7 @@ namespace thames::perturbations::baseperturbation{
              * @param[in] R Position vector.
              * @return double Perturbing potential.
              */
-            virtual double potential(double t, Vector3 R);
+            virtual real potential(real t, vector R);
 
             /**
              * @brief Default time derivative of the perturbing potential.
@@ -70,7 +71,7 @@ namespace thames::perturbations::baseperturbation{
              * @param[in] V Velocity vector.
              * @return double Time derivative of the perturbing potential.
              */
-            virtual double potential_derivative(double t, Vector3 R, Vector3 V);
+            virtual real potential_derivative(real t, vector R, vector V);
 
     };
 

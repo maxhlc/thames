@@ -23,9 +23,9 @@ int main(){
     double radius = 6.378136460000000E+03; //thames::constants::earth::radius;
     double J2 = 1.082626111e-3; //thames::constants::earth::J2;
 
-    thames::perturbations::geopotential::J2 perturbation(mu, J2, radius);
+    thames::perturbations::geopotential::J2<double, Vector3> perturbation(mu, J2, radius);
 
-    Vector6 state_prop = thames::propagators::geqoe::propagate(tstart, tend, tstep, RV, mu, perturbation, 1e-13, 1e-13);
+    Vector6 state_prop = thames::propagators::cowell::propagate(tstart, tend, tstep, RV, mu, perturbation, 1e-13, 1e-13);
 
     std::cout << std::setprecision(16) << state_prop << std::endl;
 

@@ -5,32 +5,44 @@ using namespace thames::types;
 
 namespace thames::perturbations::baseperturbation{
 
-    BasePerturbation::BasePerturbation(){
+    template<class real, class vector>
+    BasePerturbation<real, vector>::BasePerturbation(){
 
     };
 
-    BasePerturbation::~BasePerturbation(){
+    template<class real, class vector>
+    BasePerturbation<real, vector>::~BasePerturbation(){
 
     };
     
-    Vector3 BasePerturbation::acceleration_total(double t, Vector3 R, Vector3 V){
-        Vector3 F;
-        F << 0.0, 0.0, 0.0;
+    template<class real, class vector>
+    vector BasePerturbation<real, vector>::acceleration_total(real t, vector R, vector V){
+        vector F;
+        F[0] = 0.0;
+        F[1] = 0.0;
+        F[2] = 0.0;
         return F;
     };
 
-    Vector3 BasePerturbation::acceleration_nonpotential(double t, Vector3 R, Vector3 V){
-        Vector3 F;
-        F << 0.0, 0.0, 0.0;
+    template<class real, class vector>
+    vector BasePerturbation<real, vector>::acceleration_nonpotential(real t, vector R, vector V){
+        vector F;
+        F[0] = 0.0;
+        F[1] = 0.0;
+        F[2] = 0.0;
         return F;
     };
 
-    double BasePerturbation::potential(double t, Vector3 R){
+    template<class real, class vector>
+    real BasePerturbation<real, vector>::potential(real t, vector R){
         return 0.0;
     }
 
-    double BasePerturbation::potential_derivative(double t, Vector3 R, Vector3 V){
+    template<class real, class vector>
+    real BasePerturbation<real, vector>::potential_derivative(real t, vector R, vector V){
         return 0.0;
     }
+
+    template class BasePerturbation<double, Vector3>;
 
 }

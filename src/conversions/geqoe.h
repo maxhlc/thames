@@ -18,7 +18,7 @@ namespace thames::conversions::geqoe{
      * @param[in] perturbation Perturbation object.
      * @return Vector6 GEqOE state.
      */
-    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, BasePerturbation &perturbation);
+    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, BasePerturbation<double, Vector3> &perturbation);
 
     /**
      * @brief Convert from Generalised Equinoctial Orbital Elements (GEqOE) to Cartesian state.
@@ -29,7 +29,7 @@ namespace thames::conversions::geqoe{
      * @param[in] perturbation Perturbation object.
      * @return Vector6 Cartesian state.
      */
-    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, BasePerturbation &perturbation);
+    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, BasePerturbation<double, Vector3> &perturbation);
 
 }
 

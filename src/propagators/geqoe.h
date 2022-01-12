@@ -18,7 +18,7 @@ namespace thames::propagators::geqoe{
      * @param[in] mu Central body gravitational parameter.
      * @param[in] perturbation Perturbation object.
      */
-    void derivative(const Vector6 &geqoe, Vector6 &geqoedot, const double t, const double &mu, BasePerturbation &perturbation);
+    void derivative(const Vector6 &geqoe, Vector6 &geqoedot, const double t, const double &mu, BasePerturbation<double, Vector3> &perturbation);
 
     /**
      * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
@@ -33,7 +33,7 @@ namespace thames::propagators::geqoe{
      * @param[in] rtol Solver relative tolerance.
      * @return Vector6 Final Cartesian state.
      */
-    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, BasePerturbation &perturbation, double atol = 1e-10, double rtol = 1e-10);
+    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, BasePerturbation<double, Vector3> &perturbation, double atol = 1e-10, double rtol = 1e-10);
 
 }
 

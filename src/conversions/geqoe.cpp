@@ -12,7 +12,7 @@ using namespace thames::perturbations::baseperturbation;
 
 namespace thames::conversions::geqoe{
     
-    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, BasePerturbation &perturbation){
+    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, BasePerturbation<double, Vector3> &perturbation){
         // Extract position and velocity vectors
         Vector3 R, V;
         R = RV(Eigen::seq(0,2));
@@ -88,7 +88,7 @@ namespace thames::conversions::geqoe{
         return geqoe;
     }
 
-    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, BasePerturbation &perturbation){
+    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, BasePerturbation<double, Vector3> &perturbation){
         // Extract elements
         double nu = geqoe[0];
         double p1 = geqoe[1];
