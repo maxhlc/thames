@@ -19,10 +19,13 @@ digraph "src/propagators/geqoe.cpp"
   Node6 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node8 [label="Eigen/Core",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node4 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node9 [label="../conversions/geqoe.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$conversions_2geqoe_8h.html",tooltip=" "];
   Node9 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node9 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="../util/vector.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$vector_8h.html",tooltip=" "];
+  Node10 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

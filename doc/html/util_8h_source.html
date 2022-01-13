@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>THAMES: src/conversions/util.h Source File</title>
+<title>THAMES: src/util/util.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7525d6432cd0d075dffa0aef6bc30566.html">conversions</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b7878ad5ecbf2506f4125b9d34c97e45.html">util</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -69,31 +69,20 @@ $(function() {
 <div class="title">util.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="util_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef THAMES_CONVERSIONS_UTIL</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define THAMES_CONVERSIONS_UTIL</span></div>
+<a href="util_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef THAMES_UTIL</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define THAMES_UTIL</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;../types.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacethames_1_1types.html">thames::types</a>;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacethames_1_1conversions_1_1util.html">thames::conversions::util</a> {</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="namespacethames_1_1types.html#ad1c5fc048545d6e5a27b0cdde8ccc348">Matrix33</a> <a class="code" href="namespacethames_1_1conversions_1_1util.html#a7686c626d50be6eb729dc5587fb374cc">rot_x</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ang);</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="namespacethames_1_1types.html#ad1c5fc048545d6e5a27b0cdde8ccc348">Matrix33</a> <a class="code" href="namespacethames_1_1conversions_1_1util.html#a0396ccf4b89211de66e9f8ff8bf688a8">rot_y</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ang);</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="namespacethames_1_1types.html#ad1c5fc048545d6e5a27b0cdde8ccc348">Matrix33</a> <a class="code" href="namespacethames_1_1conversions_1_1util.html#a2e3206c1e02163b8eaf673cad5952df9">rot_z</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;ang);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="angles_8h.html">angles.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="optimise_8h.html">optimise.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="root_8h.html">root.h</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vector_8h.html">vector.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="anamespacethames_1_1types_html"><div class="ttname"><a href="namespacethames_1_1types.html">thames::types</a></div><div class="ttdef"><b>Definition:</b> types.h:8</div></div>
-<div class="ttc" id="anamespacethames_1_1types_html_ad1c5fc048545d6e5a27b0cdde8ccc348"><div class="ttname"><a href="namespacethames_1_1types.html#ad1c5fc048545d6e5a27b0cdde8ccc348">thames::types::Matrix33</a></div><div class="ttdeci">Eigen::Matrix&lt; double, 3, 3 &gt; Matrix33</div><div class="ttdef"><b>Definition:</b> types.h:15</div></div>
-<div class="ttc" id="anamespacethames_1_1conversions_1_1util_html_a0396ccf4b89211de66e9f8ff8bf688a8"><div class="ttname"><a href="namespacethames_1_1conversions_1_1util.html#a0396ccf4b89211de66e9f8ff8bf688a8">thames::conversions::util::rot_y</a></div><div class="ttdeci">Matrix33 rot_y(const double &amp;ang)</div><div class="ttdef"><b>Definition:</b> util.cpp:23</div></div>
-<div class="ttc" id="anamespacethames_1_1conversions_1_1util_html_a7686c626d50be6eb729dc5587fb374cc"><div class="ttname"><a href="namespacethames_1_1conversions_1_1util.html#a7686c626d50be6eb729dc5587fb374cc">thames::conversions::util::rot_x</a></div><div class="ttdeci">Matrix33 rot_x(const double &amp;ang)</div><div class="ttdef"><b>Definition:</b> util.cpp:8</div></div>
-<div class="ttc" id="anamespacethames_1_1conversions_1_1util_html"><div class="ttname"><a href="namespacethames_1_1conversions_1_1util.html">thames::conversions::util</a></div><div class="ttdef"><b>Definition:</b> util.cpp:6</div></div>
-<div class="ttc" id="anamespacethames_1_1conversions_1_1util_html_a2e3206c1e02163b8eaf673cad5952df9"><div class="ttname"><a href="namespacethames_1_1conversions_1_1util.html#a2e3206c1e02163b8eaf673cad5952df9">thames::conversions::util::rot_z</a></div><div class="ttdeci">Matrix33 rot_z(const double &amp;ang)</div><div class="ttdef"><b>Definition:</b> util.cpp:38</div></div>
+<div class="ttc" id="aoptimise_8h_html"><div class="ttname"><a href="optimise_8h.html">optimise.h</a></div></div>
+<div class="ttc" id="aangles_8h_html"><div class="ttname"><a href="angles_8h.html">angles.h</a></div></div>
+<div class="ttc" id="aroot_8h_html"><div class="ttname"><a href="root_8h.html">root.h</a></div></div>
+<div class="ttc" id="avector_8h_html"><div class="ttname"><a href="vector_8h.html">vector.h</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
