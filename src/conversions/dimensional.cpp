@@ -1,19 +1,16 @@
 #include "dimensional.h"
 #include "keplerian.h"
+#include "../util/util.h"
 #include "../types.h"
 
 using namespace thames::types;
 
 namespace thames::conversions::dimensional{
 
-    void cartesian_nondimensionalise(double &t, Vector6 &RV, double &mu, DimensionalFactors &factors){
-        // Extract position and velocity vectors
-        Vector3 R, V;
-        R = RV(Eigen::seq(0,2));
-        V = RV(Eigen::seq(3,5));
-
+    template<class real, class vector3, class vector6>
+    void cartesian_nondimensionalise(real &t, vector6 &RV, real &mu, DimensionalFactors &factors){
         // Calculate length factors (semi-major axis)
-        Vector6 keplerian = thames::conversions::keplerian::cartesian_to_keplerian(RV, mu);
+        vector6 keplerian = thames::conversions::keplerian::cartesian_to_keplerian<real, vector3, vector6>(RV, mu);
         factors.length = keplerian[0];
 
         // Calculate velocity factor
@@ -26,25 +23,29 @@ namespace thames::conversions::dimensional{
         factors.grav = mu;
 
         // Calculate non-dimensional states
-        t = t/factors.time;
-        mu = mu/factors.grav;
-        R = R/factors.length;
-        V = V/factors.velocity;
-        RV << R, V;
+        t /= factors.time;
+        mu /= factors.grav;
+        RV[0] /= factors.length;
+        RV[1] /= factors.length;
+        RV[2] /= factors.length;
+        RV[3] /= factors.velocity;
+        RV[4] /= factors.velocity;
+        RV[5] /= factors.velocity;
     }
+    template void cartesian_nondimensionalise<double, Vector3, Vector6>(double&, Vector6&, double&, DimensionalFactors&);
 
-    void cartesian_dimensionalise(double &t, Vector6 &RV, double &mu, const DimensionalFactors &factors){
-        // Extract position and velocity vectors
-        Vector3 R, V;
-        R = RV(Eigen::seq(0,2));
-        V = RV(Eigen::seq(3,5));
-
+    template<class real, class vector3, class vector6>
+    void cartesian_dimensionalise(real &t, vector6 &RV, real &mu, const DimensionalFactors &factors){
         // Calculate dimensional states
-        t = t*factors.time;
-        mu = mu*factors.grav;
-        R = R*factors.length;
-        V = V*factors.velocity;
-        RV << R, V;
+        t *= factors.time;
+        mu *= factors.grav;
+        RV[0] *= factors.length;
+        RV[1] *= factors.length;
+        RV[2] *= factors.length;
+        RV[3] *= factors.velocity;
+        RV[4] *= factors.velocity;
+        RV[5] *= factors.velocity;
     }
+    template void cartesian_dimensionalise<double, Vector3, Vector6>(double&, Vector6&, double&, const DimensionalFactors&);
 
 }

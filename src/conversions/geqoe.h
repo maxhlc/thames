@@ -12,24 +12,32 @@ namespace thames::conversions::geqoe{
     /**
      * @brief Convert from Cartesian state to Generalised Equinoctial Orbital Elements (GEqOE).
      * 
+     * @tparam real Type for real numbers.
+     * @tparam vector3 Type for the state vector slices.
+     * @tparam vector6 Type for the state vector.
      * @param[in] t Current physical time.
      * @param[in] RV Cartesian state.
      * @param[in] mu Gravitational parameter.
      * @param[in] perturbation Perturbation object.
      * @return Vector6 GEqOE state.
      */
-    Vector6 cartesian_to_geqoe(const double &t, const Vector6 &RV, const double &mu, BasePerturbation<double, Vector3> &perturbation);
+    template<class real, class vector3, class vector6>
+    vector6 cartesian_to_geqoe(const real &t, const vector6 &RV, const real &mu, BasePerturbation<real, vector3> &perturbation);
 
     /**
      * @brief Convert from Generalised Equinoctial Orbital Elements (GEqOE) to Cartesian state.
      * 
+     * @tparam real Type for real numbers.
+     * @tparam vector3 Type for the state vector slices.
+     * @tparam vector6 Type for the state vector.
      * @param[in] t Current physical time.
      * @param[in] geqoe GEqOE state.
      * @param[in] mu Gravitational parameter.
      * @param[in] perturbation Perturbation object.
      * @return Vector6 Cartesian state.
      */
-    Vector6 geqoe_to_cartesian(const double &t, const Vector6 &geqoe, const double &mu, BasePerturbation<double, Vector3> &perturbation);
+    template<class real, class vector3, class vector6>
+    vector6 geqoe_to_cartesian(const real &t, const vector6 &geqoe, const real &mu, BasePerturbation<real, vector3> &perturbation);
 
 }
 

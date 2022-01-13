@@ -12,17 +12,24 @@ namespace thames::propagators::cowell{
     /**
      * @brief State derivative for Cowell's method propagation.
      * 
+     * @tparam real Type for real numbers.
+     * @tparam vector3 Type for the state vector slices.
+     * @tparam vector6 Type for the state vector.
      * @param[in] RV Cartesian state.
      * @param[out] RVdot Time derivative of the Cartesian state.
      * @param[in] t Current physical time.
      * @param[in] mu Central body gravitational parameter.
      * @param[in] perturbation Perturbation object.
      */
-    void derivative(const Vector6 &RV, Vector6 &RVdot, const double t, const double &mu, BasePerturbation<double, Vector3> &perturbation);
+    template<class real, class vector3, class vector6>
+    void derivative(const vector6 &RV, vector6 &RVdot, const real t, const real &mu, BasePerturbation<real, vector3> &perturbation);
 
     /**
      * @brief Propagate Cartesian state using Cowell's method.
      * 
+     * @tparam real Type for real numbers.
+     * @tparam vector3 Type for the state vector slices.
+     * @tparam vector6 Type for the state vector.
      * @param[in] tstart Propagation start time in physical time.
      * @param[in] tend Propagation end time in physical time.
      * @param[in] tstep Initial timestep for propagation.
@@ -33,7 +40,8 @@ namespace thames::propagators::cowell{
      * @param[in] rtol Solver relative tolerance.
      * @return Vector6 Final Cartesian state.
      */
-    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, BasePerturbation<double, Vector3> &perturbation, double atol = 1e-10, double rtol = 1e-10);
+    template<class real, class vector3, class vector6>
+    vector6 propagate(real tstart, real tend, real tstep, vector6 RV, real mu, BasePerturbation<real, vector3> &perturbation, real atol = 1e-10, real rtol = 1e-10);
 
 }
 

@@ -44,6 +44,12 @@ namespace thames::util::vector{
     template<class vectorout, class vectorin, class integer>
     vectorout slice(vectorin v, integer a, integer b);
 
+    template<class real, class vector>
+    vector mult3(real a, vector vec);
+
+    template<class vector>
+    vector cross3(vector a, vector b);
+
 }
 
 #endif

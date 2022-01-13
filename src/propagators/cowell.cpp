@@ -13,36 +13,44 @@ using namespace thames::perturbations::baseperturbation;
 
 namespace thames::propagators::cowell{
 
-    void derivative(const Vector6 &RV, Vector6 &RVdot, const double t, const double &mu, BasePerturbation<double, Vector3> &perturbation) {
+    template<class real, class vector3, class vector6>
+    void derivative(const vector6 &RV, vector6 &RVdot, const real t, const real &mu, BasePerturbation<real, vector3> &perturbation) {
         // Extract Cartesian state vectors
-        Vector3 R, V;
-        R = thames::util::vector::slice<Vector3, Vector6, unsigned int>(RV, 0, 2);
-        V = thames::util::vector::slice<Vector3, Vector6, unsigned int>(RV, 3, 5);
+        vector3 R, V;
+        R = thames::util::vector::slice<vector3, vector6, unsigned int>(RV, 0, 2);
+        V = thames::util::vector::slice<vector3, vector6, unsigned int>(RV, 3, 5);
 
         // Calculate range
-        double r = thames::util::vector::norm3<double, Vector3>(R);
+        real r = thames::util::vector::norm3<real, vector3>(R);
 
         // Calculate perturbing acceleration
-        Vector3 F = perturbation.acceleration_total(t, R, V);
+        vector3 F = perturbation.acceleration_total(t, R, V);
 
         // Calculate central body acceleration
-        Vector3 G = -mu*R/pow(r, 3.0);
+        vector3 G = thames::util::vector::mult3<real, vector3>(-mu/pow(r, 3.0), R);
 
         // Calculate acceleration
-        Vector3 A = G + F;
+        vector3 A;
+        for(unsigned int ii=0; ii<3; ii++)
+            A[ii] = G[ii] + F[ii];
 
         // Store state derivative
-        RVdot << V, A;    
+        for(unsigned int ii=0; ii<3; ii++){
+            RVdot[ii] = V[ii];
+            RVdot[ii+3] = A[ii];
+        }
     }
+    template void derivative<double, Vector3, Vector6>(const Vector6&, Vector6&, const double, const double&, BasePerturbation<double, Vector3>&);
 
-    Vector6 propagate(double tstart, double tend, double tstep, Vector6 RV, double mu, BasePerturbation<double, Vector3> &perturbation, double atol, double rtol){
+    template<class real, class vector3, class vector6>
+    vector6 propagate(real tstart, real tend, real tstep, vector6 RV, real mu, BasePerturbation<real, vector3> &perturbation, real atol, real rtol){
         // Declare derivative function wrapper
-        auto derivative_param = [&](const Vector6 &x, Vector6 &dxdt, const double time){
-            derivative(x, dxdt, time, mu, perturbation);
+        auto derivative_param = [&](const vector6 &x, vector6 &dxdt, const real time){
+            derivative<double, Vector3, Vector6>(x, dxdt, time, mu, perturbation);
         };
 
         // Declare stepper
-        boost::numeric::odeint::runge_kutta_cash_karp54<Vector6> stepper;
+        boost::numeric::odeint::runge_kutta_cash_karp54<vector6> stepper;
         auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
 
         // Propagate orbit
@@ -51,5 +59,6 @@ namespace thames::propagators::cowell{
         // Return final state
         return RV;
     }
+    template Vector6 propagate<double, Vector3, Vector6>(double, double, double, Vector6, double, BasePerturbation<double, Vector3>&, double, double);
 
 }

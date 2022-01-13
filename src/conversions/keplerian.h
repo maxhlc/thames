@@ -14,7 +14,8 @@ namespace thames::conversions::keplerian{
      * @param[in] mu Gravitational parameter.
      * @return Vector6 Keplerian elements state.
      */
-    Vector6 cartesian_to_keplerian(const Vector6 &RV, const double &mu);
+    template<class real, class vector3, class vector6>
+    vector6 cartesian_to_keplerian(const vector6 &RV, const real &mu);
 
     /**
      * @brief Convert from traditional Keplerian elements to Cartesian state.
@@ -23,7 +24,8 @@ namespace thames::conversions::keplerian{
      * @param[in] mu Gravitational parameter.
      * @return Vector6 Cartesian state.
      */
-    Vector6 keplerian_to_cartesian(const Vector6 &keplerian, const double &mu);
+    template<class real, class vector3, class vector6>
+    vector6 keplerian_to_cartesian(const vector6 &keplerian, const real &mu);
 
 }
 
