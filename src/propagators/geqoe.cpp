@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include <boost/numeric/odeint.hpp>
 #include <boost/numeric/odeint/external/eigen/eigen_algebra.hpp>
 

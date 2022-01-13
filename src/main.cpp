@@ -21,7 +21,7 @@ int main(){
 
     thames::perturbations::geopotential::J2<double, Vector3> perturbation(mu, J2, radius);
 
-    Vector6 state_prop = thames::propagators::geqoe::propagate<double, Vector3, Vector6>(tstart, tend, tstep, RV, mu, perturbation, 1e-13, 1e-13);
+    Vector6 state_prop = thames::propagators::cowell::propagate<double, Vector3, Vector6>(tstart, tend, tstep, RV, mu, perturbation, 1e-13, 1e-13);
 
     std::cout << std::setprecision(16);
     for(unsigned int ii=0; ii<6; ii++)

@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "keplerian.h"
 #include "../util/vector.h"
 #include "../types.h"

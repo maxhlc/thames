@@ -1,5 +1,5 @@
+#include <cmath>
 #include <functional>
-#include <math.h>
 
 #include "optimise.h"
 #include "root.h"

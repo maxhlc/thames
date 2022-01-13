@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "dimensional.h"
 #include "keplerian.h"
 #include "../types.h"

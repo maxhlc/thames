@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "vector.h"
 #include "../types.h"
 

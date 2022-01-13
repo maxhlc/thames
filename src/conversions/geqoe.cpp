@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "geqoe.h"
 #include "keplerian.h"
 #include "../perturbations/baseperturbation.h"

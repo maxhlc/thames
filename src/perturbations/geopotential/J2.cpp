@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 
 #include "J2.h"
