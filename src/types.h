@@ -12,14 +12,6 @@ namespace thames::types {
     typedef Eigen::Matrix<double, 3, 1> Vector3;
     /// Type for a column vector of doubles (6 x 1)
     typedef Eigen::Matrix<double, 6, 1> Vector6;
-
-    // Function types
-    /// Type for a function for potentials
-    typedef std::function<double (double, Vector3)> PotentialFunc;
-    /// Type for a function for time derivatives of potentials
-    typedef std::function<double (double, Vector3, Vector3)> PotentialDerivativeFunc;
-    /// Type for a function for accelerations
-    typedef std::function<Vector3 (double, Vector3, Vector3)> AccelerationFunc;
     
     // Dimensional factors structure
     /// Structure to contain factors for (non)dimensionalisation of Cartesian states
