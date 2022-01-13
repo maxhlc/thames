@@ -1,15 +1,11 @@
-#include <array>
 #include <iostream>
 #include <iomanip>
-
-#include <Eigen/Core>
 
 #include "types.h"
 #include "constants/constants.h"
 #include "conversions/conversions.h"
 #include "perturbations/perturbations.h"
 #include "propagators/propagators.h"
-
 
 using namespace thames::types;
 

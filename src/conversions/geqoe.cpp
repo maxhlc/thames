@@ -1,10 +1,8 @@
-#include <Eigen/Core>
-#include <Eigen/Geometry>
-
 #include "geqoe.h"
 #include "keplerian.h"
 #include "../perturbations/baseperturbation.h"
-#include "../util/util.h"
+#include "../util/root.h"
+#include "../util/vector.h"
 #include "../types.h"
 
 using namespace thames::types;

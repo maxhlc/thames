@@ -1,5 +1,3 @@
-#include <Eigen/Core>
-
 #include "vector.h"
 #include "../types.h"
 

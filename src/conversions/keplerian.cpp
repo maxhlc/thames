@@ -1,6 +1,3 @@
-#include <Eigen/Core>
-#include <Eigen/Geometry>
-
 #include "keplerian.h"
 #include "../util/vector.h"
 #include "../types.h"

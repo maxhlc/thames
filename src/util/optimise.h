@@ -2,7 +2,6 @@
 #define THAMES_UTIL_OPTIMISE
 
 #include <functional>
-#include <math.h>
 
 namespace thames::util::optimise{
 

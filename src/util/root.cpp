@@ -1,8 +1,8 @@
 #include <functional>
 #include <math.h>
 
-#include "root.h"
 #include "optimise.h"
+#include "root.h"
 
 namespace thames::util::root{
 

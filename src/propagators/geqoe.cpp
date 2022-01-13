@@ -2,10 +2,10 @@
 #include <boost/numeric/odeint/external/eigen/eigen_algebra.hpp>
 
 #include "geqoe.h"
-#include "../types.h"
 #include "../conversions/geqoe.h"
 #include "../perturbations/baseperturbation.h"
 #include "../util/vector.h"
+#include "../types.h"
 
 using namespace thames::types;
 using namespace thames::perturbations::baseperturbation;

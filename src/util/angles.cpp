@@ -1,5 +1,7 @@
 #include <math.h>
 
+#include "angles.h"
+
 namespace thames::util::angles{
 
     template<class real>

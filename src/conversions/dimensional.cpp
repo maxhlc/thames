@@ -1,6 +1,5 @@
 #include "dimensional.h"
 #include "keplerian.h"
-#include "../util/util.h"
 #include "../types.h"
 
 using namespace thames::types;
