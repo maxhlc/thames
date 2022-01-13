@@ -4,6 +4,5 @@
 #include "dimensional.h"
 #include "geqoe.h"
 #include "keplerian.h"
-#include "util.h"
 
 #endif

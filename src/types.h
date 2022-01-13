@@ -13,10 +13,6 @@ namespace thames::types {
     /// Type for a column vector of doubles (6 x 1)
     typedef Eigen::Matrix<double, 6, 1> Vector6;
 
-    // Define matrix types
-    /// Type for a matrix of doubles (3 x 3)
-    typedef Eigen::Matrix<double, 3, 3> Matrix33;
-
     // Function types
     /// Type for a function for potentials
     typedef std::function<double (double, Vector3)> PotentialFunc;

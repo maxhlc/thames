@@ -3,7 +3,6 @@ add_executable(${PROJECT_NAME}
                conversions/dimensional.cpp
                conversions/geqoe.cpp
                conversions/keplerian.cpp
-               conversions/util.cpp
                perturbations/baseperturbation.cpp
                perturbations/geopotential/J2.cpp
                propagators/cowell.cpp
