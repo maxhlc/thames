@@ -8,21 +8,21 @@ using namespace thames::types;
 namespace thames::util::vector{
 
     template<class real, class vector>
-    real dot3(vector a, vector b){
+    real dot3(const vector& a, const vector& b){
         // Return dot product
         return a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
     }
-    template double dot3<double, Vector3>(Vector3, Vector3);
+    template double dot3<double, Vector3>(const Vector3&, const Vector3&);
 
     template<class real, class vector>
-    real norm3(vector a){
+    real norm3(const vector& a){
         // Return square root of the dot product of the vector and itself
         return sqrt(dot3<real, vector>(a, a));
     }
-    template double norm3<double, Vector3>(Vector3);
+    template double norm3<double, Vector3>(const Vector3&);
 
     template<class vectorout, class vectorin, class integer>
-    vectorout slice(vectorin v, integer a, integer b){
+    vectorout slice(const vectorin& v, const integer a, const integer b){
         // Declare output vector
         vectorout vres;
 
@@ -34,10 +34,10 @@ namespace thames::util::vector{
         // Return output vector
         return vres;
     }
-    template Vector3 slice<Vector3, Vector6, unsigned int>(Vector6, unsigned int, unsigned int);
+    template Vector3 slice<Vector3, Vector6, unsigned int>(const Vector6&, const unsigned int, const unsigned int);
 
     template<class real, class vector>
-    vector mult3(real a, vector vec){
+    vector mult3(const real a, const vector& vec){
         // Declare output vector
         vector vecout;
 
@@ -49,10 +49,10 @@ namespace thames::util::vector{
         // Return output vector
         return vecout;
     }
-    template Vector3 mult3<double, Vector3>(double, Vector3);
+    template Vector3 mult3<double, Vector3>(const double, const Vector3&);
 
     template<class vector>
-    vector cross3(vector a, vector b){
+    vector cross3(const vector& a, const vector& b){
         // Declare output vector
         vector vecout;
 
@@ -64,6 +64,6 @@ namespace thames::util::vector{
         // Return cross product
         return vecout;
     }
-    template Vector3 cross3<Vector3>(Vector3, Vector3);
+    template Vector3 cross3<Vector3>(const Vector3&, const Vector3&);
 
 }

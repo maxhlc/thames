@@ -17,7 +17,7 @@ namespace thames::util::vector{
      * @return real Dot product of the vectors.
      */
     template<class real, class vector>
-    real dot3(vector a, vector b);
+    real dot3(const vector& a, const vector& b);
 
     /**
      * @brief Function to calculate the length of a vector with three elements.
@@ -28,7 +28,7 @@ namespace thames::util::vector{
      * @return real Length of the vector.
      */
     template<class real, class vector>
-    real norm3(vector a);
+    real norm3(const vector& a);
 
     /**
      * @brief Function to return the slice of a vector.
@@ -42,13 +42,13 @@ namespace thames::util::vector{
      * @return vectorout Output vector which has been sliced.
      */
     template<class vectorout, class vectorin, class integer>
-    vectorout slice(vectorin v, integer a, integer b);
+    vectorout slice(const vectorin& v, const integer a, const integer b);
 
     template<class real, class vector>
-    vector mult3(real a, vector vec);
+    vector mult3(const real a, const vector& vec);
 
     template<class vector>
-    vector cross3(vector a, vector b);
+    vector cross3(const vector& a, const vector& b);
 
 }
 
