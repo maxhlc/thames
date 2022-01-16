@@ -15,7 +15,7 @@ namespace thames::util::optimise{
         real d = a + (b - a)/gr;
 
         // Iterate until convergence
-        while (abs(b - a) > tol) {
+        while (fabs(b - a) > tol) {
             // Choose test points based on function values
             if (func(c) < func(d)) {
                 b = d;

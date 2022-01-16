@@ -9,7 +9,7 @@ namespace thames::util::root{
     template<class real>
     real golden_section_search(std::function<real (real)> func, real a, real b, real tol){
         // Declare function for minimisation (root at minimum of absolute of the function)
-        std::function<real (real)> f = [func](real x) {return abs(func(x));};
+        std::function<real (real)> f = [func](real x) {return fabs(func(x));};
 
         // Minimise function using the golden section search
         real x0 = thames::util::optimise::golden_section_search(f, a, b, tol);
@@ -33,7 +33,7 @@ namespace thames::util::root{
             xn1 = xn - func(xn)/dfunc(xn);
 
             // Converged if update is smaller than tolerance
-            if(abs(xn1 - xn) < tol)
+            if(fabs(xn1 - xn) < tol)
                 converged = true;
 
             // Update previous approximation

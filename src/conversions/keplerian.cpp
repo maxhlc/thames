@@ -48,8 +48,8 @@ namespace thames::conversions::keplerian{
         real inc = acos(thames::util::vector::dot3<real, vector3>(K, H)/h);
 
         // Check for circular and equatorial orbits
-        bool e_near = abs(e) < atol;
-        bool inc_near = abs(inc) < atol;
+        bool e_near = fabs(e) < atol;
+        bool inc_near = fabs(inc) < atol;
 
         // Calculate right ascension of the ascending node
         vector3 N = thames::util::vector::cross3<vector3>(K, H);
