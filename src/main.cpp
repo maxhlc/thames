@@ -1,3 +1,4 @@
+#include <array>
 #include <iostream>
 #include <iomanip>
 
@@ -10,7 +11,7 @@
 using namespace thames::types;
 
 int main(){
-    Vector6 RV;
+    std::array<double, 6> RV;
     RV = {6.916000000000002E+03, 0.000000000000000E+00, 0.000000000000000E+00, 0.000000000000000E+00, 4.483946567026534E+00, 8.954234385325996E+00};
     double mu = 3.986004414498200E+05; //thames::constants::earth::mu;
     double tstart = 0.0;
@@ -19,9 +20,9 @@ int main(){
     double radius = 6.378136460000000E+03; //thames::constants::earth::radius;
     double J2 = 1.082626111e-3; //thames::constants::earth::J2;
 
-    thames::perturbations::geopotential::J2<double, Vector3> perturbation(mu, J2, radius);
+    thames::perturbations::geopotential::J2<double> perturbation(mu, J2, radius);
 
-    Vector6 state_prop = thames::propagators::cowell::propagate<double, Vector3, Vector6>(tstart, tend, tstep, RV, mu, perturbation, 1e-13, 1e-13);
+    std::array<double, 6> state_prop = thames::propagators::cowell::propagate<double>(tstart, tend, tstep, RV, mu, perturbation, 1e-13, 1e-13);
 
     std::cout << std::setprecision(16);
     for(unsigned int ii=0; ii<6; ii++)

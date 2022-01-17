@@ -1,10 +1,10 @@
 #ifndef THAMES_PERTURBATIONS_GEOPOTENTIAL_J2
 #define THAMES_PERTURBATIONS_GEOPOTENTIAL_J2
 
-#include "../baseperturbation.h"
-#include "../../types.h"
+#include <array>
 
-using namespace thames::types;
+#include "../baseperturbation.h"
+
 using namespace thames::perturbations::baseperturbation;
 
 namespace thames::perturbations::geopotential{
@@ -12,21 +12,20 @@ namespace thames::perturbations::geopotential{
     /**
      * @brief Class for the perturbation resulting from the J2-term.
      * 
-     * @tparam real Type for real numbers (e.g. float, double, etc.)
-     * @tparam vector Type for vector (e.g. std::vector<double, 3>, Eigen::Vector3d)
+     * @tparam T Numeric type.
      */
-    template<class real, class vector>
-    class J2 : public BasePerturbation<real, vector> {
+    template<class T>
+    class J2 : public BasePerturbation<T> {
         private:
 
             /// Central body gravitational parameter.
-            real m_mu;
+            T m_mu;
 
             /// Central body J2-term.
-            real m_J2;
+            T m_J2;
 
             /// Central body radius.
-            real m_radius;
+            T m_radius;
 
         public:
 
@@ -37,7 +36,7 @@ namespace thames::perturbations::geopotential{
              * @param[in] J2 Central body J2-term.
              * @param[in] radius Central body radius.
              */
-            J2(real mu, real J2, real radius);
+            J2(T mu, T J2, T radius);
 
             /**
              * @brief Calculate perturbing acceleration resulting from the J2-term. 
@@ -45,18 +44,18 @@ namespace thames::perturbations::geopotential{
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @param[in] V Velocity vector.
-             * @return vector Total perturbing acceleration due to the J2-term.
+             * @return std::array<T, 3> Total perturbing acceleration due to the J2-term.
              */
-            vector acceleration_total(real t, vector R, vector V) override;
+            std::array<T, 3> acceleration_total(T t, std::array<T, 3> R, std::array<T, 3> V) override;
 
             /**
              * @brief Calculate perturbing potential resulting from the J2-term. 
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
-             * @return real Perturbing potential due to the J2-term.
+             * @return T Perturbing potential due to the J2-term.
              */
-            real potential(real t, vector R) override;
+            T potential(T t, std::array<T, 3> R) override;
 
     };
 

@@ -6,23 +6,23 @@
 
 namespace thames::util::root{
 
-    template<class real>
-    real golden_section_search(std::function<real (real)> func, real a, real b, real tol){
+    template<class T>
+    T golden_section_search(std::function<T (T)> func, T a, T b, T tol){
         // Declare function for minimisation (root at minimum of absolute of the function)
-        std::function<real (real)> f = [func](real x) {return fabs(func(x));};
+        std::function<T (T)> f = [func](T x) {return fabs(func(x));};
 
         // Minimise function using the golden section search
-        real x0 = thames::util::optimise::golden_section_search(f, a, b, tol);
+        T x0 = thames::util::optimise::golden_section_search(f, a, b, tol);
 
         // Return root
         return x0;
     }
     template double golden_section_search<double>(std::function<double (double)>, double, double, double);
 
-    template<class real>
-    real newton_raphson(const std::function<real (real)> &func, const std::function<real (real)> &dfunc, real xn, real tol){
+    template<class T>
+    T newton_raphson(const std::function<T (T)> &func, const std::function<T (T)> &dfunc, T xn, T tol){
         // Declare approximation variable
-        real xn1;
+        T xn1;
 
         // Set converged flag to false
         bool converged = false;

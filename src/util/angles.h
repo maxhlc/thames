@@ -8,12 +8,12 @@ namespace thames::util::angles{
      * 
      * @details Method described by: https://stackoverflow.com/a/11498248
      * 
-     * @tparam real Type for a real number.
+     * @tparam T Numeric type.
      * @param[in] theta Angle.
-     * @return real Wrapped angle.
+     * @return T Wrapped angle.
      */
-    template<class real>
-    real angle_wrap(real theta);
+    template<class T>
+    T angle_wrap(T theta);
 
 }
 

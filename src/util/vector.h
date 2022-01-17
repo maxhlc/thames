@@ -1,54 +1,52 @@
 #ifndef THAMES_UTIL_VECTOR
 #define THAMES_UTIL_VECTOR
 
-#include "../types.h"
-
-using namespace thames::types;
+#include <array>
 
 namespace thames::util::vector{
 
     /**
      * @brief Function to calculate the dot product of two vectors with three elements.
      * 
-     * @tparam real Type for real numbers (e.g. float, double, etc.)
+     * @tparam T Numeric type.
      * @tparam vector Type for vector (e.g. std::vector<double, 3>, Eigen::Vector3d)
      * @param[in] a First vector.
      * @param[in] b Second vector.
-     * @return real Dot product of the vectors.
+     * @return T Dot product of the vectors.
      */
-    template<class real, class vector>
-    real dot3(const vector& a, const vector& b);
+    template<class T>
+    T dot3(const std::array<T, 3>& a, const std::array<T, 3>& b);
 
     /**
      * @brief Function to calculate the length of a vector with three elements.
      * 
-     * @tparam real Type for real numbers (e.g. float, double, etc.)
+     * @tparam T Numeric type.
      * @tparam vector Type for vector (e.g. std::vector<double, 3>, Eigen::Vector3d)
      * @param[in] a Vector.
-     * @return real Length of the vector.
+     * @return T Length of the vector.
      */
-    template<class real, class vector>
-    real norm3(const vector& a);
+    template<class T>
+    T norm3(const std::array<T, 3>& a);
 
     /**
      * @brief Function to return the slice of a vector.
      * 
-     * @tparam vectorout Type for output vector.
-     * @tparam vectorin Type for input vector.
-     * @tparam integer Type for slicing bounds.
+     * @tparam T Numeric type.
+     * @tparam Si Input size.
+     * @tparam So Output size.
      * @param[in] v Input vector for slicing.
      * @param[in] a Lower index.
      * @param[in] b Upper index.
-     * @return vectorout Output vector which has been sliced.
+     * @return std::array<T, So> Output vector which has been sliced.
      */
-    template<class vectorout, class vectorin, class integer>
-    vectorout slice(const vectorin& v, const integer a, const integer b);
+    template<class T, const std::size_t Si, const std::size_t So>
+    std::array<T, So> slice(const std::array<T, Si>& v, const unsigned int a, const unsigned int b);
 
-    template<class real, class vector>
-    vector mult3(const real a, const vector& vec);
+    template<class T>
+    std::array<T, 3> mult3(const T a, const std::array<T, 3>& vec);
 
-    template<class vector>
-    vector cross3(const vector& a, const vector& b);
+    template<class T>
+    std::array<T, 3> cross3(const std::array<T, 3>& a, const std::array<T, 3>& b);
 
 }
 

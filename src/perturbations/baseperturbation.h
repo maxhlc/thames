@@ -1,19 +1,16 @@
 #ifndef THAMES_PERTURBATIONS_BASEPERTURBATION
 #define THAMES_PERTURBATIONS_BASEPERTURBATION
 
-#include "../types.h"
-
-using namespace thames::types;
+#include <array>
 
 namespace thames::perturbations::baseperturbation{
     
     /**
      * @brief Class for the base perturbation.
      * 
-     * @tparam real Type for real numbers (e.g. float, double, etc.)
-     * @tparam vector Type for vector (e.g. std::vector<double, 3>, Eigen::Vector3d)
+     * @tparam T Numeric type.
      */
-    template<class real, class vector>
+    template<class T>
     class BasePerturbation{
 
         private:
@@ -40,9 +37,9 @@ namespace thames::perturbations::baseperturbation{
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @param[in] V Velocity vector.
-             * @return vector Total perturbing acceleration.
+             * @return std::array<T, 3> Total perturbing acceleration.
              */
-            virtual vector acceleration_total(real t, vector R, vector V);
+            virtual std::array<T, 3> acceleration_total(T t, std::array<T, 3> R, std::array<T, 3> V);
 
             /**
              * @brief Default non-potential perturbing acceleration.
@@ -52,9 +49,9 @@ namespace thames::perturbations::baseperturbation{
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @param[in] V Velocity vector.
-             * @return vector Non-potential perturbing acceleration.
+             * @return std::array<T, 3> Non-potential perturbing acceleration.
              */
-            virtual vector acceleration_nonpotential(real t, vector R, vector V);
+            virtual std::array<T, 3> acceleration_nonpotential(T t, std::array<T, 3> R, std::array<T, 3> V);
 
             /**
              * @brief Default perturbing potential.
@@ -63,9 +60,9 @@ namespace thames::perturbations::baseperturbation{
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
-             * @return real Perturbing potential.
+             * @return T Perturbing potential.
              */
-            virtual real potential(real t, vector R);
+            virtual T potential(T t, std::array<T, 3> R);
 
             /**
              * @brief Default time derivative of the perturbing potential.
@@ -75,9 +72,9 @@ namespace thames::perturbations::baseperturbation{
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @param[in] V Velocity vector.
-             * @return real Time derivative of the perturbing potential.
+             * @return T Time derivative of the perturbing potential.
              */
-            virtual real potential_derivative(real t, vector R, vector V);
+            virtual T potential_derivative(T t, std::array<T, 3> R, std::array<T, 3> V);
 
     };
 

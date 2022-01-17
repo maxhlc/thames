@@ -1,3 +1,4 @@
+#include <array>
 #include <cmath>
 
 #include "dimensional.h"
@@ -8,10 +9,10 @@ using namespace thames::types;
 
 namespace thames::conversions::dimensional{
 
-    template<class real, class vector3, class vector6>
-    void cartesian_nondimensionalise(real &t, vector6 &RV, real &mu, DimensionalFactors &factors){
+    template<class T>
+    void cartesian_nondimensionalise(T& t, std::array<T, 6>& RV, T& mu, DimensionalFactors& factors){
         // Calculate length factors (semi-major axis)
-        vector6 keplerian = thames::conversions::keplerian::cartesian_to_keplerian<real, vector3, vector6>(RV, mu);
+        std::array<T, 6> keplerian = thames::conversions::keplerian::cartesian_to_keplerian<T>(RV, mu);
         factors.length = keplerian[0];
 
         // Calculate velocity factor
@@ -33,10 +34,10 @@ namespace thames::conversions::dimensional{
         RV[4] /= factors.velocity;
         RV[5] /= factors.velocity;
     }
-    template void cartesian_nondimensionalise<double, Vector3, Vector6>(double&, Vector6&, double&, DimensionalFactors&);
+    template void cartesian_nondimensionalise<double>(double&, std::array<double, 6>&, double&, DimensionalFactors&);
 
-    template<class real, class vector3, class vector6>
-    void cartesian_dimensionalise(real &t, vector6 &RV, real &mu, const DimensionalFactors &factors){
+    template<class T>
+    void cartesian_dimensionalise(T& t, std::array<T, 6>& RV, T& mu, const DimensionalFactors& factors){
         // Calculate dimensional states
         t *= factors.time;
         mu *= factors.grav;
@@ -47,6 +48,6 @@ namespace thames::conversions::dimensional{
         RV[4] *= factors.velocity;
         RV[5] *= factors.velocity;
     }
-    template void cartesian_dimensionalise<double, Vector3, Vector6>(double&, Vector6&, double&, const DimensionalFactors&);
+    template void cartesian_dimensionalise<double>(double&, std::array<double, 6>&, double&, const DimensionalFactors&);
 
 }

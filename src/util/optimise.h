@@ -10,15 +10,15 @@ namespace thames::util::optimise{
      * 
      * @details Method as described by: https://en.wikipedia.org/wiki/Golden-section_search#Iterative_algorithm
      * 
-     * @tparam real Type for a real number.
+     * @tparam T Numeric type.
      * @param[in] func Scalar function to be minimised.
      * @param[in] a Left hand boundary.
      * @param[in] b Right hand boundary.
      * @param[in] tol Solver tolerance.
-     * @return real Argument of the minimum.
+     * @return T Argument of the minimum.
      */
-    template<class real>
-    real golden_section_search(std::function<real (real)> func, real a, real b, real tol = 1e-10);
+    template<class T>
+    T golden_section_search(std::function<T (T)> func, T a, T b, T tol = 1e-10);
 
 }
 

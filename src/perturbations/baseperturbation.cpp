@@ -1,48 +1,47 @@
-#include "baseperturbation.h"
-#include "../types.h"
+#include <array>
 
-using namespace thames::types;
+#include "baseperturbation.h"
 
 namespace thames::perturbations::baseperturbation{
 
-    template<class real, class vector>
-    BasePerturbation<real, vector>::BasePerturbation(){
+    template<class T>
+    BasePerturbation<T>::BasePerturbation(){
 
     };
 
-    template<class real, class vector>
-    BasePerturbation<real, vector>::~BasePerturbation(){
+    template<class T>
+    BasePerturbation<T>::~BasePerturbation(){
 
     };
     
-    template<class real, class vector>
-    vector BasePerturbation<real, vector>::acceleration_total(real t, vector R, vector V){
-        vector F;
+    template<class T>
+    std::array<T, 3> BasePerturbation<T>::acceleration_total(T t, std::array<T, 3> R, std::array<T, 3> V){
+        std::array<T, 3> F;
         F[0] = 0.0;
         F[1] = 0.0;
         F[2] = 0.0;
         return F;
     };
 
-    template<class real, class vector>
-    vector BasePerturbation<real, vector>::acceleration_nonpotential(real t, vector R, vector V){
-        vector F;
+    template<class T>
+    std::array<T, 3> BasePerturbation<T>::acceleration_nonpotential(T t, std::array<T, 3> R, std::array<T, 3> V){
+        std::array<T, 3> F;
         F[0] = 0.0;
         F[1] = 0.0;
         F[2] = 0.0;
         return F;
     };
 
-    template<class real, class vector>
-    real BasePerturbation<real, vector>::potential(real t, vector R){
+    template<class T>
+    T BasePerturbation<T>::potential(T t, std::array<T, 3> R){
         return 0.0;
     }
 
-    template<class real, class vector>
-    real BasePerturbation<real, vector>::potential_derivative(real t, vector R, vector V){
+    template<class T>
+    T BasePerturbation<T>::potential_derivative(T t, std::array<T, 3> R, std::array<T, 3> V){
         return 0.0;
     }
 
-    template class BasePerturbation<double, Vector3>;
+    template class BasePerturbation<double>;
 
 }
