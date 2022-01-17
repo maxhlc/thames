@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['slice_71',['slice',['../namespacethames_1_1util_1_1vector.html#acbbdfca5854eabbb3ec6c070c88fd0e9',1,'thames::util::vector']]],
-  ['slice_3c_20vector3_2c_20vector6_2c_20unsigned_20int_20_3e_72',['slice&lt; Vector3, Vector6, unsigned int &gt;',['../namespacethames_1_1util_1_1vector.html#a40e08971a34816b79775ae30f3af1540',1,'thames::util::vector']]]
+  ['slice_71',['slice',['../namespacethames_1_1util_1_1vector.html#ac08ae1ba781405c7eab4e46c5b1d2b47',1,'thames::util::vector']]],
+  ['slice_3c_20double_2c_206_2c_203_20_3e_72',['slice&lt; double, 6, 3 &gt;',['../namespacethames_1_1util_1_1vector.html#a72931ff726a4b21e373305833c025e26',1,'thames::util::vector']]]
 ];

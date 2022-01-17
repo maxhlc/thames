@@ -72,8 +72,8 @@ $(function() {
 <div class="title">geqoe.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="baseperturbation_8h_source.html">../perturbations/baseperturbation.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="types_8h_source.html">../types.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;array&gt;</code><br />
+<code>#include &quot;<a class="el" href="baseperturbation_8h_source.html">../perturbations/baseperturbation.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for geqoe.h:</div>
 <div class="dyncontent">
@@ -98,14 +98,14 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ace2cf2da2219826090e89bb5def44935"><td class="memTemplParams" colspan="2">template&lt;class real , class vector3 , class vector6 &gt; </td></tr>
-<tr class="memitem:ace2cf2da2219826090e89bb5def44935"><td class="memTemplItemLeft" align="right" valign="top">vector6&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1geqoe.html#ace2cf2da2219826090e89bb5def44935">thames::conversions::geqoe::cartesian_to_geqoe</a> (const real &amp;t, const vector6 &amp;RV, const real &amp;mu, <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; real, vector3 &gt; &amp;perturbation)</td></tr>
-<tr class="memdesc:ace2cf2da2219826090e89bb5def44935"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert from Cartesian state to Generalised Equinoctial Orbital Elements (GEqOE).  <a href="namespacethames_1_1conversions_1_1geqoe.html#ace2cf2da2219826090e89bb5def44935">More...</a><br /></td></tr>
-<tr class="separator:ace2cf2da2219826090e89bb5def44935"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a372939dc38d3cef509d64c1e8943e0e0"><td class="memTemplParams" colspan="2">template&lt;class real , class vector3 , class vector6 &gt; </td></tr>
-<tr class="memitem:a372939dc38d3cef509d64c1e8943e0e0"><td class="memTemplItemLeft" align="right" valign="top">vector6&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1geqoe.html#a372939dc38d3cef509d64c1e8943e0e0">thames::conversions::geqoe::geqoe_to_cartesian</a> (const real &amp;t, const vector6 &amp;geqoe, const real &amp;mu, <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; real, vector3 &gt; &amp;perturbation)</td></tr>
-<tr class="memdesc:a372939dc38d3cef509d64c1e8943e0e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert from Generalised Equinoctial Orbital Elements (GEqOE) to Cartesian state.  <a href="namespacethames_1_1conversions_1_1geqoe.html#a372939dc38d3cef509d64c1e8943e0e0">More...</a><br /></td></tr>
-<tr class="separator:a372939dc38d3cef509d64c1e8943e0e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eec4ccb0fe8a91e60ad2f115fa7e876"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a9eec4ccb0fe8a91e60ad2f115fa7e876"><td class="memTemplItemLeft" align="right" valign="top">std::array&lt; T, 6 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1geqoe.html#a9eec4ccb0fe8a91e60ad2f115fa7e876">thames::conversions::geqoe::cartesian_to_geqoe</a> (const T &amp;t, const std::array&lt; T, 6 &gt; &amp;RV, const T &amp;mu, <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; &amp;perturbation)</td></tr>
+<tr class="memdesc:a9eec4ccb0fe8a91e60ad2f115fa7e876"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert from Cartesian state to Generalised Equinoctial Orbital Elements (GEqOE).  <a href="namespacethames_1_1conversions_1_1geqoe.html#a9eec4ccb0fe8a91e60ad2f115fa7e876">More...</a><br /></td></tr>
+<tr class="separator:a9eec4ccb0fe8a91e60ad2f115fa7e876"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1353883e1b633a5d5884219b156faf4a"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a1353883e1b633a5d5884219b156faf4a"><td class="memTemplItemLeft" align="right" valign="top">std::array&lt; T, 6 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1geqoe.html#a1353883e1b633a5d5884219b156faf4a">thames::conversions::geqoe::geqoe_to_cartesian</a> (const T &amp;t, const std::array&lt; T, 6 &gt; &amp;geqoe, const T &amp;mu, <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; &amp;perturbation)</td></tr>
+<tr class="memdesc:a1353883e1b633a5d5884219b156faf4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert from Generalised Equinoctial Orbital Elements (GEqOE) to Cartesian state.  <a href="namespacethames_1_1conversions_1_1geqoe.html#a1353883e1b633a5d5884219b156faf4a">More...</a><br /></td></tr>
+<tr class="separator:a1353883e1b633a5d5884219b156faf4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

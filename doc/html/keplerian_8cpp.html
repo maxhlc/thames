@@ -72,10 +72,10 @@ $(function() {
 <div class="title">keplerian.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
+<div class="textblock"><code>#include &lt;array&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
 <code>#include &quot;<a class="el" href="keplerian_8h_source.html">keplerian.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="vector_8h_source.html">../util/vector.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="types_8h_source.html">../types.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for keplerian.cpp:</div>
 <div class="dyncontent">
@@ -93,18 +93,18 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9945b751afb304f30aed07892f95d9fc"><td class="memTemplParams" colspan="2">template&lt;class real , class vector3 , class vector6 &gt; </td></tr>
-<tr class="memitem:a9945b751afb304f30aed07892f95d9fc"><td class="memTemplItemLeft" align="right" valign="top">vector6&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1keplerian.html#a9945b751afb304f30aed07892f95d9fc">thames::conversions::keplerian::cartesian_to_keplerian</a> (const vector6 &amp;RV, const real &amp;mu)</td></tr>
-<tr class="memdesc:a9945b751afb304f30aed07892f95d9fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert from Cartesian state to traditional Keplerian elements.  <a href="namespacethames_1_1conversions_1_1keplerian.html#a9945b751afb304f30aed07892f95d9fc">More...</a><br /></td></tr>
-<tr class="separator:a9945b751afb304f30aed07892f95d9fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6af6f582555d8393a1fbf8407524bbdc"><td class="memItemLeft" align="right" valign="top">template <a class="el" href="namespacethames_1_1types.html#a127056591974b818c7603957bf8fa6aa">Vector6</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1keplerian.html#a6af6f582555d8393a1fbf8407524bbdc">thames::conversions::keplerian::cartesian_to_keplerian&lt; double, Vector3, Vector6 &gt;</a> (const <a class="el" href="namespacethames_1_1types.html#a127056591974b818c7603957bf8fa6aa">Vector6</a> &amp;, const double &amp;)</td></tr>
-<tr class="separator:a6af6f582555d8393a1fbf8407524bbdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed42ef7e279a2ea2c052d9c197728f80"><td class="memTemplParams" colspan="2">template&lt;class real , class vector3 , class vector6 &gt; </td></tr>
-<tr class="memitem:aed42ef7e279a2ea2c052d9c197728f80"><td class="memTemplItemLeft" align="right" valign="top">vector6&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1keplerian.html#aed42ef7e279a2ea2c052d9c197728f80">thames::conversions::keplerian::keplerian_to_cartesian</a> (const vector6 &amp;keplerian, const real &amp;mu)</td></tr>
-<tr class="memdesc:aed42ef7e279a2ea2c052d9c197728f80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert from traditional Keplerian elements to Cartesian state.  <a href="namespacethames_1_1conversions_1_1keplerian.html#aed42ef7e279a2ea2c052d9c197728f80">More...</a><br /></td></tr>
-<tr class="separator:aed42ef7e279a2ea2c052d9c197728f80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e2254561355b83327ed23f1b48545a3"><td class="memItemLeft" align="right" valign="top">template <a class="el" href="namespacethames_1_1types.html#a127056591974b818c7603957bf8fa6aa">Vector6</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1keplerian.html#a4e2254561355b83327ed23f1b48545a3">thames::conversions::keplerian::keplerian_to_cartesian&lt; double, Vector3, Vector6 &gt;</a> (const <a class="el" href="namespacethames_1_1types.html#a127056591974b818c7603957bf8fa6aa">Vector6</a> &amp;, const double &amp;)</td></tr>
-<tr class="separator:a4e2254561355b83327ed23f1b48545a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb1fc20660ef99283328bfb9a7fb656f"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:abb1fc20660ef99283328bfb9a7fb656f"><td class="memTemplItemLeft" align="right" valign="top">std::array&lt; T, 6 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1keplerian.html#abb1fc20660ef99283328bfb9a7fb656f">thames::conversions::keplerian::cartesian_to_keplerian</a> (const std::array&lt; T, 6 &gt; &amp;RV, const T &amp;mu)</td></tr>
+<tr class="memdesc:abb1fc20660ef99283328bfb9a7fb656f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert from Cartesian state to traditional Keplerian elements.  <a href="namespacethames_1_1conversions_1_1keplerian.html#abb1fc20660ef99283328bfb9a7fb656f">More...</a><br /></td></tr>
+<tr class="separator:abb1fc20660ef99283328bfb9a7fb656f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa327f1e54e2d18f69c3405944f2df5b"><td class="memItemLeft" align="right" valign="top">template std::array&lt; double, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1keplerian.html#afa327f1e54e2d18f69c3405944f2df5b">thames::conversions::keplerian::cartesian_to_keplerian&lt; double &gt;</a> (const std::array&lt; double, 6 &gt; &amp;, const double &amp;)</td></tr>
+<tr class="separator:afa327f1e54e2d18f69c3405944f2df5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92c34df4e7879d7948759d25dc2fd3d5"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a92c34df4e7879d7948759d25dc2fd3d5"><td class="memTemplItemLeft" align="right" valign="top">std::array&lt; T, 6 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1keplerian.html#a92c34df4e7879d7948759d25dc2fd3d5">thames::conversions::keplerian::keplerian_to_cartesian</a> (const std::array&lt; T, 6 &gt; &amp;keplerian, const T &amp;mu)</td></tr>
+<tr class="memdesc:a92c34df4e7879d7948759d25dc2fd3d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert from traditional Keplerian elements to Cartesian state.  <a href="namespacethames_1_1conversions_1_1keplerian.html#a92c34df4e7879d7948759d25dc2fd3d5">More...</a><br /></td></tr>
+<tr class="separator:a92c34df4e7879d7948759d25dc2fd3d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a713771f310636225f3ec6ec408fb9a34"><td class="memItemLeft" align="right" valign="top">template std::array&lt; double, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1keplerian.html#a713771f310636225f3ec6ec408fb9a34">thames::conversions::keplerian::keplerian_to_cartesian&lt; double &gt;</a> (const std::array&lt; double, 6 &gt; &amp;, const double &amp;)</td></tr>
+<tr class="separator:a713771f310636225f3ec6ec408fb9a34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

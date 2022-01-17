@@ -72,14 +72,13 @@ $(function() {
 <div class="title">geqoe.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
+<div class="textblock"><code>#include &lt;array&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
 <code>#include &lt;boost/numeric/odeint.hpp&gt;</code><br />
-<code>#include &lt;boost/numeric/odeint/external/eigen/eigen_algebra.hpp&gt;</code><br />
 <code>#include &quot;<a class="el" href="propagators_2geqoe_8h_source.html">geqoe.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="conversions_2geqoe_8h_source.html">../conversions/geqoe.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="baseperturbation_8h_source.html">../perturbations/baseperturbation.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="vector_8h_source.html">../util/vector.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="types_8h_source.html">../types.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for geqoe.cpp:</div>
 <div class="dyncontent">
@@ -97,18 +96,18 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a23b0c0d09e9d4f3bf0d9135175aaa45e"><td class="memTemplParams" colspan="2">template&lt;class real , class vector3 , class vector6 &gt; </td></tr>
-<tr class="memitem:a23b0c0d09e9d4f3bf0d9135175aaa45e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1geqoe.html#a23b0c0d09e9d4f3bf0d9135175aaa45e">thames::propagators::geqoe::derivative</a> (const vector6 &amp;geqoe, vector6 &amp;geqoedot, const real t, const real &amp;mu, <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; real, vector3 &gt; &amp;perturbation)</td></tr>
-<tr class="memdesc:a23b0c0d09e9d4f3bf0d9135175aaa45e"><td class="mdescLeft">&#160;</td><td class="mdescRight">State derivative for propagation using Generalised Equinoctial Orbital Elements (GEqOE).  <a href="namespacethames_1_1propagators_1_1geqoe.html#a23b0c0d09e9d4f3bf0d9135175aaa45e">More...</a><br /></td></tr>
-<tr class="separator:a23b0c0d09e9d4f3bf0d9135175aaa45e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a368580a5b8895d575abd376d47d3fc47"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1geqoe.html#a368580a5b8895d575abd376d47d3fc47">thames::propagators::geqoe::derivative</a> (const <a class="el" href="namespacethames_1_1types.html#a127056591974b818c7603957bf8fa6aa">Vector6</a> &amp;, <a class="el" href="namespacethames_1_1types.html#a127056591974b818c7603957bf8fa6aa">Vector6</a> &amp;, const double, const double &amp;, <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; double, <a class="el" href="namespacethames_1_1types.html#ae8bc11dab4bfeeb0cfd8e87c6e8eaa7d">Vector3</a> &gt; &amp;)</td></tr>
-<tr class="separator:a368580a5b8895d575abd376d47d3fc47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1aef3474886565db1f1904ceeee2fde"><td class="memTemplParams" colspan="2">template&lt;class real , class vector3 , class vector6 &gt; </td></tr>
-<tr class="memitem:aa1aef3474886565db1f1904ceeee2fde"><td class="memTemplItemLeft" align="right" valign="top">vector6&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1geqoe.html#aa1aef3474886565db1f1904ceeee2fde">thames::propagators::geqoe::propagate</a> (real tstart, real tend, real tstep, vector6 RV, real mu, <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; real, vector3 &gt; &amp;perturbation, real atol=1e-10, real rtol=1e-10)</td></tr>
-<tr class="memdesc:aa1aef3474886565db1f1904ceeee2fde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).  <a href="namespacethames_1_1propagators_1_1geqoe.html#aa1aef3474886565db1f1904ceeee2fde">More...</a><br /></td></tr>
-<tr class="separator:aa1aef3474886565db1f1904ceeee2fde"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e42b645d997cf79e8980bae284ffb0a"><td class="memItemLeft" align="right" valign="top">template <a class="el" href="namespacethames_1_1types.html#a127056591974b818c7603957bf8fa6aa">Vector6</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1geqoe.html#a2e42b645d997cf79e8980bae284ffb0a">thames::propagators::geqoe::propagate&lt; double, Vector3, Vector6 &gt;</a> (double, double, double, <a class="el" href="namespacethames_1_1types.html#a127056591974b818c7603957bf8fa6aa">Vector6</a>, double, <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; double, <a class="el" href="namespacethames_1_1types.html#ae8bc11dab4bfeeb0cfd8e87c6e8eaa7d">Vector3</a> &gt; &amp;, double, double)</td></tr>
-<tr class="separator:a2e42b645d997cf79e8980bae284ffb0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0473dcd5f046af6f7cbc6b56324199b9"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a0473dcd5f046af6f7cbc6b56324199b9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1geqoe.html#a0473dcd5f046af6f7cbc6b56324199b9">thames::propagators::geqoe::derivative</a> (const std::array&lt; T, 6 &gt; &amp;geqoe, std::array&lt; T, 6 &gt; &amp;geqoedot, const T t, const T &amp;mu, <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; &amp;perturbation)</td></tr>
+<tr class="memdesc:a0473dcd5f046af6f7cbc6b56324199b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">State derivative for propagation using Generalised Equinoctial Orbital Elements (GEqOE).  <a href="namespacethames_1_1propagators_1_1geqoe.html#a0473dcd5f046af6f7cbc6b56324199b9">More...</a><br /></td></tr>
+<tr class="separator:a0473dcd5f046af6f7cbc6b56324199b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1223a7523f17fcd7e26829840d437217"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1geqoe.html#a1223a7523f17fcd7e26829840d437217">thames::propagators::geqoe::derivative&lt; double &gt;</a> (const std::array&lt; double, 6 &gt; &amp;, std::array&lt; double, 6 &gt; &amp;, const double, const double &amp;, <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; double &gt; &amp;)</td></tr>
+<tr class="separator:a1223a7523f17fcd7e26829840d437217"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafbcbdfde79c146b9a887483ff6857ba"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:aafbcbdfde79c146b9a887483ff6857ba"><td class="memTemplItemLeft" align="right" valign="top">std::array&lt; T, 6 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1geqoe.html#aafbcbdfde79c146b9a887483ff6857ba">thames::propagators::geqoe::propagate</a> (T tstart, T tend, T tstep, std::array&lt; T, 6 &gt; RV, T mu, <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; &amp;perturbation, T atol=1e-10, T rtol=1e-10)</td></tr>
+<tr class="memdesc:aafbcbdfde79c146b9a887483ff6857ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).  <a href="namespacethames_1_1propagators_1_1geqoe.html#aafbcbdfde79c146b9a887483ff6857ba">More...</a><br /></td></tr>
+<tr class="separator:aafbcbdfde79c146b9a887483ff6857ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f302414a5fcc5f36f84c013ba4266ed"><td class="memItemLeft" align="right" valign="top">template std::array&lt; double, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1geqoe.html#a6f302414a5fcc5f36f84c013ba4266ed">thames::propagators::geqoe::propagate&lt; double &gt;</a> (double, double, double, std::array&lt; double, 6 &gt;, double, <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; double &gt; &amp;, double, double)</td></tr>
+<tr class="separator:a6f302414a5fcc5f36f84c013ba4266ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

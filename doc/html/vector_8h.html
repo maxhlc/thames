@@ -72,7 +72,7 @@ $(function() {
 <div class="title">vector.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="types_8h_source.html">../types.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;array&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for vector.h:</div>
 <div class="dyncontent">
@@ -97,24 +97,24 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9e9343eec74ef002acb68fe197183ed4"><td class="memTemplParams" colspan="2">template&lt;class real , class vector &gt; </td></tr>
-<tr class="memitem:a9e9343eec74ef002acb68fe197183ed4"><td class="memTemplItemLeft" align="right" valign="top">real&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1vector.html#a9e9343eec74ef002acb68fe197183ed4">thames::util::vector::dot3</a> (vector a, vector b)</td></tr>
-<tr class="memdesc:a9e9343eec74ef002acb68fe197183ed4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to calculate the dot product of two vectors with three elements.  <a href="namespacethames_1_1util_1_1vector.html#a9e9343eec74ef002acb68fe197183ed4">More...</a><br /></td></tr>
-<tr class="separator:a9e9343eec74ef002acb68fe197183ed4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1e3501bb71496914d19677276e785f8"><td class="memTemplParams" colspan="2">template&lt;class real , class vector &gt; </td></tr>
-<tr class="memitem:aa1e3501bb71496914d19677276e785f8"><td class="memTemplItemLeft" align="right" valign="top">real&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1vector.html#aa1e3501bb71496914d19677276e785f8">thames::util::vector::norm3</a> (vector a)</td></tr>
-<tr class="memdesc:aa1e3501bb71496914d19677276e785f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to calculate the length of a vector with three elements.  <a href="namespacethames_1_1util_1_1vector.html#aa1e3501bb71496914d19677276e785f8">More...</a><br /></td></tr>
-<tr class="separator:aa1e3501bb71496914d19677276e785f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbbdfca5854eabbb3ec6c070c88fd0e9"><td class="memTemplParams" colspan="2">template&lt;class vectorout , class vectorin , class integer &gt; </td></tr>
-<tr class="memitem:acbbdfca5854eabbb3ec6c070c88fd0e9"><td class="memTemplItemLeft" align="right" valign="top">vectorout&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1vector.html#acbbdfca5854eabbb3ec6c070c88fd0e9">thames::util::vector::slice</a> (vectorin v, integer a, integer b)</td></tr>
-<tr class="memdesc:acbbdfca5854eabbb3ec6c070c88fd0e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to return the slice of a vector.  <a href="namespacethames_1_1util_1_1vector.html#acbbdfca5854eabbb3ec6c070c88fd0e9">More...</a><br /></td></tr>
-<tr class="separator:acbbdfca5854eabbb3ec6c070c88fd0e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e1e744c78ae7b978f9dcbfe6b139ec3"><td class="memTemplParams" colspan="2">template&lt;class real , class vector &gt; </td></tr>
-<tr class="memitem:a7e1e744c78ae7b978f9dcbfe6b139ec3"><td class="memTemplItemLeft" align="right" valign="top">vector&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1vector.html#a7e1e744c78ae7b978f9dcbfe6b139ec3">thames::util::vector::mult3</a> (real a, vector vec)</td></tr>
-<tr class="separator:a7e1e744c78ae7b978f9dcbfe6b139ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d932f011b0e22fb961b5a2ac625aacf"><td class="memTemplParams" colspan="2">template&lt;class vector &gt; </td></tr>
-<tr class="memitem:a8d932f011b0e22fb961b5a2ac625aacf"><td class="memTemplItemLeft" align="right" valign="top">vector&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1vector.html#a8d932f011b0e22fb961b5a2ac625aacf">thames::util::vector::cross3</a> (vector a, vector b)</td></tr>
-<tr class="separator:a8d932f011b0e22fb961b5a2ac625aacf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a324519bc4855139b1119cbb335103871"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a324519bc4855139b1119cbb335103871"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1vector.html#a324519bc4855139b1119cbb335103871">thames::util::vector::dot3</a> (const std::array&lt; T, 3 &gt; &amp;a, const std::array&lt; T, 3 &gt; &amp;b)</td></tr>
+<tr class="memdesc:a324519bc4855139b1119cbb335103871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to calculate the dot product of two vectors with three elements.  <a href="namespacethames_1_1util_1_1vector.html#a324519bc4855139b1119cbb335103871">More...</a><br /></td></tr>
+<tr class="separator:a324519bc4855139b1119cbb335103871"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81b8f87d0d9a5d51829df283a40cd4cd"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a81b8f87d0d9a5d51829df283a40cd4cd"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1vector.html#a81b8f87d0d9a5d51829df283a40cd4cd">thames::util::vector::norm3</a> (const std::array&lt; T, 3 &gt; &amp;a)</td></tr>
+<tr class="memdesc:a81b8f87d0d9a5d51829df283a40cd4cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to calculate the length of a vector with three elements.  <a href="namespacethames_1_1util_1_1vector.html#a81b8f87d0d9a5d51829df283a40cd4cd">More...</a><br /></td></tr>
+<tr class="separator:a81b8f87d0d9a5d51829df283a40cd4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac08ae1ba781405c7eab4e46c5b1d2b47"><td class="memTemplParams" colspan="2">template&lt;class T , const std::size_t Si, const std::size_t So&gt; </td></tr>
+<tr class="memitem:ac08ae1ba781405c7eab4e46c5b1d2b47"><td class="memTemplItemLeft" align="right" valign="top">std::array&lt; T, So &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1vector.html#ac08ae1ba781405c7eab4e46c5b1d2b47">thames::util::vector::slice</a> (const std::array&lt; T, Si &gt; &amp;v, const unsigned int a, const unsigned int b)</td></tr>
+<tr class="memdesc:ac08ae1ba781405c7eab4e46c5b1d2b47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to return the slice of a vector.  <a href="namespacethames_1_1util_1_1vector.html#ac08ae1ba781405c7eab4e46c5b1d2b47">More...</a><br /></td></tr>
+<tr class="separator:ac08ae1ba781405c7eab4e46c5b1d2b47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eba443223b9c963e752894601c8a936"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a6eba443223b9c963e752894601c8a936"><td class="memTemplItemLeft" align="right" valign="top">std::array&lt; T, 3 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1vector.html#a6eba443223b9c963e752894601c8a936">thames::util::vector::mult3</a> (const T a, const std::array&lt; T, 3 &gt; &amp;vec)</td></tr>
+<tr class="separator:a6eba443223b9c963e752894601c8a936"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e9c6730f9eea87136a178a59b33c099"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a6e9c6730f9eea87136a178a59b33c099"><td class="memTemplItemLeft" align="right" valign="top">std::array&lt; T, 3 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1vector.html#a6e9c6730f9eea87136a178a59b33c099">thames::util::vector::cross3</a> (const std::array&lt; T, 3 &gt; &amp;a, const std::array&lt; T, 3 &gt; &amp;b)</td></tr>
+<tr class="separator:a6e9c6730f9eea87136a178a59b33c099"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
