@@ -9,7 +9,6 @@ namespace thames::util::vector{
      * @brief Function to calculate the dot product of two vectors with three elements.
      * 
      * @tparam T Numeric type.
-     * @tparam vector Type for vector (e.g. std::vector<double, 3>, Eigen::Vector3d)
      * @param[in] a First vector.
      * @param[in] b Second vector.
      * @return T Dot product of the vectors.
@@ -21,7 +20,6 @@ namespace thames::util::vector{
      * @brief Function to calculate the length of a vector with three elements.
      * 
      * @tparam T Numeric type.
-     * @tparam vector Type for vector (e.g. std::vector<double, 3>, Eigen::Vector3d)
      * @param[in] a Vector.
      * @return T Length of the vector.
      */
