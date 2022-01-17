@@ -14,7 +14,7 @@ namespace thames::perturbations::geopotential{
     }
 
     template <class T>
-    std::array<T, 3> J2<T>::acceleration_total(T t, std::array<T, 3> R, std::array<T, 3> V){
+    std::array<T, 3> J2<T>::acceleration_total(T t, std::array<T, 3> R, std::array<T, 3> V) const{
         // Extract position components
         T x = R[0], y = R[1], z = R[2];
 
@@ -36,7 +36,7 @@ namespace thames::perturbations::geopotential{
     }
 
     template <class T>
-    T J2<T>::potential(T t, std::array<T, 3> R){
+    T J2<T>::potential(T t, std::array<T, 3> R) const{
         // Extract position components
         T z = R[2];
 

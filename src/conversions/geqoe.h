@@ -20,7 +20,7 @@ namespace thames::conversions::geqoe{
      * @return std::array<T, 6> GEqOE state.
      */
     template<class T>
-    std::array<T, 6> cartesian_to_geqoe(const T& t, const std::array<T, 6>& RV, const T& mu, BasePerturbation<T>& perturbation);
+    std::array<T, 6> cartesian_to_geqoe(const T& t, const std::array<T, 6>& RV, const T& mu, const BasePerturbation<T>& perturbation);
 
     /**
      * @brief Convert from Generalised Equinoctial Orbital Elements (GEqOE) to Cartesian state.
@@ -33,7 +33,7 @@ namespace thames::conversions::geqoe{
      * @return std::array<T, 6> Cartesian state.
      */
     template<class T>
-    std::array<T, 6> geqoe_to_cartesian(const T& t, const std::array<T, 6>& geqoe, const T& mu, BasePerturbation<T>& perturbation);
+    std::array<T, 6> geqoe_to_cartesian(const T& t, const std::array<T, 6>& geqoe, const T& mu, const BasePerturbation<T>& perturbation);
 
 }
 

@@ -12,7 +12,7 @@ using namespace thames::perturbations::baseperturbation;
 namespace thames::conversions::geqoe{
     
     template<class T>
-    std::array<T, 6> cartesian_to_geqoe(const T& t, const std::array<T, 6>& RV, const T& mu, BasePerturbation<T>& perturbation){
+    std::array<T, 6> cartesian_to_geqoe(const T& t, const std::array<T, 6>& RV, const T& mu, const BasePerturbation<T>& perturbation){
         // Extract position and velocity vectors
         std::array<T, 3> R, V;
         R = thames::util::vector::slice<T, 6, 3>(RV, 0, 2);
@@ -96,10 +96,10 @@ namespace thames::conversions::geqoe{
         // Return GEqOE state vector
         return geqoe;
     }
-    template std::array<double, 6> cartesian_to_geqoe<double>(const double&, const std::array<double, 6>&, const double&, BasePerturbation<double>&);
+    template std::array<double, 6> cartesian_to_geqoe<double>(const double&, const std::array<double, 6>&, const double&, const BasePerturbation<double>&);
 
     template<class T>
-    std::array<T, 6> geqoe_to_cartesian(const T& t, const std::array<T, 6>& geqoe, const T& mu, BasePerturbation<T>& perturbation){
+    std::array<T, 6> geqoe_to_cartesian(const T& t, const std::array<T, 6>& geqoe, const T& mu, const BasePerturbation<T>& perturbation){
         // Extract elements
         T nu = geqoe[0];
         T p1 = geqoe[1];
@@ -170,6 +170,6 @@ namespace thames::conversions::geqoe{
         // Return Cartesian state vector
         return RV;
     }
-    template std::array<double, 6> geqoe_to_cartesian<double>(const double&, const std::array<double, 6>&, const double&, BasePerturbation<double>&);
+    template std::array<double, 6> geqoe_to_cartesian<double>(const double&, const std::array<double, 6>&, const double&, const BasePerturbation<double>&);
     
 }

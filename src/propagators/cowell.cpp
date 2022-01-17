@@ -13,7 +13,7 @@ using namespace thames::perturbations::baseperturbation;
 namespace thames::propagators::cowell{
 
     template<class T>
-    void derivative(const std::array<T, 6>& RV, std::array<T, 6>& RVdot, const T t, const T& mu, BasePerturbation<T>& perturbation) {
+    void derivative(const std::array<T, 6>& RV, std::array<T, 6>& RVdot, const T t, const T& mu, const BasePerturbation<T>& perturbation) {
         // Extract Cartesian state vectors
         std::array<T, 3> R, V;
         R = thames::util::vector::slice<T, 6, 3>(RV, 0, 2);
@@ -39,10 +39,10 @@ namespace thames::propagators::cowell{
             RVdot[ii+3] = A[ii];
         }
     }
-    template void derivative<double>(const std::array<double, 6>&, std::array<double, 6>&, const double, const double&, BasePerturbation<double>&);
+    template void derivative<double>(const std::array<double, 6>&, std::array<double, 6>&, const double, const double&, const BasePerturbation<double>&);
 
     template<class T>
-    std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T mu, BasePerturbation<T>& perturbation, T atol, T rtol){
+    std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T mu, const BasePerturbation<T>& perturbation, T atol, T rtol){
         // Declare derivative function wrapper
         auto derivative_param = [&](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T time){
             derivative<double>(x, dxdt, time, mu, perturbation);
@@ -58,6 +58,6 @@ namespace thames::propagators::cowell{
         // Return final state
         return RV;
     }
-    template std::array<double, 6> propagate<double>(double, double, double, std::array<double, 6>, double, BasePerturbation<double>&, double, double);
+    template std::array<double, 6> propagate<double>(double, double, double, std::array<double, 6>, double, const BasePerturbation<double>&, double, double);
 
 }

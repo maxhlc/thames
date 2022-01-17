@@ -20,7 +20,7 @@ namespace thames::propagators::geqoe{
      * @param[in] perturbation Perturbation object.
      */
     template<class T>
-    void derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t, const T& mu, BasePerturbation<T>& perturbation);
+    void derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t, const T& mu, const BasePerturbation<T>& perturbation);
 
     /**
      * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
@@ -37,7 +37,7 @@ namespace thames::propagators::geqoe{
      * @return std::array<T, 6> Final Cartesian state.
      */
     template<class T>
-    std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T mu, BasePerturbation<T>& perturbation, T atol = 1e-10, T rtol = 1e-10);
+    std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T mu, const BasePerturbation<T>& perturbation, T atol = 1e-10, T rtol = 1e-10);
 
 }
 

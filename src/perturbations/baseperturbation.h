@@ -39,7 +39,7 @@ namespace thames::perturbations::baseperturbation{
              * @param[in] V Velocity vector.
              * @return std::array<T, 3> Total perturbing acceleration.
              */
-            virtual std::array<T, 3> acceleration_total(T t, std::array<T, 3> R, std::array<T, 3> V);
+            virtual std::array<T, 3> acceleration_total(T t, std::array<T, 3> R, std::array<T, 3> V) const;
 
             /**
              * @brief Default non-potential perturbing acceleration.
@@ -51,7 +51,7 @@ namespace thames::perturbations::baseperturbation{
              * @param[in] V Velocity vector.
              * @return std::array<T, 3> Non-potential perturbing acceleration.
              */
-            virtual std::array<T, 3> acceleration_nonpotential(T t, std::array<T, 3> R, std::array<T, 3> V);
+            virtual std::array<T, 3> acceleration_nonpotential(T t, std::array<T, 3> R, std::array<T, 3> V) const;
 
             /**
              * @brief Default perturbing potential.
@@ -62,7 +62,7 @@ namespace thames::perturbations::baseperturbation{
              * @param[in] R Position vector.
              * @return T Perturbing potential.
              */
-            virtual T potential(T t, std::array<T, 3> R);
+            virtual T potential(T t, std::array<T, 3> R) const;
 
             /**
              * @brief Default time derivative of the perturbing potential.
@@ -74,7 +74,7 @@ namespace thames::perturbations::baseperturbation{
              * @param[in] V Velocity vector.
              * @return T Time derivative of the perturbing potential.
              */
-            virtual T potential_derivative(T t, std::array<T, 3> R, std::array<T, 3> V);
+            virtual T potential_derivative(T t, std::array<T, 3> R, std::array<T, 3> V) const;
 
     };
 

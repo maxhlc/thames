@@ -13,7 +13,7 @@ using namespace thames::perturbations::baseperturbation;
 namespace thames::propagators::geqoe{
 
     template<class T>
-    void derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t, const T& mu, BasePerturbation<T>& perturbation){
+    void derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t, const T& mu, const BasePerturbation<T>& perturbation){
         // Extract elements
         T nu = geqoe[0];
         T p1 = geqoe[1];
@@ -110,10 +110,10 @@ namespace thames::propagators::geqoe{
         geqoedot[4] = q1dot;
         geqoedot[5] = q2dot;
     }
-    template void derivative<double>(const std::array<double, 6>&, std::array<double, 6>&, const double, const double&, BasePerturbation<double>&);
+    template void derivative<double>(const std::array<double, 6>&, std::array<double, 6>&, const double, const double&, const BasePerturbation<double>&);
 
     template<class T>
-    std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T mu, BasePerturbation<T>& perturbation, T atol, T rtol){
+    std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T mu, const BasePerturbation<T>& perturbation, T atol, T rtol){
         // Transform initial state
         std::array<T, 6> geqoe = thames::conversions::geqoe::cartesian_to_geqoe<T>(tstart, RV, mu, perturbation);
 
@@ -135,6 +135,6 @@ namespace thames::propagators::geqoe{
         // Return final state
         return RV;
     }
-    template std::array<double, 6> propagate<double>(double, double, double, std::array<double, 6>, double, BasePerturbation<double>&, double, double);
+    template std::array<double, 6> propagate<double>(double, double, double, std::array<double, 6>, double, const BasePerturbation<double>&, double, double);
 
 }

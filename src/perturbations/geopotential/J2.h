@@ -46,7 +46,7 @@ namespace thames::perturbations::geopotential{
              * @param[in] V Velocity vector.
              * @return std::array<T, 3> Total perturbing acceleration due to the J2-term.
              */
-            std::array<T, 3> acceleration_total(T t, std::array<T, 3> R, std::array<T, 3> V) override;
+            std::array<T, 3> acceleration_total(T t, std::array<T, 3> R, std::array<T, 3> V) const override;
 
             /**
              * @brief Calculate perturbing potential resulting from the J2-term. 
@@ -55,7 +55,7 @@ namespace thames::perturbations::geopotential{
              * @param[in] R Position vector.
              * @return T Perturbing potential due to the J2-term.
              */
-            T potential(T t, std::array<T, 3> R) override;
+            T potential(T t, std::array<T, 3> R) const override;
 
     };
 
