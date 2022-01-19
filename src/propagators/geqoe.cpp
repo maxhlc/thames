@@ -7,7 +7,7 @@
 #include "geqoe.h"
 #include "../conversions/geqoe.h"
 #include "../perturbations/baseperturbation.h"
-#include "../util/vector.h"
+#include "../vector/geometry.h"
 
 using namespace thames::perturbations::baseperturbation;
 
@@ -25,12 +25,12 @@ namespace thames::propagators::geqoe{
         // Calculate Cartesian state and extract vectors
         std::array<T, 6> RV = thames::conversions::geqoe::geqoe_to_cartesian<T>(t, geqoe, mu, perturbation);
         std::array<T, 3> R, V;
-        R = thames::util::vector::slice<T, 6, 3>(RV, 0, 2);
-        V = thames::util::vector::slice<T, 6, 3>(RV, 3, 5);
+        R = thames::vector::geometry::slice<T, 6, 3>(RV, 0, 2);
+        V = thames::vector::geometry::slice<T, 6, 3>(RV, 3, 5);
 
         // Calculate range and range rate
-        T r = thames::util::vector::norm3<T>(R);
-        T drdt = thames::util::vector::dot3<T>(R, V)/r;
+        T r = thames::vector::geometry::norm3<T>(R);
+        T drdt = thames::vector::geometry::dot3<T>(R, V)/r;
 
         // Calculate perturbations
         T U = perturbation.potential(t, R);
@@ -39,7 +39,7 @@ namespace thames::propagators::geqoe{
         std::array<T, 3> P = perturbation.acceleration_nonpotential(t, R, V);
 
         // Calculate time derivative of total energy
-        T edot = Ut + thames::util::vector::dot3<T>(P, V);
+        T edot = Ut + thames::vector::geometry::dot3<T>(P, V);
 
         // Calculate time derivative of nu
         T nudot = -3.0*pow(nu/pow(mu, 2.0), 1.0/3.0)*edot;
@@ -55,19 +55,19 @@ namespace thames::propagators::geqoe{
         ey[2] = efac*(2.0*q2);
 
         // Calculate radial unit vector
-        std::array<T, 3> er = thames::util::vector::mult3<T>(1.0/r, R);
+        std::array<T, 3> er = thames::vector::geometry::mult3<T>(1.0/r, R);
 
         // Calculate trig of the true longitude
-        T cl = thames::util::vector::dot3<T>(er, ex);
-        T sl = thames::util::vector::dot3<T>(er, ey);
+        T cl = thames::vector::geometry::dot3<T>(er, ex);
+        T sl = thames::vector::geometry::dot3<T>(er, ey);
 
         // Calculate equinoctial reference frame velocity components
         T hwh = q1*cl - q2*sl;
 
         // Calculate angular momentum
-        std::array<T, 3> H = thames::util::vector::cross3<T>(R, V);
-        T h = thames::util::vector::norm3<T>(H);
-        std::array<T, 3> eh = thames::util::vector::mult3<T>(1.0/h, H);
+        std::array<T, 3> H = thames::vector::geometry::cross3<T>(R, V);
+        T h = thames::vector::geometry::norm3<T>(H);
+        std::array<T, 3> eh = thames::vector::geometry::mult3<T>(1.0/h, H);
 
         // Calculate the effective potential energy
         T ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + U;
@@ -79,8 +79,8 @@ namespace thames::propagators::geqoe{
         T p = pow(c, 2.0)/mu;
 
         // Calculate perturbation components
-        T Fr = thames::util::vector::dot3<T>(F, er);
-        T Fh = thames::util::vector::dot3<T>(F, eh);
+        T Fr = thames::vector::geometry::dot3<T>(F, er);
+        T Fh = thames::vector::geometry::dot3<T>(F, eh);
 
         // Calculate non-dimensional quantities
         T zeta = r/p;
@@ -125,12 +125,12 @@ namespace thames::propagators::geqoe{
         // Calculate Cartesian state and extract vectors
         std::vector<T> RV = thames::conversions::geqoe::geqoe_to_cartesian<T>(t, geqoe, mu, perturbation);
         std::vector<T> R(3), V(3);
-        R = thames::util::vector::slice<T>(RV, 0, 2);
-        V = thames::util::vector::slice<T>(RV, 3, 5);
+        R = thames::vector::geometry::slice<T>(RV, 0, 2);
+        V = thames::vector::geometry::slice<T>(RV, 3, 5);
 
         // Calculate range and range rate
-        T r = thames::util::vector::norm3<T>(R);
-        T drdt = thames::util::vector::dot3<T>(R, V)/r;
+        T r = thames::vector::geometry::norm3<T>(R);
+        T drdt = thames::vector::geometry::dot3<T>(R, V)/r;
 
         // Calculate perturbations
         T U = perturbation.potential(t, R);
@@ -139,7 +139,7 @@ namespace thames::propagators::geqoe{
         std::vector<T> P = perturbation.acceleration_nonpotential(t, R, V);
 
         // Calculate time derivative of total energy
-        T edot = Ut + thames::util::vector::dot3<T>(P, V);
+        T edot = Ut + thames::vector::geometry::dot3<T>(P, V);
 
         // Calculate time derivative of nu
         T nudot = -3.0*pow(nu/pow(mu, 2.0), 1.0/3.0)*edot;
@@ -155,19 +155,19 @@ namespace thames::propagators::geqoe{
         ey[2] = efac*(2.0*q2);
 
         // Calculate radial unit vector
-        std::vector<T> er = thames::util::vector::mult3<T>(1.0/r, R);
+        std::vector<T> er = thames::vector::geometry::mult3<T>(1.0/r, R);
 
         // Calculate trig of the true longitude
-        T cl = thames::util::vector::dot3<T>(er, ex);
-        T sl = thames::util::vector::dot3<T>(er, ey);
+        T cl = thames::vector::geometry::dot3<T>(er, ex);
+        T sl = thames::vector::geometry::dot3<T>(er, ey);
 
         // Calculate equinoctial reference frame velocity components
         T hwh = q1*cl - q2*sl;
 
         // Calculate angular momentum
-        std::vector<T> H = thames::util::vector::cross3<T>(R, V);
-        T h = thames::util::vector::norm3<T>(H);
-        std::vector<T> eh = thames::util::vector::mult3<T>(1.0/h, H);
+        std::vector<T> H = thames::vector::geometry::cross3<T>(R, V);
+        T h = thames::vector::geometry::norm3<T>(H);
+        std::vector<T> eh = thames::vector::geometry::mult3<T>(1.0/h, H);
 
         // Calculate the effective potential energy
         T ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + U;
@@ -179,8 +179,8 @@ namespace thames::propagators::geqoe{
         T p = pow(c, 2.0)/mu;
 
         // Calculate perturbation components
-        T Fr = thames::util::vector::dot3<T>(F, er);
-        T Fh = thames::util::vector::dot3<T>(F, eh);
+        T Fr = thames::vector::geometry::dot3<T>(F, er);
+        T Fh = thames::vector::geometry::dot3<T>(F, eh);
 
         // Calculate non-dimensional quantities
         T zeta = r/p;

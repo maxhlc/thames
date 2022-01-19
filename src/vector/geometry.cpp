@@ -1,9 +1,9 @@
 #include <array>
 #include <cmath>
 
-#include "vector.h"
+#include "geometry.h"
 
-namespace thames::util::vector{
+namespace thames::vector::geometry{
 
     template<class T>
     T dot3(const std::array<T, 3>& a, const std::array<T, 3>& b){

@@ -6,7 +6,7 @@
 #include "keplerian.h"
 #include "../perturbations/baseperturbation.h"
 #include "../util/root.h"
-#include "../util/vector.h"
+#include "../vector/geometry.h"
 
 using namespace thames::perturbations::baseperturbation;
 
@@ -16,16 +16,16 @@ namespace thames::conversions::geqoe{
     std::array<T, 6> cartesian_to_geqoe(const T& t, const std::array<T, 6>& RV, const T& mu, const BasePerturbation<T>& perturbation){
         // Extract position and velocity vectors
         std::array<T, 3> R, V;
-        R = thames::util::vector::slice<T, 6, 3>(RV, 0, 2);
-        V = thames::util::vector::slice<T, 6, 3>(RV, 3, 5);
+        R = thames::vector::geometry::slice<T, 6, 3>(RV, 0, 2);
+        V = thames::vector::geometry::slice<T, 6, 3>(RV, 3, 5);
 
         // Calculate range and range rate
-        T r = thames::util::vector::norm3<T>(R);
-        T drdt = thames::util::vector::dot3<T>(R, V)/r;
+        T r = thames::vector::geometry::norm3<T>(R);
+        T drdt = thames::vector::geometry::dot3<T>(R, V)/r;
 
         // Calculate the angular momentum
-        std::array<T, 3> H = thames::util::vector::cross3<T>(R, V);
-        T h = thames::util::vector::norm3<T>(H);
+        std::array<T, 3> H = thames::vector::geometry::cross3<T>(R, V);
+        T h = thames::vector::geometry::norm3<T>(H);
 
         // Calculate the effective potential energy
         T ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + perturbation.potential(t, R);
@@ -56,11 +56,11 @@ namespace thames::conversions::geqoe{
         ey[2] = efac*(2.0*q2);
 
         // Calculate radial unit vector
-        std::array<T, 3> er = thames::util::vector::mult3<T>(1.0/r, R);
+        std::array<T, 3> er = thames::vector::geometry::mult3<T>(1.0/r, R);
 
         // Calculate trig of the true longitude
-        T cl = thames::util::vector::dot3<T>(er, ex);
-        T sl = thames::util::vector::dot3<T>(er, ey);
+        T cl = thames::vector::geometry::dot3<T>(er, ex);
+        T sl = thames::vector::geometry::dot3<T>(er, ey);
 
         // Calculate the generalised angular momentum
         T c = sqrt(2.0*pow(r, 2.0)*ueff);
@@ -103,16 +103,16 @@ namespace thames::conversions::geqoe{
     std::vector<T> cartesian_to_geqoe(const T& t, const std::vector<T>& RV, const T& mu, const BasePerturbation<T>& perturbation){
         // Extract position and velocity vectors
         std::vector<T> R(3), V(3);
-        R = thames::util::vector::slice<T>(RV, 0, 2);
-        V = thames::util::vector::slice<T>(RV, 3, 5);
+        R = thames::vector::geometry::slice<T>(RV, 0, 2);
+        V = thames::vector::geometry::slice<T>(RV, 3, 5);
 
         // Calculate range and range rate
-        T r = thames::util::vector::norm3<T>(R);
-        T drdt = thames::util::vector::dot3<T>(R, V)/r;
+        T r = thames::vector::geometry::norm3<T>(R);
+        T drdt = thames::vector::geometry::dot3<T>(R, V)/r;
 
         // Calculate the angular momentum
-        std::vector<T> H = thames::util::vector::cross3<T>(R, V);
-        T h = thames::util::vector::norm3<T>(H);
+        std::vector<T> H = thames::vector::geometry::cross3<T>(R, V);
+        T h = thames::vector::geometry::norm3<T>(H);
 
         // Calculate the effective potential energy
         T ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + perturbation.potential(t, R);
@@ -143,11 +143,11 @@ namespace thames::conversions::geqoe{
         ey[2] = efac*(2.0*q2);
 
         // Calculate radial unit vector
-        std::vector<T> er = thames::util::vector::mult3<T>(1.0/r, R);
+        std::vector<T> er = thames::vector::geometry::mult3<T>(1.0/r, R);
 
         // Calculate trig of the true longitude
-        T cl = thames::util::vector::dot3<T>(er, ex);
-        T sl = thames::util::vector::dot3<T>(er, ey);
+        T cl = thames::vector::geometry::dot3<T>(er, ex);
+        T sl = thames::vector::geometry::dot3<T>(er, ey);
 
         // Calculate the generalised angular momentum
         T c = sqrt(2.0*pow(r, 2.0)*ueff);
@@ -233,7 +233,7 @@ namespace thames::conversions::geqoe{
         }
 
         // Calculate position
-        std::array<T, 3> R = thames::util::vector::mult3<T>(r, er);
+        std::array<T, 3> R = thames::vector::geometry::mult3<T>(r, er);
 
         // Calculate generalised angular momentum
         T c = pow(pow(mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
@@ -307,7 +307,7 @@ namespace thames::conversions::geqoe{
         }
 
         // Calculate position
-        std::vector<T> R = thames::util::vector::mult3<T>(r, er);
+        std::vector<T> R = thames::vector::geometry::mult3<T>(r, er);
 
         // Calculate generalised angular momentum
         T c = pow(pow(mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));

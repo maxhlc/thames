@@ -1,10 +1,10 @@
-#ifndef THAMES_UTIL_VECTOR
-#define THAMES_UTIL_VECTOR
+#ifndef THAMES_VECTOR_GEOMETRY
+#define THAMES_VECTOR_GEOMETRY
 
 #include <array>
 #include <vector>
 
-namespace thames::util::vector{
+namespace thames::vector::geometry{
 
     /**
      * @brief Function to calculate the dot product of two vectors with three elements.

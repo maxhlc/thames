@@ -7,7 +7,7 @@
 
 #include "cowell.h"
 #include "../perturbations/baseperturbation.h"
-#include "../util/vector.h"
+#include "../vector/geometry.h"
 
 using namespace thames::perturbations::baseperturbation;
 
@@ -17,17 +17,17 @@ namespace thames::propagators::cowell{
     void derivative(const std::array<T, 6>& RV, std::array<T, 6>& RVdot, const T t, const T& mu, const BasePerturbation<T>& perturbation) {
         // Extract Cartesian state vectors
         std::array<T, 3> R, V;
-        R = thames::util::vector::slice<T, 6, 3>(RV, 0, 2);
-        V = thames::util::vector::slice<T, 6, 3>(RV, 3, 5);
+        R = thames::vector::geometry::slice<T, 6, 3>(RV, 0, 2);
+        V = thames::vector::geometry::slice<T, 6, 3>(RV, 3, 5);
 
         // Calculate range
-        T r = thames::util::vector::norm3<T>(R);
+        T r = thames::vector::geometry::norm3<T>(R);
 
         // Calculate perturbing acceleration
         std::array<T, 3> F = perturbation.acceleration_total(t, R, V);
 
         // Calculate central body acceleration
-        std::array<T, 3> G = thames::util::vector::mult3<T>(-mu/pow(r, 3.0), R);
+        std::array<T, 3> G = thames::vector::geometry::mult3<T>(-mu/pow(r, 3.0), R);
 
         // Calculate acceleration
         std::array<T, 3> A;
@@ -46,17 +46,17 @@ namespace thames::propagators::cowell{
     void derivative(const std::vector<T>& RV, std::vector<T>& RVdot, const T t, const T& mu, const BasePerturbation<T>& perturbation) {
         // Extract Cartesian state vectors
         std::vector<T> R(3), V(3);
-        R = thames::util::vector::slice<T>(RV, 0, 2);
-        V = thames::util::vector::slice<T>(RV, 3, 5);
+        R = thames::vector::geometry::slice<T>(RV, 0, 2);
+        V = thames::vector::geometry::slice<T>(RV, 3, 5);
 
         // Calculate range
-        T r = thames::util::vector::norm3<T>(R);
+        T r = thames::vector::geometry::norm3<T>(R);
 
         // Calculate perturbing acceleration
         std::vector<T> F = perturbation.acceleration_total(t, R, V);
 
         // Calculate central body acceleration
-        std::vector<T> G = thames::util::vector::mult3<T>(-mu/pow(r, 3.0), R);
+        std::vector<T> G = thames::vector::geometry::mult3<T>(-mu/pow(r, 3.0), R);
 
         // Calculate acceleration
         std::vector<T> A(3);

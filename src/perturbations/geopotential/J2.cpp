@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "J2.h"
-#include "../../util/vector.h"
+#include "../../vector/geometry.h"
 
 namespace thames::perturbations::geopotential{
 
@@ -20,7 +20,7 @@ namespace thames::perturbations::geopotential{
         T x = R[0], y = R[1], z = R[2];
 
         // Calculate range
-        T r = thames::util::vector::norm3<T>(R);
+        T r = thames::vector::geometry::norm3<T>(R);
 
         // Precompute factors
         T J2_fac1 = -1.5*m_mu*m_J2*pow(m_radius, 2.0)/pow(r, 5.0);
@@ -42,7 +42,7 @@ namespace thames::perturbations::geopotential{
         T x = R[0], y = R[1], z = R[2];
 
         // Calculate range
-        T r = thames::util::vector::norm3<T>(R);
+        T r = thames::vector::geometry::norm3<T>(R);
 
         // Precompute factors
         T J2_fac1 = -1.5*m_mu*m_J2*pow(m_radius, 2.0)/pow(r, 5.0);
@@ -64,7 +64,7 @@ namespace thames::perturbations::geopotential{
         T z = R[2];
 
         // Calculate range
-        T r = thames::util::vector::norm3<T>(R);
+        T r = thames::vector::geometry::norm3<T>(R);
 
         // Calculate cosine of latitude
         T cphi = z/r;
@@ -82,7 +82,7 @@ namespace thames::perturbations::geopotential{
         T z = R[2];
 
         // Calculate range
-        T r = thames::util::vector::norm3<T>(R);
+        T r = thames::vector::geometry::norm3<T>(R);
 
         // Calculate cosine of latitude
         T cphi = z/r;
