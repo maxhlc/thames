@@ -1,5 +1,6 @@
 #include <array>
 #include <cmath>
+#include <vector>
 
 #include "dimensional.h"
 #include "keplerian.h"
@@ -37,6 +38,33 @@ namespace thames::conversions::dimensional{
     template void cartesian_nondimensionalise<double>(double&, std::array<double, 6>&, double&, DimensionalFactors&);
 
     template<class T>
+    void cartesian_nondimensionalise(T &t, std::vector<T> &RV, T &mu, DimensionalFactors &factors){
+        // Calculate length factors (semi-major axis)
+        std::vector<T> keplerian = thames::conversions::keplerian::cartesian_to_keplerian(RV, mu);
+        factors.length = keplerian[0];
+
+        // Calculate velocity factor
+        factors.velocity = sqrt(mu/factors.length);
+
+        // Calculate time factors
+        factors.time = sqrt(pow(factors.length, 3.0)/mu);
+
+        // Calculate gravitational parameter factors
+        factors.grav = mu;
+
+        // Calculate non-dimensional states
+        t /= factors.time;
+        mu /= factors.grav;
+        RV[0] /= factors.length;
+        RV[1] /= factors.length;
+        RV[2] /= factors.length;
+        RV[3] /= factors.velocity;
+        RV[4] /= factors.velocity;
+        RV[5] /= factors.velocity;
+    }
+    template void cartesian_nondimensionalise<double>(double&, std::vector<double>&, double&, DimensionalFactors&);
+
+    template<class T>
     void cartesian_dimensionalise(T& t, std::array<T, 6>& RV, T& mu, const DimensionalFactors& factors){
         // Calculate dimensional states
         t *= factors.time;
@@ -49,5 +77,19 @@ namespace thames::conversions::dimensional{
         RV[5] *= factors.velocity;
     }
     template void cartesian_dimensionalise<double>(double&, std::array<double, 6>&, double&, const DimensionalFactors&);
+
+    template<class T>
+    void cartesian_dimensionalise(T &t, std::vector<T> &RV, T &mu, const DimensionalFactors &factors){
+        // Calculate dimensional states
+        t *= factors.time;
+        mu *= factors.grav;
+        RV[0] *= factors.length;
+        RV[1] *= factors.length;
+        RV[2] *= factors.length;
+        RV[3] *= factors.velocity;
+        RV[4] *= factors.velocity;
+        RV[5] *= factors.velocity;
+    }
+    template void cartesian_dimensionalise<double>(double&, std::vector<double>&, double&, const DimensionalFactors&);
 
 }

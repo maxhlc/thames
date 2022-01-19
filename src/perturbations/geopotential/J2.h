@@ -2,6 +2,7 @@
 #define THAMES_PERTURBATIONS_GEOPOTENTIAL_J2
 
 #include <array>
+#include <vector>
 
 #include "../baseperturbation.h"
 
@@ -49,6 +50,16 @@ namespace thames::perturbations::geopotential{
             std::array<T, 3> acceleration_total(T t, std::array<T, 3> R, std::array<T, 3> V) const override;
 
             /**
+             * @brief Calculate perturbing acceleration resulting from the J2-term. 
+             * 
+             * @param[in] t Current physical time.
+             * @param[in] R Position vector.
+             * @param[in] V Velocity vector.
+             * @return std::vector<T> Total perturbing acceleration due to the J2-term.
+             */
+            std::vector<T> acceleration_total(T t, std::vector<T> R, std::vector<T> V) const override;
+
+            /**
              * @brief Calculate perturbing potential resulting from the J2-term. 
              * 
              * @param[in] t Current physical time.
@@ -56,6 +67,15 @@ namespace thames::perturbations::geopotential{
              * @return T Perturbing potential due to the J2-term.
              */
             T potential(T t, std::array<T, 3> R) const override;
+
+            /**
+             * @brief Calculate perturbing potential resulting from the J2-term. 
+             * 
+             * @param[in] t Current physical time.
+             * @param[in] R Position vector.
+             * @return T Perturbing potential due to the J2-term.
+             */
+            T potential(T t, std::vector<T> R) const override;
 
     };
 

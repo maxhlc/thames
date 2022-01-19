@@ -1,24 +1,4 @@
 var searchData=
 [
-  ['angles_73',['angles',['../namespacethames_1_1util_1_1angles.html',1,'thames::util']]],
-  ['baseperturbation_74',['baseperturbation',['../namespacethames_1_1perturbations_1_1baseperturbation.html',1,'thames::perturbations']]],
-  ['constants_75',['constants',['../namespacethames_1_1constants.html',1,'thames']]],
-  ['conversions_76',['conversions',['../namespacethames_1_1conversions.html',1,'thames']]],
-  ['cowell_77',['cowell',['../namespacethames_1_1propagators_1_1cowell.html',1,'thames::propagators']]],
-  ['dimensional_78',['dimensional',['../namespacethames_1_1conversions_1_1dimensional.html',1,'thames::conversions']]],
-  ['earth_79',['earth',['../namespacethames_1_1constants_1_1earth.html',1,'thames::constants']]],
-  ['geopotential_80',['geopotential',['../namespacethames_1_1perturbations_1_1geopotential.html',1,'thames::perturbations']]],
-  ['geqoe_81',['geqoe',['../namespacethames_1_1conversions_1_1geqoe.html',1,'thames::conversions::geqoe'],['../namespacethames_1_1propagators_1_1geqoe.html',1,'thames::propagators::geqoe']]],
-  ['keplerian_82',['keplerian',['../namespacethames_1_1conversions_1_1keplerian.html',1,'thames::conversions']]],
-  ['models_83',['models',['../namespacethames_1_1perturbations_1_1geopotential_1_1models.html',1,'thames::perturbations::geopotential']]],
-  ['optimise_84',['optimise',['../namespacethames_1_1util_1_1optimise.html',1,'thames::util']]],
-  ['perturbations_85',['perturbations',['../namespacethames_1_1perturbations.html',1,'thames']]],
-  ['propagators_86',['propagators',['../namespacethames_1_1propagators.html',1,'thames']]],
-  ['root_87',['root',['../namespacethames_1_1util_1_1root.html',1,'thames::util']]],
-  ['thames_88',['thames',['../namespacethames.html',1,'']]],
-  ['time_89',['time',['../structthames_1_1types_1_1DimensionalFactors.html#a33393b950b7fd634aa7c518a72a0b673',1,'thames::types::DimensionalFactors']]],
-  ['types_90',['types',['../namespacethames_1_1types.html',1,'thames']]],
-  ['types_2eh_91',['types.h',['../types_8h.html',1,'']]],
-  ['util_92',['util',['../namespacethames_1_1util.html',1,'thames']]],
-  ['vector_93',['vector',['../namespacethames_1_1util_1_1vector.html',1,'thames::util']]]
+  ['util_2eh_90',['util.h',['../util_8h.html',1,'']]]
 ];

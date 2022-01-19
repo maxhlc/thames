@@ -1,6 +1,7 @@
 #include <array>
 #include <iostream>
 #include <iomanip>
+#include <vector>
 
 #include "types.h"
 #include "constants/constants.h"

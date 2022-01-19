@@ -80,16 +80,28 @@ Functions</h2></td></tr>
 <tr class="separator:a1380c3373a238b9f5be1b15eb9016b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af378dbd8a0a2cd8a6116d656731c2b8a"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1cowell.html#af378dbd8a0a2cd8a6116d656731c2b8a">derivative&lt; double &gt;</a> (const std::array&lt; double, 6 &gt; &amp;, std::array&lt; double, 6 &gt; &amp;, const double, const double &amp;, const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; double &gt; &amp;)</td></tr>
 <tr class="separator:af378dbd8a0a2cd8a6116d656731c2b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad678845a621fc5ee0988f4610243c98b"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ad678845a621fc5ee0988f4610243c98b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1cowell.html#ad678845a621fc5ee0988f4610243c98b">derivative</a> (const std::vector&lt; T &gt; &amp;RV, std::vector&lt; T &gt; &amp;RVdot, const T t, const T &amp;mu, const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; &amp;perturbation)</td></tr>
+<tr class="memdesc:ad678845a621fc5ee0988f4610243c98b"><td class="mdescLeft">&#160;</td><td class="mdescRight">State derivative for Cowell's method propagation.  <a href="namespacethames_1_1propagators_1_1cowell.html#ad678845a621fc5ee0988f4610243c98b">More...</a><br /></td></tr>
+<tr class="separator:ad678845a621fc5ee0988f4610243c98b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e5d1d73577e1eeac75280ca6a8d929d"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1cowell.html#a2e5d1d73577e1eeac75280ca6a8d929d">derivative&lt; double &gt;</a> (const std::vector&lt; double &gt; &amp;, std::vector&lt; double &gt; &amp;, const double, const double &amp;, const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; double &gt; &amp;)</td></tr>
+<tr class="separator:a2e5d1d73577e1eeac75280ca6a8d929d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33941cc8333ecdcd0b8f7a374503f350"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:a33941cc8333ecdcd0b8f7a374503f350"><td class="memTemplItemLeft" align="right" valign="top">std::array&lt; T, 6 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1cowell.html#a33941cc8333ecdcd0b8f7a374503f350">propagate</a> (T tstart, T tend, T tstep, std::array&lt; T, 6 &gt; RV, T mu, const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; &amp;perturbation, T atol=1e-10, T rtol=1e-10)</td></tr>
 <tr class="memdesc:a33941cc8333ecdcd0b8f7a374503f350"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagate Cartesian state using Cowell's method.  <a href="namespacethames_1_1propagators_1_1cowell.html#a33941cc8333ecdcd0b8f7a374503f350">More...</a><br /></td></tr>
 <tr class="separator:a33941cc8333ecdcd0b8f7a374503f350"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65f08efa1e4bf20d40fe674b3485b3dd"><td class="memItemLeft" align="right" valign="top">template std::array&lt; double, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1cowell.html#a65f08efa1e4bf20d40fe674b3485b3dd">propagate&lt; double &gt;</a> (double, double, double, std::array&lt; double, 6 &gt;, double, const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; double &gt; &amp;, double, double)</td></tr>
 <tr class="separator:a65f08efa1e4bf20d40fe674b3485b3dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ad68db1da23b14d5d4bfdb95ce7841f"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a5ad68db1da23b14d5d4bfdb95ce7841f"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1cowell.html#a5ad68db1da23b14d5d4bfdb95ce7841f">propagate</a> (T tstart, T tend, T tstep, std::vector&lt; T &gt; RV, T mu, const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; &amp;perturbation, T atol=1e-10, T rtol=1e-10)</td></tr>
+<tr class="memdesc:a5ad68db1da23b14d5d4bfdb95ce7841f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagate Cartesian state using Cowell's method.  <a href="namespacethames_1_1propagators_1_1cowell.html#a5ad68db1da23b14d5d4bfdb95ce7841f">More...</a><br /></td></tr>
+<tr class="separator:a5ad68db1da23b14d5d4bfdb95ce7841f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c910a4162f4876deaa9f56b2a0b5a77"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1cowell.html#a1c910a4162f4876deaa9f56b2a0b5a77">propagate&lt; double &gt;</a> (double, double, double, std::vector&lt; double &gt;, double, const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; double &gt; &amp;, double, double)</td></tr>
+<tr class="separator:a1c910a4162f4876deaa9f56b2a0b5a77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a1380c3373a238b9f5be1b15eb9016b18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1380c3373a238b9f5be1b15eb9016b18">&#9670;&nbsp;</a></span>derivative()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1380c3373a238b9f5be1b15eb9016b18">&#9670;&nbsp;</a></span>derivative() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -154,8 +166,74 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<a id="ad678845a621fc5ee0988f4610243c98b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad678845a621fc5ee0988f4610243c98b">&#9670;&nbsp;</a></span>derivative() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void thames::propagators::cowell::derivative </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>RV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>RVdot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>mu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>perturbation</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>State derivative for Cowell's method propagation. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Numeric type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">RV</td><td>Cartesian state. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">RVdot</td><td>Time derivative of the Cartesian state. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>Current physical time. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mu</td><td>Central body gravitational parameter. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">perturbation</td><td>Perturbation object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="af378dbd8a0a2cd8a6116d656731c2b8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af378dbd8a0a2cd8a6116d656731c2b8a">&#9670;&nbsp;</a></span>derivative&lt; double &gt;()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af378dbd8a0a2cd8a6116d656731c2b8a">&#9670;&nbsp;</a></span>derivative&lt; double &gt;() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -200,8 +278,54 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<a id="a2e5d1d73577e1eeac75280ca6a8d929d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e5d1d73577e1eeac75280ca6a8d929d">&#9670;&nbsp;</a></span>derivative&lt; double &gt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="namespacethames_1_1propagators_1_1cowell.html#a1380c3373a238b9f5be1b15eb9016b18">thames::propagators::cowell::derivative</a>&lt; double &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a33941cc8333ecdcd0b8f7a374503f350"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33941cc8333ecdcd0b8f7a374503f350">&#9670;&nbsp;</a></span>propagate()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a33941cc8333ecdcd0b8f7a374503f350">&#9670;&nbsp;</a></span>propagate() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -288,8 +412,96 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<a id="a5ad68db1da23b14d5d4bfdb95ce7841f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ad68db1da23b14d5d4bfdb95ce7841f">&#9670;&nbsp;</a></span>propagate() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; T &gt; thames::propagators::cowell::propagate </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>tstart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>tend</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>tstep</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; T &gt;&#160;</td>
+          <td class="paramname"><em>RV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>mu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>perturbation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>atol</em> = <code>1e-10</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>rtol</em> = <code>1e-10</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Propagate Cartesian state using Cowell's method. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Numeric type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">tstart</td><td>Propagation start time in physical time. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tend</td><td>Propagation end time in physical time. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tstep</td><td>Initial timestep for propagation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">RV</td><td>Initial Cartesian state. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mu</td><td>Central body gravitational parameter. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">perturbation</td><td>Perturbation object. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">atol</td><td>Solver absolute tolerance. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rtol</td><td>Solver relative tolerance. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;T&gt; Final Cartesian state. </dd></dl>
+
+</div>
+</div>
 <a id="a65f08efa1e4bf20d40fe674b3485b3dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65f08efa1e4bf20d40fe674b3485b3dd">&#9670;&nbsp;</a></span>propagate&lt; double &gt;()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a65f08efa1e4bf20d40fe674b3485b3dd">&#9670;&nbsp;</a></span>propagate&lt; double &gt;() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -316,6 +528,70 @@ template&lt;class T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::array&lt; double, 6 &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1c910a4162f4876deaa9f56b2a0b5a77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c910a4162f4876deaa9f56b2a0b5a77">&#9670;&nbsp;</a></span>propagate&lt; double &gt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template std::vector&lt;double&gt; <a class="el" href="namespacethames_1_1propagators_1_1cowell.html#a33941cc8333ecdcd0b8f7a374503f350">thames::propagators::cowell::propagate</a>&lt; double &gt; </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt;&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>

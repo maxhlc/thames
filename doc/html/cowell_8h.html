@@ -73,6 +73,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;array&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="baseperturbation_8h_source.html">../perturbations/baseperturbation.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for cowell.h:</div>
@@ -102,10 +103,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a1380c3373a238b9f5be1b15eb9016b18"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1cowell.html#a1380c3373a238b9f5be1b15eb9016b18">thames::propagators::cowell::derivative</a> (const std::array&lt; T, 6 &gt; &amp;RV, std::array&lt; T, 6 &gt; &amp;RVdot, const T t, const T &amp;mu, const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; &amp;perturbation)</td></tr>
 <tr class="memdesc:a1380c3373a238b9f5be1b15eb9016b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">State derivative for Cowell's method propagation.  <a href="namespacethames_1_1propagators_1_1cowell.html#a1380c3373a238b9f5be1b15eb9016b18">More...</a><br /></td></tr>
 <tr class="separator:a1380c3373a238b9f5be1b15eb9016b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad678845a621fc5ee0988f4610243c98b"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ad678845a621fc5ee0988f4610243c98b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1cowell.html#ad678845a621fc5ee0988f4610243c98b">thames::propagators::cowell::derivative</a> (const std::vector&lt; T &gt; &amp;RV, std::vector&lt; T &gt; &amp;RVdot, const T t, const T &amp;mu, const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; &amp;perturbation)</td></tr>
+<tr class="memdesc:ad678845a621fc5ee0988f4610243c98b"><td class="mdescLeft">&#160;</td><td class="mdescRight">State derivative for Cowell's method propagation.  <a href="namespacethames_1_1propagators_1_1cowell.html#ad678845a621fc5ee0988f4610243c98b">More...</a><br /></td></tr>
+<tr class="separator:ad678845a621fc5ee0988f4610243c98b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33941cc8333ecdcd0b8f7a374503f350"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:a33941cc8333ecdcd0b8f7a374503f350"><td class="memTemplItemLeft" align="right" valign="top">std::array&lt; T, 6 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1cowell.html#a33941cc8333ecdcd0b8f7a374503f350">thames::propagators::cowell::propagate</a> (T tstart, T tend, T tstep, std::array&lt; T, 6 &gt; RV, T mu, const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; &amp;perturbation, T atol=1e-10, T rtol=1e-10)</td></tr>
 <tr class="memdesc:a33941cc8333ecdcd0b8f7a374503f350"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagate Cartesian state using Cowell's method.  <a href="namespacethames_1_1propagators_1_1cowell.html#a33941cc8333ecdcd0b8f7a374503f350">More...</a><br /></td></tr>
 <tr class="separator:a33941cc8333ecdcd0b8f7a374503f350"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ad68db1da23b14d5d4bfdb95ce7841f"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a5ad68db1da23b14d5d4bfdb95ce7841f"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1propagators_1_1cowell.html#a5ad68db1da23b14d5d4bfdb95ce7841f">thames::propagators::cowell::propagate</a> (T tstart, T tend, T tstep, std::vector&lt; T &gt; RV, T mu, const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; &amp;perturbation, T atol=1e-10, T rtol=1e-10)</td></tr>
+<tr class="memdesc:a5ad68db1da23b14d5d4bfdb95ce7841f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagate Cartesian state using Cowell's method.  <a href="namespacethames_1_1propagators_1_1cowell.html#a5ad68db1da23b14d5d4bfdb95ce7841f">More...</a><br /></td></tr>
+<tr class="separator:a5ad68db1da23b14d5d4bfdb95ce7841f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
