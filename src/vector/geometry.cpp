@@ -64,14 +64,21 @@ namespace thames::vector::geometry{
     template std::vector<double> slice<double>(const std::vector<double>&, const unsigned int, const unsigned int);
 
     template<class T>
-    std::array<T, 3> mult3(const T a, const std::array<T, 3>& vec){
-        // Declare output vector
-        std::array<T, 3> vecout;
-
+    void mult3(const T a, const std::array<T, 3>& vec, std::array<T, 3>& vecout){
         // Interate through elements
         for(unsigned int ii=0; ii<3; ii++){
             vecout[ii] = a*vec[ii];
         }
+    }
+    template void mult3<double>(const double, const std::array<double, 3>&, std::array<double, 3>&);
+
+    template<class T>
+    std::array<T, 3> mult3(const T a, const std::array<T, 3>& vec){
+        // Declare output vector
+        std::array<T, 3> vecout;
+
+        // Scalar multiplication
+        mult3<T>(a, vec, vecout);
 
         // Return output vector
         return vecout;
@@ -79,14 +86,21 @@ namespace thames::vector::geometry{
     template std::array<double, 3> mult3<double>(const double, const std::array<double, 3>&);
 
     template<class T>
-    std::vector<T> mult3(const T a, const std::vector<T>& vec){
-        // Declare output vector
-        std::vector<T> vecout(3);
-
+    void mult3(const T a, const std::vector<T>& vec, std::vector<T>& vecout){
         // Interate through elements
         for(unsigned int ii=0; ii<3; ii++){
             vecout[ii] = a*vec[ii];
         }
+    }
+    template void mult3<double>(const double, const std::vector<double>&, std::vector<double>&);
+
+    template<class T>
+    std::vector<T> mult3(const T a, const std::vector<T>& vec){
+        // Declare output vector
+        std::vector<T> vecout(3);
+
+        // Scalar multiplication
+        mult3<T>(a, vec, vecout);
 
         // Return output vector
         return vecout;
@@ -94,14 +108,21 @@ namespace thames::vector::geometry{
     template std::vector<double> mult3<double>(const double, const std::vector<double>&);
 
     template<class T>
+    void cross3(const std::array<T, 3>& a, const std::array<T, 3>& b, std::array<T, 3>& vecout){
+        // Calculate cross product
+        vecout[0] = a[1]*b[2] - a[2]*b[1];
+        vecout[1] = a[2]*b[0] - a[0]*b[2];
+        vecout[2] = a[0]*b[1] - a[1]*b[0];
+    }
+    template void cross3<double>(const std::array<double, 3>&, const std::array<double, 3>&, std::array<double, 3>&);
+
+    template<class T>
     std::array<T, 3> cross3(const std::array<T, 3>& a, const std::array<T, 3>& b){
         // Declare output vector
         std::array<T, 3> vecout;
 
         // Calculate cross product
-        vecout[0] = a[1]*b[2] - a[2]*b[1];
-        vecout[1] = a[2]*b[0] - a[0]*b[2];
-        vecout[2] = a[0]*b[1] - a[1]*b[0];
+        cross3<T>(a, b, vecout);
 
         // Return cross product
         return vecout;
@@ -109,14 +130,21 @@ namespace thames::vector::geometry{
     template std::array<double, 3> cross3<double>(const std::array<double, 3>&, const std::array<double, 3>&);
 
     template<class T>
+    void cross3(const std::vector<T>& a, const std::vector<T>& b, std::vector<T>& vecout){
+        // Calculate cross product
+        vecout[0] = a[1]*b[2] - a[2]*b[1];
+        vecout[1] = a[2]*b[0] - a[0]*b[2];
+        vecout[2] = a[0]*b[1] - a[1]*b[0];
+    }
+    template void cross3<double>(const std::vector<double>&, const std::vector<double>&, std::vector<double>&);
+
+    template<class T>
     std::vector<T> cross3(const std::vector<T>& a, const std::vector<T>& b){
         // Declare output vector
         std::vector<T> vecout(3);
 
         // Calculate cross product
-        vecout[0] = a[1]*b[2] - a[2]*b[1];
-        vecout[1] = a[2]*b[0] - a[0]*b[2];
-        vecout[2] = a[0]*b[1] - a[1]*b[0];
+        cross3<T>(a, b, vecout);
 
         // Return cross product
         return vecout;
