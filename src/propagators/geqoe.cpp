@@ -7,9 +7,11 @@
 #include "geqoe.h"
 #include "../conversions/geqoe.h"
 #include "../perturbations/baseperturbation.h"
+#include "../vector/arithmeticoverloads.h"
 #include "../vector/geometry.h"
 
 using namespace thames::perturbations::baseperturbation;
+using namespace thames::vector::arithmeticoverloads;
 
 namespace thames::propagators::geqoe{
 
@@ -55,7 +57,7 @@ namespace thames::propagators::geqoe{
         ey[2] = efac*(2.0*q2);
 
         // Calculate radial unit vector
-        std::array<T, 3> er = thames::vector::geometry::mult3<T>(1.0/r, R);
+        std::array<T, 3> er = R/r;
 
         // Calculate trig of the true longitude
         T cl = thames::vector::geometry::dot3<T>(er, ex);
@@ -67,7 +69,7 @@ namespace thames::propagators::geqoe{
         // Calculate angular momentum
         std::array<T, 3> H = thames::vector::geometry::cross3<T>(R, V);
         T h = thames::vector::geometry::norm3<T>(H);
-        std::array<T, 3> eh = thames::vector::geometry::mult3<T>(1.0/h, H);
+        std::array<T, 3> eh = H/h;
 
         // Calculate the effective potential energy
         T ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + U;
@@ -155,7 +157,7 @@ namespace thames::propagators::geqoe{
         ey[2] = efac*(2.0*q2);
 
         // Calculate radial unit vector
-        std::vector<T> er = thames::vector::geometry::mult3<T>(1.0/r, R);
+        std::vector<T> er = R/r;
 
         // Calculate trig of the true longitude
         T cl = thames::vector::geometry::dot3<T>(er, ex);
@@ -167,7 +169,7 @@ namespace thames::propagators::geqoe{
         // Calculate angular momentum
         std::vector<T> H = thames::vector::geometry::cross3<T>(R, V);
         T h = thames::vector::geometry::norm3<T>(H);
-        std::vector<T> eh = thames::vector::geometry::mult3<T>(1.0/h, H);
+        std::vector<T> eh = H/h;
 
         // Calculate the effective potential energy
         T ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + U;

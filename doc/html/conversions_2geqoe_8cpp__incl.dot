@@ -28,7 +28,11 @@ digraph "src/conversions/geqoe.cpp"
   Node8 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node9 [label="functional",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node10 [label="../vector/geometry.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$geometry_8h.html",tooltip=" "];
+  Node10 [label="../vector/arithmeticoverloads.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$arithmeticoverloads_8h.html",tooltip=" "];
   Node10 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node10 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="../vector/geometry.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$geometry_8h.html",tooltip=" "];
+  Node11 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

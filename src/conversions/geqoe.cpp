@@ -6,9 +6,11 @@
 #include "keplerian.h"
 #include "../perturbations/baseperturbation.h"
 #include "../util/root.h"
+#include "../vector/arithmeticoverloads.h"
 #include "../vector/geometry.h"
 
 using namespace thames::perturbations::baseperturbation;
+using namespace thames::vector::arithmeticoverloads;
 
 namespace thames::conversions::geqoe{
     
@@ -56,7 +58,7 @@ namespace thames::conversions::geqoe{
         ey[2] = efac*(2.0*q2);
 
         // Calculate radial unit vector
-        std::array<T, 3> er = thames::vector::geometry::mult3<T>(1.0/r, R);
+        std::array<T, 3> er = R/r;
 
         // Calculate trig of the true longitude
         T cl = thames::vector::geometry::dot3<T>(er, ex);
@@ -143,7 +145,7 @@ namespace thames::conversions::geqoe{
         ey[2] = efac*(2.0*q2);
 
         // Calculate radial unit vector
-        std::vector<T> er = thames::vector::geometry::mult3<T>(1.0/r, R);
+        std::vector<T> er = R/r;
 
         // Calculate trig of the true longitude
         T cl = thames::vector::geometry::dot3<T>(er, ex);
@@ -226,14 +228,11 @@ namespace thames::conversions::geqoe{
         ey[2] = efac*(2.0*q2);
 
         // Calculate orbital basis vectors
-        std::array<T, 3> er, ef;
-        for(unsigned int ii=0; ii<3; ii++){
-            er[ii] = ex[ii]*cosl + ey[ii]*sinl;
-            ef[ii] = ey[ii]*cosl - ex[ii]*sinl;
-        }
+        std::array<T, 3> er = ex*cosl + ey*sinl;
+        std::array<T, 3> ef = ey*cosl - ex*sinl;
 
         // Calculate position
-        std::array<T, 3> R = thames::vector::geometry::mult3<T>(r, er);
+        std::array<T, 3> R = r*er;
 
         // Calculate generalised angular momentum
         T c = pow(pow(mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
@@ -242,9 +241,7 @@ namespace thames::conversions::geqoe{
         T h = sqrt(pow(c, 2.0) - 2.0*pow(r, 2.0)*perturbation.potential(t, R));
 
         // Calculate velocity
-        std::array<T, 3> V;
-        for(unsigned int ii=0; ii<3; ii++)
-            V[ii] = drdt*er[ii] + h/r*ef[ii];
+        std::array<T, 3> V = drdt*er + h/r*ef;
 
         // Construct Cartesian state vector
         std::array<T, 6> RV;
@@ -300,14 +297,11 @@ namespace thames::conversions::geqoe{
         ey[2] = efac*(2.0*q2);
 
         // Calculate orbital basis vectors
-        std::vector<T> er(3), ef(3);
-        for(unsigned int ii=0; ii<3; ii++){
-            er[ii] = ex[ii]*cosl + ey[ii]*sinl;
-            ef[ii] = ey[ii]*cosl - ex[ii]*sinl;
-        }
+        std::vector<T> er = ex*cosl + ey*sinl;
+        std::vector<T> ef = ey*cosl - ex*sinl;
 
         // Calculate position
-        std::vector<T> R = thames::vector::geometry::mult3<T>(r, er);
+        std::vector<T> R = r*er;
 
         // Calculate generalised angular momentum
         T c = pow(pow(mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
@@ -316,9 +310,7 @@ namespace thames::conversions::geqoe{
         T h = sqrt(pow(c, 2.0) - 2.0*pow(r, 2.0)*perturbation.potential(t, R));
 
         // Calculate velocity
-        std::vector<T> V(3);
-        for(unsigned int ii=0; ii<3; ii++)
-            V[ii] = drdt*er[ii] + h/r*ef[ii];
+        std::vector<T> V = drdt*er + h/r*ef;
 
         // Construct Cartesian state vector
         std::vector<T> RV(6);

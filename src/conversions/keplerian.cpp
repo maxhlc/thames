@@ -3,7 +3,10 @@
 #include <vector>
 
 #include "keplerian.h"
+#include "../vector/arithmeticoverloads.h"
 #include "../vector/geometry.h"
+
+using namespace thames::vector::arithmeticoverloads;
 
 namespace thames::conversions::keplerian{
 
@@ -37,10 +40,7 @@ namespace thames::conversions::keplerian{
         T h = thames::vector::geometry::norm3<T>(H);
 
         // Calculate eccentricity vector and magnitude
-        std::array<T, 3> E;
-        std::array<T, 3> Etmp = thames::vector::geometry::cross3<T>(V, H);
-        for(unsigned int ii=0; ii<3; ii++)
-            E[ii] = Etmp[ii]/mu - R[ii]/r;
+        std::array<T, 3> E = thames::vector::geometry::cross3<T>(V, H)/mu - R/r;
         T e = thames::vector::geometry::norm3<T>(E);
 
         // Calculate inclination
@@ -141,10 +141,7 @@ namespace thames::conversions::keplerian{
         T h = thames::vector::geometry::norm3<T>(H);
 
         // Calculate eccentricity vector and magnitude
-        std::vector<T> E(3);
-        std::vector<T> Etmp = thames::vector::geometry::cross3<T>(V, H);
-        for(unsigned int ii=0; ii<3; ii++)
-            E[ii] = Etmp[ii]/mu - R[ii]/r;
+        std::vector<T> E = thames::vector::geometry::cross3<T>(V, H)/mu - R/r;
         T e = thames::vector::geometry::norm3<T>(E);
 
         // Calculate inclination

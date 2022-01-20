@@ -7,9 +7,11 @@
 
 #include "cowell.h"
 #include "../perturbations/baseperturbation.h"
+#include "../vector/arithmeticoverloads.h"
 #include "../vector/geometry.h"
 
 using namespace thames::perturbations::baseperturbation;
+using namespace thames::vector::arithmeticoverloads;
 
 namespace thames::propagators::cowell{
 
@@ -27,12 +29,10 @@ namespace thames::propagators::cowell{
         std::array<T, 3> F = perturbation.acceleration_total(t, R, V);
 
         // Calculate central body acceleration
-        std::array<T, 3> G = thames::vector::geometry::mult3<T>(-mu/pow(r, 3.0), R);
+        std::array<T, 3> G = -mu/pow(r, 3.0)*R;
 
         // Calculate acceleration
-        std::array<T, 3> A;
-        for(unsigned int ii=0; ii<3; ii++)
-            A[ii] = G[ii] + F[ii];
+        std::array<T, 3> A = G + F;
 
         // Store state derivative
         for(unsigned int ii=0; ii<3; ii++){
@@ -56,12 +56,10 @@ namespace thames::propagators::cowell{
         std::vector<T> F = perturbation.acceleration_total(t, R, V);
 
         // Calculate central body acceleration
-        std::vector<T> G = thames::vector::geometry::mult3<T>(-mu/pow(r, 3.0), R);
+        std::vector<T> G = -mu/pow(r, 3.0)*R;
 
         // Calculate acceleration
-        std::vector<T> A(3);
-        for(unsigned int ii=0; ii<3; ii++)
-            A[ii] = G[ii] + F[ii];
+        std::vector<T> A = G + F;
 
         // Store state derivative
         for(unsigned int ii=0; ii<3; ii++){

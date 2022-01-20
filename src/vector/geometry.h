@@ -75,50 +75,6 @@ namespace thames::vector::geometry{
     std::vector<T> slice(const std::vector<T>& v, const unsigned int a, const unsigned int b);
 
     /**
-     * @brief Multiply a vector with three elements with a scalar.
-     * 
-     * @tparam T Numeric type.
-     * @param[in] a Scalar.
-     * @param[in] vec Input vector.
-     * @param[out] vecout Output vector.
-     */
-    template<class T>
-    void mult3(const T a, const std::array<T, 3>& vec, std::array<T, 3>& vecout);
-
-    /**
-     * @brief Multiply a vector with three elements with a scalar.
-     * 
-     * @tparam T Numeric type.
-     * @param[in] a Scalar.
-     * @param[in] vec Input vector.
-     * @return std::array<T, 3> Output vector.
-     */
-    template<class T>
-    std::array<T, 3> mult3(const T a, const std::array<T, 3>& vec);
-
-    /**
-     * @brief Multiply a vector with three elements with a scalar.
-     * 
-     * @tparam T Numeric type.
-     * @param[in] a Scalar.
-     * @param[in] vec Input vector.
-     * @param[out] vecout Output vector.
-     */
-    template<class T>
-    void mult3(const T a, const std::vector<T>& vec, std::vector<T>& vecout);
-
-    /**
-     * @brief Multiply a vector with three elements with a scalar.
-     * 
-     * @tparam T Numeric type.
-     * @param[in] a Scalar.
-     * @param[in] vec Input vector.
-     * @return std::vector<T> Output vector.
-     */
-    template<class T>
-    std::vector<T> mult3(const T a, const std::vector<T>& vec);
-
-    /**
      * @brief Calculate the cross product of two vectors with three elements.
      * 
      * @tparam T Numeric type.
