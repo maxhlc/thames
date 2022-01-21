@@ -3,13 +3,10 @@
 #include <iomanip>
 #include <vector>
 
-#include "types.h"
 #include "constants/constants.h"
 #include "conversions/conversions.h"
 #include "perturbations/perturbations.h"
 #include "propagators/propagators.h"
-
-using namespace thames::types;
 
 int main(){
     std::array<double, 6> RV;

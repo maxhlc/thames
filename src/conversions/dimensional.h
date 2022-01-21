@@ -4,11 +4,18 @@
 #include <array>
 #include <vector>
 
-#include "../types.h"
-
-using namespace thames::types;
-
 namespace thames::conversions::dimensional{
+
+    /**
+     * @brief Structure to contain factors for (non)dimensionalisation of Cartesian states.
+     * 
+     */
+    typedef struct {
+        double time;
+        double length;
+        double velocity;
+        double grav;
+    } DimensionalFactors;
 
     /**
      * @brief Non-dimensionalise Cartesian state.

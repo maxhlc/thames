@@ -18,9 +18,7 @@ var searchData=
   ['propagators_100',['propagators',['../namespacethames_1_1propagators.html',1,'thames']]],
   ['root_101',['root',['../namespacethames_1_1util_1_1root.html',1,'thames::util']]],
   ['thames_102',['thames',['../namespacethames.html',1,'']]],
-  ['time_103',['time',['../structthames_1_1types_1_1DimensionalFactors.html#a33393b950b7fd634aa7c518a72a0b673',1,'thames::types::DimensionalFactors']]],
-  ['types_104',['types',['../namespacethames_1_1types.html',1,'thames']]],
-  ['types_2eh_105',['types.h',['../types_8h.html',1,'']]],
-  ['util_106',['util',['../namespacethames_1_1util.html',1,'thames']]],
-  ['vector_107',['vector',['../namespacethames_1_1vector.html',1,'thames']]]
+  ['time_103',['time',['../structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html#af82107f548b863090d035f7e3534a8d2',1,'thames::conversions::dimensional::DimensionalFactors']]],
+  ['util_104',['util',['../namespacethames_1_1util.html',1,'thames']]],
+  ['vector_105',['vector',['../namespacethames_1_1vector.html',1,'thames']]]
 ];

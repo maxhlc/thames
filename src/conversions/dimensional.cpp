@@ -4,9 +4,6 @@
 
 #include "dimensional.h"
 #include "keplerian.h"
-#include "../types.h"
-
-using namespace thames::types;
 
 namespace thames::conversions::dimensional{
 

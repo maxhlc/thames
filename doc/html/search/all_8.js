@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['length_50',['length',['../structthames_1_1types_1_1DimensionalFactors.html#aa8d055b8fea170fd6879fdd9714978fc',1,'thames::types::DimensionalFactors']]]
+  ['length_50',['length',['../structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html#a4c9b63a6de245002ad587d0b3fd14e02',1,'thames::conversions::dimensional::DimensionalFactors']]]
 ];
