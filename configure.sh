@@ -1,2 +1,2 @@
 #!/bin/bash
-cmake -S . -B ./build/
+cmake -DBUILD_MAIN=OFF -S . -B ./build/
