@@ -1,3 +1,4 @@
+# Build thames static library
 add_library(${PROJECT_NAME} STATIC
             conversions/dimensional.cpp
             conversions/geqoe.cpp
@@ -12,7 +13,3 @@ add_library(${PROJECT_NAME} STATIC
             vector/arithmeticoverloads.cpp
             vector/geometry.cpp
 )
-
-add_executable(main main.cpp)
-
-target_link_libraries(main thames)
