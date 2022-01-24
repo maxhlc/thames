@@ -1,24 +1,4 @@
 var searchData=
 [
-  ['angles_85',['angles',['../namespacethames_1_1util_1_1angles.html',1,'thames::util']]],
-  ['arithmeticoverloads_86',['arithmeticoverloads',['../namespacethames_1_1vector_1_1arithmeticoverloads.html',1,'thames::vector']]],
-  ['baseperturbation_87',['baseperturbation',['../namespacethames_1_1perturbations_1_1baseperturbation.html',1,'thames::perturbations']]],
-  ['constants_88',['constants',['../namespacethames_1_1constants.html',1,'thames']]],
-  ['conversions_89',['conversions',['../namespacethames_1_1conversions.html',1,'thames']]],
-  ['cowell_90',['cowell',['../namespacethames_1_1propagators_1_1cowell.html',1,'thames::propagators']]],
-  ['dimensional_91',['dimensional',['../namespacethames_1_1conversions_1_1dimensional.html',1,'thames::conversions']]],
-  ['earth_92',['earth',['../namespacethames_1_1constants_1_1earth.html',1,'thames::constants']]],
-  ['geometry_93',['geometry',['../namespacethames_1_1vector_1_1geometry.html',1,'thames::vector']]],
-  ['geopotential_94',['geopotential',['../namespacethames_1_1perturbations_1_1geopotential.html',1,'thames::perturbations']]],
-  ['geqoe_95',['geqoe',['../namespacethames_1_1conversions_1_1geqoe.html',1,'thames::conversions::geqoe'],['../namespacethames_1_1propagators_1_1geqoe.html',1,'thames::propagators::geqoe']]],
-  ['thames_96',['THAMES',['../index.html',1,'']]],
-  ['keplerian_97',['keplerian',['../namespacethames_1_1conversions_1_1keplerian.html',1,'thames::conversions']]],
-  ['optimise_98',['optimise',['../namespacethames_1_1util_1_1optimise.html',1,'thames::util']]],
-  ['perturbations_99',['perturbations',['../namespacethames_1_1perturbations.html',1,'thames']]],
-  ['propagators_100',['propagators',['../namespacethames_1_1propagators.html',1,'thames']]],
-  ['root_101',['root',['../namespacethames_1_1util_1_1root.html',1,'thames::util']]],
-  ['thames_102',['thames',['../namespacethames.html',1,'']]],
-  ['time_103',['time',['../structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html#af82107f548b863090d035f7e3534a8d2',1,'thames::conversions::dimensional::DimensionalFactors']]],
-  ['util_104',['util',['../namespacethames_1_1util.html',1,'thames']]],
-  ['vector_105',['vector',['../namespacethames_1_1vector.html',1,'thames']]]
+  ['util_2eh_104',['util.h',['../util_8h.html',1,'']]]
 ];

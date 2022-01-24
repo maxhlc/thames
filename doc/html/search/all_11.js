@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['velocity_107',['velocity',['../structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html#a5b7cbd1601ef799a98a47cc9731d34f9',1,'thames::conversions::dimensional::DimensionalFactors']]]
+  ['_7ebaseperturbation_107',['~BasePerturbation',['../classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html#a12098cf0e36796d336233bfab8397cdc',1,'thames::perturbations::baseperturbation::BasePerturbation']]]
 ];

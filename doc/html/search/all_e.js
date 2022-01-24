@@ -1,6 +1,25 @@
 var searchData=
 [
-  ['slice_82',['slice',['../namespacethames_1_1vector_1_1geometry.html#a6ae5b14aaf153e00fb48f8ee4a606ad5',1,'thames::vector::geometry::slice(const std::array&lt; T, Si &gt; &amp;v, const unsigned int a, const unsigned int b)'],['../namespacethames_1_1vector_1_1geometry.html#a92fad781131530384d213322ba308e92',1,'thames::vector::geometry::slice(const std::vector&lt; T &gt; &amp;v, const unsigned int a, const unsigned int b)']]],
-  ['slice_3c_20double_20_3e_83',['slice&lt; double &gt;',['../namespacethames_1_1vector_1_1geometry.html#aad00fc9e7547bb1de07a6538b93a0f39',1,'thames::vector::geometry']]],
-  ['slice_3c_20double_2c_206_2c_203_20_3e_84',['slice&lt; double, 6, 3 &gt;',['../namespacethames_1_1vector_1_1geometry.html#ad93014cd7aa26136a51084fc4fa4324b',1,'thames::vector::geometry']]]
+  ['angles_82',['angles',['../namespacethames_1_1util_1_1angles.html',1,'thames::util']]],
+  ['arithmeticoverloads_83',['arithmeticoverloads',['../namespacethames_1_1vector_1_1arithmeticoverloads.html',1,'thames::vector']]],
+  ['baseperturbation_84',['baseperturbation',['../namespacethames_1_1perturbations_1_1baseperturbation.html',1,'thames::perturbations']]],
+  ['constants_85',['constants',['../namespacethames_1_1constants.html',1,'thames']]],
+  ['conversions_86',['conversions',['../namespacethames_1_1conversions.html',1,'thames']]],
+  ['cowell_87',['cowell',['../namespacethames_1_1propagators_1_1cowell.html',1,'thames::propagators']]],
+  ['dimensional_88',['dimensional',['../namespacethames_1_1conversions_1_1dimensional.html',1,'thames::conversions']]],
+  ['earth_89',['earth',['../namespacethames_1_1constants_1_1earth.html',1,'thames::constants']]],
+  ['geometry_90',['geometry',['../namespacethames_1_1vector_1_1geometry.html',1,'thames::vector']]],
+  ['geopotential_91',['geopotential',['../namespacethames_1_1perturbations_1_1geopotential.html',1,'thames::perturbations']]],
+  ['geqoe_92',['geqoe',['../namespacethames_1_1conversions_1_1geqoe.html',1,'thames::conversions::geqoe'],['../namespacethames_1_1propagators_1_1geqoe.html',1,'thames::propagators::geqoe']]],
+  ['thames_93',['THAMES',['../index.html',1,'']]],
+  ['keplerian_94',['keplerian',['../namespacethames_1_1conversions_1_1keplerian.html',1,'thames::conversions']]],
+  ['optimise_95',['optimise',['../namespacethames_1_1util_1_1optimise.html',1,'thames::util']]],
+  ['perturbations_96',['perturbations',['../namespacethames_1_1perturbations.html',1,'thames']]],
+  ['propagators_97',['propagators',['../namespacethames_1_1propagators.html',1,'thames']]],
+  ['root_98',['root',['../namespacethames_1_1util_1_1root.html',1,'thames::util']]],
+  ['thames_99',['thames',['../namespacethames.html',1,'']]],
+  ['thames_2eh_100',['thames.h',['../thames_8h.html',1,'']]],
+  ['time_101',['time',['../structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html#af82107f548b863090d035f7e3534a8d2',1,'thames::conversions::dimensional::DimensionalFactors']]],
+  ['util_102',['util',['../namespacethames_1_1util.html',1,'thames']]],
+  ['vector_103',['vector',['../namespacethames_1_1vector.html',1,'thames']]]
 ];
