@@ -3,10 +3,7 @@
 #include <iomanip>
 #include <vector>
 
-#include "constants/constants.h"
-#include "conversions/conversions.h"
-#include "perturbations/perturbations.h"
-#include "propagators/propagators.h"
+#include "thames.h"
 
 int main(){
     std::array<double, 6> RV;
