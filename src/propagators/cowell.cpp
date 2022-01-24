@@ -22,7 +22,7 @@ namespace thames::propagators::cowell{
         std::array<T, 3> V = {RV[3], RV[4], RV[5]};
 
         // Calculate range
-        T r = thames::vector::geometry::norm3<T>(R);
+        T r = thames::vector::geometry::norm3(R);
 
         // Calculate perturbing acceleration
         std::array<T, 3> F = perturbation.acceleration_total(t, R, V);
@@ -48,7 +48,7 @@ namespace thames::propagators::cowell{
         std::vector<T> V = {RV[3], RV[4], RV[5]};
 
         // Calculate range
-        T r = thames::vector::geometry::norm3<T>(R);
+        T r = thames::vector::geometry::norm3(R);
 
         // Calculate perturbing acceleration
         std::vector<T> F = perturbation.acceleration_total(t, R, V);
@@ -70,8 +70,8 @@ namespace thames::propagators::cowell{
     template<class T>
     std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T mu, const BasePerturbation<T>& perturbation, T atol, T rtol){
         // Declare derivative function wrapper
-        auto derivative_param = [&](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T time){
-            derivative<double>(x, dxdt, time, mu, perturbation);
+        std::function<void (const std::array<T, 6>&, std::array<T, 6>&, const T)> derivative_param = [mu, &perturbation](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T time){
+            derivative(x, dxdt, time, mu, perturbation);
         };
 
         // Declare stepper
@@ -89,8 +89,8 @@ namespace thames::propagators::cowell{
     template<class T>
     std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> RV, T mu, const BasePerturbation<T>& perturbation, T atol, T rtol){
         // Declare derivative function wrapper
-        auto derivative_param = [&](const std::vector<T>& x, std::vector<T>& dxdt, const T time){
-            derivative<double>(x, dxdt, time, mu, perturbation);
+        std::function<void (const std::vector<T>&, std::vector<T>&, const T)> derivative_param = [mu, &perturbation](const std::vector<T>& x, std::vector<T>& dxdt, const T time){
+            derivative(x, dxdt, time, mu, perturbation);
         };
 
         // Declare stepper

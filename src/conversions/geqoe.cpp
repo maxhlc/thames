@@ -1,5 +1,6 @@
 #include <array>
 #include <cmath>
+#include <functional>
 #include <vector>
 
 #include "geqoe.h"
@@ -21,12 +22,12 @@ namespace thames::conversions::geqoe{
         std::array<T, 3> V = {RV[3], RV[4], RV[5]};
 
         // Calculate range and range rate
-        T r = thames::vector::geometry::norm3<T>(R);
-        T drdt = thames::vector::geometry::dot3<T>(R, V)/r;
+        T r = thames::vector::geometry::norm3(R);
+        T drdt = thames::vector::geometry::dot3(R, V)/r;
 
         // Calculate the angular momentum
-        std::array<T, 3> H = thames::vector::geometry::cross3<T>(R, V);
-        T h = thames::vector::geometry::norm3<T>(H);
+        std::array<T, 3> H = thames::vector::geometry::cross3(R, V);
+        T h = thames::vector::geometry::norm3(H);
 
         // Calculate the effective potential energy
         T ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + perturbation.potential(t, R);
@@ -38,7 +39,7 @@ namespace thames::conversions::geqoe{
         T nu = pow(-2.0*e, 1.5)/mu;
 
         // Calculate Keplerian elements, and extract angles
-        std::array<T, 6> keplerian = thames::conversions::keplerian::cartesian_to_keplerian<T>(RV, mu);
+        std::array<T, 6> keplerian = thames::conversions::keplerian::cartesian_to_keplerian(RV, mu);
         T inc = keplerian[2];
         T raan = keplerian[3];
 
@@ -48,20 +49,23 @@ namespace thames::conversions::geqoe{
 
         // Calculate equinocital reference frame unit vectors
         T efac = 1.0/(1.0 + pow(q1, 2.0) + pow(q2, 2.0));
-        std::array<T, 3> ex, ey;
-        ex[0] = efac*(1.0 - pow(q1, 2.0) + pow(q2, 2.0));
-        ex[1] = efac*(2.0*q1*q2);
-        ex[2] = efac*(-2.0*q1);
-        ey[0] = efac*(2.0*q1*q2);
-        ey[1] = efac*(1.0 + pow(q1, 2.0) - pow(q2, 2.0));
-        ey[2] = efac*(2.0*q2);
+        std::array<T, 3> ex = {
+            efac*(1.0 - pow(q1, 2.0) + pow(q2, 2.0)),
+            efac*(2.0*q1*q2),
+            efac*(-2.0*q1)
+        };
+        std::array<T, 3> ey = {
+            efac*(2.0*q1*q2),
+            efac*(1.0 + pow(q1, 2.0) - pow(q2, 2.0)),
+            efac*(2.0*q2)
+        };
 
         // Calculate radial unit vector
         std::array<T, 3> er = R/r;
 
         // Calculate trig of the true longitude
-        T cl = thames::vector::geometry::dot3<T>(er, ex);
-        T sl = thames::vector::geometry::dot3<T>(er, ey);
+        T cl = thames::vector::geometry::dot3(er, ex);
+        T sl = thames::vector::geometry::dot3(er, ey);
 
         // Calculate the generalised angular momentum
         T c = sqrt(2.0*pow(r, 2.0)*ueff);
@@ -87,13 +91,14 @@ namespace thames::conversions::geqoe{
         T L = atan2(S, C) + (C*p1 - S*p2)/(mu + c*w);
 
         // Construct GEqOE state vector
-        std::array<T, 6> geqoe;
-        geqoe[0] = nu;
-        geqoe[1] = p1;
-        geqoe[2] = p2;
-        geqoe[3] = L;
-        geqoe[4] = q1;
-        geqoe[5] = q2;
+        std::array<T, 6> geqoe = {
+            nu,
+            p1,
+            p2,
+            L,
+            q1,
+            q2
+        };
 
         // Return GEqOE state vector
         return geqoe;
@@ -107,12 +112,12 @@ namespace thames::conversions::geqoe{
         std::vector<T> V = {RV[3], RV[4], RV[5]};
 
         // Calculate range and range rate
-        T r = thames::vector::geometry::norm3<T>(R);
-        T drdt = thames::vector::geometry::dot3<T>(R, V)/r;
+        T r = thames::vector::geometry::norm3(R);
+        T drdt = thames::vector::geometry::dot3(R, V)/r;
 
         // Calculate the angular momentum
-        std::vector<T> H = thames::vector::geometry::cross3<T>(R, V);
-        T h = thames::vector::geometry::norm3<T>(H);
+        std::vector<T> H = thames::vector::geometry::cross3(R, V);
+        T h = thames::vector::geometry::norm3(H);
 
         // Calculate the effective potential energy
         T ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + perturbation.potential(t, R);
@@ -124,7 +129,7 @@ namespace thames::conversions::geqoe{
         T nu = pow(-2.0*e, 1.5)/mu;
 
         // Calculate Keplerian elements, and extract angles
-        std::vector<T> keplerian = thames::conversions::keplerian::cartesian_to_keplerian<T>(RV, mu);
+        std::vector<T> keplerian = thames::conversions::keplerian::cartesian_to_keplerian(RV, mu);
         T inc = keplerian[2];
         T raan = keplerian[3];
 
@@ -134,20 +139,23 @@ namespace thames::conversions::geqoe{
 
         // Calculate equinocital reference frame unit vectors
         T efac = 1.0/(1.0 + pow(q1, 2.0) + pow(q2, 2.0));
-        std::vector<T> ex(3), ey(3);
-        ex[0] = efac*(1.0 - pow(q1, 2.0) + pow(q2, 2.0));
-        ex[1] = efac*(2.0*q1*q2);
-        ex[2] = efac*(-2.0*q1);
-        ey[0] = efac*(2.0*q1*q2);
-        ey[1] = efac*(1.0 + pow(q1, 2.0) - pow(q2, 2.0));
-        ey[2] = efac*(2.0*q2);
+        std::vector<T> ex = {
+            efac*(1.0 - pow(q1, 2.0) + pow(q2, 2.0)),
+            efac*(2.0*q1*q2),
+            efac*(-2.0*q1)
+        };
+        std::vector<T> ey = {
+            efac*(2.0*q1*q2),
+            efac*(1.0 + pow(q1, 2.0) - pow(q2, 2.0)),
+            efac*(2.0*q2)
+        };
 
         // Calculate radial unit vector
         std::vector<T> er = R/r;
 
         // Calculate trig of the true longitude
-        T cl = thames::vector::geometry::dot3<T>(er, ex);
-        T sl = thames::vector::geometry::dot3<T>(er, ey);
+        T cl = thames::vector::geometry::dot3(er, ex);
+        T sl = thames::vector::geometry::dot3(er, ey);
 
         // Calculate the generalised angular momentum
         T c = sqrt(2.0*pow(r, 2.0)*ueff);
@@ -173,13 +181,14 @@ namespace thames::conversions::geqoe{
         T L = atan2(S, C) + (C*p1 - S*p2)/(mu + c*w);
 
         // Construct GEqOE state vector
-        std::vector<T> geqoe(6);
-        geqoe[0] = nu;
-        geqoe[1] = p1;
-        geqoe[2] = p2;
-        geqoe[3] = L;
-        geqoe[4] = q1;
-        geqoe[5] = q2;
+        std::vector<T> geqoe = {
+            nu,
+            p1,
+            p2,
+            L,
+            q1,
+            q2
+        };
 
         // Return GEqOE state vector
         return geqoe;
@@ -197,9 +206,9 @@ namespace thames::conversions::geqoe{
         T q2 = geqoe[5];
 
         // Calculate generalised eccentric longitude
-        auto fk = [p1, p2, L](T k) {return (k + p1*cos(k) - p2*sin(k) - L);};
-        auto dfk = [p1, p2, L](T k) {return (1 - p1*sin(k) - p2*cos(k));};
-        T k = thames::util::root::newton_raphson<T>(fk, dfk, L);
+        std::function<double (double)> fk = [p1, p2, L](T k) {return (k + p1*cos(k) - p2*sin(k) - L);};
+        std::function<double (double)> dfk = [p1, p2, L](T k) {return (1 - p1*sin(k) - p2*cos(k));};
+        T k = thames::util::root::newton_raphson(fk, dfk, L);
         T sink = sin(k);
         T cosk = cos(k);
 
@@ -217,13 +226,16 @@ namespace thames::conversions::geqoe{
 
         // Calculate equinocital reference frame unit vectors
         T efac = 1.0/(1.0 + pow(q1, 2.0) + pow(q2, 2.0));
-        std::array<T, 3> ex, ey;
-        ex[0] = efac*(1.0 - pow(q1, 2.0) + pow(q2, 2.0));
-        ex[1] = efac*(2.0*q1*q2);
-        ex[2] = efac*(-2.0*q1);
-        ey[0] = efac*(2.0*q1*q2);
-        ey[1] = efac*(1.0 + pow(q1, 2.0) - pow(q2, 2.0));
-        ey[2] = efac*(2.0*q2);
+        std::array<T, 3> ex = {
+            efac*(1.0 - pow(q1, 2.0) + pow(q2, 2.0)),
+            efac*(2.0*q1*q2),
+            efac*(-2.0*q1)
+        };
+        std::array<T, 3> ey = {
+            efac*(2.0*q1*q2),
+            efac*(1.0 + pow(q1, 2.0) - pow(q2, 2.0)),
+            efac*(2.0*q2)
+        };
 
         // Calculate orbital basis vectors
         std::array<T, 3> er = ex*cosl + ey*sinl;
@@ -242,13 +254,14 @@ namespace thames::conversions::geqoe{
         std::array<T, 3> V = drdt*er + h/r*ef;
 
         // Construct Cartesian state vector
-        std::array<T, 6> RV;
-        RV[0] = R[0];
-        RV[1] = R[1];
-        RV[2] = R[2];
-        RV[3] = V[0];
-        RV[4] = V[1];
-        RV[5] = V[2];
+        std::array<T, 6> RV = {
+            R[0],
+            R[1],
+            R[2],
+            V[0],
+            V[1],
+            V[2]
+        };
 
         // Return Cartesian state vector
         return RV;
@@ -256,7 +269,7 @@ namespace thames::conversions::geqoe{
     template std::array<double, 6> geqoe_to_cartesian<double>(const double&, const std::array<double, 6>&, const double&, const BasePerturbation<double>&);
 
     template<class T>
-    std::vector<T> geqoe_to_cartesian(const T &t, const std::vector<T> &geqoe, const T &mu, const BasePerturbation<T> &perturbation){
+    std::vector<T> geqoe_to_cartesian(const T& t, const std::vector<T>& geqoe, const T& mu, const BasePerturbation<T>& perturbation){
         // Extract elements
         T nu = geqoe[0];
         T p1 = geqoe[1];
@@ -266,9 +279,9 @@ namespace thames::conversions::geqoe{
         T q2 = geqoe[5];
 
         // Calculate generalised eccentric longitude
-        auto fk = [p1, p2, L](T k) {return (k + p1*cos(k) - p2*sin(k) - L);};
-        auto dfk = [p1, p2, L](T k) {return (1 - p1*sin(k) - p2*cos(k));};
-        T k = thames::util::root::newton_raphson<T>(fk, dfk, L);
+        std::function<double (double)> fk = [p1, p2, L](T k) {return (k + p1*cos(k) - p2*sin(k) - L);};
+        std::function<double (double)> dfk = [p1, p2, L](T k) {return (1 - p1*sin(k) - p2*cos(k));};
+        T k = thames::util::root::newton_raphson(fk, dfk, L);
         T sink = sin(k);
         T cosk = cos(k);
 
@@ -286,13 +299,16 @@ namespace thames::conversions::geqoe{
 
         // Calculate equinocital reference frame unit vectors
         T efac = 1.0/(1.0 + pow(q1, 2.0) + pow(q2, 2.0));
-        std::vector<T> ex(3), ey(3);
-        ex[0] = efac*(1.0 - pow(q1, 2.0) + pow(q2, 2.0));
-        ex[1] = efac*(2.0*q1*q2);
-        ex[2] = efac*(-2.0*q1);
-        ey[0] = efac*(2.0*q1*q2);
-        ey[1] = efac*(1.0 + pow(q1, 2.0) - pow(q2, 2.0));
-        ey[2] = efac*(2.0*q2);
+        std::vector<T> ex = {
+            efac*(1.0 - pow(q1, 2.0) + pow(q2, 2.0)),
+            efac*(2.0*q1*q2),
+            efac*(-2.0*q1)
+        };
+        std::vector<T> ey = {
+            efac*(2.0*q1*q2),
+            efac*(1.0 + pow(q1, 2.0) - pow(q2, 2.0)),
+            efac*(2.0*q2)
+        };
 
         // Calculate orbital basis vectors
         std::vector<T> er = ex*cosl + ey*sinl;
@@ -311,13 +327,14 @@ namespace thames::conversions::geqoe{
         std::vector<T> V = drdt*er + h/r*ef;
 
         // Construct Cartesian state vector
-        std::vector<T> RV(6);
-        RV[0] = R[0];
-        RV[1] = R[1];
-        RV[2] = R[2];
-        RV[3] = V[0];
-        RV[4] = V[1];
-        RV[5] = V[2];
+        std::vector<T> RV = {
+            R[0],
+            R[1],
+            R[2],
+            V[0],
+            V[1],
+            V[2]
+        };
 
         // Return Cartesian state vector
         return RV;

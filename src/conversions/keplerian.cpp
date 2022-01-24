@@ -17,47 +17,42 @@ namespace thames::conversions::keplerian{
         std::array<T, 3> V = {RV[3], RV[4], RV[5]};
         
         // Declare units vectors
-        const std::array<T, 3> I = {1.0, 0.0, 0.0};
-        const std::array<T, 3> J = {0.0, 1.0, 0.0};
         const std::array<T, 3> K = {0.0, 0.0, 1.0};
 
         // Set constants
         const double atol = 1e-12;
 
-        // Declare Keplerian elements vector
-        std::array<T, 6> keplerian;
-
         // Calculate state magnitudes
-        T r = thames::vector::geometry::norm3<T>(R);
-        T v = thames::vector::geometry::norm3<T>(V);
+        T r = thames::vector::geometry::norm3(R);
+        T v = thames::vector::geometry::norm3(V);
 
         // Calculate semi-major axis
         T sma = 1.0/(2.0/r - pow(v, 2.0)/mu);
 
         // Calculate angular momentum vector and magnitude
-        std::array<T, 3> H = thames::vector::geometry::cross3<T>(R, V);
-        T h = thames::vector::geometry::norm3<T>(H);
+        std::array<T, 3> H = thames::vector::geometry::cross3(R, V);
+        T h = thames::vector::geometry::norm3(H);
 
         // Calculate eccentricity vector and magnitude
-        std::array<T, 3> E = thames::vector::geometry::cross3<T>(V, H)/mu - R/r;
-        T e = thames::vector::geometry::norm3<T>(E);
+        std::array<T, 3> E = thames::vector::geometry::cross3(V, H)/mu - R/r;
+        T e = thames::vector::geometry::norm3(E);
 
         // Calculate inclination
-        T inc = acos(thames::vector::geometry::dot3<T>(K, H)/h);
+        T inc = acos(H[2]/h);
 
         // Check for circular and equatorial orbits
         bool e_near = fabs(e) < atol;
         bool inc_near = fabs(inc) < atol;
 
         // Calculate right ascension of the ascending node
-        std::array<T, 3> N = thames::vector::geometry::cross3<T>(K, H);
-        T n = thames::vector::geometry::norm3<T>(N);
+        std::array<T, 3> N = thames::vector::geometry::cross3(K, H);
+        T n = thames::vector::geometry::norm3(N);
         T raan;
         if (inc_near) {
             raan = 0.0;
         } else {
-            raan = acos(thames::vector::geometry::dot3<T>(I, N)/n);
-            if(thames::vector::geometry::dot3<T>(J, N) < 0.0){
+            raan = acos(N[0]/n);
+            if(N[1] < 0.0){
                 raan = 2.0*M_PI - raan;
             }
         }
@@ -72,8 +67,8 @@ namespace thames::conversions::keplerian{
                 aop = 2.0*M_PI - aop;
             }
         } else {
-            aop = acos(thames::vector::geometry::dot3<T>(N, E)/(n*e));
-            if(thames::vector::geometry::dot3<T>(K, E) < 0.0){
+            aop = acos(thames::vector::geometry::dot3(N, E)/(n*e));
+            if(E[2] < 0.0){
                 aop = 2.0*M_PI - aop;
             }
         }
@@ -86,24 +81,26 @@ namespace thames::conversions::keplerian{
                 ta = 2.0*M_PI - ta;
             }
         } else if (e_near) {
-            ta = acos(thames::vector::geometry::dot3<T>(N, R)/(n*r));
+            ta = acos(thames::vector::geometry::dot3(N, R)/(n*r));
             if (R[2] < 0.0) {
                 ta = 2.0*M_PI - ta;
             }
         } else {
-            ta = acos(thames::vector::geometry::dot3<T>(E, R)/(e*r));
-            if (thames::vector::geometry::dot3<T>(R, V) < 0.0) {
+            ta = acos(thames::vector::geometry::dot3(E, R)/(e*r));
+            if (thames::vector::geometry::dot3(R, V) < 0.0) {
                 ta = 2.0*M_PI - ta;
             }
         }
 
         // Store elements in the Keplerian elements vector
-        keplerian[0] = sma;
-        keplerian[1] = e;
-        keplerian[2] = inc;
-        keplerian[3] = raan;
-        keplerian[4] = aop;
-        keplerian[5] = ta;
+        std::array<T, 6> keplerian = {
+            sma,
+            e,
+            inc,
+            raan,
+            aop,
+            ta
+        };
 
         // Return Keplerian elements vector
         return keplerian;
@@ -117,47 +114,42 @@ namespace thames::conversions::keplerian{
         std::vector<T> V = {RV[3], RV[4], RV[5]};
         
         // Declare units vectors
-        const std::vector<T> I = {1.0, 0.0, 0.0};
-        const std::vector<T> J = {0.0, 1.0, 0.0};
         const std::vector<T> K = {0.0, 0.0, 1.0};
 
         // Set constants
         const double atol = 1e-12;
 
-        // Declare Keplerian elements vector
-        std::vector<T> keplerian(6);
-
         // Calculate state magnitudes
-        T r = thames::vector::geometry::norm3<T>(R);
-        T v = thames::vector::geometry::norm3<T>(V);
+        T r = thames::vector::geometry::norm3(R);
+        T v = thames::vector::geometry::norm3(V);
 
         // Calculate semi-major axis
         T sma = 1.0/(2.0/r - pow(v, 2.0)/mu);
 
         // Calculate angular momentum vector and magnitude
-        std::vector<T> H = thames::vector::geometry::cross3<T>(R, V);
-        T h = thames::vector::geometry::norm3<T>(H);
+        std::vector<T> H = thames::vector::geometry::cross3(R, V);
+        T h = thames::vector::geometry::norm3(H);
 
         // Calculate eccentricity vector and magnitude
-        std::vector<T> E = thames::vector::geometry::cross3<T>(V, H)/mu - R/r;
-        T e = thames::vector::geometry::norm3<T>(E);
+        std::vector<T> E = thames::vector::geometry::cross3(V, H)/mu - R/r;
+        T e = thames::vector::geometry::norm3(E);
 
         // Calculate inclination
-        T inc = acos(thames::vector::geometry::dot3<T>(K, H)/h);
+        T inc = acos(H[2]/h);
 
         // Check for circular and equatorial orbits
         bool e_near = fabs(e) < atol;
         bool inc_near = fabs(inc) < atol;
 
         // Calculate right ascension of the ascending node
-        std::vector<T> N = thames::vector::geometry::cross3<T>(K, H);
-        T n = thames::vector::geometry::norm3<T>(N);
+        std::vector<T> N = thames::vector::geometry::cross3(K, H);
+        T n = thames::vector::geometry::norm3(N);
         T raan;
         if (inc_near) {
             raan = 0.0;
         } else {
-            raan = acos(thames::vector::geometry::dot3<T>(I, N)/n);
-            if(thames::vector::geometry::dot3<T>(J, N) < 0.0){
+            raan = acos(N[0]/n);
+            if(N[1] < 0.0){
                 raan = 2.0*M_PI - raan;
             }
         }
@@ -172,8 +164,8 @@ namespace thames::conversions::keplerian{
                 aop = 2.0*M_PI - aop;
             }
         } else {
-            aop = acos(thames::vector::geometry::dot3<T>(N, E)/(n*e));
-            if(thames::vector::geometry::dot3<T>(K, E) < 0.0){
+            aop = acos(thames::vector::geometry::dot3(N, E)/(n*e));
+            if(E[2] < 0.0){
                 aop = 2.0*M_PI - aop;
             }
         }
@@ -186,24 +178,26 @@ namespace thames::conversions::keplerian{
                 ta = 2.0*M_PI - ta;
             }
         } else if (e_near) {
-            ta = acos(thames::vector::geometry::dot3<T>(N, R)/(n*r));
+            ta = acos(thames::vector::geometry::dot3(N, R)/(n*r));
             if (R[2] < 0.0) {
                 ta = 2.0*M_PI - ta;
             }
         } else {
-            ta = acos(thames::vector::geometry::dot3<T>(E, R)/(e*r));
-            if (thames::vector::geometry::dot3<T>(R, V) < 0.0) {
+            ta = acos(thames::vector::geometry::dot3(E, R)/(e*r));
+            if (thames::vector::geometry::dot3(R, V) < 0.0) {
                 ta = 2.0*M_PI - ta;
             }
         }
 
         // Store elements in the Keplerian elements vector
-        keplerian[0] = sma;
-        keplerian[1] = e;
-        keplerian[2] = inc;
-        keplerian[3] = raan;
-        keplerian[4] = aop;
-        keplerian[5] = ta;
+        std::vector<T> keplerian = {
+            sma,
+            e,
+            inc,
+            raan,
+            aop,
+            ta
+        };
 
         // Return Keplerian elements vector
         return keplerian;
@@ -233,16 +227,18 @@ namespace thames::conversions::keplerian{
         T r = sma*(1.0 - pow(e, 2.0))/(1.0 + e*cta);
 
         // Calculate position and velocity vectors in the orbital frame
-        std::array<T, 3> o;
-        o[0] = r*cta;
-        o[1] = r*sta;
-        o[2] = 0.0;
+        std::array<T, 3> o = {
+            r*cta,
+            r*sta,
+            0.0
+        };
 
-        std::array<T, 3> dodt;
         T fac = sqrt(mu*sma)/r;
-        dodt[0] = -fac*sin(E);
-        dodt[1] = fac*sqrt(1.0 - pow(e, 2.0))*cos(E);
-        dodt[2] = 0.0;
+        std::array<T, 3> dodt = {
+            -fac*sin(E),
+            fac*sqrt(1.0 - pow(e, 2.0))*cos(E),
+            0.0
+        };
 
         // Calculate rotation angles
         T ang[3][2];
@@ -288,16 +284,18 @@ namespace thames::conversions::keplerian{
         T r = sma*(1.0 - pow(e, 2.0))/(1.0 + e*cta);
 
         // Calculate position and velocity vectors in the orbital frame
-        std::vector<T> o(3);
-        o[0] = r*cta;
-        o[1] = r*sta;
-        o[2] = 0.0;
+        std::vector<T> o = {
+            r*cta,
+            r*sta,
+            0.0
+        };
 
-        std::vector<T> dodt(3);
         T fac = sqrt(mu*sma)/r;
-        dodt[0] = -fac*sin(E);
-        dodt[1] = fac*sqrt(1.0 - pow(e, 2.0))*cos(E);
-        dodt[2] = 0.0;
+        std::vector<T> dodt = {
+            -fac*sin(E),
+            fac*sqrt(1.0 - pow(e, 2.0))*cos(E),
+            0.0
+        };
 
         // Calculate rotation angles
         T ang[3][2];

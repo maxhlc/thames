@@ -20,7 +20,7 @@ namespace thames::util::root{
     template double golden_section_search<double>(std::function<double (double)>, double, double, double);
 
     template<class T>
-    T newton_raphson(const std::function<T (T)> &func, const std::function<T (T)> &dfunc, T xn, T tol){
+    T newton_raphson(const std::function<T (T)>& func, const std::function<T (T)>& dfunc, T xn, T tol){
         // Declare approximation variable
         T xn1;
 

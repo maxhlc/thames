@@ -20,17 +20,18 @@ namespace thames::perturbations::geopotential{
         T x = R[0], y = R[1], z = R[2];
 
         // Calculate range
-        T r = thames::vector::geometry::norm3<T>(R);
+        T r = thames::vector::geometry::norm3(R);
 
         // Precompute factors
         T J2_fac1 = -1.5*m_mu*m_J2*pow(m_radius, 2.0)/pow(r, 5.0);
         T J2_fac2 = 5.0*pow(z, 2.0)/pow(r, 2.0);
 
         // Declare and calculate perturbing acceleration vector
-        std::array<T, 3> A;
-        A[0] =  J2_fac1*x*(1.0 - J2_fac2),
-        A[1] =  J2_fac1*y*(1.0 - J2_fac2),
-        A[2] =  J2_fac1*z*(3.0 - J2_fac2);
+        std::array<T, 3> A = {
+            J2_fac1*x*(1.0 - J2_fac2),
+            J2_fac1*y*(1.0 - J2_fac2),
+            J2_fac1*z*(3.0 - J2_fac2)
+        };
 
         // Return perturbing acceleration vector
         return A;
@@ -42,17 +43,18 @@ namespace thames::perturbations::geopotential{
         T x = R[0], y = R[1], z = R[2];
 
         // Calculate range
-        T r = thames::vector::geometry::norm3<T>(R);
+        T r = thames::vector::geometry::norm3(R);
 
         // Precompute factors
         T J2_fac1 = -1.5*m_mu*m_J2*pow(m_radius, 2.0)/pow(r, 5.0);
         T J2_fac2 = 5.0*pow(z, 2.0)/pow(r, 2.0);
 
         // Declare and calculate perturbing acceleration vector
-        std::vector<T> A(3);
-        A[0] =  J2_fac1*x*(1.0 - J2_fac2),
-        A[1] =  J2_fac1*y*(1.0 - J2_fac2),
-        A[2] =  J2_fac1*z*(3.0 - J2_fac2);
+        std::vector<T> A = {
+            J2_fac1*x*(1.0 - J2_fac2),
+            J2_fac1*y*(1.0 - J2_fac2),
+            J2_fac1*z*(3.0 - J2_fac2)
+        };
 
         // Return perturbing acceleration vector
         return A;
@@ -64,7 +66,7 @@ namespace thames::perturbations::geopotential{
         T z = R[2];
 
         // Calculate range
-        T r = thames::vector::geometry::norm3<T>(R);
+        T r = thames::vector::geometry::norm3(R);
 
         // Calculate cosine of latitude
         T cphi = z/r;
@@ -82,7 +84,7 @@ namespace thames::perturbations::geopotential{
         T z = R[2];
 
         // Calculate range
-        T r = thames::vector::geometry::norm3<T>(R);
+        T r = thames::vector::geometry::norm3(R);
 
         // Calculate cosine of latitude
         T cphi = z/r;
