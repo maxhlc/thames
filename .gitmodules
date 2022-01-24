@@ -1,0 +1,3 @@
+[submodule "external/smart-uq"]
+	path = external/smart-uq
+	url = https://github.com/strath-ace/smart-uq
