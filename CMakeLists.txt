@@ -16,8 +16,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 if(THAMES_USE_SMARTUQ)
     # Force SMART-UQ Release Build
     set(CMAKE_BUILD_TYPE "Release")
-    # Force SMART-UQ to not build main file
-    set(BUILD_MAIN OFF CACHE INTERNAL "" FORCE)
     # Add SMART-UQ directory
     add_subdirectory(external/smart-uq external/smart-uq)
     # Add flag to include SMART-UQ
