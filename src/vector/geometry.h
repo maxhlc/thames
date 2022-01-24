@@ -49,32 +49,6 @@ namespace thames::vector::geometry{
     T norm3(const std::vector<T>& a);
 
     /**
-     * @brief Function to return the slice of a vector.
-     * 
-     * @tparam T Numeric type.
-     * @tparam Si Input size.
-     * @tparam So Output size.
-     * @param[in] v Input vector for slicing.
-     * @param[in] a Lower index.
-     * @param[in] b Upper index.
-     * @return std::array<T, So> Output vector which has been sliced.
-     */
-    template<class T, const std::size_t Si, const std::size_t So>
-    std::array<T, So> slice(const std::array<T, Si>& v, const unsigned int a, const unsigned int b);
-
-    /**
-     * @brief Function to return the slice of a vector.
-     * 
-     * @tparam T Numeric type.
-     * @param[in] v Input vector for slicing.
-     * @param[in] a Lower index.
-     * @param[in] b Upper index.
-     * @return std::vector<T> Output vector which has been sliced.
-     */
-    template<class T>
-    std::vector<T> slice(const std::vector<T>& v, const unsigned int a, const unsigned int b);
-
-    /**
      * @brief Calculate the cross product of two vectors with three elements.
      * 
      * @tparam T Numeric type.

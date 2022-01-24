@@ -33,36 +33,6 @@ namespace thames::vector::geometry{
     }
     template double norm3<double>(const std::vector<double>&);
 
-    template<class T, const std::size_t Si, const std::size_t So>
-    std::array<T, So> slice(const std::array<T, Si>& v, const unsigned int a, const unsigned int b){
-        // Declare output vector
-        std::array<T, So> vres;
-
-        // Iterate through slice indices and populate output vector
-        for(unsigned int ii=a; ii<=b; ii++){
-            vres[ii-a] = v[ii];
-        }
-
-        // Return output vector
-        return vres;
-    }
-    template std::array<double, 3> slice<double, 6, 3>(const std::array<double, 6>&, const unsigned int, const unsigned int);
-
-    template<class T>
-    std::vector<T> slice(const std::vector<T>& v, const unsigned int a, const unsigned int b){
-        // Declare output vector
-        std::vector<T> vres(b-a+1);
-
-        // Iterate through slice indices and populate output vector
-        for(unsigned int ii=a; ii<=b; ii++){
-            vres[ii-a] = v[ii];
-        }
-
-        // Return output vector
-        return vres;
-    }
-    template std::vector<double> slice<double>(const std::vector<double>&, const unsigned int, const unsigned int);
-
     template<class T>
     void cross3(const std::array<T, 3>& a, const std::array<T, 3>& b, std::array<T, 3>& vecout){
         // Calculate cross product

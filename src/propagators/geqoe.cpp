@@ -26,9 +26,8 @@ namespace thames::propagators::geqoe{
 
         // Calculate Cartesian state and extract vectors
         std::array<T, 6> RV = thames::conversions::geqoe::geqoe_to_cartesian<T>(t, geqoe, mu, perturbation);
-        std::array<T, 3> R, V;
-        R = thames::vector::geometry::slice<T, 6, 3>(RV, 0, 2);
-        V = thames::vector::geometry::slice<T, 6, 3>(RV, 3, 5);
+        std::array<T, 3> R = {RV[0], RV[1], RV[2]};
+        std::array<T, 3> V = {RV[3], RV[4], RV[5]};
 
         // Calculate range and range rate
         T r = thames::vector::geometry::norm3<T>(R);
@@ -126,9 +125,8 @@ namespace thames::propagators::geqoe{
 
         // Calculate Cartesian state and extract vectors
         std::vector<T> RV = thames::conversions::geqoe::geqoe_to_cartesian<T>(t, geqoe, mu, perturbation);
-        std::vector<T> R(3), V(3);
-        R = thames::vector::geometry::slice<T>(RV, 0, 2);
-        V = thames::vector::geometry::slice<T>(RV, 3, 5);
+        std::vector<T> R = {RV[0], RV[1], RV[2]};
+        std::vector<T> V = {RV[3], RV[4], RV[5]};
 
         // Calculate range and range rate
         T r = thames::vector::geometry::norm3<T>(R);
