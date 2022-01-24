@@ -1,4 +1,4 @@
 [submodule "external/smart-uq"]
 	path = external/smart-uq
-	url = https://github.com/strath-ace/smart-uq
+	url = https://github.com/maxhlc/smart-uq
 	ignore = dirty
