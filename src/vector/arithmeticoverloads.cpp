@@ -7,6 +7,10 @@
 
 namespace thames::vector::arithmeticoverloads {
 
+    ////////////
+    // Arrays //
+    ////////////
+
     template<class T, std::size_t S>
     std::array<T, S> operator+(const std::array<T, S>& a, const std::array<T, S>& b){
         std::array<T, S> c;
@@ -57,7 +61,9 @@ namespace thames::vector::arithmeticoverloads {
     }
     template std::array<double, 3> operator/<double, 3>(const std::array<double, 3>& b, const double& a);
 
-    // std::vector
+    /////////////
+    // Vectors //
+    /////////////
 
     template<class T>
     std::vector<T> operator+(const std::vector<T>& a, const std::vector<T>& b){

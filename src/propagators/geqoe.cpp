@@ -15,6 +15,10 @@ using namespace thames::vector::arithmeticoverloads;
 
 namespace thames::propagators::geqoe{
 
+    ////////////
+    // Arrays //
+    ////////////
+
     template<class T>
     void derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t, const T& mu, const BasePerturbation<T>& perturbation){
         // Extract elements
@@ -120,6 +124,35 @@ namespace thames::propagators::geqoe{
     template void derivative<double>(const std::array<double, 6>&, std::array<double, 6>&, const double, const double&, const BasePerturbation<double>&);
 
     template<class T>
+    std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T mu, const BasePerturbation<T>& perturbation, T atol, T rtol){
+        // Transform initial state
+        std::array<T, 6> geqoe = thames::conversions::geqoe::cartesian_to_geqoe(tstart, RV, mu, perturbation);
+
+        // Declare derivative function wrapper
+        std::function<void (const std::array<T, 6>&, std::array<T, 6>&, const T)> derivative_param = [mu, &perturbation](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T time){
+            derivative(x, dxdt, time, mu, perturbation);
+        };
+
+        // Declare stepper
+        boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
+        auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
+
+        // Propagate orbit
+        boost::numeric::odeint::integrate_adaptive(steppercontrolled, derivative_param, geqoe, tstart, tend, tstep);
+
+        // Transform final state
+        RV = thames::conversions::geqoe::geqoe_to_cartesian<T>(tend, geqoe, mu, perturbation);
+
+        // Return final state
+        return RV;
+    }
+    template std::array<double, 6> propagate<double>(double, double, double, std::array<double, 6>, double, const BasePerturbation<double>&, double, double);
+
+    /////////////
+    // Vectors //
+    /////////////
+
+    template<class T>
     void derivative(const std::vector<T>& geqoe, std::vector<T>& geqoedot, const T t, const T& mu, const BasePerturbation<T>& perturbation){
         // Extract elements
         T nu = geqoe[0];
@@ -222,31 +255,6 @@ namespace thames::propagators::geqoe{
         };
     }
     template void derivative<double>(const std::vector<double>&, std::vector<double>&, const double, const double&, const BasePerturbation<double>&);
-
-    template<class T>
-    std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T mu, const BasePerturbation<T>& perturbation, T atol, T rtol){
-        // Transform initial state
-        std::array<T, 6> geqoe = thames::conversions::geqoe::cartesian_to_geqoe(tstart, RV, mu, perturbation);
-
-        // Declare derivative function wrapper
-        std::function<void (const std::array<T, 6>&, std::array<T, 6>&, const T)> derivative_param = [mu, &perturbation](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T time){
-            derivative(x, dxdt, time, mu, perturbation);
-        };
-
-        // Declare stepper
-        boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
-        auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
-
-        // Propagate orbit
-        boost::numeric::odeint::integrate_adaptive(steppercontrolled, derivative_param, geqoe, tstart, tend, tstep);
-
-        // Transform final state
-        RV = thames::conversions::geqoe::geqoe_to_cartesian<T>(tend, geqoe, mu, perturbation);
-
-        // Return final state
-        return RV;
-    }
-    template std::array<double, 6> propagate<double>(double, double, double, std::array<double, 6>, double, const BasePerturbation<double>&, double, double);
 
     template<class T>
     std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> RV, T mu, const BasePerturbation<T>& perturbation, T atol, T rtol){

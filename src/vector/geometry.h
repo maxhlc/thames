@@ -6,6 +6,10 @@
 
 namespace thames::vector::geometry{
 
+    ////////////
+    // Arrays //
+    ////////////
+
     /**
      * @brief Function to calculate the dot product of two vectors with three elements.
      * 
@@ -18,17 +22,6 @@ namespace thames::vector::geometry{
     T dot3(const std::array<T, 3>& a, const std::array<T, 3>& b);
 
     /**
-     * @brief Function to calculate the dot product of two vectors with three elements.
-     * 
-     * @tparam T Numeric type.
-     * @param[in] a First vector.
-     * @param[in] b Second vector.
-     * @return T Dot product of the vectors.
-     */
-    template<class T>
-    T dot3(const std::vector<T>& a, const std::vector<T>& b);
-
-    /**
      * @brief Function to calculate the length of a vector with three elements.
      * 
      * @tparam T Numeric type.
@@ -37,16 +30,6 @@ namespace thames::vector::geometry{
      */
     template<class T>
     T norm3(const std::array<T, 3>& a);
-
-    /**
-     * @brief Function to calculate the length of a vector with three elements.
-     * 
-     * @tparam T Numeric type.
-     * @param[in] a Vector.
-     * @return T Length of the vector.
-     */
-    template<class T>
-    T norm3(const std::vector<T>& a);
 
     /**
      * @brief Calculate the cross product of two vectors with three elements.
@@ -69,6 +52,31 @@ namespace thames::vector::geometry{
      */
     template<class T>
     std::array<T, 3> cross3(const std::array<T, 3>& a, const std::array<T, 3>& b);
+
+    /////////////
+    // Vectors //
+    /////////////
+
+    /**
+     * @brief Function to calculate the dot product of two vectors with three elements.
+     * 
+     * @tparam T Numeric type.
+     * @param[in] a First vector.
+     * @param[in] b Second vector.
+     * @return T Dot product of the vectors.
+     */
+    template<class T>
+    T dot3(const std::vector<T>& a, const std::vector<T>& b);
+
+    /**
+     * @brief Function to calculate the length of a vector with three elements.
+     * 
+     * @tparam T Numeric type.
+     * @param[in] a Vector.
+     * @return T Length of the vector.
+     */
+    template<class T>
+    T norm3(const std::vector<T>& a);
 
     /**
      * @brief Calculate the cross product of two vectors with three elements.

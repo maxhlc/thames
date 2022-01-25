@@ -10,18 +10,9 @@ using namespace thames::perturbations::baseperturbation;
 
 namespace thames::propagators::cowell{
 
-    /**
-     * @brief State derivative for Cowell's method propagation.
-     * 
-     * @tparam T Numeric type.
-     * @param[in] RV Cartesian state.
-     * @param[out] RVdot Time derivative of the Cartesian state.
-     * @param[in] t Current physical time.
-     * @param[in] mu Central body gravitational parameter.
-     * @param[in] perturbation Perturbation object.
-     */
-    template<class T>
-    void derivative(const std::array<T, 6>& RV, std::array<T, 6>& RVdot, const T t, const T& mu, const BasePerturbation<T>& perturbation);
+    ////////////
+    // Arrays //
+    ////////////
 
     /**
      * @brief State derivative for Cowell's method propagation.
@@ -34,7 +25,7 @@ namespace thames::propagators::cowell{
      * @param[in] perturbation Perturbation object.
      */
     template<class T>
-    void derivative(const std::vector<T>& RV, std::vector<T>& RVdot, const T t, const T& mu, const BasePerturbation<T>& perturbation);
+    void derivative(const std::array<T, 6>& RV, std::array<T, 6>& RVdot, const T t, const T& mu, const BasePerturbation<T>& perturbation);
 
     /**
      * @brief Propagate Cartesian state using Cowell's method.
@@ -52,6 +43,23 @@ namespace thames::propagators::cowell{
      */
     template<class T>
     std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T mu, const BasePerturbation<T>& perturbation, T atol = 1e-10, T rtol = 1e-10);
+
+    /////////////
+    // Vectors //
+    /////////////
+
+    /**
+     * @brief State derivative for Cowell's method propagation.
+     * 
+     * @tparam T Numeric type.
+     * @param[in] RV Cartesian state.
+     * @param[out] RVdot Time derivative of the Cartesian state.
+     * @param[in] t Current physical time.
+     * @param[in] mu Central body gravitational parameter.
+     * @param[in] perturbation Perturbation object.
+     */
+    template<class T>
+    void derivative(const std::vector<T>& RV, std::vector<T>& RVdot, const T t, const T& mu, const BasePerturbation<T>& perturbation);
 
     /**
      * @brief Propagate Cartesian state using Cowell's method.

@@ -10,6 +10,10 @@ using namespace thames::vector::arithmeticoverloads;
 
 namespace thames::conversions::keplerian{
 
+    ////////////
+    // Arrays //
+    ////////////
+
     template<class T>
     std::array<T, 6> cartesian_to_keplerian(const std::array<T, 6>& RV, const T& mu){
         // Extract position and velocity vectors
@@ -108,6 +112,67 @@ namespace thames::conversions::keplerian{
     template std::array<double, 6> cartesian_to_keplerian<double>(const std::array<double, 6>&, const double&);
 
     template<class T>
+    std::array<T, 6> keplerian_to_cartesian(const std::array<T, 6>& keplerian, const T& mu){
+        // Extract Keplerian elements
+        T sma = keplerian[0];
+        T e = keplerian[1];
+        T inc = keplerian[2];
+        T raan = keplerian[3];
+        T aop = keplerian[4];
+        T ta = keplerian[5];
+
+        // Calculate angle trigs
+        T cinc = cos(inc), sinc = sin(inc);
+        T craan = cos(raan), sraan = sin(raan);
+        T caop = cos(aop), saop = sin(aop);
+        T cta = cos(ta), sta = sin(ta);
+
+        // Calculate eccentric anomaly
+        T E = 2.0*atan(sqrt((1.0 - e)/(1.0 + e))*tan(ta/2.0));
+
+        // Calculate radial distance
+        T r = sma*(1.0 - pow(e, 2.0))/(1.0 + e*cta);
+
+        // Calculate position and velocity vectors in the orbital frame
+        std::array<T, 3> o = {
+            r*cta,
+            r*sta,
+            0.0
+        };
+
+        T fac = sqrt(mu*sma)/r;
+        std::array<T, 3> dodt = {
+            -fac*sin(E),
+            fac*sqrt(1.0 - pow(e, 2.0))*cos(E),
+            0.0
+        };
+
+        // Calculate rotation angles
+        T ang[3][2];
+        ang[0][0] = caop*craan - saop*cinc*sraan;
+        ang[0][1] = -saop*craan - caop*cinc*sraan;
+        ang[1][0] = caop*sraan + saop*cinc*craan;
+        ang[1][1] = caop*cinc*craan - saop*sraan;
+        ang[2][0] = saop*sinc;
+        ang[2][1] = caop*sinc;
+
+        // Transform the position and velocity vectors to the inertial frame
+        std::array<T, 6> RV;
+        for(unsigned int ii=0; ii<3; ii++){
+            RV[ii] = o[0]*ang[ii][0] + o[1]*ang[ii][1];
+            RV[ii+3] = dodt[0]*ang[ii][0] + dodt[1]*ang[ii][1];
+        }
+
+        // Return Cartesian state
+        return RV;
+    }
+    template std::array<double, 6> keplerian_to_cartesian<double>(const std::array<double, 6>&, const double&);
+
+    /////////////
+    // Vectors //
+    /////////////
+
+    template<class T>
     std::vector<T> cartesian_to_keplerian(const std::vector<T>& RV, const T& mu){
         // Extract position and velocity vectors
         std::vector<T> R = {RV[0], RV[1], RV[2]};
@@ -203,63 +268,6 @@ namespace thames::conversions::keplerian{
         return keplerian;
     }
     template std::vector<double> cartesian_to_keplerian<double>(const std::vector<double>&, const double&);
-
-    template<class T>
-    std::array<T, 6> keplerian_to_cartesian(const std::array<T, 6>& keplerian, const T& mu){
-        // Extract Keplerian elements
-        T sma = keplerian[0];
-        T e = keplerian[1];
-        T inc = keplerian[2];
-        T raan = keplerian[3];
-        T aop = keplerian[4];
-        T ta = keplerian[5];
-
-        // Calculate angle trigs
-        T cinc = cos(inc), sinc = sin(inc);
-        T craan = cos(raan), sraan = sin(raan);
-        T caop = cos(aop), saop = sin(aop);
-        T cta = cos(ta), sta = sin(ta);
-
-        // Calculate eccentric anomaly
-        T E = 2.0*atan(sqrt((1.0 - e)/(1.0 + e))*tan(ta/2.0));
-
-        // Calculate radial distance
-        T r = sma*(1.0 - pow(e, 2.0))/(1.0 + e*cta);
-
-        // Calculate position and velocity vectors in the orbital frame
-        std::array<T, 3> o = {
-            r*cta,
-            r*sta,
-            0.0
-        };
-
-        T fac = sqrt(mu*sma)/r;
-        std::array<T, 3> dodt = {
-            -fac*sin(E),
-            fac*sqrt(1.0 - pow(e, 2.0))*cos(E),
-            0.0
-        };
-
-        // Calculate rotation angles
-        T ang[3][2];
-        ang[0][0] = caop*craan - saop*cinc*sraan;
-        ang[0][1] = -saop*craan - caop*cinc*sraan;
-        ang[1][0] = caop*sraan + saop*cinc*craan;
-        ang[1][1] = caop*cinc*craan - saop*sraan;
-        ang[2][0] = saop*sinc;
-        ang[2][1] = caop*sinc;
-
-        // Transform the position and velocity vectors to the inertial frame
-        std::array<T, 6> RV;
-        for(unsigned int ii=0; ii<3; ii++){
-            RV[ii] = o[0]*ang[ii][0] + o[1]*ang[ii][1];
-            RV[ii+3] = dodt[0]*ang[ii][0] + dodt[1]*ang[ii][1];
-        }
-
-        // Return Cartesian state
-        return RV;
-    }
-    template std::array<double, 6> keplerian_to_cartesian<double>(const std::array<double, 6>&, const double&);
 
     template<class T>
     std::vector<T> keplerian_to_cartesian(const std::vector<T>& keplerian, const T& mu){

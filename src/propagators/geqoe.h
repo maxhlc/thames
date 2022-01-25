@@ -10,18 +10,9 @@ using namespace thames::perturbations::baseperturbation;
 
 namespace thames::propagators::geqoe{
 
-    /**
-     * @brief State derivative for propagation using Generalised Equinoctial Orbital Elements (GEqOE).
-     * 
-     * @tparam T Numeric type.
-     * @param[in] geqoe GEqOE state.
-     * @param[in,out] geqoedot Time derivative of the GEqOE state.
-     * @param[in] t Current physical time.
-     * @param[in] mu Central body gravitational parameter.
-     * @param[in] perturbation Perturbation object.
-     */
-    template<class T>
-    void derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t, const T& mu, const BasePerturbation<T>& perturbation);
+    ////////////
+    // Arrays //
+    ////////////
 
     /**
      * @brief State derivative for propagation using Generalised Equinoctial Orbital Elements (GEqOE).
@@ -34,7 +25,7 @@ namespace thames::propagators::geqoe{
      * @param[in] perturbation Perturbation object.
      */
     template<class T>
-    void derivative(const std::vector<T>& geqoe, std::vector<T>& geqoedot, const T t, const T& mu, const BasePerturbation<T>& perturbation);
+    void derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t, const T& mu, const BasePerturbation<T>& perturbation);
 
     /**
      * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
@@ -52,6 +43,23 @@ namespace thames::propagators::geqoe{
      */
     template<class T>
     std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T mu, const BasePerturbation<T>& perturbation, T atol = 1e-10, T rtol = 1e-10);
+
+    /////////////
+    // Vectors //
+    /////////////
+
+    /**
+     * @brief State derivative for propagation using Generalised Equinoctial Orbital Elements (GEqOE).
+     * 
+     * @tparam T Numeric type.
+     * @param[in] geqoe GEqOE state.
+     * @param[in,out] geqoedot Time derivative of the GEqOE state.
+     * @param[in] t Current physical time.
+     * @param[in] mu Central body gravitational parameter.
+     * @param[in] perturbation Perturbation object.
+     */
+    template<class T>
+    void derivative(const std::vector<T>& geqoe, std::vector<T>& geqoedot, const T t, const T& mu, const BasePerturbation<T>& perturbation);
 
     /**
      * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).

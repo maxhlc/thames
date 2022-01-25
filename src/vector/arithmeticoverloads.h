@@ -6,6 +6,10 @@
 
 namespace thames::vector::arithmeticoverloads {
 
+    ////////////
+    // Arrays //
+    ////////////
+
     /**
      * @brief Element-wise addition of two arrays.
      * 
@@ -65,6 +69,10 @@ namespace thames::vector::arithmeticoverloads {
      */
     template<class T, std::size_t S>
     std::array<T, S> operator/(const std::array<T, S>& b, const T& a);
+
+    /////////////
+    // Vectors //
+    /////////////
 
     /**
      * @brief Element-wise addition of two vectors.
