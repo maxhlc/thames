@@ -20,13 +20,13 @@ namespace thames::perturbations::geopotential{
         private:
 
             /// Central body gravitational parameter.
-            T m_mu;
+            const T m_mu;
 
             /// Central body J2-term.
-            T m_J2;
+            const T m_J2;
 
             /// Central body radius.
-            T m_radius;
+            const T m_radius;
 
         public:
 
@@ -37,7 +37,7 @@ namespace thames::perturbations::geopotential{
              * @param[in] J2 Central body J2-term.
              * @param[in] radius Central body radius.
              */
-            J2(T mu, T J2, T radius);
+            J2(const T& mu, const T& J2, const T& radius);
 
             ////////////
             // Arrays //
@@ -51,7 +51,7 @@ namespace thames::perturbations::geopotential{
              * @param[in] V Velocity vector.
              * @return std::array<T, 3> Total perturbing acceleration due to the J2-term.
              */
-            std::array<T, 3> acceleration_total(T t, std::array<T, 3> R, std::array<T, 3> V) const override;
+            std::array<T, 3> acceleration_total(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const override;
 
             /**
              * @brief Calculate perturbing potential resulting from the J2-term. 
@@ -60,7 +60,7 @@ namespace thames::perturbations::geopotential{
              * @param[in] R Position vector.
              * @return T Perturbing potential due to the J2-term.
              */
-            T potential(T t, std::array<T, 3> R) const override;
+            T potential(const T& t, const std::array<T, 3>& R) const override;
 
             /////////////
             // Vectors //
@@ -74,7 +74,7 @@ namespace thames::perturbations::geopotential{
              * @param[in] V Velocity vector.
              * @return std::vector<T> Total perturbing acceleration due to the J2-term.
              */
-            std::vector<T> acceleration_total(T t, std::vector<T> R, std::vector<T> V) const override;
+            std::vector<T> acceleration_total(const T& t, const std::vector<T>& R, const std::vector<T>& V) const override;
 
             /**
              * @brief Calculate perturbing potential resulting from the J2-term. 
@@ -83,7 +83,7 @@ namespace thames::perturbations::geopotential{
              * @param[in] R Position vector.
              * @return T Perturbing potential due to the J2-term.
              */
-            T potential(T t, std::vector<T> R) const override;
+            T potential(const T& t, const std::vector<T>& R) const override;
 
     };
 

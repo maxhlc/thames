@@ -8,10 +8,8 @@
 namespace thames::perturbations::geopotential{
 
     template <class T>
-    J2<T>::J2(T mu, T J2, T radius){
-        m_mu = mu;
-        m_J2 = J2;
-        m_radius = radius;
+    J2<T>::J2(const T& mu, const T& J2, const T& radius) : m_mu(mu), m_J2(J2), m_radius(radius) {
+
     }
 
     ////////////
@@ -19,7 +17,7 @@ namespace thames::perturbations::geopotential{
     ////////////
 
     template <class T>
-    std::array<T, 3> J2<T>::acceleration_total(T t, std::array<T, 3> R, std::array<T, 3> V) const{
+    std::array<T, 3> J2<T>::acceleration_total(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const{
         // Extract position components
         T x = R[0], y = R[1], z = R[2];
 
@@ -42,7 +40,7 @@ namespace thames::perturbations::geopotential{
     }
 
     template <class T>
-    T J2<T>::potential(T t, std::array<T, 3> R) const{
+    T J2<T>::potential(const T& t, const std::array<T, 3>& R) const{
         // Extract position components
         T z = R[2];
 
@@ -64,7 +62,7 @@ namespace thames::perturbations::geopotential{
     /////////////
 
     template <class T>
-    std::vector<T> J2<T>::acceleration_total(T t, std::vector<T> R, std::vector<T> V) const{
+    std::vector<T> J2<T>::acceleration_total(const T& t, const std::vector<T>& R, const std::vector<T>& V) const{
         // Extract position components
         T x = R[0], y = R[1], z = R[2];
 
@@ -87,7 +85,7 @@ namespace thames::perturbations::geopotential{
     }
 
     template <class T>
-    T J2<T>::potential(T t, std::vector<T> R) const{
+    T J2<T>::potential(const T& t, const std::vector<T>& R) const{
         // Extract position components
         T z = R[2];
 
