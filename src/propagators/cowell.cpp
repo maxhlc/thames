@@ -12,7 +12,7 @@
 using namespace thames::perturbations::baseperturbation;
 using namespace thames::vector::arithmeticoverloads;
 
-namespace thames::propagators::cowell{
+namespace thames::propagators {
 
     template<class T>
     CowellPropagator<T>::CowellPropagator(const T& mu, const BasePerturbation<T>* perturbation) : m_mu(mu), m_perturbation(perturbation) {

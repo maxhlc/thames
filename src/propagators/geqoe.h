@@ -10,7 +10,7 @@
 using namespace thames::propagators::basepropagator;
 using namespace thames::perturbations::baseperturbation;
 
-namespace thames::propagators::geqoe{
+namespace thames::propagators {
 
     template<class T>
     class GEqOEPropagator : public BasePropagator<T> {

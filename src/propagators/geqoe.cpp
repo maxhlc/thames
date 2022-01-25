@@ -13,7 +13,7 @@
 using namespace thames::perturbations::baseperturbation;
 using namespace thames::vector::arithmeticoverloads;
 
-namespace thames::propagators::geqoe{
+namespace thames::propagators {
 
     template<class T>
     GEqOEPropagator<T>::GEqOEPropagator(const T& mu, const BasePerturbation<T>* perturbation) : m_mu(mu), m_perturbation(perturbation) {

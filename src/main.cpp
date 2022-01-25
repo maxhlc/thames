@@ -17,7 +17,7 @@ int main(){
 
     thames::perturbations::geopotential::J2<double> perturbation(mu, J2, radius);
 
-    thames::propagators::geqoe::GEqOEPropagator<double> propagator(mu, &perturbation);
+    thames::propagators::GEqOEPropagator<double> propagator(mu, &perturbation);
 
     std::array<double, 6> state_prop = propagator.propagate(tstart, tend, tstep, RV, 1e-13, 1e-13);
 
