@@ -16,12 +16,8 @@ using namespace thames::vector::arithmeticoverloads;
 namespace thames::propagators::geqoe{
 
     template<class T>
-    GEqOEPropagator<T>::GEqOEPropagator(const T& mu, BasePerturbation<T>* perturbation){
-        // Store gravitational parameter
-        m_mu = mu;
+    GEqOEPropagator<T>::GEqOEPropagator(const T& mu, const BasePerturbation<T>* perturbation) : m_mu(mu), m_perturbation(perturbation) {
 
-        // Store perturbation object
-        m_perturbation = perturbation;
     }
 
     ////////////

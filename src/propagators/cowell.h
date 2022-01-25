@@ -18,10 +18,10 @@ namespace thames::propagators::cowell{
         private:
 
             /// Gravitational parameter
-            T m_mu;
+            const T m_mu;
 
             /// Perturbation object
-            BasePerturbation<T>* m_perturbation;
+            const BasePerturbation<T>* m_perturbation;
 
         public:
 
@@ -31,7 +31,7 @@ namespace thames::propagators::cowell{
              * @param[in] mu Gravitational parameter. 
              * @param[in] perturbation Perturbation object.
              */
-            CowellPropagator(const T& mu, BasePerturbation<T>* perturbation);
+            CowellPropagator(const T& mu, const BasePerturbation<T>* perturbation);
 
             ////////////
             // Arrays //

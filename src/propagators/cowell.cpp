@@ -15,12 +15,8 @@ using namespace thames::vector::arithmeticoverloads;
 namespace thames::propagators::cowell{
 
     template<class T>
-    CowellPropagator<T>::CowellPropagator(const T& mu, BasePerturbation<T>* perturbation){
-        // Store gravitational parameter
-        m_mu = mu;
+    CowellPropagator<T>::CowellPropagator(const T& mu, const BasePerturbation<T>* perturbation) : m_mu(mu), m_perturbation(perturbation) {
 
-        // Store base perturbation pointer to derived perturbation
-        m_perturbation = perturbation;
     }
 
     ////////////
