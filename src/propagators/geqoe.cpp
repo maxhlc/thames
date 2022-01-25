@@ -15,12 +15,21 @@ using namespace thames::vector::arithmeticoverloads;
 
 namespace thames::propagators::geqoe{
 
+    template<class T>
+    GEqOEPropagator<T>::GEqOEPropagator(const T& mu, BasePerturbation<T>* perturbation){
+        // Store gravitational parameter
+        m_mu = mu;
+
+        // Store perturbation object
+        m_perturbation = perturbation;
+    }
+
     ////////////
     // Arrays //
     ////////////
 
     template<class T>
-    void derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t, const T& mu, const BasePerturbation<T>& perturbation){
+    void GEqOEPropagator<T>::derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t) const {
         // Extract elements
         T nu = geqoe[0];
         T p1 = geqoe[1];
@@ -29,7 +38,7 @@ namespace thames::propagators::geqoe{
         T q2 = geqoe[5];
 
         // Calculate Cartesian state and extract vectors
-        std::array<T, 6> RV = thames::conversions::geqoe::geqoe_to_cartesian(t, geqoe, mu, perturbation);
+        std::array<T, 6> RV = thames::conversions::geqoe::geqoe_to_cartesian(t, geqoe, m_mu, m_perturbation);
         std::array<T, 3> R = {RV[0], RV[1], RV[2]};
         std::array<T, 3> V = {RV[3], RV[4], RV[5]};
 
@@ -38,16 +47,16 @@ namespace thames::propagators::geqoe{
         T drdt = thames::vector::geometry::dot3(R, V)/r;
 
         // Calculate perturbations
-        T U = perturbation.potential(t, R);
-        T Ut = perturbation.potential_derivative(t, R, V);
-        std::array<T, 3> F = perturbation.acceleration_total(t, R, V);
-        std::array<T, 3> P = perturbation.acceleration_nonpotential(t, R, V);
+        T U = m_perturbation->potential(t, R);
+        T Ut = m_perturbation->potential_derivative(t, R, V);
+        std::array<T, 3> F = m_perturbation->acceleration_total(t, R, V);
+        std::array<T, 3> P = m_perturbation->acceleration_nonpotential(t, R, V);
 
         // Calculate time derivative of total energy
         T edot = Ut + thames::vector::geometry::dot3(P, V);
 
         // Calculate time derivative of nu
-        T nudot = -3.0*pow(nu/pow(mu, 2.0), 1.0/3.0)*edot;
+        T nudot = -3.0*pow(nu/pow(m_mu, 2.0), 1.0/3.0)*edot;
 
         // Calculate equinocital reference frame unit vectors
         T efac = 1.0/(1.0 + pow(q1, 2.0) + pow(q2, 2.0));
@@ -84,7 +93,7 @@ namespace thames::propagators::geqoe{
         T c = sqrt(2.0*pow(r, 2.0)*ueff);
 
         // Calculate the generalised semi-latus rectum
-        T p = pow(c, 2.0)/mu;
+        T p = pow(c, 2.0)/m_mu;
 
         // Calculate perturbation components
         T Fr = thames::vector::geometry::dot3(F, er);
@@ -95,17 +104,17 @@ namespace thames::propagators::geqoe{
         T zetatilde = 1 + zeta;
 
         // Calculate time derivatives of the second and third elements
-        T p1dot = p2*((h - c)/pow(r, 2.0) - r/h*hwh*Fh) + 1.0/c*(r*drdt/c*p1 + zetatilde*p2 + zeta*cl)*(2.0*U - r*Fr) + r/mu*(zeta*p1 + zetatilde*sl)*edot;
-        T p2dot = p1*(r/h*hwh*Fh - (h-c)/pow(r, 2.0)) + 1.0/c*(r*drdt/c*p2 - zetatilde*p1 - zeta*sl)*(2.0*U - r*Fr) + r/mu*(zeta*p2 + zetatilde*cl)*edot;
+        T p1dot = p2*((h - c)/pow(r, 2.0) - r/h*hwh*Fh) + 1.0/c*(r*drdt/c*p1 + zetatilde*p2 + zeta*cl)*(2.0*U - r*Fr) + r/m_mu*(zeta*p1 + zetatilde*sl)*edot;
+        T p2dot = p1*(r/h*hwh*Fh - (h-c)/pow(r, 2.0)) + 1.0/c*(r*drdt/c*p2 - zetatilde*p1 - zeta*sl)*(2.0*U - r*Fr) + r/m_mu*(zeta*p2 + zetatilde*cl)*edot;
 
         // Calculate generalised semi-major axis
-        T a = pow(mu/pow(nu, 2.0), 1.0/3.0);
+        T a = pow(m_mu/pow(nu, 2.0), 1.0/3.0);
 
         // Calculate alpha
         T alpha = 1.0/(1.0 + sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0)));
 
         // Calculate time derivative of the generalised mean longitude
-        T Ldot = nu + (h - c)/pow(r, 2.0) - r/h*hwh*Fh + (r*drdt*c/pow(mu, 2.0)*zetatilde*alpha)*edot + 1.0/c*(1.0/alpha + alpha*(1.0 - r/a))*(2.0*U - r*Fr);
+        T Ldot = nu + (h - c)/pow(r, 2.0) - r/h*hwh*Fh + (r*drdt*c/pow(m_mu, 2.0)*zetatilde*alpha)*edot + 1.0/c*(1.0/alpha + alpha*(1.0 - r/a))*(2.0*U - r*Fr);
 
         // Calculate time derivatives of the remaining elements
         T q1dot = r/(2.0*h)*Fh*(1.0 + pow(q1, 2.0) + pow(q2, 2.0))*sl;
@@ -121,39 +130,32 @@ namespace thames::propagators::geqoe{
             q2dot
         };
     }
-    template void derivative<double>(const std::array<double, 6>&, std::array<double, 6>&, const double, const double&, const BasePerturbation<double>&);
 
     template<class T>
-    std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T mu, const BasePerturbation<T>& perturbation, T atol, T rtol){
+    std::array<T, 6> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T atol, T rtol) const {
         // Transform initial state
-        std::array<T, 6> geqoe = thames::conversions::geqoe::cartesian_to_geqoe(tstart, RV, mu, perturbation);
-
-        // Declare derivative function wrapper
-        std::function<void (const std::array<T, 6>&, std::array<T, 6>&, const T)> derivative_param = [mu, &perturbation](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T time){
-            derivative(x, dxdt, time, mu, perturbation);
-        };
+        std::array<T, 6> geqoe = thames::conversions::geqoe::cartesian_to_geqoe(tstart, RV, m_mu, m_perturbation);
 
         // Declare stepper
         boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
         auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
 
         // Propagate orbit
-        boost::numeric::odeint::integrate_adaptive(steppercontrolled, derivative_param, geqoe, tstart, tend, tstep);
+        boost::numeric::odeint::integrate_adaptive(steppercontrolled, [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);}, geqoe, tstart, tend, tstep);
 
         // Transform final state
-        RV = thames::conversions::geqoe::geqoe_to_cartesian<T>(tend, geqoe, mu, perturbation);
+        RV = thames::conversions::geqoe::geqoe_to_cartesian<T>(tend, geqoe, m_mu, m_perturbation);
 
         // Return final state
         return RV;
     }
-    template std::array<double, 6> propagate<double>(double, double, double, std::array<double, 6>, double, const BasePerturbation<double>&, double, double);
 
     /////////////
     // Vectors //
     /////////////
 
     template<class T>
-    void derivative(const std::vector<T>& geqoe, std::vector<T>& geqoedot, const T t, const T& mu, const BasePerturbation<T>& perturbation){
+    void GEqOEPropagator<T>::derivative(const std::vector<T>& geqoe, std::vector<T>& geqoedot, const T t) const {
         // Extract elements
         T nu = geqoe[0];
         T p1 = geqoe[1];
@@ -162,7 +164,7 @@ namespace thames::propagators::geqoe{
         T q2 = geqoe[5];
 
         // Calculate Cartesian state and extract vectors
-        std::vector<T> RV = thames::conversions::geqoe::geqoe_to_cartesian(t, geqoe, mu, perturbation);
+        std::vector<T> RV = thames::conversions::geqoe::geqoe_to_cartesian(t, geqoe, m_mu, m_perturbation);
         std::vector<T> R = {RV[0], RV[1], RV[2]};
         std::vector<T> V = {RV[3], RV[4], RV[5]};
 
@@ -171,16 +173,16 @@ namespace thames::propagators::geqoe{
         T drdt = thames::vector::geometry::dot3(R, V)/r;
 
         // Calculate perturbations
-        T U = perturbation.potential(t, R);
-        T Ut = perturbation.potential_derivative(t, R, V);
-        std::vector<T> F = perturbation.acceleration_total(t, R, V);
-        std::vector<T> P = perturbation.acceleration_nonpotential(t, R, V);
+        T U = m_perturbation->potential(t, R);
+        T Ut = m_perturbation->potential_derivative(t, R, V);
+        std::vector<T> F = m_perturbation->acceleration_total(t, R, V);
+        std::vector<T> P = m_perturbation->acceleration_nonpotential(t, R, V);
 
         // Calculate time derivative of total energy
         T edot = Ut + thames::vector::geometry::dot3(P, V);
 
         // Calculate time derivative of nu
-        T nudot = -3.0*pow(nu/pow(mu, 2.0), 1.0/3.0)*edot;
+        T nudot = -3.0*pow(nu/pow(m_mu, 2.0), 1.0/3.0)*edot;
 
         // Calculate equinocital reference frame unit vectors
         T efac = 1.0/(1.0 + pow(q1, 2.0) + pow(q2, 2.0));
@@ -217,7 +219,7 @@ namespace thames::propagators::geqoe{
         T c = sqrt(2.0*pow(r, 2.0)*ueff);
 
         // Calculate the generalised semi-latus rectum
-        T p = pow(c, 2.0)/mu;
+        T p = pow(c, 2.0)/m_mu;
 
         // Calculate perturbation components
         T Fr = thames::vector::geometry::dot3(F, er);
@@ -228,17 +230,17 @@ namespace thames::propagators::geqoe{
         T zetatilde = 1 + zeta;
 
         // Calculate time derivatives of the second and third elements
-        T p1dot = p2*((h - c)/pow(r, 2.0) - r/h*hwh*Fh) + 1.0/c*(r*drdt/c*p1 + zetatilde*p2 + zeta*cl)*(2.0*U - r*Fr) + r/mu*(zeta*p1 + zetatilde*sl)*edot;
-        T p2dot = p1*(r/h*hwh*Fh - (h-c)/pow(r, 2.0)) + 1.0/c*(r*drdt/c*p2 - zetatilde*p1 - zeta*sl)*(2.0*U - r*Fr) + r/mu*(zeta*p2 + zetatilde*cl)*edot;
+        T p1dot = p2*((h - c)/pow(r, 2.0) - r/h*hwh*Fh) + 1.0/c*(r*drdt/c*p1 + zetatilde*p2 + zeta*cl)*(2.0*U - r*Fr) + r/m_mu*(zeta*p1 + zetatilde*sl)*edot;
+        T p2dot = p1*(r/h*hwh*Fh - (h-c)/pow(r, 2.0)) + 1.0/c*(r*drdt/c*p2 - zetatilde*p1 - zeta*sl)*(2.0*U - r*Fr) + r/m_mu*(zeta*p2 + zetatilde*cl)*edot;
 
         // Calculate generalised semi-major axis
-        T a = pow(mu/pow(nu, 2.0), 1.0/3.0);
+        T a = pow(m_mu/pow(nu, 2.0), 1.0/3.0);
 
         // Calculate alpha
         T alpha = 1.0/(1.0 + sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0)));
 
         // Calculate time derivative of the generalised mean longitude
-        T Ldot = nu + (h - c)/pow(r, 2.0) - r/h*hwh*Fh + (r*drdt*c/pow(mu, 2.0)*zetatilde*alpha)*edot + 1.0/c*(1.0/alpha + alpha*(1.0 - r/a))*(2.0*U - r*Fr);
+        T Ldot = nu + (h - c)/pow(r, 2.0) - r/h*hwh*Fh + (r*drdt*c/pow(m_mu, 2.0)*zetatilde*alpha)*edot + 1.0/c*(1.0/alpha + alpha*(1.0 - r/a))*(2.0*U - r*Fr);
 
         // Calculate time derivatives of the remaining elements
         T q1dot = r/(2.0*h)*Fh*(1.0 + pow(q1, 2.0) + pow(q2, 2.0))*sl;
@@ -254,31 +256,26 @@ namespace thames::propagators::geqoe{
             q2dot
         };
     }
-    template void derivative<double>(const std::vector<double>&, std::vector<double>&, const double, const double&, const BasePerturbation<double>&);
 
     template<class T>
-    std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> RV, T mu, const BasePerturbation<T>& perturbation, T atol, T rtol){
+    std::vector<T> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> RV, T atol, T rtol) const {
         // Transform initial state
-        std::vector<T> geqoe = thames::conversions::geqoe::cartesian_to_geqoe<T>(tstart, RV, mu, perturbation);
-
-        // Declare derivative function wrapper
-        std::function<void (const std::vector<T>&, std::vector<T>&, const T)> derivative_param = [mu, &perturbation](const std::vector<T>& x, std::vector<T>& dxdt, const T time){
-            derivative(x, dxdt, time, mu, perturbation);
-        };
+        std::vector<T> geqoe = thames::conversions::geqoe::cartesian_to_geqoe<T>(tstart, RV, m_mu, m_perturbation);
 
         // Declare stepper
         boost::numeric::odeint::runge_kutta_cash_karp54<std::vector<T>> stepper;
         auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
 
         // Propagate orbit
-        boost::numeric::odeint::integrate_adaptive(steppercontrolled, derivative_param, geqoe, tstart, tend, tstep);
+        boost::numeric::odeint::integrate_adaptive(steppercontrolled, [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);}, geqoe, tstart, tend, tstep);
 
         // Transform final state
-        RV = thames::conversions::geqoe::geqoe_to_cartesian<T>(tend, geqoe, mu, perturbation);
+        RV = thames::conversions::geqoe::geqoe_to_cartesian<T>(tend, geqoe, m_mu, m_perturbation);
 
         // Return final state
         return RV;
     }
-    template std::vector<double> propagate<double>(double, double, double, std::vector<double>, double, const BasePerturbation<double>&, double, double);
+
+    template class GEqOEPropagator<double>;
 
 }

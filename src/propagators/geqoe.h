@@ -4,79 +4,96 @@
 #include <array>
 #include <vector>
 
+#include "basepropagator.h"
 #include "../perturbations/baseperturbation.h"
 
+using namespace thames::propagators::basepropagator;
 using namespace thames::perturbations::baseperturbation;
 
 namespace thames::propagators::geqoe{
 
-    ////////////
-    // Arrays //
-    ////////////
-
-    /**
-     * @brief State derivative for propagation using Generalised Equinoctial Orbital Elements (GEqOE).
-     * 
-     * @tparam T Numeric type.
-     * @param[in] geqoe GEqOE state.
-     * @param[in,out] geqoedot Time derivative of the GEqOE state.
-     * @param[in] t Current physical time.
-     * @param[in] mu Central body gravitational parameter.
-     * @param[in] perturbation Perturbation object.
-     */
     template<class T>
-    void derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t, const T& mu, const BasePerturbation<T>& perturbation);
+    class GEqOEPropagator : public BasePropagator<T> {
 
-    /**
-     * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
-     * 
-     * @tparam T Numeric type.
-     * @param[in] tstart Propagation start time in physical time.
-     * @param[in] tend Propagation end time in physical time.
-     * @param[in] tstep Initial timestep for propagation.
-     * @param[in] RV Initial Cartesian state.
-     * @param[in] mu Central body gravitational parameter.
-     * @param[in] perturbation Perturbation object.
-     * @param[in] atol Solver absolute tolerance.
-     * @param[in] rtol Solver relative tolerance.
-     * @return std::array<T, 6> Final Cartesian state.
-     */
-    template<class T>
-    std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T mu, const BasePerturbation<T>& perturbation, T atol = 1e-10, T rtol = 1e-10);
+        private:
 
-    /////////////
-    // Vectors //
-    /////////////
+            /// Gravitational parameter
+            T m_mu;
 
-    /**
-     * @brief State derivative for propagation using Generalised Equinoctial Orbital Elements (GEqOE).
-     * 
-     * @tparam T Numeric type.
-     * @param[in] geqoe GEqOE state.
-     * @param[in,out] geqoedot Time derivative of the GEqOE state.
-     * @param[in] t Current physical time.
-     * @param[in] mu Central body gravitational parameter.
-     * @param[in] perturbation Perturbation object.
-     */
-    template<class T>
-    void derivative(const std::vector<T>& geqoe, std::vector<T>& geqoedot, const T t, const T& mu, const BasePerturbation<T>& perturbation);
+            /// Perturbation object
+            BasePerturbation<T>* m_perturbation;
 
-    /**
-     * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
-     * 
-     * @tparam T Numeric type.
-     * @param[in] tstart Propagation start time in physical time.
-     * @param[in] tend Propagation end time in physical time.
-     * @param[in] tstep Initial timestep for propagation.
-     * @param[in] RV Initial Cartesian state.
-     * @param[in] mu Central body gravitational parameter.
-     * @param[in] perturbation Perturbation object.
-     * @param[in] atol Solver absolute tolerance.
-     * @param[in] rtol Solver relative tolerance.
-     * @return std::vector<T> Final Cartesian state.
-     */
-    template<class T>
-    std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> RV, T mu, const BasePerturbation<T>& perturbation, T atol = 1e-10, T rtol = 1e-10);
+        public:
+
+            /**
+             * @brief Construct a new GEqOE Propagator object.
+             * 
+             * @param[in] mu Gravitational parameter.
+             * @param[in] perturbation Perturbation object. 
+             */
+            GEqOEPropagator(const T& mu, BasePerturbation<T>* perturbation);
+
+            ////////////
+            // Arrays //
+            ////////////
+
+            /**
+             * @brief State derivative for propagation using Generalised Equinoctial Orbital Elements (GEqOE).
+             * 
+             * @param[in] geqoe GEqOE state.
+             * @param[in,out] geqoedot Time derivative of the GEqOE state.
+             * @param[in] t Current physical time.
+             * @param[in] mu Central body gravitational parameter.
+             * @param[in] perturbation Perturbation object.
+             */
+            void derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t) const override;
+
+            /**
+             * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
+             * 
+             * @param[in] tstart Propagation start time in physical time.
+             * @param[in] tend Propagation end time in physical time.
+             * @param[in] tstep Initial timestep for propagation.
+             * @param[in] RV Initial Cartesian state.
+             * @param[in] mu Central body gravitational parameter.
+             * @param[in] perturbation Perturbation object.
+             * @param[in] atol Solver absolute tolerance.
+             * @param[in] rtol Solver relative tolerance.
+             * @return std::array<T, 6> Final Cartesian state.
+             */
+            std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T atol = 1e-10, T rtol = 1e-10) const override;
+
+            /////////////
+            // Vectors //
+            /////////////
+
+            /**
+             * @brief State derivative for propagation using Generalised Equinoctial Orbital Elements (GEqOE).
+             * 
+             * @param[in] geqoe GEqOE state.
+             * @param[in,out] geqoedot Time derivative of the GEqOE state.
+             * @param[in] t Current physical time.
+             * @param[in] mu Central body gravitational parameter.
+             * @param[in] perturbation Perturbation object.
+             */
+            void derivative(const std::vector<T>& geqoe, std::vector<T>& geqoedot, const T t) const override;
+
+            /**
+             * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
+             * 
+             * @param[in] tstart Propagation start time in physical time.
+             * @param[in] tend Propagation end time in physical time.
+             * @param[in] tstep Initial timestep for propagation.
+             * @param[in] RV Initial Cartesian state.
+             * @param[in] mu Central body gravitational parameter.
+             * @param[in] perturbation Perturbation object.
+             * @param[in] atol Solver absolute tolerance.
+             * @param[in] rtol Solver relative tolerance.
+             * @return std::vector<T> Final Cartesian state.
+             */
+            std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> RV, T atol = 1e-10, T rtol = 1e-10) const override;
+
+    };
 
 }
 

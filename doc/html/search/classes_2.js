@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['j2_110',['J2',['../classthames_1_1perturbations_1_1geopotential_1_1J2.html',1,'thames::perturbations::geopotential']]]
+  ['dimensionalfactors_114',['DimensionalFactors',['../structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html',1,'thames::conversions::dimensional']]]
 ];

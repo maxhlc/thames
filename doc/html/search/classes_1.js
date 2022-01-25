@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dimensionalfactors_109',['DimensionalFactors',['../structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html',1,'thames::conversions::dimensional']]]
+  ['cowellpropagator_113',['CowellPropagator',['../classthames_1_1propagators_1_1cowell_1_1CowellPropagator.html',1,'thames::propagators::cowell']]]
 ];

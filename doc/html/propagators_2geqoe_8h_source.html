@@ -75,38 +75,53 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;../perturbations/baseperturbation.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacethames_1_1perturbations_1_1baseperturbation.html">thames::perturbations::baseperturbation</a>;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacethames_1_1propagators_1_1geqoe.html">thames::propagators::geqoe</a>{</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="basepropagator_8h.html">basepropagator.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;../perturbations/baseperturbation.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacethames_1_1propagators_1_1basepropagator.html">thames::propagators::basepropagator</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacethames_1_1perturbations_1_1baseperturbation.html">thames::perturbations::baseperturbation</a>;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">// Arrays //</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacethames_1_1propagators_1_1cowell.html#a1380c3373a238b9f5be1b15eb9016b18">derivative</a>(<span class="keyword">const</span> std::array&lt;T, 6&gt;&amp; geqoe, std::array&lt;T, 6&gt;&amp; geqoedot, <span class="keyword">const</span> T t, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>, <span class="keyword">const</span> <a class="code" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation&lt;T&gt;</a>&amp; perturbation);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    std::array&lt;T, 6&gt; <a class="code" href="namespacethames_1_1propagators_1_1cowell.html#a33941cc8333ecdcd0b8f7a374503f350">propagate</a>(T tstart, T tend, T tstep, std::array&lt;T, 6&gt; RV, T <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>, <span class="keyword">const</span> <a class="code" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation&lt;T&gt;</a>&amp; perturbation, T atol = 1e-10, T rtol = 1e-10);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// Vectors //</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacethames_1_1propagators_1_1cowell.html#a1380c3373a238b9f5be1b15eb9016b18">derivative</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; geqoe, std::vector&lt;T&gt;&amp; geqoedot, <span class="keyword">const</span> T t, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>, <span class="keyword">const</span> <a class="code" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation&lt;T&gt;</a>&amp; perturbation);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    std::vector&lt;T&gt; <a class="code" href="namespacethames_1_1propagators_1_1cowell.html#a33941cc8333ecdcd0b8f7a374503f350">propagate</a>(T tstart, T tend, T tstep, std::vector&lt;T&gt; RV, T <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>, <span class="keyword">const</span> <a class="code" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation&lt;T&gt;</a>&amp; perturbation, T atol = 1e-10, T rtol = 1e-10);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacethames_1_1propagators_1_1geqoe.html">thames::propagators::geqoe</a>{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classthames_1_1propagators_1_1geqoe_1_1GEqOEPropagator.html">   16</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classthames_1_1propagators_1_1geqoe_1_1GEqOEPropagator.html">GEqOEPropagator</a> : <span class="keyword">public</span> <a class="code" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html">BasePropagator</a>&lt;T&gt; {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            T m_mu;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <a class="code" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation&lt;T&gt;</a>* m_perturbation;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <a class="code" href="classthames_1_1propagators_1_1geqoe_1_1GEqOEPropagator.html">GEqOEPropagator</a>(<span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>, <a class="code" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation&lt;T&gt;</a>* perturbation);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="comment">// Arrays //</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordtype">void</span> derivative(<span class="keyword">const</span> std::array&lt;T, 6&gt;&amp; geqoe, std::array&lt;T, 6&gt;&amp; geqoedot, <span class="keyword">const</span> T t) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            std::array&lt;T, 6&gt; propagate(T tstart, T tend, T tstep, std::array&lt;T, 6&gt; RV, T atol = 1e-10, T rtol = 1e-10) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="comment">// Vectors //</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keywordtype">void</span> derivative(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; geqoe, std::vector&lt;T&gt;&amp; geqoedot, <span class="keyword">const</span> T t) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            std::vector&lt;T&gt; propagate(T tstart, T tend, T tstep, std::vector&lt;T&gt; RV, T atol = 1e-10, T rtol = 1e-10) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    };</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="anamespacethames_1_1propagators_1_1cowell_html_a1380c3373a238b9f5be1b15eb9016b18"><div class="ttname"><a href="namespacethames_1_1propagators_1_1cowell.html#a1380c3373a238b9f5be1b15eb9016b18">thames::propagators::cowell::derivative</a></div><div class="ttdeci">void derivative(const std::array&lt; T, 6 &gt; &amp;RV, std::array&lt; T, 6 &gt; &amp;RVdot, const T t, const T &amp;mu, const BasePerturbation&lt; T &gt; &amp;perturbation)</div><div class="ttdoc">State derivative for Cowell's method propagation.</div><div class="ttdef"><b>Definition:</b> cowell.cpp:23</div></div>
+<div class="ttc" id="aclassthames_1_1propagators_1_1basepropagator_1_1BasePropagator_html"><div class="ttname"><a href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html">thames::propagators::basepropagator::BasePropagator</a></div><div class="ttdef"><b>Definition:</b> basepropagator.h:11</div></div>
+<div class="ttc" id="anamespacethames_1_1propagators_1_1basepropagator_html"><div class="ttname"><a href="namespacethames_1_1propagators_1_1basepropagator.html">thames::propagators::basepropagator</a></div><div class="ttdef"><b>Definition:</b> basepropagator.h:8</div></div>
+<div class="ttc" id="abasepropagator_8h_html"><div class="ttname"><a href="basepropagator_8h.html">basepropagator.h</a></div></div>
 <div class="ttc" id="aclassthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation_html"><div class="ttname"><a href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">thames::perturbations::baseperturbation::BasePerturbation</a></div><div class="ttdoc">Class for the base perturbation.</div><div class="ttdef"><b>Definition:</b> baseperturbation.h:15</div></div>
+<div class="ttc" id="aclassthames_1_1propagators_1_1geqoe_1_1GEqOEPropagator_html"><div class="ttname"><a href="classthames_1_1propagators_1_1geqoe_1_1GEqOEPropagator.html">thames::propagators::geqoe::GEqOEPropagator</a></div><div class="ttdef"><b>Definition:</b> geqoe.h:16</div></div>
 <div class="ttc" id="anamespacethames_1_1perturbations_1_1baseperturbation_html"><div class="ttname"><a href="namespacethames_1_1perturbations_1_1baseperturbation.html">thames::perturbations::baseperturbation</a></div><div class="ttdef"><b>Definition:</b> baseperturbation.cpp:6</div></div>
 <div class="ttc" id="anamespacethames_1_1constants_1_1earth_html_af14ba7df5ed2e621ca4d7021ef544156"><div class="ttname"><a href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">thames::constants::earth::mu</a></div><div class="ttdeci">const double mu</div><div class="ttdoc">Earth's gravitational parameter [km^3/s^2].</div><div class="ttdef"><b>Definition:</b> earth.h:10</div></div>
 <div class="ttc" id="anamespacethames_1_1propagators_1_1geqoe_html"><div class="ttname"><a href="namespacethames_1_1propagators_1_1geqoe.html">thames::propagators::geqoe</a></div><div class="ttdef"><b>Definition:</b> geqoe.cpp:16</div></div>
-<div class="ttc" id="anamespacethames_1_1propagators_1_1cowell_html_a33941cc8333ecdcd0b8f7a374503f350"><div class="ttname"><a href="namespacethames_1_1propagators_1_1cowell.html#a33941cc8333ecdcd0b8f7a374503f350">thames::propagators::cowell::propagate</a></div><div class="ttdeci">std::array&lt; T, 6 &gt; propagate(T tstart, T tend, T tstep, std::array&lt; T, 6 &gt; RV, T mu, const BasePerturbation&lt; T &gt; &amp;perturbation, T atol, T rtol)</div><div class="ttdoc">Propagate Cartesian state using Cowell's method.</div><div class="ttdef"><b>Definition:</b> cowell.cpp:49</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

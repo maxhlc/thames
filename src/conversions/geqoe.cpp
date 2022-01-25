@@ -20,7 +20,7 @@ namespace thames::conversions::geqoe{
     ////////////
 
     template<class T>
-    std::array<T, 6> cartesian_to_geqoe(const T& t, const std::array<T, 6>& RV, const T& mu, const BasePerturbation<T>& perturbation){
+    std::array<T, 6> cartesian_to_geqoe(const T& t, const std::array<T, 6>& RV, const T& mu, BasePerturbation<T>* perturbation){
         // Extract position and velocity vectors
         std::array<T, 3> R = {RV[0], RV[1], RV[2]};
         std::array<T, 3> V = {RV[3], RV[4], RV[5]};
@@ -34,7 +34,7 @@ namespace thames::conversions::geqoe{
         T h = thames::vector::geometry::norm3(H);
 
         // Calculate the effective potential energy
-        T ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + perturbation.potential(t, R);
+        T ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + perturbation->potential(t, R);
 
         // Calculate the total energy
         T e = 0.5*pow(drdt, 2.0) - mu/r + ueff;
@@ -107,10 +107,10 @@ namespace thames::conversions::geqoe{
         // Return GEqOE state vector
         return geqoe;
     }
-    template std::array<double, 6> cartesian_to_geqoe<double>(const double&, const std::array<double, 6>&, const double&, const BasePerturbation<double>&);
+    template std::array<double, 6> cartesian_to_geqoe<double>(const double&, const std::array<double, 6>&, const double&, BasePerturbation<double>*);
 
     template<class T>
-    std::array<T, 6> geqoe_to_cartesian(const T& t, const std::array<T, 6>& geqoe, const T& mu, const BasePerturbation<T>& perturbation){
+    std::array<T, 6> geqoe_to_cartesian(const T& t, const std::array<T, 6>& geqoe, const T& mu, BasePerturbation<T>* perturbation){
         // Extract elements
         T nu = geqoe[0];
         T p1 = geqoe[1];
@@ -162,7 +162,7 @@ namespace thames::conversions::geqoe{
         T c = pow(pow(mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
 
         // Calculate angular momentum
-        T h = sqrt(pow(c, 2.0) - 2.0*pow(r, 2.0)*perturbation.potential(t, R));
+        T h = sqrt(pow(c, 2.0) - 2.0*pow(r, 2.0)*perturbation->potential(t, R));
 
         // Calculate velocity
         std::array<T, 3> V = drdt*er + h/r*ef;
@@ -180,14 +180,14 @@ namespace thames::conversions::geqoe{
         // Return Cartesian state vector
         return RV;
     }
-    template std::array<double, 6> geqoe_to_cartesian<double>(const double&, const std::array<double, 6>&, const double&, const BasePerturbation<double>&);
+    template std::array<double, 6> geqoe_to_cartesian<double>(const double&, const std::array<double, 6>&, const double&, BasePerturbation<double>*);
 
     /////////////
     // Vectors //
     /////////////
 
     template<class T>
-    std::vector<T> cartesian_to_geqoe(const T& t, const std::vector<T>& RV, const T& mu, const BasePerturbation<T>& perturbation){
+    std::vector<T> cartesian_to_geqoe(const T& t, const std::vector<T>& RV, const T& mu, BasePerturbation<T>* perturbation){
         // Extract position and velocity vectors
         std::vector<T> R = {RV[0], RV[1], RV[2]};
         std::vector<T> V = {RV[3], RV[4], RV[5]};
@@ -201,7 +201,7 @@ namespace thames::conversions::geqoe{
         T h = thames::vector::geometry::norm3(H);
 
         // Calculate the effective potential energy
-        T ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + perturbation.potential(t, R);
+        T ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + perturbation->potential(t, R);
 
         // Calculate the total energy
         T e = 0.5*pow(drdt, 2.0) - mu/r + ueff;
@@ -274,10 +274,10 @@ namespace thames::conversions::geqoe{
         // Return GEqOE state vector
         return geqoe;
     }
-    template std::vector<double> cartesian_to_geqoe<double>(const double& t, const std::vector<double>& RV, const double& mu, const BasePerturbation<double>& perturbation);
+    template std::vector<double> cartesian_to_geqoe<double>(const double& t, const std::vector<double>& RV, const double& mu, BasePerturbation<double>* perturbation);
 
     template<class T>
-    std::vector<T> geqoe_to_cartesian(const T& t, const std::vector<T>& geqoe, const T& mu, const BasePerturbation<T>& perturbation){
+    std::vector<T> geqoe_to_cartesian(const T& t, const std::vector<T>& geqoe, const T& mu, BasePerturbation<T>* perturbation){
         // Extract elements
         T nu = geqoe[0];
         T p1 = geqoe[1];
@@ -329,7 +329,7 @@ namespace thames::conversions::geqoe{
         T c = pow(pow(mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
 
         // Calculate angular momentum
-        T h = sqrt(pow(c, 2.0) - 2.0*pow(r, 2.0)*perturbation.potential(t, R));
+        T h = sqrt(pow(c, 2.0) - 2.0*pow(r, 2.0)*perturbation->potential(t, R));
 
         // Calculate velocity
         std::vector<T> V = drdt*er + h/r*ef;
@@ -347,6 +347,6 @@ namespace thames::conversions::geqoe{
         // Return Cartesian state vector
         return RV;
     }
-    template std::vector<double> geqoe_to_cartesian<double>(const double&, const std::vector<double>&, const double&, const BasePerturbation<double>&);
+    template std::vector<double> geqoe_to_cartesian<double>(const double&, const std::vector<double>&, const double&, BasePerturbation<double>*);
     
 }
