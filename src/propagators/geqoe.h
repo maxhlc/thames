@@ -12,6 +12,11 @@ using namespace thames::perturbations::baseperturbation;
 
 namespace thames::propagators {
 
+    /**
+     * @brief Propagator object for GEqOE.
+     * 
+     * @tparam T Numeric type.
+     */
     template<class T>
     class GEqOEPropagator : public BasePropagator<T> {
 

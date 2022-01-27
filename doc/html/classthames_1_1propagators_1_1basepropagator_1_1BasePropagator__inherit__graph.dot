@@ -4,9 +4,9 @@ digraph "thames::propagators::basepropagator::BasePropagator&lt; T &gt;"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node1 [label="thames::propagators\l::basepropagator::BasePropagator\< T \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 [label="thames::propagators\l::basepropagator::BasePropagator\< T \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Base propagator abstract object."];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="thames::propagators\l::cowell::CowellPropagator\< T \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classthames_1_1propagators_1_1cowell_1_1CowellPropagator.html",tooltip=" "];
+  Node2 [label="thames::propagators\l::CowellPropagator\< T \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classthames_1_1propagators_1_1CowellPropagator.html",tooltip="Propagator object for Cowell's method."];
   Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="thames::propagators\l::geqoe::GEqOEPropagator\< T \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classthames_1_1propagators_1_1geqoe_1_1GEqOEPropagator.html",tooltip=" "];
+  Node3 [label="thames::propagators\l::GEqOEPropagator\< T \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classthames_1_1propagators_1_1GEqOEPropagator.html",tooltip="Propagator object for GEqOE."];
 }
