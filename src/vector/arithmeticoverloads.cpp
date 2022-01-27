@@ -1,9 +1,12 @@
 #include <array>
 #include <vector>
-#include <stdexcept>
+
+#ifdef THAMES_USE_SMARTUQ
+#include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
+using namespace smartuq::polynomial;
+#endif
 
 #include "arithmeticoverloads.h"
-
 
 namespace thames::vector::arithmeticoverloads {
 
@@ -114,5 +117,91 @@ namespace thames::vector::arithmeticoverloads {
         return c;
     }
     template std::vector<double> operator/<double>(const std::vector<double>& b, const double& a);
+
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator+(const std::vector<P<T>>& a, const std::vector<P<T>>& b){
+        std::vector<P<T>> c(a);
+
+        for(std::size_t ii=0; ii<a.size(); ii++)
+            c[ii] = a[ii] + b[ii];
+
+        return c;
+    }
+    template std::vector<taylor_polynomial<double>> operator+(const std::vector<taylor_polynomial<double>>& a, const std::vector<taylor_polynomial<double>>& b);
+
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator-(const std::vector<P<T>>& a, const std::vector<P<T>>& b){
+        std::vector<P<T>> c(a);
+
+        for(std::size_t ii=0; ii<a.size(); ii++)
+            c[ii] = a[ii] - b[ii];
+
+        return c;
+    }
+    template std::vector<taylor_polynomial<double>> operator-(const std::vector<taylor_polynomial<double>>& a, const std::vector<taylor_polynomial<double>>& b);
+
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator*(const T& a, const std::vector<P<T>>& b){
+        std::vector<P<T>> c(b);
+
+        for(std::size_t ii=0; ii<b.size(); ii++)
+            c[ii] = a*b[ii];
+
+        return c;
+    }
+    template std::vector<taylor_polynomial<double>> operator*(const double& a, const std::vector<taylor_polynomial<double>>& b);
+
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator*(const std::vector<P<T>>& b, const T& a){
+        return a*b;
+    }
+    template std::vector<taylor_polynomial<double>> operator*(const std::vector<taylor_polynomial<double>>& b, const double& a);
+
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator*(const P<T>& a, const std::vector<P<T>>& b){
+        std::vector<P<T>> c(b);
+
+        for(std::size_t ii=0; ii<b.size(); ii++)
+            c[ii] = a*b[ii];
+
+        return c;
+    }
+    template std::vector<taylor_polynomial<double>> operator*(const taylor_polynomial<double>& a, const std::vector<taylor_polynomial<double>>& b);
+
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator*(const std::vector<P<T>>& b, const P<T>& a){
+        return a*b;
+    }
+    template std::vector<taylor_polynomial<double>> operator*(const std::vector<taylor_polynomial<double>>& b, const taylor_polynomial<double>& a);
+
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator/(const std::vector<P<T>>& b, const T& a){
+        std::vector<P<T>> c(b);
+
+        for(std::size_t ii=0; ii<b.size(); ii++)
+            c[ii] = b[ii]/a;
+
+        return c;
+    }
+    template std::vector<taylor_polynomial<double>> operator/(const std::vector<taylor_polynomial<double>>& b, const double& a);
+
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator/(const std::vector<P<T>>& b, const P<T>& a){
+        std::vector<P<T>> c(b);
+
+        for(std::size_t ii=0; ii<b.size(); ii++)
+            c[ii] = b[ii]/a;
+
+        return c;
+    }
+    template std::vector<taylor_polynomial<double>> operator/(const std::vector<taylor_polynomial<double>>& b, const taylor_polynomial<double>& a);
+
+    #endif
 
 }

@@ -129,6 +129,110 @@ namespace thames::vector::arithmeticoverloads {
     template<class T>
     std::vector<T> operator/(const std::vector<T>& b, const T& a);
 
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    /**
+     * @brief Element-wise addition of two vectors of polynomials.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] a First vector.
+     * @param[in] b Second vector.
+     * @return std::vector<P<T>> Output vector.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator+(const std::vector<P<T>>& a, const std::vector<P<T>>& b);
+
+    /**
+     * @brief Element-wise subtraction of two vectors of polynomials.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] a First vector of polynomials.
+     * @param[in] b Second vector of polynomials.
+     * @return std::vector<P<T>> Output vector of polynomials.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator-(const std::vector<P<T>>& a, const std::vector<P<T>>& b);
+
+    /**
+     * @brief Multiplication of a vector of polynomials with a scalar.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] a Scalar.
+     * @param[in] b Vector of polynomials.
+     * @return std::vector<P<T>> Output vector of polynomials.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator*(const T& a, const std::vector<P<T>>& b);
+
+    /**
+     * @brief Multiplication of a vector of polynomials with a scalar.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] a Scalar.
+     * @param[in] b Vector of polynomials.
+     * @return std::vector<P<T>> Output vector of polynomials.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator*(const std::vector<P<T>>& b, const T& a);
+
+    /**
+     * @brief Multiplication of a vector of polynomials with a polynomial.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] a Polynomial.
+     * @param[in] b Vector of polynomials.
+     * @return std::vector<P<T>> Output vector of polynomials.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator*(const P<T>& a, const std::vector<P<T>>& b);
+
+    /**
+     * @brief Multiplication of a vector of polynomials with a polynomial.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] a Polynomial.
+     * @param[in] b Vector of polynomials.
+     * @return std::vector<P<T>> Output vector of polynomials.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator*(const std::vector<P<T>>& b, const P<T>& a);
+
+    /**
+     * @brief Division of a vector of polynomials with a scalar.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] b Vector of polynomials.
+     * @param[in] a Scalar.
+     * @return std::vector<P<T>> Output vector.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator/(const std::vector<P<T>>& b, const T& a);
+
+    /**
+     * @brief Division of a vector of polynomials with a polynomial.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] b Vector of polynomials.
+     * @param[in] a Polynomial.
+     * @return std::vector<P<T>> Output vector.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> operator/(const std::vector<P<T>>& b, const P<T>& a);
+
+    #endif
+
 }
 
 #endif

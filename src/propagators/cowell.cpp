@@ -4,6 +4,13 @@
 
 #include <boost/numeric/odeint.hpp>
 
+#ifdef THAMES_USE_SMARTUQ
+#include "../../external/smart-uq/include/Integrators/rk4.h"
+#include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
+using namespace smartuq::integrator;
+using namespace smartuq::polynomial;
+#endif
+
 #include "cowell.h"
 #include "../perturbations/baseperturbation.h"
 #include "../vector/arithmeticoverloads.h"
@@ -13,6 +20,10 @@ using namespace thames::perturbations::baseperturbation;
 using namespace thames::vector::arithmeticoverloads;
 
 namespace thames::propagators {
+
+    ///////////
+    // Reals //
+    ///////////
 
     template<class T>
     CowellPropagator<T>::CowellPropagator(const T& mu, const BasePerturbation<T>* perturbation) : m_mu(mu), m_perturbation(perturbation) {
@@ -104,5 +115,80 @@ namespace thames::propagators {
     }
 
     template class CowellPropagator<double>;
+
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    template<class T, template<class> class P>
+    CowellPropagatorPolynomialDynamics<T, P>::CowellPropagatorPolynomialDynamics(const P<T>& mu, const BasePerturbationPolynomial<T, P>* perturbation) : smartuq::dynamics::base_dynamics<P<T>>("Cowell"), m_mu(mu), m_perturbation(perturbation) {
+
+    }
+
+    template<class T, template<class> class P>
+    CowellPropagatorPolynomialDynamics<T, P>::~CowellPropagatorPolynomialDynamics() {
+
+    }
+
+    template<class T, template<class> class P>
+    int CowellPropagatorPolynomialDynamics<T, P>::evaluate(const T& t, const std::vector<P<T>>& RV, std::vector<P<T>>& RVdot) const {
+        // Extract Cartesian state vectors
+        std::vector<P<T>> R = {RV[0], RV[1], RV[2]};
+        std::vector<P<T>> V = {RV[3], RV[4], RV[5]};
+
+        // Calculate range
+        P<T> r = thames::vector::geometry::norm3(R);
+
+        // Calculate perturbing acceleration
+        std::vector<P<T>> F = m_perturbation->acceleration_total(t, R, V);
+
+        // Calculate central body acceleration
+        std::vector<P<T>> G = -m_mu/pow(r, 3)*R;
+
+        // Calculate acceleration
+        std::vector<P<T>> A = G + F;
+
+        // Update derivative
+        RVdot = {V[0], V[1], V[2], A[0], A[1], A[2]};
+
+        // Return zero
+        return 0;
+    }
+
+    template class CowellPropagatorPolynomialDynamics<double, taylor_polynomial>;
+
+    template<class T, template<class> class P>
+    CowellPropagatorPolynomial<T, P>::CowellPropagatorPolynomial(const P<T>& mu, const BasePerturbationPolynomial<T, P>* perturbation) : m_dyn(mu, perturbation) {
+
+    }
+
+    template<class T, template<class> class P>
+    CowellPropagatorPolynomial<T, P>::~CowellPropagatorPolynomial() {
+        
+    }
+
+    template<class T, template<class> class P>
+    std::vector<P<T>> CowellPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV) const {
+        // Calculate number of steps based on time step
+        unsigned int nstep = (int) ceil((tend - tstart)/tstep);
+
+        // Create final state vector
+        std::vector<P<T>> RVfinal(RV);
+
+        // Create integrator
+        rk4<P<T>> integrator(&m_dyn);
+
+        // Integrate state
+        integrator.integrate(tstart,tend, nstep, RV, RVfinal);
+
+        // Return final state
+        return RVfinal;        
+    }
+
+    template class CowellPropagatorPolynomial<double, taylor_polynomial>;
+
+    #endif
 
 }

@@ -10,6 +10,10 @@ using namespace thames::perturbations::baseperturbation;
 
 namespace thames::perturbations::geopotential{
 
+    ///////////
+    // Reals //
+    ///////////
+
     /**
      * @brief Class for the perturbation resulting from the J2-term.
      * 
@@ -38,6 +42,12 @@ namespace thames::perturbations::geopotential{
              * @param[in] radius Central body radius.
              */
             J2(const T& mu, const T& J2, const T& radius);
+
+            /**
+             * @brief Destroy the J2 object.
+             * 
+             */
+            ~J2();
 
             ////////////
             // Arrays //
@@ -86,6 +96,71 @@ namespace thames::perturbations::geopotential{
             T potential(const T& t, const std::vector<T>& R) const override;
 
     };
+
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    /**
+     * @brief Class for the perturbation resulting from the J2-term.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     */
+    template<class T, template<class> class P>
+    class J2Polynomial : public BasePerturbationPolynomial<T, P> {
+        private:
+
+            /// Central body gravitational parameter.
+            const P<T> m_mu;
+
+            /// Central body J2-term.
+            const P<T> m_J2;
+
+            /// Central body radius.
+            const P<T> m_radius;
+
+        public:
+
+            /**
+             * @brief Construct a new J2Polynomial object.
+             * 
+             * @param[in] mu Central body gravitational parameter.
+             * @param[in] J2 Central body J2-term.
+             * @param[in] radius Central body radius.
+             */
+            J2Polynomial(const P<T>& mu, const P<T>& J2, const P<T>& radius);
+
+            /**
+             * @brief Destroy the J2Polynomial object
+             * 
+             */
+            ~J2Polynomial();
+
+            /**
+             * @brief Calculate perturbing acceleration resulting from the J2-term. 
+             * 
+             * @param[in] t Current physical time.
+             * @param[in] R Position vector.
+             * @param[in] V Velocity vector.
+             * @return std::vector<P<T>> Total perturbing acceleration due to the J2-term.
+             */
+            std::vector<P<T>> acceleration_total(const T& t, const std::vector<P<T>>& R, const std::vector<P<T>>& V) const override;
+
+            /**
+             * @brief Calculate perturbing potential resulting from the J2-term. 
+             * 
+             * @param[in] t Current physical time.
+             * @param[in] R Position vector.
+             * @return P<T> Perturbing potential due to the J2-term.
+             */
+            P<T> potential(const T& t, const std::vector<P<T>>& R) const override;
+
+    };
+
+    #endif
 
 }
 

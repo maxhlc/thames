@@ -100,6 +100,37 @@ namespace thames::vector::geometry{
     template<class T>
     std::vector<T> cross3(const std::vector<T>& a, const std::vector<T>& b);
 
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    /**
+     * @brief Function to calculate the dot product of two vectors of polynomials with three elements.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] a First vector of polynomials.
+     * @param[in] b Second vector of polynomials.
+     * @return P<T> Dot product of the vectors of polynomials.
+     */
+    template<class T, template<class> class P>
+    P<T> dot3(const std::vector<P<T>>& a, const std::vector<P<T>>& b);
+
+    /**
+     * @brief Function to calculate the length of a vector with three elements.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] a Vector of polynomials.
+     * @return P<T> Length of the vector of polynomials.
+     */
+    template<class T, template<class> class P>
+    P<T> norm3(const std::vector<P<T>>& a);
+
+    #endif
+
 }
 
 #endif

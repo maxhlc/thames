@@ -30,9 +30,19 @@ add_subdirectory(src)
 
 # Build main executable
 add_executable(main src/main.cpp)
+
 # Link thames library
 target_link_libraries(main thames)
+
 # Link SMART-UQ static library
 if(THAMES_USE_SMARTUQ)
+    # Link SMART-UQ
     target_link_libraries(main smart-uq)
+
+    # Link FFTW libraries
+    find_library(FFTW_LIBRARY fftw3)
+    find_library(FFTWF_LIBRARY fftw3f)
+    find_library(FFTWL_LIBRARY fftw3l)
+    set(FFTW_LIBRARIES "${FFTW_LIBRARY}" "${FFTWF_LIBRARY}" "${FFTWL_LIBRARY}")
+    target_link_libraries(main ${FFTW_LIBRARIES})
 endif(THAMES_USE_SMARTUQ)

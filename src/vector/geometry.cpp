@@ -1,6 +1,11 @@
 #include <array>
 #include <cmath>
 
+#ifdef THAMES_USE_SMARTUQ
+#include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
+using namespace smartuq::polynomial;
+#endif
+
 #include "geometry.h"
 
 namespace thames::vector::geometry{
@@ -84,5 +89,27 @@ namespace thames::vector::geometry{
         return vecout;
     }
     template std::vector<double> cross3<double>(const std::vector<double>&, const std::vector<double>&);
+
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    template<class T, template<class> class P>
+    P<T> dot3(const std::vector<P<T>>& a, const std::vector<P<T>>& b){
+        // Return dot product
+        return a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
+    }
+    template taylor_polynomial<double> dot3(const std::vector<taylor_polynomial<double>>&, const std::vector<taylor_polynomial<double>>&);
+
+    template<class T, template<class> class P>
+    P<T> norm3(const std::vector<P<T>>& a){
+        // Return square root of the dot product of the vector and itself
+        return sqrt(dot3(a, a));
+    }
+    template taylor_polynomial<double> norm3(const std::vector<taylor_polynomial<double>>&);
+
+    #endif
 
 }

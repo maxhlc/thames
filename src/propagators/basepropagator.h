@@ -1,11 +1,14 @@
 #ifndef THAMES_PROPAGATORS_BASEPROPAGATOR
 #define THAMES_PROPAGATORS_BASEPROPAGATOR
 
-#include "../perturbations/baseperturbation.h"
-
-using namespace thames::perturbations::baseperturbation;
+#include <array>
+#include <vector>
 
 namespace thames::propagators::basepropagator {
+
+    ///////////
+    // Reals //
+    ///////////
 
     /**
      * @brief Base propagator abstract object.
@@ -72,6 +75,49 @@ namespace thames::propagators::basepropagator {
             virtual std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> RV, T atol, T rtol) const;           
 
     };
+
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    /**
+     * @brief Base propagator abstract object for polynomial propagations.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     */
+    template<class T, template<class> class P>
+    class BasePropagatorPolynomial {
+
+        private:
+
+        public:
+
+            // /**
+            //  * @brief State derivative method.
+            //  * 
+            //  * @param[in] x State.
+            //  * @param[out] dxdt State derivative.
+            //  * @param[in] t Time.
+            //  */
+            // virtual void derivative(const std::vector<P<T>>& x, std::vector<P<T>>& dxdt, const T t) const;
+
+            /**
+             * @brief Propagation method.
+             * 
+             * @param[in] tstart Propagation start time in physical time.
+             * @param[in] tend Propagation end time in physical time.
+             * @param[in] tstep Initial timestep for propagation.
+             * @param[in] RV Initial Cartesian state.
+             * @return std::vector<P<T>> Final state.
+             */
+            virtual std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV) const;           
+
+    };
+
+    #endif
 
 }
 
