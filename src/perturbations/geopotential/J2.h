@@ -113,14 +113,14 @@ namespace thames::perturbations::geopotential{
     class J2Polynomial : public BasePerturbationPolynomial<T, P> {
         private:
 
-            /// Central body gravitational parameter.
-            const P<T> m_mu;
+            /// Central body gravitational parameter
+            const T m_mu;
 
-            /// Central body J2-term.
-            const P<T> m_J2;
+            /// Central body J2-term
+            const T m_J2;
 
-            /// Central body radius.
-            const P<T> m_radius;
+            /// Central body radius
+            const T m_radius;
 
         public:
 
@@ -131,7 +131,7 @@ namespace thames::perturbations::geopotential{
              * @param[in] J2 Central body J2-term.
              * @param[in] radius Central body radius.
              */
-            J2Polynomial(const P<T>& mu, const P<T>& J2, const P<T>& radius);
+            J2Polynomial(const T& mu, const T& J2, const T& radius);
 
             /**
              * @brief Destroy the J2Polynomial object

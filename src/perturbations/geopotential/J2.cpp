@@ -125,7 +125,7 @@ namespace thames::perturbations::geopotential{
     #ifdef THAMES_USE_SMARTUQ
 
     template<class T, template<class> class P>
-    J2Polynomial<T, P>::J2Polynomial(const P<T>& mu, const P<T>& J2, const P<T>& radius) : m_mu(mu), m_J2(J2), m_radius(radius) {
+    J2Polynomial<T, P>::J2Polynomial(const T& mu, const T& J2, const T& radius) : m_mu(mu), m_J2(J2), m_radius(radius) {
 
     }
 
@@ -152,8 +152,6 @@ namespace thames::perturbations::geopotential{
             J2_fac1*y*(1.0 - J2_fac2),
             J2_fac1*z*(3.0 - J2_fac2)
         };
-
-        // std::cout << (1/pow(r, 5)).get_coeffs()[0] << "\n";
 
         // Return perturbing acceleration vector
         return A;
