@@ -121,7 +121,7 @@ namespace thames::propagators {
             using smartuq::dynamics::base_dynamics<P<T>>::m_name;
 
             /// Gravitational parameter
-            const P<T> m_mu;
+            const T m_mu;
 
             /// Perturbation object
             const BasePerturbationPolynomial<T, P>* m_perturbation;
@@ -134,7 +134,7 @@ namespace thames::propagators {
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              */
-            CowellPropagatorPolynomialDynamics(const P<T>& mu, const BasePerturbationPolynomial<T, P>* perturbation);
+            CowellPropagatorPolynomialDynamics(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation);
 
             /**
              * @brief Destroy the Cowell Propagator Polynomial Dynamics object.
@@ -176,7 +176,7 @@ namespace thames::propagators {
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              */
-            CowellPropagatorPolynomial(const P<T>& mu, const BasePerturbationPolynomial<T, P>* perturbation);
+            CowellPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation);
 
             /**
              * @brief Destroy the Cowell Propagator Polynomial object

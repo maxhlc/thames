@@ -123,7 +123,7 @@ namespace thames::propagators {
     #ifdef THAMES_USE_SMARTUQ
 
     template<class T, template<class> class P>
-    CowellPropagatorPolynomialDynamics<T, P>::CowellPropagatorPolynomialDynamics(const P<T>& mu, const BasePerturbationPolynomial<T, P>* perturbation) : smartuq::dynamics::base_dynamics<P<T>>("Cowell"), m_mu(mu), m_perturbation(perturbation) {
+    CowellPropagatorPolynomialDynamics<T, P>::CowellPropagatorPolynomialDynamics(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation) : smartuq::dynamics::base_dynamics<P<T>>("Cowell"), m_mu(mu), m_perturbation(perturbation) {
 
     }
 
@@ -160,7 +160,7 @@ namespace thames::propagators {
     template class CowellPropagatorPolynomialDynamics<double, taylor_polynomial>;
 
     template<class T, template<class> class P>
-    CowellPropagatorPolynomial<T, P>::CowellPropagatorPolynomial(const P<T>& mu, const BasePerturbationPolynomial<T, P>* perturbation) : m_dyn(mu, perturbation) {
+    CowellPropagatorPolynomial<T, P>::CowellPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation) : m_dyn(mu, perturbation) {
 
     }
 
