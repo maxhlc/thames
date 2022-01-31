@@ -42,14 +42,9 @@ namespace thames::conversions::geqoe{
         // Calculate the generalised mean motion
         T nu = pow(-2.0*e, 1.5)/mu;
 
-        // Calculate Keplerian elements, and extract angles
-        std::array<T, 6> keplerian = thames::conversions::keplerian::cartesian_to_keplerian(RV, mu);
-        T inc = keplerian[2];
-        T raan = keplerian[3];
-
-        // Calculate plane orientation parameters
-        T q1 = tan(inc/2.0)*sin(raan);
-        T q2 = tan(inc/2.0)*cos(raan);
+        // // Calculate plane orientation parameters
+        T q1 = H[0]/(h + H[2]);
+        T q2 = -H[1]/(h + H[2]);
 
         // Calculate equinocital reference frame unit vectors
         T efac = 1.0/(1.0 + pow(q1, 2.0) + pow(q2, 2.0));
@@ -209,14 +204,9 @@ namespace thames::conversions::geqoe{
         // Calculate the generalised mean motion
         T nu = pow(-2.0*e, 1.5)/mu;
 
-        // Calculate Keplerian elements, and extract angles
-        std::vector<T> keplerian = thames::conversions::keplerian::cartesian_to_keplerian(RV, mu);
-        T inc = keplerian[2];
-        T raan = keplerian[3];
-
         // Calculate plane orientation parameters
-        T q1 = tan(inc/2.0)*sin(raan);
-        T q2 = tan(inc/2.0)*cos(raan);
+        T q1 = H[0]/(h + H[2]);
+        T q2 = -H[1]/(h + H[2]);
 
         // Calculate equinocital reference frame unit vectors
         T efac = 1.0/(1.0 + pow(q1, 2.0) + pow(q2, 2.0));
