@@ -4,6 +4,10 @@
 #include <array>
 #include <vector>
 
+#ifdef THAMES_USE_SMARTUQ
+#include "../../external/smart-uq/include/Dynamics/base_dynamics.h"
+#endif
+
 #include "basepropagator.h"
 #include "../perturbations/baseperturbation.h"
 
@@ -91,6 +95,111 @@ namespace thames::propagators {
             std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> RV, T atol = 1e-10, T rtol = 1e-10) const override;
 
     };
+
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    /**
+     * @brief Object for GEqOE dynamics with polynomials, compatible with the SMART-UQ schema.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     */
+    template<class T, template<class> class P>
+    class GEqOEPropagatorPolynomialDynamics : public smartuq::dynamics::base_dynamics<P<T>> {
+
+        private:
+
+            /// Dynamics name
+            using smartuq::dynamics::base_dynamics<P<T>>::m_name;
+
+            /// Gravitational parameter
+            const T m_mu;
+
+            /// Perturbation object
+            const BasePerturbationPolynomial<T, P>* m_perturbation;
+
+        public:
+
+            /**
+             * @brief Construct a new GEqOE Propagator Polynomial Dynamics object.
+             * 
+             * @param[in] mu Gravitational parameter.
+             * @param[in] perturbation Perturbation object.
+             */
+            GEqOEPropagatorPolynomialDynamics(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation);
+
+            /**
+             * @brief Destroy the GEqOE Propagator Polynomial Dynamics object.
+             * 
+             */
+            ~GEqOEPropagatorPolynomialDynamics();
+
+            /**
+             * @brief Evaluate the derivative of the GEqOE dynamics.
+             * 
+             * @param[in] t Current physical time.
+             * @param[in] geqoe GEqOE state.
+             * @param[out] geoqedot Derivative of the GEqOE state.
+             * @return int 
+             */
+            int evaluate(const T& t, const std::vector<P<T>>& geqoe, std::vector<P<T>>& geoqedot) const;
+
+    };
+
+    /**
+     * @brief Propagator object for GEqOE with polynomials.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     */
+    template<class T, template<class> class P>
+    class GEqOEPropagatorPolynomial : public BasePropagatorPolynomial<T, P> {
+        
+        private:
+
+            /// Gravitational parameter
+            const T m_mu;
+
+            /// Perturbation object
+            const BasePerturbationPolynomial<T, P>* m_perturbation;
+
+            /// Dynamics object
+            const GEqOEPropagatorPolynomialDynamics<T, P> m_dyn;
+
+        public:
+
+            /**
+             * @brief Construct a new GEqOE Propagator Polynomial object.
+             * 
+             * @param[in] mu Gravitational parameter.
+             * @param[in] perturbation Perturbation object.
+             */
+            GEqOEPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation);
+
+            /**
+             * @brief Destroy the GEqOE Propagator Polynomial object
+             * 
+             */
+            ~GEqOEPropagatorPolynomial();
+
+            /**
+             * @brief Propagate Cartesian state using GEqOE.
+             * 
+             * @param[in] tstart Propagation start time in physical time.
+             * @param[in] tend Propagation end time in physical time.
+             * @param[in] tstep Initial timestep for propagation.
+             * @param[in] RV Initial Cartesian state.
+             * @return std::vector<P<T>> Final Cartesian state.
+             */
+            std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV) const override;
+
+    };
+
+    #endif
 
 }
 
