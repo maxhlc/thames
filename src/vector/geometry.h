@@ -119,7 +119,7 @@ namespace thames::vector::geometry{
     P<T> dot3(const std::vector<P<T>>& a, const std::vector<P<T>>& b);
 
     /**
-     * @brief Function to calculate the length of a vector with three elements.
+     * @brief Function to calculate the length of a vector of polynomials with three elements.
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -128,6 +128,30 @@ namespace thames::vector::geometry{
      */
     template<class T, template<class> class P>
     P<T> norm3(const std::vector<P<T>>& a);
+
+    /**
+     * @brief Calculate the cross product of two vectors of polynomials with three elements.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] a First vector of polynomials.
+     * @param[in] b Second vector of polynomials.
+     * @param[out] vecout Cross product of the vectors of polynomials.
+     */
+    template<class T, template<class> class P>
+    void cross3(const std::vector<P<T>>& a, const std::vector<P<T>>& b, std::vector<P<T>>& vecout);
+
+    /**
+     * @brief Calculate the cross product of two vectors of polynomials with three elements.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] a First vector of polynomials.
+     * @param[in] b Second vector of polynomials.
+     * @return std::vector<P<T>> Cross product of the vectors of polynomials.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> cross3(const std::vector<P<T>>& a, const std::vector<P<T>>& b);
 
     #endif
 

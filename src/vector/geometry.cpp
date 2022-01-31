@@ -110,6 +110,28 @@ namespace thames::vector::geometry{
     }
     template taylor_polynomial<double> norm3(const std::vector<taylor_polynomial<double>>&);
 
+    template<class T, template<class> class P>
+    void cross3(const std::vector<P<T>>& a, const std::vector<P<T>>& b, std::vector<P<T>>& vecout){
+        // Calculate cross product
+        vecout[0] = a[1]*b[2] - a[2]*b[1];
+        vecout[1] = a[2]*b[0] - a[0]*b[2];
+        vecout[2] = a[0]*b[1] - a[1]*b[0];
+    }
+    template void cross3(const std::vector<taylor_polynomial<double>>&, const std::vector<taylor_polynomial<double>>&, std::vector<taylor_polynomial<double>>&);
+
+    template<class T, template<class> class P>
+    std::vector<P<T>> cross3(const std::vector<P<T>>& a, const std::vector<P<T>>& b){
+        // Declare output vector
+        std::vector<P<T>> vecout(a);
+
+        // Calculate cross product
+        cross3(a, b, vecout);
+
+        // Return cross product
+        return vecout;
+    }
+    template std::vector<taylor_polynomial<double>> cross3(const std::vector<taylor_polynomial<double>>&, const std::vector<taylor_polynomial<double>>&);
+
     #endif
 
 }

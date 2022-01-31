@@ -82,10 +82,16 @@ Functions</h2></td></tr>
 <tr class="separator:a19f8b6821632ceb4f4f7cca6aca92b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5a7ce57094b750a0dc346230d2e3fca"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:aa5a7ce57094b750a0dc346230d2e3fca"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1root.html#aa5a7ce57094b750a0dc346230d2e3fca">newton_raphson</a> (const std::function&lt; T(T)&gt; &amp;func, const std::function&lt; T(T)&gt; &amp;dfunc, T xn, T tol=1e-10)</td></tr>
-<tr class="memdesc:aa5a7ce57094b750a0dc346230d2e3fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Netwon-Raphson method for root finding.  <a href="namespacethames_1_1util_1_1root.html#aa5a7ce57094b750a0dc346230d2e3fca">More...</a><br /></td></tr>
+<tr class="memdesc:aa5a7ce57094b750a0dc346230d2e3fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Newton-Raphson method for root finding.  <a href="namespacethames_1_1util_1_1root.html#aa5a7ce57094b750a0dc346230d2e3fca">More...</a><br /></td></tr>
 <tr class="separator:aa5a7ce57094b750a0dc346230d2e3fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c5402e251e0aa78d7c8521272f0f1f1"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1root.html#a9c5402e251e0aa78d7c8521272f0f1f1">newton_raphson&lt; double &gt;</a> (const std::function&lt; double(double)&gt; &amp;, const std::function&lt; double(double)&gt; &amp;, double, double)</td></tr>
 <tr class="separator:a9c5402e251e0aa78d7c8521272f0f1f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c823b3a83ed76fbe31c39d2bd029292"><td class="memTemplParams" colspan="2">template&lt;class T , template&lt; class &gt; class P&gt; </td></tr>
+<tr class="memitem:a7c823b3a83ed76fbe31c39d2bd029292"><td class="memTemplItemLeft" align="right" valign="top">P&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1root.html#a7c823b3a83ed76fbe31c39d2bd029292">newton_raphson</a> (const std::function&lt; P&lt; T &gt;(P&lt; T &gt;)&gt; &amp;func, const std::function&lt; P&lt; T &gt;(P&lt; T &gt;)&gt; &amp;dfunc, P&lt; T &gt; xn, T tol=1e-10)</td></tr>
+<tr class="memdesc:a7c823b3a83ed76fbe31c39d2bd029292"><td class="mdescLeft">&#160;</td><td class="mdescRight">Newton-Raphson method for root finding.  <a href="namespacethames_1_1util_1_1root.html#a7c823b3a83ed76fbe31c39d2bd029292">More...</a><br /></td></tr>
+<tr class="separator:a7c823b3a83ed76fbe31c39d2bd029292"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dab55ec0588b7ecfeef84ba7bcf5bc8"><td class="memItemLeft" align="right" valign="top">template taylor_polynomial&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1root.html#a8dab55ec0588b7ecfeef84ba7bcf5bc8">newton_raphson</a> (const std::function&lt; taylor_polynomial&lt; double &gt;(taylor_polynomial&lt; double &gt;)&gt; &amp;, const std::function&lt; taylor_polynomial&lt; double &gt;(taylor_polynomial&lt; double &gt;)&gt; &amp;, taylor_polynomial&lt; double &gt;, double)</td></tr>
+<tr class="separator:a8dab55ec0588b7ecfeef84ba7bcf5bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="af51416ea48be4ef9b68144e522321b00"></a>
@@ -188,8 +194,70 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<a id="a7c823b3a83ed76fbe31c39d2bd029292"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c823b3a83ed76fbe31c39d2bd029292">&#9670;&nbsp;</a></span>newton_raphson() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , template&lt; class &gt; class P&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">P&lt; T &gt; thames::util::root::newton_raphson </td>
+          <td>(</td>
+          <td class="paramtype">const std::function&lt; P&lt; T &gt;(P&lt; T &gt;)&gt; &amp;&#160;</td>
+          <td class="paramname"><em>func</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::function&lt; P&lt; T &gt;(P&lt; T &gt;)&gt; &amp;&#160;</td>
+          <td class="paramname"><em>dfunc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">P&lt; T &gt;&#160;</td>
+          <td class="paramname"><em>xn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>tol</em> = <code>1e-10</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Newton-Raphson method for root finding. </p>
+<p>Convergence is calculated using the constant (index of zero) term.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Numeric type. </td></tr>
+    <tr><td class="paramname">P</td><td>Polynomial type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">func</td><td>Scalar function for root finding. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dfunc</td><td>Derivative of scalar function for root finding. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">xn</td><td>Initial guess. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tol</td><td>Solver tolerance. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>P&lt;T&gt; Argument of the root. </dd></dl>
+
+</div>
+</div>
 <a id="aa5a7ce57094b750a0dc346230d2e3fca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5a7ce57094b750a0dc346230d2e3fca">&#9670;&nbsp;</a></span>newton_raphson()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5a7ce57094b750a0dc346230d2e3fca">&#9670;&nbsp;</a></span>newton_raphson() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -228,7 +296,7 @@ template&lt;class T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Netwon-Raphson method for root finding. </p>
+<p>Newton-Raphson method for root finding. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Numeric type. </td></tr>
@@ -245,6 +313,46 @@ template&lt;class T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>T Argument of the root. </dd></dl>
+
+</div>
+</div>
+<a id="a8dab55ec0588b7ecfeef84ba7bcf5bc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dab55ec0588b7ecfeef84ba7bcf5bc8">&#9670;&nbsp;</a></span>newton_raphson() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template taylor_polynomial&lt;double&gt; thames::util::root::newton_raphson </td>
+          <td>(</td>
+          <td class="paramtype">const std::function&lt; taylor_polynomial&lt; double &gt;(taylor_polynomial&lt; double &gt;)&gt; &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::function&lt; taylor_polynomial&lt; double &gt;(taylor_polynomial&lt; double &gt;)&gt; &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">taylor_polynomial&lt; double &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

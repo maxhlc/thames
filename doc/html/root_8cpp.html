@@ -74,6 +74,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;cmath&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
+<code>#include &quot;../../external/smart-uq/include/Polynomial/smartuq_polynomial.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="optimise_8h_source.html">optimise.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="root_8h_source.html">root.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -101,10 +102,16 @@ Functions</h2></td></tr>
 <tr class="separator:a19f8b6821632ceb4f4f7cca6aca92b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5a7ce57094b750a0dc346230d2e3fca"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:aa5a7ce57094b750a0dc346230d2e3fca"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1root.html#aa5a7ce57094b750a0dc346230d2e3fca">thames::util::root::newton_raphson</a> (const std::function&lt; T(T)&gt; &amp;func, const std::function&lt; T(T)&gt; &amp;dfunc, T xn, T tol=1e-10)</td></tr>
-<tr class="memdesc:aa5a7ce57094b750a0dc346230d2e3fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Netwon-Raphson method for root finding.  <a href="namespacethames_1_1util_1_1root.html#aa5a7ce57094b750a0dc346230d2e3fca">More...</a><br /></td></tr>
+<tr class="memdesc:aa5a7ce57094b750a0dc346230d2e3fca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Newton-Raphson method for root finding.  <a href="namespacethames_1_1util_1_1root.html#aa5a7ce57094b750a0dc346230d2e3fca">More...</a><br /></td></tr>
 <tr class="separator:aa5a7ce57094b750a0dc346230d2e3fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c5402e251e0aa78d7c8521272f0f1f1"><td class="memItemLeft" align="right" valign="top">template double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1root.html#a9c5402e251e0aa78d7c8521272f0f1f1">thames::util::root::newton_raphson&lt; double &gt;</a> (const std::function&lt; double(double)&gt; &amp;, const std::function&lt; double(double)&gt; &amp;, double, double)</td></tr>
 <tr class="separator:a9c5402e251e0aa78d7c8521272f0f1f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c823b3a83ed76fbe31c39d2bd029292"><td class="memTemplParams" colspan="2">template&lt;class T , template&lt; class &gt; class P&gt; </td></tr>
+<tr class="memitem:a7c823b3a83ed76fbe31c39d2bd029292"><td class="memTemplItemLeft" align="right" valign="top">P&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1root.html#a7c823b3a83ed76fbe31c39d2bd029292">thames::util::root::newton_raphson</a> (const std::function&lt; P&lt; T &gt;(P&lt; T &gt;)&gt; &amp;func, const std::function&lt; P&lt; T &gt;(P&lt; T &gt;)&gt; &amp;dfunc, P&lt; T &gt; xn, T tol=1e-10)</td></tr>
+<tr class="memdesc:a7c823b3a83ed76fbe31c39d2bd029292"><td class="mdescLeft">&#160;</td><td class="mdescRight">Newton-Raphson method for root finding.  <a href="namespacethames_1_1util_1_1root.html#a7c823b3a83ed76fbe31c39d2bd029292">More...</a><br /></td></tr>
+<tr class="separator:a7c823b3a83ed76fbe31c39d2bd029292"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dab55ec0588b7ecfeef84ba7bcf5bc8"><td class="memItemLeft" align="right" valign="top">template taylor_polynomial&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1root.html#a8dab55ec0588b7ecfeef84ba7bcf5bc8">thames::util::root::newton_raphson</a> (const std::function&lt; taylor_polynomial&lt; double &gt;(taylor_polynomial&lt; double &gt;)&gt; &amp;, const std::function&lt; taylor_polynomial&lt; double &gt;(taylor_polynomial&lt; double &gt;)&gt; &amp;, taylor_polynomial&lt; double &gt;, double)</td></tr>
+<tr class="separator:a8dab55ec0588b7ecfeef84ba7bcf5bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

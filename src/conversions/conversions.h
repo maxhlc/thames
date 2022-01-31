@@ -1,6 +1,7 @@
 #ifndef THAMES_CONVERSIONS
 #define THAMES_CONVERSIONS
 
+#include "cartesian.h"
 #include "dimensional.h"
 #include "geqoe.h"
 #include "keplerian.h"

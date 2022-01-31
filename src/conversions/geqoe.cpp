@@ -3,6 +3,11 @@
 #include <functional>
 #include <vector>
 
+#ifdef THAMES_USE_SMARTUQ
+#include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
+using namespace smartuq::polynomial;
+#endif
+
 #include "geqoe.h"
 #include "keplerian.h"
 #include "../perturbations/baseperturbation.h"
@@ -338,5 +343,171 @@ namespace thames::conversions::geqoe{
         return RV;
     }
     template std::vector<double> geqoe_to_cartesian<double>(const double&, const std::vector<double>&, const double&, const BasePerturbation<double>*);
-    
+
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    template<class T, template<class> class P>
+    std::vector<P<T>> cartesian_to_geqoe(const T& t, const std::vector<P<T>>& RV, const T& mu, const BasePerturbationPolynomial<T, P>* perturbation){
+        // Extract position and velocity vectors
+        std::vector<P<T>> R = {RV[0], RV[1], RV[2]};
+        std::vector<P<T>> V = {RV[3], RV[4], RV[5]};
+
+        // Calculate range and range rate
+        P<T> r = thames::vector::geometry::norm3(R);
+        P<T> drdt = thames::vector::geometry::dot3(R, V)/r;
+
+        // Calculate the angular momentum
+        std::vector<P<T>> H = thames::vector::geometry::cross3(R, V);
+        P<T> h = thames::vector::geometry::norm3(H);
+
+        // Calculate the effective potential energy
+        P<T> ueff = pow(h, 2.0)/(2.0*pow(r, 2.0)) + perturbation->potential(t, R);
+
+        // Calculate the total energy
+        P<T> e = 0.5*pow(drdt, 2.0) - mu/r + ueff;
+
+        // Calculate the generalised mean motion
+        P<T> nu = pow(-2.0*e, 1.5)/mu;
+
+        // Calculate plane orientation parameters
+        P<T> q1 = H[0]/(h + H[2]);
+        P<T> q2 = -H[1]/(h + H[2]);
+
+        // Calculate equinocital reference frame unit vectors
+        P<T> efac = 1.0/(1.0 + pow(q1, 2.0) + pow(q2, 2.0));
+        std::vector<P<T>> ex = {
+            efac*(1.0 - pow(q1, 2.0) + pow(q2, 2.0)),
+            efac*(2.0*q1*q2),
+            efac*(-2.0*q1)
+        };
+        std::vector<P<T>> ey = {
+            efac*(2.0*q1*q2),
+            efac*(1.0 + pow(q1, 2.0) - pow(q2, 2.0)),
+            efac*(2.0*q2)
+        };
+
+        // Calculate radial unit vector
+        std::vector<P<T>> er = R/r;
+
+        // Calculate trig of the true longitude
+        P<T> cl = thames::vector::geometry::dot3(er, ex);
+        P<T> sl = thames::vector::geometry::dot3(er, ey);
+
+        // Calculate the generalised angular momentum
+        P<T> c = sqrt(2.0*pow(r, 2.0)*ueff);
+
+        // Calculate the generalised semi-latus rectum
+        P<T> p = pow(c, 2.0)/mu;
+
+        // Calculate remaining non-osculating ellipse parameters
+        P<T> pfac1 = (p/r - 1.0);
+        P<T> pfac2 = c*drdt/mu;
+        P<T> p1 = pfac1*sl - pfac2*cl;
+        P<T> p2 = pfac1*cl + pfac2*sl;
+
+        // Calculate generalised semi-major axis and velocity
+        P<T> a = pow(mu/pow(nu, 2.0), 1.0/3.0);
+        P<T> w = sqrt(mu/a);
+
+        // Calculate generalised mean longitude
+        P<T> SCfac1 = mu + c*w - r*pow(drdt, 2.0);
+        P<T> SCfac2 = drdt*(c + w*r);
+        P<T> S = SCfac1*sl - SCfac2*cl;
+        P<T> C = SCfac1*cl + SCfac2*sl;
+        P<T> L = atan2(S, C) + (C*p1 - S*p2)/(mu + c*w);
+
+        // Construct GEqOE state vector
+        std::vector<P<T>> geqoe = {
+            nu,
+            p1,
+            p2,
+            L,
+            q1,
+            q2
+        };
+
+        // Return GEqOE state vector
+        return geqoe;
+    }
+    template std::vector<taylor_polynomial<double>> cartesian_to_geqoe(const double& t, const std::vector<taylor_polynomial<double>>& RV, const double& mu, const BasePerturbationPolynomial<double, taylor_polynomial>* perturbation);
+
+    template<class T, template<class> class P>
+    std::vector<P<T>> geqoe_to_cartesian(const T& t, const std::vector<P<T>>& geqoe, const T& mu, const BasePerturbationPolynomial<T, P>* perturbation){
+        // Extract elements
+        P<T> nu = geqoe[0];
+        P<T> p1 = geqoe[1];
+        P<T> p2 = geqoe[2];
+        P<T> L = geqoe[3];
+        P<T> q1 = geqoe[4];
+        P<T> q2 = geqoe[5];
+
+        // Calculate generalised eccentric longitude
+        std::function<P<T> (P<T>)> fk = [p1, p2, L](P<T> k) {return (k + p1*cos(k) - p2*sin(k) - L);};
+        std::function<P<T> (P<T>)> dfk = [p1, p2, L](P<T> k) {return (1 - p1*sin(k) - p2*cos(k));};
+        P<T> k = thames::util::root::newton_raphson(fk, dfk, L);
+        P<T> sink = sin(k);
+        P<T> cosk = cos(k);
+
+        // Calculate generalised semi-major axis
+        P<T> a = pow(mu/pow(nu, 2.0), 1.0/3.0);
+
+        // Calculate range and range rate
+        P<T> r = a*(1.0 - p1*sink - p2*cosk);
+        P<T> drdt = sqrt(mu*a)/r*(p2*sink - p1*cosk);
+
+        // Calculate trig of the true longitude
+        P<T> alpha = 1.0/(1.0 + sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0)));
+        P<T> sinl = a/r*(alpha*p1*p2*cosk + (1.0 - alpha*pow(p2, 2.0))*sink - p1);
+        P<T> cosl = a/r*(alpha*p1*p2*sink + (1.0 - alpha*pow(p1, 2.0))*cosk - p2);
+
+        // Calculate equinocital reference frame unit vectors
+        P<T> efac = 1.0/(1.0 + pow(q1, 2.0) + pow(q2, 2.0));
+        std::vector<P<T>> ex = {
+            efac*(1.0 - pow(q1, 2.0) + pow(q2, 2.0)),
+            efac*(2.0*q1*q2),
+            efac*(-2.0*q1)
+        };
+        std::vector<P<T>> ey = {
+            efac*(2.0*q1*q2),
+            efac*(1.0 + pow(q1, 2.0) - pow(q2, 2.0)),
+            efac*(2.0*q2)
+        };
+
+        // Calculate orbital basis vectors
+        std::vector<P<T>> er = ex*cosl + ey*sinl;
+        std::vector<P<T>> ef = ey*cosl - ex*sinl;
+
+        // Calculate position
+        std::vector<P<T>> R = r*er;
+
+        // Calculate generalised angular momentum
+        P<T> c = pow(pow(mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
+
+        // Calculate angular momentum
+        P<T> h = sqrt(pow(c, 2.0) - 2.0*pow(r, 2.0)*perturbation->potential(t, R));
+
+        // Calculate velocity
+        std::vector<P<T>> V = drdt*er + h/r*ef;
+
+        // Construct Cartesian state vector
+        std::vector<P<T>> RV = {
+            R[0],
+            R[1],
+            R[2],
+            V[0],
+            V[1],
+            V[2]
+        };
+
+        // Return Cartesian state vector
+        return RV;
+    }
+    template std::vector<taylor_polynomial<double>> geqoe_to_cartesian(const double&, const std::vector<taylor_polynomial<double>>&, const double&, const BasePerturbationPolynomial<double, taylor_polynomial>*);
+
+    #endif
+
 }

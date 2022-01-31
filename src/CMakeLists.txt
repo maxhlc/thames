@@ -2,6 +2,7 @@ if(THAMES_BUILD_STATIC)
     # Build thames static library
     add_library(${PROJECT_NAME} STATIC
                 # Conversions
+                conversions/cartesian.cpp
                 conversions/dimensional.cpp
                 conversions/geqoe.cpp
                 conversions/keplerian.cpp

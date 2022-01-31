@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>THAMES: src/conversions/conversions.h File Reference</title>
+<title>THAMES: src/conversions/cartesian.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -65,26 +65,43 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">conversions.h File Reference</div>  </div>
+<div class="title">cartesian.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="cartesian_8h_source.html">cartesian.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="dimensional_8h_source.html">dimensional.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="conversions_2geqoe_8h_source.html">geqoe.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="keplerian_8h_source.html">keplerian.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;vector&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for conversions.h:</div>
+Include dependency graph for cartesian.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="conversions_8h__incl.png" border="0" usemap="#src_2conversions_2conversions_8h" alt=""/></div>
+<div class="center"><img src="cartesian_8h__incl.png" border="0" usemap="#src_2conversions_2cartesian_8h" alt=""/></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="conversions_8h__dep__incl.png" border="0" usemap="#src_2conversions_2conversions_8hdep" alt=""/></div>
+<div class="center"><img src="cartesian_8h__dep__incl.png" border="0" usemap="#src_2conversions_2cartesian_8hdep" alt=""/></div>
 </div>
 </div>
-<p><a href="conversions_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="cartesian_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacethames"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames.html">thames</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacethames_1_1conversions"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions.html">thames::conversions</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacethames_1_1conversions_1_1cartesian"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1cartesian.html">thames::conversions::cartesian</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:abdb3032c759d9679cc23c18d9ce6e928"><td class="memTemplParams" colspan="2">template&lt;class T , template&lt; class &gt; class P&gt; </td></tr>
+<tr class="memitem:abdb3032c759d9679cc23c18d9ce6e928"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1cartesian.html#abdb3032c759d9679cc23c18d9ce6e928">thames::conversions::cartesian::cartesian_to_polynomial</a> (const std::vector&lt; T &gt; &amp;RV, const std::vector&lt; T &gt; &amp;RVunc, int degree, std::vector&lt; P&lt; T &gt;&gt; &amp;RVPolynomial)</td></tr>
+<tr class="memdesc:abdb3032c759d9679cc23c18d9ce6e928"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate vector of polynomials representing Cartesian state, and its uncertainty.  <a href="namespacethames_1_1conversions_1_1cartesian.html#abdb3032c759d9679cc23c18d9ce6e928">More...</a><br /></td></tr>
+<tr class="separator:abdb3032c759d9679cc23c18d9ce6e928"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

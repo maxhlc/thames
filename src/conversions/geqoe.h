@@ -70,6 +70,42 @@ namespace thames::conversions::geqoe{
     template<class T>
     std::vector<T> geqoe_to_cartesian(const T& t, const std::vector<T>& geqoe, const T& mu, const BasePerturbation<T>* perturbation);
 
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    /**
+     * @brief Convert from Cartesian state to Generalised Equinoctial Orbital Elements (GEqOE).
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] t Current physical time.
+     * @param[in] geqoe GEqOE state.
+     * @param[in] mu Gravitational parameter.
+     * @param[in] perturbation Perturbation object.
+     * @return std::vector<P<T>> GEqOE state.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> cartesian_to_geqoe(const T& t, const std::vector<P<T>>& RV, const T& mu, const BasePerturbationPolynomial<T, P>* perturbation);
+
+    /**
+     * @brief Convert from Generalised Equinoctial Orbital Elements (GEqOE) to Cartesian state.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] t Current physical time.
+     * @param[in] geqoe GEqOE state.
+     * @param[in] mu Gravitational parameter.
+     * @param[in] perturbation Perturbation object.
+     * @return std::vector<P<T>> Cartesian state.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> geqoe_to_cartesian(const T& t, const std::vector<P<T>>& geqoe, const T& mu, const BasePerturbationPolynomial<T, P>* perturbation);
+
+    #endif
+
 }
 
 #endif

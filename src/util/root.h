@@ -5,6 +5,10 @@
 
 namespace thames::util::root{
 
+    ///////////
+    // Reals //
+    ///////////
+
     /**
      * @brief Golden section search for root finding.
      * 
@@ -19,7 +23,7 @@ namespace thames::util::root{
     T golden_section_search(std::function<T (T)> func, T a, T b, T tol = 1e-10);
 
     /**
-     * @brief Netwon-Raphson method for root finding.
+     * @brief Newton-Raphson method for root finding.
      * 
      * @tparam T Numeric type.
      * @param[in] func Scalar function for root finding. 
@@ -31,6 +35,29 @@ namespace thames::util::root{
     template<class T>
     T newton_raphson(const std::function<T (T)> &func, const std::function<T (T)> &dfunc, T xn, T tol = 1e-10);
 
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    /**
+     * @brief Newton-Raphson method for root finding.
+     * 
+     * Convergence is calculated using the constant (index of zero) term.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] func Scalar function for root finding. 
+     * @param[in] dfunc Derivative of scalar function for root finding.
+     * @param[in] xn Initial guess.
+     * @param[in] tol Solver tolerance.
+     * @return P<T> Argument of the root.
+     */
+    template<class T, template<class> class P>
+    P<T> newton_raphson(const std::function<P<T> (P<T>)>& func, const std::function<P<T> (P<T>)>& dfunc, P<T> xn, T tol = 1e-10);
+
+    #endif
 }
 
 #endif

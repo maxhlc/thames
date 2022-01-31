@@ -1,10 +1,19 @@
 #include <cmath>
 #include <functional>
 
+#ifdef THAMES_USE_SMARTUQ
+#include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
+using namespace smartuq::polynomial;
+#endif
+
 #include "optimise.h"
 #include "root.h"
 
 namespace thames::util::root{
+
+    ///////////
+    // Reals //
+    ///////////
 
     template<class T>
     T golden_section_search(std::function<T (T)> func, T a, T b, T tol){
@@ -44,5 +53,39 @@ namespace thames::util::root{
         return xn1;
     }
     template double newton_raphson<double>(const std::function<double (double)>&, const std::function<double (double)>&, double, double);
+
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    template<class T, template<class> class P>
+    P<T> newton_raphson(const std::function<P<T> (P<T>)>& func, const std::function<P<T> (P<T>)>& dfunc, P<T> xn, T tol){
+        // Declare approximation variable
+        P<T> xn1(xn);
+
+        // Set converged flag to false
+        bool converged = false;
+
+        // Iterate until converged
+        while(!converged){
+            // Update approximation
+            xn1 = xn - func(xn)/dfunc(xn);
+
+            // Converged if update is smaller than tolerance
+            if(fabs((xn1 - xn).get_coeffs()[0]) < tol)
+                converged = true;
+
+            // Update previous approximation
+            xn = xn1;
+        }
+
+        // Return root
+        return xn1;
+    }
+    template taylor_polynomial<double> newton_raphson(const std::function<taylor_polynomial<double> (taylor_polynomial<double>)>&, const std::function<taylor_polynomial<double> (taylor_polynomial<double>)>&, taylor_polynomial<double>, double);
+
+    #endif
 
 }
