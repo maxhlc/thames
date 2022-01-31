@@ -1,3 +1,6 @@
+#ifndef THAMES_CONVERSIONS_CARTESIAN
+#define THAMES_CONVERSIONS_CARTESIAN
+
 #include <vector>
 
 namespace thames::conversions::cartesian {
@@ -24,3 +27,5 @@ namespace thames::conversions::cartesian {
     #endif
 
 }
+
+#endif
