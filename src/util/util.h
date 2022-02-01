@@ -4,5 +4,6 @@
 #include "angles.h"
 #include "optimise.h"
 #include "root.h"
+#include "sampling.h"
 
 #endif

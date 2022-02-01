@@ -16,6 +16,7 @@ if(THAMES_BUILD_STATIC)
                 util/angles.cpp
                 util/root.cpp
                 util/optimise.cpp
+                util/sampling.cpp
                 # Vector
                 vector/arithmeticoverloads.cpp
                 vector/geometry.cpp
