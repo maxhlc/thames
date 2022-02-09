@@ -3,6 +3,7 @@
 
 #include "angles.h"
 #include "optimise.h"
+#include "polynomials.h"
 #include "root.h"
 #include "sampling.h"
 

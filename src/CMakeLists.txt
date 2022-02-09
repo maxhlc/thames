@@ -15,6 +15,7 @@ if(THAMES_BUILD_STATIC)
                 # Util
                 util/angles.cpp
                 util/root.cpp
+                util/polynomials.cpp
                 util/optimise.cpp
                 util/sampling.cpp
                 # Vector
