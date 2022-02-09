@@ -176,6 +176,7 @@ namespace thames::perturbations::geopotential{
     }
 
     template class J2Polynomial<double, taylor_polynomial>;
+    template class J2Polynomial<double, chebyshev_polynomial>;
 
     #endif
 

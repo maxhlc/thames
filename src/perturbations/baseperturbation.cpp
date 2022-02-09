@@ -133,6 +133,7 @@ namespace thames::perturbations::baseperturbation{
     }
 
     template class BasePerturbationPolynomial<double, taylor_polynomial>;
+    template class BasePerturbationPolynomial<double, chebyshev_polynomial>;
 
     #endif
 

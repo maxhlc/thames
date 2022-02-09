@@ -404,6 +404,7 @@ namespace thames::propagators {
     }
 
     template class GEqOEPropagatorPolynomialDynamics<double, taylor_polynomial>;
+    template class GEqOEPropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
     GEqOEPropagatorPolynomial<T, P>::GEqOEPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation) : m_mu(mu), m_perturbation(perturbation), m_dyn(mu, perturbation) {
@@ -440,6 +441,7 @@ namespace thames::propagators {
     }
 
     template class GEqOEPropagatorPolynomial<double, taylor_polynomial>;
+    template class GEqOEPropagatorPolynomial<double, chebyshev_polynomial>;
 
     #endif
 

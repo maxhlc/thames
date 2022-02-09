@@ -85,6 +85,7 @@ namespace thames::util::root{
         return xn1;
     }
     template taylor_polynomial<double> newton_raphson(const std::function<taylor_polynomial<double> (taylor_polynomial<double>)>&, const std::function<taylor_polynomial<double> (taylor_polynomial<double>)>&, taylor_polynomial<double>, double);
+    template chebyshev_polynomial<double> newton_raphson(const std::function<chebyshev_polynomial<double> (chebyshev_polynomial<double>)>&, const std::function<chebyshev_polynomial<double> (chebyshev_polynomial<double>)>&, chebyshev_polynomial<double>, double);
 
     #endif
 

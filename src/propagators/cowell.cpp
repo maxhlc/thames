@@ -158,6 +158,7 @@ namespace thames::propagators {
     }
 
     template class CowellPropagatorPolynomialDynamics<double, taylor_polynomial>;
+    template class CowellPropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
     CowellPropagatorPolynomial<T, P>::CowellPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation) : m_dyn(mu, perturbation) {
@@ -188,6 +189,7 @@ namespace thames::propagators {
     }
 
     template class CowellPropagatorPolynomial<double, taylor_polynomial>;
+    template class CowellPropagatorPolynomial<double, chebyshev_polynomial>;
 
     #endif
 

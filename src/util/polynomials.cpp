@@ -24,6 +24,7 @@ namespace thames::util::polynomials {
         return numeric;
     }
     template std::vector<double> evaluate_polynomials(const std::vector<taylor_polynomial<double>>&, const std::vector<double>&);
+    template std::vector<double> evaluate_polynomials(const std::vector<chebyshev_polynomial<double>>&, const std::vector<double>&);
 
     #endif
 

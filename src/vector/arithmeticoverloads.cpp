@@ -134,6 +134,7 @@ namespace thames::vector::arithmeticoverloads {
         return c;
     }
     template std::vector<taylor_polynomial<double>> operator+(const std::vector<taylor_polynomial<double>>& a, const std::vector<taylor_polynomial<double>>& b);
+    template std::vector<chebyshev_polynomial<double>> operator+(const std::vector<chebyshev_polynomial<double>>& a, const std::vector<chebyshev_polynomial<double>>& b);
 
     template<class T, template<class> class P>
     std::vector<P<T>> operator-(const std::vector<P<T>>& a, const std::vector<P<T>>& b){
@@ -145,6 +146,7 @@ namespace thames::vector::arithmeticoverloads {
         return c;
     }
     template std::vector<taylor_polynomial<double>> operator-(const std::vector<taylor_polynomial<double>>& a, const std::vector<taylor_polynomial<double>>& b);
+    template std::vector<chebyshev_polynomial<double>> operator-(const std::vector<chebyshev_polynomial<double>>& a, const std::vector<chebyshev_polynomial<double>>& b);
 
     template<class T, template<class> class P>
     std::vector<P<T>> operator*(const T& a, const std::vector<P<T>>& b){
@@ -156,12 +158,14 @@ namespace thames::vector::arithmeticoverloads {
         return c;
     }
     template std::vector<taylor_polynomial<double>> operator*(const double& a, const std::vector<taylor_polynomial<double>>& b);
+    template std::vector<chebyshev_polynomial<double>> operator*(const double& a, const std::vector<chebyshev_polynomial<double>>& b);
 
     template<class T, template<class> class P>
     std::vector<P<T>> operator*(const std::vector<P<T>>& b, const T& a){
         return a*b;
     }
     template std::vector<taylor_polynomial<double>> operator*(const std::vector<taylor_polynomial<double>>& b, const double& a);
+    template std::vector<chebyshev_polynomial<double>> operator*(const std::vector<chebyshev_polynomial<double>>& b, const double& a);
 
     template<class T, template<class> class P>
     std::vector<P<T>> operator*(const P<T>& a, const std::vector<P<T>>& b){
@@ -173,12 +177,14 @@ namespace thames::vector::arithmeticoverloads {
         return c;
     }
     template std::vector<taylor_polynomial<double>> operator*(const taylor_polynomial<double>& a, const std::vector<taylor_polynomial<double>>& b);
+    template std::vector<chebyshev_polynomial<double>> operator*(const chebyshev_polynomial<double>& a, const std::vector<chebyshev_polynomial<double>>& b);
 
     template<class T, template<class> class P>
     std::vector<P<T>> operator*(const std::vector<P<T>>& b, const P<T>& a){
         return a*b;
     }
     template std::vector<taylor_polynomial<double>> operator*(const std::vector<taylor_polynomial<double>>& b, const taylor_polynomial<double>& a);
+    template std::vector<chebyshev_polynomial<double>> operator*(const std::vector<chebyshev_polynomial<double>>& b, const chebyshev_polynomial<double>& a);
 
     template<class T, template<class> class P>
     std::vector<P<T>> operator/(const std::vector<P<T>>& b, const T& a){
@@ -190,6 +196,7 @@ namespace thames::vector::arithmeticoverloads {
         return c;
     }
     template std::vector<taylor_polynomial<double>> operator/(const std::vector<taylor_polynomial<double>>& b, const double& a);
+    template std::vector<chebyshev_polynomial<double>> operator/(const std::vector<chebyshev_polynomial<double>>& b, const double& a);
 
     template<class T, template<class> class P>
     std::vector<P<T>> operator/(const std::vector<P<T>>& b, const P<T>& a){
@@ -201,6 +208,7 @@ namespace thames::vector::arithmeticoverloads {
         return c;
     }
     template std::vector<taylor_polynomial<double>> operator/(const std::vector<taylor_polynomial<double>>& b, const taylor_polynomial<double>& a);
+    template std::vector<chebyshev_polynomial<double>> operator/(const std::vector<chebyshev_polynomial<double>>& b, const chebyshev_polynomial<double>& a);
 
     #endif
 

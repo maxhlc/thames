@@ -434,6 +434,7 @@ namespace thames::conversions::geqoe{
         return geqoe;
     }
     template std::vector<taylor_polynomial<double>> cartesian_to_geqoe(const double& t, const std::vector<taylor_polynomial<double>>& RV, const double& mu, const BasePerturbationPolynomial<double, taylor_polynomial>* perturbation);
+    template std::vector<chebyshev_polynomial<double>> cartesian_to_geqoe(const double& t, const std::vector<chebyshev_polynomial<double>>& RV, const double& mu, const BasePerturbationPolynomial<double, chebyshev_polynomial>* perturbation);
 
     template<class T, template<class> class P>
     std::vector<P<T>> geqoe_to_cartesian(const T& t, const std::vector<P<T>>& geqoe, const T& mu, const BasePerturbationPolynomial<T, P>* perturbation){
@@ -507,6 +508,7 @@ namespace thames::conversions::geqoe{
         return RV;
     }
     template std::vector<taylor_polynomial<double>> geqoe_to_cartesian(const double&, const std::vector<taylor_polynomial<double>>&, const double&, const BasePerturbationPolynomial<double, taylor_polynomial>*);
+    template std::vector<chebyshev_polynomial<double>> geqoe_to_cartesian(const double&, const std::vector<chebyshev_polynomial<double>>&, const double&, const BasePerturbationPolynomial<double, chebyshev_polynomial>*);
 
     #endif
 

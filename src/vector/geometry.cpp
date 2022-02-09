@@ -102,6 +102,7 @@ namespace thames::vector::geometry{
         return a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
     }
     template taylor_polynomial<double> dot3(const std::vector<taylor_polynomial<double>>&, const std::vector<taylor_polynomial<double>>&);
+    template chebyshev_polynomial<double> dot3(const std::vector<chebyshev_polynomial<double>>&, const std::vector<chebyshev_polynomial<double>>&);
 
     template<class T, template<class> class P>
     P<T> norm3(const std::vector<P<T>>& a){
@@ -109,6 +110,7 @@ namespace thames::vector::geometry{
         return sqrt(dot3(a, a));
     }
     template taylor_polynomial<double> norm3(const std::vector<taylor_polynomial<double>>&);
+    template chebyshev_polynomial<double> norm3(const std::vector<chebyshev_polynomial<double>>&);
 
     template<class T, template<class> class P>
     void cross3(const std::vector<P<T>>& a, const std::vector<P<T>>& b, std::vector<P<T>>& vecout){
@@ -118,6 +120,7 @@ namespace thames::vector::geometry{
         vecout[2] = a[0]*b[1] - a[1]*b[0];
     }
     template void cross3(const std::vector<taylor_polynomial<double>>&, const std::vector<taylor_polynomial<double>>&, std::vector<taylor_polynomial<double>>&);
+    template void cross3(const std::vector<chebyshev_polynomial<double>>&, const std::vector<chebyshev_polynomial<double>>&, std::vector<chebyshev_polynomial<double>>&);
 
     template<class T, template<class> class P>
     std::vector<P<T>> cross3(const std::vector<P<T>>& a, const std::vector<P<T>>& b){
@@ -131,6 +134,7 @@ namespace thames::vector::geometry{
         return vecout;
     }
     template std::vector<taylor_polynomial<double>> cross3(const std::vector<taylor_polynomial<double>>&, const std::vector<taylor_polynomial<double>>&);
+    template std::vector<chebyshev_polynomial<double>> cross3(const std::vector<chebyshev_polynomial<double>>&, const std::vector<chebyshev_polynomial<double>>&);
 
     #endif
 
