@@ -9,13 +9,15 @@ namespace thames::conversions::dimensional{
     /**
      * @brief Structure to contain factors for (non)dimensionalisation of Cartesian states.
      * 
+     * @tparam T Numeric type.
      */
-    typedef struct {
-        double time;
-        double length;
-        double velocity;
-        double grav;
-    } DimensionalFactors;
+    template <class T>
+    struct DimensionalFactors {
+        T time;
+        T length;
+        T velocity;
+        T grav;
+    };
 
     ////////////
     // Arrays //
@@ -31,7 +33,7 @@ namespace thames::conversions::dimensional{
      * @param[out] factors Structure containing the factors for non-dimensionalisation.
      */
     template<class T>
-    void cartesian_nondimensionalise(T& t, std::array<T, 6>& RV, T& mu, DimensionalFactors& factors);
+    void cartesian_nondimensionalise(T& t, std::array<T, 6>& RV, T& mu, DimensionalFactors<T>& factors);
 
     /**
      * @brief Dimensionalise Cartesian state.
@@ -43,7 +45,18 @@ namespace thames::conversions::dimensional{
      * @param[in] factors Structure containing the factors for dimensionalisation.
      */ 
     template<class T>
-    void cartesian_dimensionalise(T& t, std::array<T, 6>& RV, T& mu, const DimensionalFactors& factors);
+    void cartesian_dimensionalise(T& t, std::array<T, 6>& RV, T& mu, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Calculate non-dimensionalisation factors.
+     * 
+     * @tparam T Numeric type.
+     * @param[in] RV Cartesian state vector. 
+     * @param[in] mu Gravitational parameter.
+     * @return DimensionalFactors<T> Non-dimensionalisation factors.
+     */
+    template<class T>
+    DimensionalFactors<T> calculate_factors(const std::array<T, 6> RV, const T mu);
 
     /////////////
     // Vectors //
@@ -59,7 +72,7 @@ namespace thames::conversions::dimensional{
      * @param[out] factors Structure containing the factors for non-dimensionalisation.
      */
     template<class T>
-    void cartesian_nondimensionalise(T& t, std::vector<T>& RV, T& mu, DimensionalFactors& factors);
+    void cartesian_nondimensionalise(T& t, std::vector<T>& RV, T& mu, DimensionalFactors<T>& factors);
 
     /**
      * @brief Dimensionalise Cartesian state.
@@ -71,7 +84,18 @@ namespace thames::conversions::dimensional{
      * @param[in] factors Structure containing the factors for dimensionalisation.
      */ 
     template<class T>
-    void cartesian_dimensionalise(T& t, std::vector<T>& RV, T& mu, const DimensionalFactors& factors);
+    void cartesian_dimensionalise(T& t, std::vector<T>& RV, T& mu, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Calculate non-dimensionalisation factors.
+     * 
+     * @tparam T Numeric type.
+     * @param[in] RV Cartesian state vector. 
+     * @param[in] mu Gravitational parameter.
+     * @return DimensionalFactors<T> Non-dimensionalisation factors.
+     */
+    template<class T>
+    DimensionalFactors<T> calculate_factors(const std::vector<T> RV, const T mu);
 
 }
 
