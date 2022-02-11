@@ -13,10 +13,10 @@ namespace thames::conversions::dimensional{
      */
     template <class T>
     struct DimensionalFactors {
-        T time;
-        T length;
-        T velocity;
-        T grav;
+        T time = 1.0;
+        T length = 1.0;
+        T velocity = 1.0;
+        T grav = 1.0;
     };
 
     ////////////
