@@ -6,6 +6,8 @@ if(THAMES_BUILD_STATIC)
                 conversions/dimensional.cpp
                 conversions/geqoe.cpp
                 conversions/keplerian.cpp
+                # Input/output
+                io/point.cpp
                 # Perturbations
                 perturbations/baseperturbation.cpp
                 perturbations/geopotential/J2.cpp
