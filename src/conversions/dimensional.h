@@ -97,6 +97,40 @@ namespace thames::conversions::dimensional{
     template<class T>
     DimensionalFactors<T> calculate_factors(const std::vector<T> RV, const T mu);
 
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    /**
+     * @brief Non-dimensionalise Cartesian state polynomial.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in,out] t Current physical time.
+     * @param[in,out] RV Current Cartesian state vector (position and velocity).
+     * @param[in,out] mu Gravitational parameter.
+     * @param[in] factors Structure containing the factors for dimensionalisation.
+     */
+    template<class T, template<class> class P>
+    void cartesian_nondimensionalise(T& t, std::vector<P<T>>& RV, T& mu, DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Dimensionalise Cartesian state polynomial.
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in,out] t Current physical time.
+     * @param[in,out] RV Current Cartesian state vector (position and velocity).
+     * @param[in,out] mu Gravitational parameter.
+     * @param[in] factors Structure containing the factors for dimensionalisation.
+     */
+    template<class T, template<class> class P>
+    void cartesian_dimensionalise(T& t, std::vector<P<T>>& RV, T& mu, DimensionalFactors<T>& factors);
+
+    #endif
+
 }
 
 #endif

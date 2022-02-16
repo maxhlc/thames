@@ -2,6 +2,11 @@
 #include <cmath>
 #include <vector>
 
+#ifdef THAMES_USE_SMARTUQ
+#include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
+using namespace smartuq::polynomial;
+#endif
+
 #include "dimensional.h"
 #include "keplerian.h"
 #include "../vector/geometry.h"
@@ -137,5 +142,48 @@ namespace thames::conversions::dimensional{
         return factors;
     }
     template DimensionalFactors<double> calculate_factors(const std::vector<double>, const double);
+
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    template<class T, template<class> class P>
+    void cartesian_nondimensionalise(T& t, std::vector<P<T>>& RV, T& mu, DimensionalFactors<T>& factors){
+        // Extract central state vector
+        std::vector<T> RVcentral = {RV[0].get_coeffs()[0], RV[1].get_coeffs()[0], RV[2].get_coeffs()[0],
+                                    RV[0].get_coeffs()[3], RV[4].get_coeffs()[0], RV[5].get_coeffs()[0]};
+
+        // Calculate factors
+        factors = calculate_factors(RVcentral, mu);
+
+        // Calculate non-dimensional states
+        t /= factors.time;
+        mu /= factors.grav;
+        RV[0] /= factors.length;
+        RV[1] /= factors.length;
+        RV[2] /= factors.length;
+        RV[3] /= factors.velocity;
+        RV[4] /= factors.velocity;
+        RV[5] /= factors.velocity;
+    }
+    template void cartesian_nondimensionalise(double&, std::vector<taylor_polynomial<double>>&, double&, DimensionalFactors<double>&);
+
+    template<class T, template<class> class P>
+    void cartesian_dimensionalise(T& t, std::vector<P<T>>& RV, T& mu, DimensionalFactors<T>& factors){
+        // Calculate dimensional states
+        t *= factors.time;
+        mu *= factors.grav;
+        RV[0] *= factors.length;
+        RV[1] *= factors.length;
+        RV[2] *= factors.length;
+        RV[3] *= factors.velocity;
+        RV[4] *= factors.velocity;
+        RV[5] *= factors.velocity;
+    }
+    template void cartesian_dimensionalise(double&, std::vector<taylor_polynomial<double>>&, double&, DimensionalFactors<double>&);
+
+    #endif
 
 }
