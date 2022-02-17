@@ -58,7 +58,7 @@ int main(int argc, char **argv){
     thames::propagators::CowellPropagator<double> propagator(mu, &perturbation);
 
     // Declare vector for propagated states
-    std::vector<std::vector<double>> states_propagated(states.size());
+    std::vector<std::vector<double>> states_propagated(states.size(), std::vector<double>(6));
 
     // Declare temporary vectors
     std::vector<double> state(6), state_propagated(6);
