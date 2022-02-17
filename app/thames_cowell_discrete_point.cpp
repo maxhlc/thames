@@ -22,7 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <chrono>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -35,26 +34,20 @@ SOFTWARE.
 int main(int argc, char **argv){
     // Set constants
     double mu = thames::constants::earth::mu;
+    double radius = thames::constants::earth::radius;
+    double J2 = thames::constants::earth::J2;
 
     // Store filepaths as strings
     std::string filepathin(argv[1]), filepathout(argv[2]);
 
-    // Total times
-    double total = 0;
-
     // Load sample states
-    auto start = std::chrono::high_resolution_clock::now();
     double tstart, tend;
     int scid;
     std::vector<std::vector<double>> states;
     thames::io::point::load(filepathin, tstart, tend, scid, states);
-    auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "Input time: " << duration.count() << " us \n";
-    total += duration.count();
 
     // Declare propagator and perturbations
-    thames::perturbations::baseperturbation::BasePerturbation<double> perturbation;
+    thames::perturbations::geopotential::J2<double> perturbation(mu, J2, radius);
     thames::propagators::CowellPropagator<double> propagator(mu, &perturbation);
 
     // Declare vector for propagated states
@@ -64,7 +57,6 @@ int main(int argc, char **argv){
     std::vector<double> state(6), state_propagated(6);
 
     // Iterate through samples
-    start = std::chrono::high_resolution_clock::now();
     for(std::size_t ii=0; ii<states.size(); ii++){
         // Extract state
         state = states[ii];
@@ -75,21 +67,9 @@ int main(int argc, char **argv){
         // Store propagated state
         states_propagated[ii] = state_propagated;
     }
-    stop = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "Propagation time: " << duration.count() << " us \n";
-    total += duration.count();
 
     // Save propagated states
-    start = std::chrono::high_resolution_clock::now();
     thames::io::point::save(filepathout, tstart, tend, scid, states_propagated);
-    stop = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "Output time: " << duration.count() << " us \n";
-    total += duration.count();
-
-    // Print total time
-    std::cout << "Total time: " << total << " us\n";
 
     // Return zero
     return 0;
