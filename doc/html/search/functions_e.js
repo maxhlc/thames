@@ -1,11 +1,5 @@
 var searchData=
 [
-  ['_7ebaseperturbation_267',['~BasePerturbation',['../classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html#a12098cf0e36796d336233bfab8397cdc',1,'thames::perturbations::baseperturbation::BasePerturbation']]],
-  ['_7ebaseperturbationpolynomial_268',['~BasePerturbationPolynomial',['../classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbationPolynomial.html#af804bfb5506937a3dbcb1a86b47e51b2',1,'thames::perturbations::baseperturbation::BasePerturbationPolynomial']]],
-  ['_7ecowellpropagatorpolynomial_269',['~CowellPropagatorPolynomial',['../classthames_1_1propagators_1_1CowellPropagatorPolynomial.html#a2887588f0f5701d0ba27e6e9a57066c8',1,'thames::propagators::CowellPropagatorPolynomial']]],
-  ['_7ecowellpropagatorpolynomialdynamics_270',['~CowellPropagatorPolynomialDynamics',['../classthames_1_1propagators_1_1CowellPropagatorPolynomialDynamics.html#a8ea24c881f15f4f6133b81d2c109290c',1,'thames::propagators::CowellPropagatorPolynomialDynamics']]],
-  ['_7egeqoepropagatorpolynomial_271',['~GEqOEPropagatorPolynomial',['../classthames_1_1propagators_1_1GEqOEPropagatorPolynomial.html#a01069fefeaa6b25e794638b5d6c2dacd',1,'thames::propagators::GEqOEPropagatorPolynomial']]],
-  ['_7egeqoepropagatorpolynomialdynamics_272',['~GEqOEPropagatorPolynomialDynamics',['../classthames_1_1propagators_1_1GEqOEPropagatorPolynomialDynamics.html#a3b5e413a97ab47ba28477aff756ac578',1,'thames::propagators::GEqOEPropagatorPolynomialDynamics']]],
-  ['_7ej2_273',['~J2',['../classthames_1_1perturbations_1_1geopotential_1_1J2.html#ae62c27aeca966e2599a6ee1fe5f85d00',1,'thames::perturbations::geopotential::J2']]],
-  ['_7ej2polynomial_274',['~J2Polynomial',['../classthames_1_1perturbations_1_1geopotential_1_1J2Polynomial.html#a8ac613d0d686df390b75350905050f60',1,'thames::perturbations::geopotential::J2Polynomial']]]
+  ['save_300',['save',['../namespacethames_1_1io_1_1point.html#a3153ae2957999b1712a4eb99e3e19309',1,'thames::io::point::save(const std::string filepath, const T &amp;tstart, const T &amp;tend, const int &amp;scid, const std::vector&lt; std::vector&lt; T &gt;&gt; &amp;states, const unsigned int precision=15)'],['../namespacethames_1_1io_1_1point.html#a04a381a5078a1e6e0e894b554fc04647',1,'thames::io::point::save(const std::string, const double &amp;, const double &amp;, const int &amp;, const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;, const unsigned int)']]],
+  ['sleep_301',['Sleep',['../classthames_1_1perturbations_1_1testing_1_1Sleep.html#a463bd673a7aa0de4908eaf6572ef3989',1,'thames::perturbations::testing::Sleep']]]
 ];

@@ -32,6 +32,9 @@ namespace thames::util::angles{
      * 
      * @details Method described by: https://stackoverflow.com/a/11498248
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-17
+     * 
      * @tparam T Numeric type.
      * @param[in] theta Angle.
      * @return T Wrapped angle.

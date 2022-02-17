@@ -38,6 +38,9 @@ namespace thames::conversions::cartesian {
     /**
      * @brief Generate vector of polynomials representing Cartesian state, and its uncertainty.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-31
+     * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      * @param[in] RV Cartesian state.

@@ -37,6 +37,9 @@ namespace thames::vector::geometry{
     /**
      * @brief Function to calculate the dot product of two vectors with three elements.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-19
+     * 
      * @tparam T Numeric type.
      * @param[in] a First vector.
      * @param[in] b Second vector.
@@ -48,6 +51,9 @@ namespace thames::vector::geometry{
     /**
      * @brief Function to calculate the length of a vector with three elements.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-19
+     * 
      * @tparam T Numeric type.
      * @param[in] a Vector.
      * @return T Length of the vector.
@@ -57,6 +63,9 @@ namespace thames::vector::geometry{
 
     /**
      * @brief Calculate the cross product of two vectors with three elements.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-19
      * 
      * @tparam T Numeric type.
      * @param[in] a First vector.
@@ -68,6 +77,9 @@ namespace thames::vector::geometry{
 
     /**
      * @brief Calculate the cross product of two vectors with three elements.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-19
      * 
      * @tparam T Numeric type.
      * @param[in] a First vector.
@@ -84,6 +96,9 @@ namespace thames::vector::geometry{
     /**
      * @brief Function to calculate the dot product of two vectors with three elements.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-19
+     * 
      * @tparam T Numeric type.
      * @param[in] a First vector.
      * @param[in] b Second vector.
@@ -95,6 +110,9 @@ namespace thames::vector::geometry{
     /**
      * @brief Function to calculate the length of a vector with three elements.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-19
+     * 
      * @tparam T Numeric type.
      * @param[in] a Vector.
      * @return T Length of the vector.
@@ -104,6 +122,9 @@ namespace thames::vector::geometry{
 
     /**
      * @brief Calculate the cross product of two vectors with three elements.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-19
      * 
      * @tparam T Numeric type.
      * @param[in] a First vector.
@@ -115,6 +136,9 @@ namespace thames::vector::geometry{
 
     /**
      * @brief Calculate the cross product of two vectors with three elements.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-19
      * 
      * @tparam T Numeric type.
      * @param[in] a First vector.
@@ -133,6 +157,9 @@ namespace thames::vector::geometry{
     /**
      * @brief Function to calculate the dot product of two vectors of polynomials with three elements.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-27
+     * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      * @param[in] a First vector of polynomials.
@@ -145,6 +172,9 @@ namespace thames::vector::geometry{
     /**
      * @brief Function to calculate the length of a vector of polynomials with three elements.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-27
+     * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      * @param[in] a Vector of polynomials.
@@ -155,6 +185,9 @@ namespace thames::vector::geometry{
 
     /**
      * @brief Calculate the cross product of two vectors of polynomials with three elements.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-31
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -167,6 +200,9 @@ namespace thames::vector::geometry{
 
     /**
      * @brief Calculate the cross product of two vectors of polynomials with three elements.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-31
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.

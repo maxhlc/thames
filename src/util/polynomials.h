@@ -34,6 +34,9 @@ namespace thames::util::polynomials {
     /**
      * @brief Evaluate vector of polynomials at a point.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-02-09
+     * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      * @param[in] polynomials Vector of polynomials.

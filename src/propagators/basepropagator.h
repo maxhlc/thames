@@ -37,6 +37,9 @@ namespace thames::propagators::basepropagator {
     /**
      * @brief Base propagator abstract object.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-26
+     * 
      * @tparam T Numeric type.
      */
     template<class T>
@@ -53,6 +56,9 @@ namespace thames::propagators::basepropagator {
             /**
              * @brief State derivative method.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-26
+             * 
              * @param[in] x State.
              * @param[out] dxdt State derivative.
              * @param[in] t Current time.
@@ -61,6 +67,9 @@ namespace thames::propagators::basepropagator {
 
             /**
              * @brief Propagation method.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-26
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -79,6 +88,9 @@ namespace thames::propagators::basepropagator {
             /**
              * @brief State derivative method.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-26
+             * 
              * @param[in] x State.
              * @param[out] dxdt State derivative.
              * @param[in] t Time.
@@ -87,6 +99,9 @@ namespace thames::propagators::basepropagator {
 
             /**
              * @brief Propagation method.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-26
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -109,6 +124,9 @@ namespace thames::propagators::basepropagator {
     /**
      * @brief Base propagator abstract object for polynomial propagations.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-27
+     * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      */
@@ -119,17 +137,11 @@ namespace thames::propagators::basepropagator {
 
         public:
 
-            // /**
-            //  * @brief State derivative method.
-            //  * 
-            //  * @param[in] x State.
-            //  * @param[out] dxdt State derivative.
-            //  * @param[in] t Time.
-            //  */
-            // virtual void derivative(const std::vector<P<T>>& x, std::vector<P<T>>& dxdt, const T t) const;
-
             /**
              * @brief Propagation method.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-27
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -137,7 +149,7 @@ namespace thames::propagators::basepropagator {
              * @param[in] RV Initial Cartesian state.
              * @return std::vector<P<T>> Final state.
              */
-            virtual std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV) const;           
+            virtual std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV) const;         
 
     };
 

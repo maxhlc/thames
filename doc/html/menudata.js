@@ -22,6 +22,7 @@ for the JavaScript code in this file
 */
 var menudata={children:[
 {text:"Main Page",url:"index.html"},
+{text:"Related Pages",url:"pages.html"},
 {text:"Namespaces",url:"namespaces.html",children:[
 {text:"Namespace List",url:"namespaces.html"},
 {text:"Namespace Members",url:"namespacemembers.html",children:[
@@ -29,6 +30,7 @@ var menudata={children:[
 {text:"a",url:"namespacemembers.html#index_a"},
 {text:"c",url:"namespacemembers.html#index_c"},
 {text:"d",url:"namespacemembers.html#index_d"},
+{text:"e",url:"namespacemembers.html#index_e"},
 {text:"g",url:"namespacemembers.html#index_g"},
 {text:"j",url:"namespacemembers.html#index_j"},
 {text:"k",url:"namespacemembers.html#index_k"},
@@ -36,16 +38,19 @@ var menudata={children:[
 {text:"m",url:"namespacemembers.html#index_m"},
 {text:"n",url:"namespacemembers.html#index_n"},
 {text:"o",url:"namespacemembers.html#index_o"},
-{text:"r",url:"namespacemembers.html#index_r"}]},
+{text:"r",url:"namespacemembers.html#index_r"},
+{text:"s",url:"namespacemembers.html#index_s"}]},
 {text:"Functions",url:"namespacemembers_func.html",children:[
 {text:"a",url:"namespacemembers_func.html#index_a"},
 {text:"c",url:"namespacemembers_func.html#index_c"},
 {text:"d",url:"namespacemembers_func.html#index_d"},
+{text:"e",url:"namespacemembers_func.html#index_e"},
 {text:"g",url:"namespacemembers_func.html#index_g"},
 {text:"k",url:"namespacemembers_func.html#index_k"},
 {text:"l",url:"namespacemembers_func.html#index_l"},
 {text:"n",url:"namespacemembers_func.html#index_n"},
-{text:"o",url:"namespacemembers_func.html#index_o"}]},
+{text:"o",url:"namespacemembers_func.html#index_o"},
+{text:"s",url:"namespacemembers_func.html#index_s"}]},
 {text:"Variables",url:"namespacemembers_vars.html"}]}]},
 {text:"Classes",url:"annotated.html",children:[
 {text:"Class List",url:"annotated.html"},
@@ -62,6 +67,7 @@ var menudata={children:[
 {text:"j",url:"functions.html#index_j"},
 {text:"l",url:"functions.html#index_l"},
 {text:"p",url:"functions.html#index_p"},
+{text:"s",url:"functions.html#index_s"},
 {text:"t",url:"functions.html#index_t"},
 {text:"v",url:"functions.html#index_v"},
 {text:"~",url:"functions.html#index__7E"}]},
@@ -74,6 +80,7 @@ var menudata={children:[
 {text:"g",url:"functions_func.html#index_g"},
 {text:"j",url:"functions_func.html#index_j"},
 {text:"p",url:"functions_func.html#index_p"},
+{text:"s",url:"functions_func.html#index_s"},
 {text:"~",url:"functions_func.html#index__7E"}]},
 {text:"Variables",url:"functions_vars.html"}]}]},
 {text:"Files",url:"files.html",children:[

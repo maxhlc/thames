@@ -47,6 +47,9 @@ namespace thames::propagators {
     /**
      * @brief Propagator object for Cowell's method.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-25
+     * 
      * @tparam T Numeric type.
      */
     template<class T>
@@ -65,6 +68,9 @@ namespace thames::propagators {
             /**
              * @brief Construct a new Cowell Propagator object.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
+             * 
              * @param[in] mu Gravitational parameter. 
              * @param[in] perturbation Perturbation object.
              */
@@ -77,6 +83,9 @@ namespace thames::propagators {
             /**
              * @brief State derivative for Cowell's method propagation.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
+             * 
              * @param[in] RV Cartesian state.
              * @param[out] RVdot Time derivative of the Cartesian state.
              * @param[in] t Current physical time.
@@ -85,6 +94,9 @@ namespace thames::propagators {
 
             /**
              * @brief Propagate Cartesian state using Cowell's method.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -103,6 +115,9 @@ namespace thames::propagators {
             /**
              * @brief State derivative for Cowell's method propagation.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
+             * 
              * @param[in] RV Cartesian state.
              * @param[out] RVdot Time derivative of the Cartesian state.
              * @param[in] t Current physical time.
@@ -111,6 +126,9 @@ namespace thames::propagators {
 
             /**
              * @brief Propagate Cartesian state using Cowell's method.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -132,6 +150,9 @@ namespace thames::propagators {
 
     /**
      * @brief Object for Cowell's method dynamics with polynomials, compatible with the SMART-UQ schema.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-28
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -155,6 +176,9 @@ namespace thames::propagators {
             /**
              * @brief Construct a new Cowell Propagator Polynomial Dynamics object.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-28
+             * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              */
@@ -163,11 +187,17 @@ namespace thames::propagators {
             /**
              * @brief Destroy the Cowell Propagator Polynomial Dynamics object.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-27
+             * 
              */
             ~CowellPropagatorPolynomialDynamics();
 
             /**
              * @brief Evaluate the derivative of the Cowell's method dynamics.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-27
              * 
              * @param[in] t Current physical time.
              * @param[in] RV Cartesian state.
@@ -180,6 +210,9 @@ namespace thames::propagators {
 
     /**
      * @brief Propagator object for Cowell's method with polynomials.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-28
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -197,6 +230,9 @@ namespace thames::propagators {
             /**
              * @brief Construct a new Cowell Propagator Polynomial object.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-28
+             * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              */
@@ -205,11 +241,17 @@ namespace thames::propagators {
             /**
              * @brief Destroy the Cowell Propagator Polynomial object
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-27
+             * 
              */
             ~CowellPropagatorPolynomial();
 
             /**
              * @brief Propagate Cartesian state using Cowell's method.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-27
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.

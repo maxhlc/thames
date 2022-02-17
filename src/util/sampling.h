@@ -32,6 +32,9 @@ namespace thames::util::sampling {
      * 
      * Returns the mid-point if one point is requested.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-02-01
+     * 
      * @tparam T Numeric type.
      * @param[in] a Start value.
      * @param[in] b End value.
@@ -43,6 +46,9 @@ namespace thames::util::sampling {
 
     /**
      * @brief Generate permuations of Cartesian states from sets of points in each state variable.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-02-01
      * 
      * @tparam T Numeric type.
      * @param[in] points Vector of vectors of ranges for each Cartesian state (i.e. X, Y, Z, VX, VY, VZ)

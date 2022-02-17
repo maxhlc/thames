@@ -41,6 +41,9 @@ namespace thames::conversions::geqoe{
     /**
      * @brief Convert from Cartesian state to Generalised Equinoctial Orbital Elements (GEqOE).
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-31
+     * 
      * @tparam T Numeric type.
      * @param[in] t Current physical time.
      * @param[in] RV Cartesian state.
@@ -53,6 +56,9 @@ namespace thames::conversions::geqoe{
 
     /**
      * @brief Convert from Generalised Equinoctial Orbital Elements (GEqOE) to Cartesian state.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-31
      * 
      * @tparam T Numeric type.
      * @param[in] t Current physical time.
@@ -71,6 +77,9 @@ namespace thames::conversions::geqoe{
     /**
      * @brief Convert from Cartesian state to Generalised Equinoctial Orbital Elements (GEqOE).
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-31
+     * 
      * @tparam T Numeric type.
      * @param[in] t Current physical time.
      * @param[in] RV Cartesian state.
@@ -83,6 +92,9 @@ namespace thames::conversions::geqoe{
 
     /**
      * @brief Convert from Generalised Equinoctial Orbital Elements (GEqOE) to Cartesian state.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-31
      * 
      * @tparam T Numeric type.
      * @param[in] t Current physical time.
@@ -103,6 +115,9 @@ namespace thames::conversions::geqoe{
     /**
      * @brief Convert from Cartesian state to Generalised Equinoctial Orbital Elements (GEqOE).
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-31
+     * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      * @param[in] t Current physical time.
@@ -116,6 +131,9 @@ namespace thames::conversions::geqoe{
 
     /**
      * @brief Convert from Generalised Equinoctial Orbital Elements (GEqOE) to Cartesian state.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-31
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.

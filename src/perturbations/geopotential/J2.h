@@ -41,6 +41,9 @@ namespace thames::perturbations::geopotential{
     /**
      * @brief Class for the perturbation resulting from the J2-term.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-25
+     * 
      * @tparam T Numeric type.
      */
     template<class T>
@@ -61,6 +64,9 @@ namespace thames::perturbations::geopotential{
             /**
              * @brief Construct a new J2 object.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
+             * 
              * @param[in] mu Central body gravitational parameter.
              * @param[in] J2 Central body J2-term.
              * @param[in] radius Central body radius.
@@ -69,6 +75,9 @@ namespace thames::perturbations::geopotential{
 
             /**
              * @brief Destroy the J2 object.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
              * 
              */
             ~J2();
@@ -80,6 +89,9 @@ namespace thames::perturbations::geopotential{
             /**
              * @brief Calculate perturbing acceleration resulting from the J2-term. 
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
+             * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @param[in] V Velocity vector.
@@ -89,6 +101,9 @@ namespace thames::perturbations::geopotential{
 
             /**
              * @brief Calculate perturbing potential resulting from the J2-term. 
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
@@ -103,6 +118,9 @@ namespace thames::perturbations::geopotential{
             /**
              * @brief Calculate perturbing acceleration resulting from the J2-term. 
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
+             * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @param[in] V Velocity vector.
@@ -112,6 +130,9 @@ namespace thames::perturbations::geopotential{
 
             /**
              * @brief Calculate perturbing potential resulting from the J2-term. 
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
@@ -129,6 +150,9 @@ namespace thames::perturbations::geopotential{
 
     /**
      * @brief Class for the perturbation resulting from the J2-term.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-27
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -151,6 +175,9 @@ namespace thames::perturbations::geopotential{
             /**
              * @brief Construct a new J2Polynomial object.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-28
+             * 
              * @param[in] mu Central body gravitational parameter.
              * @param[in] J2 Central body J2-term.
              * @param[in] radius Central body radius.
@@ -160,11 +187,17 @@ namespace thames::perturbations::geopotential{
             /**
              * @brief Destroy the J2Polynomial object
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-27
+             * 
              */
             ~J2Polynomial();
 
             /**
              * @brief Calculate perturbing acceleration resulting from the J2-term. 
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-27
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
@@ -175,6 +208,9 @@ namespace thames::perturbations::geopotential{
 
             /**
              * @brief Calculate perturbing potential resulting from the J2-term. 
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-27
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.

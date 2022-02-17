@@ -69,38 +69,62 @@ $(function() {
 <div class="title">keplerian.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="keplerian_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef THAMES_CONVERSIONS_KEPLERIAN</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define THAMES_CONVERSIONS_KEPLERIAN</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacethames_1_1conversions_1_1keplerian.html">thames::conversions::keplerian</a>{</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="comment">// Arrays //</span></div>
+<a href="keplerian_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">MIT License</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">Copyright (c) 2021-2022 Max Hallgarten La Casta</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">Permission is hereby granted, free of charge, to any person obtaining a copy</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">of this software and associated documentation files (the &quot;Software&quot;), to deal</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">in the Software without restriction, including without limitation the rights</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">copies of the Software, and to permit persons to whom the Software is</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">furnished to do so, subject to the following conditions:</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    std::array&lt;T, 6&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#abb1fc20660ef99283328bfb9a7fb656f">cartesian_to_keplerian</a>(<span class="keyword">const</span> std::array&lt;T, 6&gt;&amp; RV, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::array&lt;T, 6&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#a92c34df4e7879d7948759d25dc2fd3d5">keplerian_to_cartesian</a>(<span class="keyword">const</span> std::array&lt;T, 6&gt;&amp; keplerian, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// Vectors //</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    std::vector&lt;T&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#abb1fc20660ef99283328bfb9a7fb656f">cartesian_to_keplerian</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; RV, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::vector&lt;T&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#a92c34df4e7879d7948759d25dc2fd3d5">keplerian_to_cartesian</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; keplerian, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">The above copyright notice and this permission notice shall be included in all</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">copies or substantial portions of the Software.</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">SOFTWARE.</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#ifndef THAMES_CONVERSIONS_KEPLERIAN</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define THAMES_CONVERSIONS_KEPLERIAN</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacethames_1_1conversions_1_1keplerian.html">thames::conversions::keplerian</a>{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">// Arrays //</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    std::array&lt;T, 6&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#abb1fc20660ef99283328bfb9a7fb656f">cartesian_to_keplerian</a>(<span class="keyword">const</span> std::array&lt;T, 6&gt;&amp; RV, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    std::array&lt;T, 6&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#a92c34df4e7879d7948759d25dc2fd3d5">keplerian_to_cartesian</a>(<span class="keyword">const</span> std::array&lt;T, 6&gt;&amp; keplerian, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// Vectors //</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    std::vector&lt;T&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#abb1fc20660ef99283328bfb9a7fb656f">cartesian_to_keplerian</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; RV, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    std::vector&lt;T&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#a92c34df4e7879d7948759d25dc2fd3d5">keplerian_to_cartesian</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; keplerian, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html_a92c34df4e7879d7948759d25dc2fd3d5"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html#a92c34df4e7879d7948759d25dc2fd3d5">thames::conversions::keplerian::keplerian_to_cartesian</a></div><div class="ttdeci">std::array&lt; T, 6 &gt; keplerian_to_cartesian(const std::array&lt; T, 6 &gt; &amp;keplerian, const T &amp;mu)</div><div class="ttdoc">Convert from traditional Keplerian elements to Cartesian state.</div><div class="ttdef"><b>Definition:</b> keplerian.cpp:115</div></div>
-<div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html_abb1fc20660ef99283328bfb9a7fb656f"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html#abb1fc20660ef99283328bfb9a7fb656f">thames::conversions::keplerian::cartesian_to_keplerian</a></div><div class="ttdeci">std::array&lt; T, 6 &gt; cartesian_to_keplerian(const std::array&lt; T, 6 &gt; &amp;RV, const T &amp;mu)</div><div class="ttdoc">Convert from Cartesian state to traditional Keplerian elements.</div><div class="ttdef"><b>Definition:</b> keplerian.cpp:18</div></div>
-<div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html">thames::conversions::keplerian</a></div><div class="ttdef"><b>Definition:</b> keplerian.cpp:11</div></div>
-<div class="ttc" id="anamespacethames_1_1constants_1_1earth_html_af14ba7df5ed2e621ca4d7021ef544156"><div class="ttname"><a href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">thames::constants::earth::mu</a></div><div class="ttdeci">const double mu</div><div class="ttdoc">Earth's gravitational parameter [km^3/s^2].</div><div class="ttdef"><b>Definition:</b> earth.h:10</div></div>
+<div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html_a92c34df4e7879d7948759d25dc2fd3d5"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html#a92c34df4e7879d7948759d25dc2fd3d5">thames::conversions::keplerian::keplerian_to_cartesian</a></div><div class="ttdeci">std::array&lt; T, 6 &gt; keplerian_to_cartesian(const std::array&lt; T, 6 &gt; &amp;keplerian, const T &amp;mu)</div><div class="ttdoc">Convert from traditional Keplerian elements to Cartesian state.</div><div class="ttdef"><b>Definition:</b> keplerian.cpp:139</div></div>
+<div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html_abb1fc20660ef99283328bfb9a7fb656f"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html#abb1fc20660ef99283328bfb9a7fb656f">thames::conversions::keplerian::cartesian_to_keplerian</a></div><div class="ttdeci">std::array&lt; T, 6 &gt; cartesian_to_keplerian(const std::array&lt; T, 6 &gt; &amp;RV, const T &amp;mu)</div><div class="ttdoc">Convert from Cartesian state to traditional Keplerian elements.</div><div class="ttdef"><b>Definition:</b> keplerian.cpp:42</div></div>
+<div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html">thames::conversions::keplerian</a></div><div class="ttdef"><b>Definition:</b> keplerian.cpp:35</div></div>
+<div class="ttc" id="anamespacethames_1_1constants_1_1earth_html_af14ba7df5ed2e621ca4d7021ef544156"><div class="ttname"><a href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">thames::constants::earth::mu</a></div><div class="ttdeci">const double mu</div><div class="ttdoc">Earth's gravitational parameter [km^3/s^2].</div><div class="ttdef"><b>Definition:</b> earth.h:34</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

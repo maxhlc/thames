@@ -37,6 +37,9 @@ namespace thames::vector::arithmeticoverloads {
     /**
      * @brief Element-wise addition of two arrays.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-20
+     * 
      * @tparam T Numeric type.
      * @tparam S Array size.
      * @param[in] a First array.
@@ -48,6 +51,9 @@ namespace thames::vector::arithmeticoverloads {
 
     /**
      * @brief Element-wise subtraction of two arrays.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-20
      * 
      * @tparam T Numeric type.
      * @tparam S Array size.
@@ -61,6 +67,9 @@ namespace thames::vector::arithmeticoverloads {
     /**
      * @brief Scalar multiplication of an array.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-20
+     * 
      * @tparam T Numeric type.
      * @tparam S Array size.
      * @param[in] a Scalar.
@@ -73,6 +82,9 @@ namespace thames::vector::arithmeticoverloads {
     /**
      * @brief Scalar multiplication of an array.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-20
+     * 
      * @tparam T Numeric type.
      * @tparam S Array size.
      * @param[in] b Array.
@@ -84,6 +96,9 @@ namespace thames::vector::arithmeticoverloads {
 
     /**
      * @brief Scalar division of an array.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-20
      * 
      * @tparam T Numeric type.
      * @tparam S Array size.
@@ -101,6 +116,9 @@ namespace thames::vector::arithmeticoverloads {
     /**
      * @brief Element-wise addition of two vectors.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-20
+     * 
      * @tparam T Numeric type.
      * @param[in] a First vector.
      * @param[in] b Second vector.
@@ -111,6 +129,9 @@ namespace thames::vector::arithmeticoverloads {
 
     /**
      * @brief Element-wise subtraction of two vectors.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-20
      * 
      * @tparam T Numeric type.
      * @param[in] a First vector.
@@ -123,6 +144,9 @@ namespace thames::vector::arithmeticoverloads {
     /**
      * @brief Scalar multiplication of a vector.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-20
+     * 
      * @tparam T Numeric type.
      * @param[in] a Scalar.
      * @param[in] b Array.
@@ -134,6 +158,9 @@ namespace thames::vector::arithmeticoverloads {
     /**
      * @brief Scalar multiplication of a vector.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-20
+     * 
      * @tparam T Numeric type.
      * @param[in] b Array.
      * @param[in] a Scalar.
@@ -144,6 +171,9 @@ namespace thames::vector::arithmeticoverloads {
 
     /**
      * @brief Scalar division of a vector.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-20
      * 
      * @tparam T Numeric type.
      * @param[in] b Array.
@@ -162,6 +192,9 @@ namespace thames::vector::arithmeticoverloads {
     /**
      * @brief Element-wise addition of two vectors of polynomials.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-27
+     * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      * @param[in] a First vector.
@@ -173,6 +206,9 @@ namespace thames::vector::arithmeticoverloads {
 
     /**
      * @brief Element-wise subtraction of two vectors of polynomials.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-27
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -186,6 +222,9 @@ namespace thames::vector::arithmeticoverloads {
     /**
      * @brief Multiplication of a vector of polynomials with a scalar.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-27
+     * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      * @param[in] a Scalar.
@@ -197,6 +236,9 @@ namespace thames::vector::arithmeticoverloads {
 
     /**
      * @brief Multiplication of a vector of polynomials with a scalar.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-27
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -210,6 +252,9 @@ namespace thames::vector::arithmeticoverloads {
     /**
      * @brief Multiplication of a vector of polynomials with a polynomial.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-27
+     * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      * @param[in] a Polynomial.
@@ -221,6 +266,9 @@ namespace thames::vector::arithmeticoverloads {
 
     /**
      * @brief Multiplication of a vector of polynomials with a polynomial.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-27
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -234,6 +282,9 @@ namespace thames::vector::arithmeticoverloads {
     /**
      * @brief Division of a vector of polynomials with a scalar.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-27
+     * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      * @param[in] b Vector of polynomials.
@@ -245,6 +296,9 @@ namespace thames::vector::arithmeticoverloads {
 
     /**
      * @brief Division of a vector of polynomials with a polynomial.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-27
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.

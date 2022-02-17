@@ -37,6 +37,9 @@ namespace thames::perturbations::baseperturbation{
     /**
      * @brief Class for the base perturbation.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-25
+     * 
      * @tparam T Numeric type.
      */
     template<class T>
@@ -49,11 +52,17 @@ namespace thames::perturbations::baseperturbation{
             /**
              * @brief Construct a new Base Perturbation object.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-10
+             * 
              */
             BasePerturbation();
 
             /**
              * @brief Destroy the Base Perturbation object.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-10
              * 
              */
             ~BasePerturbation();
@@ -67,6 +76,9 @@ namespace thames::perturbations::baseperturbation{
              * 
              * Returns zero total perturbing acceleration.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
+             * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @param[in] V Velocity vector.
@@ -78,6 +90,9 @@ namespace thames::perturbations::baseperturbation{
              * @brief Default non-potential perturbing acceleration.
              * 
              * Returns zero non-potential perturbing acceleration.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
@@ -91,6 +106,9 @@ namespace thames::perturbations::baseperturbation{
              * 
              * Returns zero potential.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
+             * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @return T Perturbing potential.
@@ -101,6 +119,9 @@ namespace thames::perturbations::baseperturbation{
              * @brief Default time derivative of the perturbing potential.
              * 
              * Returns zero time derivative of the perturbing potential.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
@@ -118,6 +139,9 @@ namespace thames::perturbations::baseperturbation{
              * 
              * Returns zero total perturbing acceleration.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
+             * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @param[in] V Velocity vector.
@@ -129,6 +153,9 @@ namespace thames::perturbations::baseperturbation{
              * @brief Default non-potential perturbing acceleration.
              * 
              * Returns zero non-potential perturbing acceleration.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
@@ -142,6 +169,9 @@ namespace thames::perturbations::baseperturbation{
              * 
              * Returns zero potential.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
+             * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @return T Perturbing potential.
@@ -152,6 +182,9 @@ namespace thames::perturbations::baseperturbation{
              * @brief Default time derivative of the perturbing potential.
              * 
              * Returns zero time derivative of the perturbing potential.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-25
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
@@ -168,8 +201,11 @@ namespace thames::perturbations::baseperturbation{
 
     #ifdef THAMES_USE_SMARTUQ
 
-   /**
+    /**
      * @brief Class for the base perturbation for polynomial distributions.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-27
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -184,11 +220,17 @@ namespace thames::perturbations::baseperturbation{
             /**
              * @brief Construct a new Base Perturbation Polynomial object.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-27
+             * 
              */
             BasePerturbationPolynomial();
 
             /**
              * @brief Destroy the Base Perturbation Polynomial object.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-27
              * 
              */
             ~BasePerturbationPolynomial();
@@ -197,6 +239,9 @@ namespace thames::perturbations::baseperturbation{
              * @brief Default total perturbing acceleration.
              * 
              * Returns zero total perturbing acceleration.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-27
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
@@ -210,6 +255,9 @@ namespace thames::perturbations::baseperturbation{
              * 
              * Returns zero non-potential perturbing acceleration.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-27
+             * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @param[in] V Velocity vector.
@@ -222,6 +270,9 @@ namespace thames::perturbations::baseperturbation{
              * 
              * Returns zero potential.
              * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-27
+             * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
              * @return P<T> Perturbing potential.
@@ -232,6 +283,9 @@ namespace thames::perturbations::baseperturbation{
              * @brief Default time derivative of the perturbing potential.
              * 
              * Returns zero time derivative of the perturbing potential.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-01-27
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.

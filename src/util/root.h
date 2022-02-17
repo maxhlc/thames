@@ -36,6 +36,9 @@ namespace thames::util::root{
     /**
      * @brief Golden section search for root finding.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-17
+     * 
      * @tparam T Numeric type.
      * @param[in] func Scalar function for root finding.
      * @param[in] a Left hand boundary.
@@ -48,6 +51,9 @@ namespace thames::util::root{
 
     /**
      * @brief Newton-Raphson method for root finding.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-24
      * 
      * @tparam T Numeric type.
      * @param[in] func Scalar function for root finding. 
@@ -69,6 +75,9 @@ namespace thames::util::root{
      * @brief Newton-Raphson method for root finding.
      * 
      * Convergence is calculated using the constant (index of zero) term.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-31
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.

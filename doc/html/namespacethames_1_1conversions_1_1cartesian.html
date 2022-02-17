@@ -80,10 +80,52 @@ Functions</h2></td></tr>
 <tr class="separator:abdb3032c759d9679cc23c18d9ce6e928"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af67d82a7b44a8b3e19be28a7a656ce96"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1cartesian.html#af67d82a7b44a8b3e19be28a7a656ce96">cartesian_to_polynomial</a> (const std::vector&lt; double &gt; &amp;RV, const std::vector&lt; double &gt; &amp;RVunc, int degree, std::vector&lt; taylor_polynomial&lt; double &gt;&gt; &amp;RVPolynomial)</td></tr>
 <tr class="separator:af67d82a7b44a8b3e19be28a7a656ce96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b919225146ddac2076be56ef4398c5d"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1cartesian.html#a3b919225146ddac2076be56ef4398c5d">cartesian_to_polynomial</a> (const std::vector&lt; double &gt; &amp;RV, const std::vector&lt; double &gt; &amp;RVunc, int degree, std::vector&lt; chebyshev_polynomial&lt; double &gt;&gt; &amp;RVPolynomial)</td></tr>
+<tr class="separator:a3b919225146ddac2076be56ef4398c5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a3b919225146ddac2076be56ef4398c5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b919225146ddac2076be56ef4398c5d">&#9670;&nbsp;</a></span>cartesian_to_polynomial() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void thames::conversions::cartesian::cartesian_to_polynomial </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>RV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>RVunc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>degree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; chebyshev_polynomial&lt; double &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>RVPolynomial</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af67d82a7b44a8b3e19be28a7a656ce96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af67d82a7b44a8b3e19be28a7a656ce96">&#9670;&nbsp;</a></span>cartesian_to_polynomial() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af67d82a7b44a8b3e19be28a7a656ce96">&#9670;&nbsp;</a></span>cartesian_to_polynomial() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -123,7 +165,7 @@ Functions</h2></td></tr>
 </div>
 </div>
 <a id="abdb3032c759d9679cc23c18d9ce6e928"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abdb3032c759d9679cc23c18d9ce6e928">&#9670;&nbsp;</a></span>cartesian_to_polynomial() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abdb3032c759d9679cc23c18d9ce6e928">&#9670;&nbsp;</a></span>cartesian_to_polynomial() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -163,6 +205,8 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 </div><div class="memdoc">
 
 <p>Generate vector of polynomials representing Cartesian state, and its uncertainty. </p>
+<dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-01-31</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Numeric type. </td></tr>

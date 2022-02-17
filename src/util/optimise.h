@@ -34,6 +34,9 @@ namespace thames::util::optimise{
      * 
      * @details Method as described by: https://en.wikipedia.org/wiki/Golden-section_search#Iterative_algorithm
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-17
+     * 
      * @tparam T Numeric type.
      * @param[in] func Scalar function to be minimised.
      * @param[in] a Left hand boundary.

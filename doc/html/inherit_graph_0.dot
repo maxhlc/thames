@@ -4,5 +4,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node0 [label="thames::conversions\l::dimensional::Dimensional\lFactors",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html",tooltip="Structure to contain factors for (non)dimensionalisation of Cartesian states."];
+  Node0 [label="thames::conversions\l::dimensional::Dimensional\lFactors\< T \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html",tooltip="Structure to contain factors for (non)dimensionalisation of Cartesian states."];
 }

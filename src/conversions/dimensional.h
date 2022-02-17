@@ -50,6 +50,9 @@ namespace thames::conversions::dimensional{
     /**
      * @brief Non-dimensionalise Cartesian state.
      *
+     * @author Max Hallgarten La Casta
+     * @date 2022-02-09
+     * 
      * @tparam T Numeric type.
      * @param[in,out] t Current physical time.
      * @param[in,out] RV Current Cartesian state vector (position and velocity).
@@ -62,6 +65,9 @@ namespace thames::conversions::dimensional{
     /**
      * @brief Dimensionalise Cartesian state.
      *
+     * @author Max Hallgarten La Casta
+     * @date 2022-02-09
+     * 
      * @tparam T Numeric type.
      * @param[in,out] t Current physical time.
      * @param[in,out] RV Current Cartesian state vector (position and velocity).
@@ -73,6 +79,9 @@ namespace thames::conversions::dimensional{
 
     /**
      * @brief Calculate non-dimensionalisation factors.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-02-09
      * 
      * @tparam T Numeric type.
      * @param[in] RV Cartesian state vector. 
@@ -89,6 +98,9 @@ namespace thames::conversions::dimensional{
     /**
      * @brief Non-dimensionalise Cartesian state.
      *
+     * @author Max Hallgarten La Casta
+     * @date 2022-02-09
+     * 
      * @tparam T Numeric type.
      * @param[in,out] t Current physical time.
      * @param[in,out] RV Current Cartesian state vector (position and velocity).
@@ -101,6 +113,9 @@ namespace thames::conversions::dimensional{
     /**
      * @brief Dimensionalise Cartesian state.
      *
+     * @author Max Hallgarten La Casta
+     * @date 2022-02-09
+     * 
      * @tparam T Numeric type.
      * @param[in,out] t Current physical time.
      * @param[in,out] RV Current Cartesian state vector (position and velocity).
@@ -112,6 +127,9 @@ namespace thames::conversions::dimensional{
 
     /**
      * @brief Calculate non-dimensionalisation factors.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-02-09
      * 
      * @tparam T Numeric type.
      * @param[in] RV Cartesian state vector. 
@@ -130,6 +148,9 @@ namespace thames::conversions::dimensional{
     /**
      * @brief Non-dimensionalise Cartesian state polynomial.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-02-16
+     * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      * @param[in,out] t Current physical time.
@@ -142,6 +163,9 @@ namespace thames::conversions::dimensional{
 
     /**
      * @brief Dimensionalise Cartesian state polynomial.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-02-16
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.

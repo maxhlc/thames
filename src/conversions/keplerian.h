@@ -37,6 +37,9 @@ namespace thames::conversions::keplerian{
     /**
      * @brief Convert from Cartesian state to traditional Keplerian elements.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-24
+     * 
      * @tparam T Numeric type.
      * @param[in] RV Cartesian state.
      * @param[in] mu Gravitational parameter.
@@ -47,6 +50,9 @@ namespace thames::conversions::keplerian{
 
     /**
      * @brief Convert from traditional Keplerian elements to Cartesian state.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-24
      * 
      * @tparam T Numeric type.
      * @param[in] keplerian Keplerian elements state.
@@ -63,6 +69,9 @@ namespace thames::conversions::keplerian{
     /**
      * @brief Convert from Cartesian state to traditional Keplerian elements.
      * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-24
+     * 
      * @tparam T Numeric type.
      * @param[in] RV Cartesian state.
      * @param[in] mu Gravitational parameter.
@@ -73,6 +82,9 @@ namespace thames::conversions::keplerian{
 
     /**
      * @brief Convert from traditional Keplerian elements to Cartesian state.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-01-24
      * 
      * @tparam T Numeric type.
      * @param[in] keplerian Keplerian elements state.
