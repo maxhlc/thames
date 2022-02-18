@@ -33,6 +33,34 @@ using namespace smartuq::polynomial;
 
 namespace thames::conversions::cartesian {
 
+    template<class T>
+    void states_to_bounds(const std::vector<std::vector<T>>& states, std::vector<T>& lower, std::vector<T>& upper){
+        // Resize vectors for minimum and maximum values
+        lower.resize(6);
+        upper.resize(6);
+
+        // Iterate through states
+        for(std::size_t ii=0; ii<states.size(); ii++){
+            // Store values for first state, otherwise compare with current minimum/maximum
+            if(ii == 0){
+                lower = states[ii];
+                upper = states[ii];
+            } else {
+                // Iterate through state variables
+                for(unsigned int jj = 0; jj<6; jj++){
+                    // Update minimum if state variable is smaller
+                    if(lower[jj] > states[ii][jj])
+                        lower[jj] = states[ii][jj];
+
+                    // Update maximum if state variable is larger
+                    if(upper[jj] < states[ii][jj])
+                        upper[jj] = states[ii][jj];                
+                }
+            }
+        }
+    }
+    template void states_to_bounds(const std::vector<std::vector<double>>& states, std::vector<double>& lower, std::vector<double>& upper);
+
     #ifdef THAMES_USE_SMARTUQ
 
     template<class T, template<class> class P>

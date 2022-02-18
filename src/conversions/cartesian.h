@@ -33,6 +33,20 @@ namespace thames::conversions::cartesian {
     // Polynomials //
     /////////////////
 
+    /**
+     * @brief Calculate lower and upper bounds for each state variable in a set of Cartesian state vectors.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-02-17
+     * 
+     * @tparam T Numeric type.
+     * @param[in] states Cartesian state vectors. 
+     * @param[out] lower Minimum of each state variable. 
+     * @param[out] upper Maximum of each state variable.
+     */
+    template<class T>
+    void states_to_bounds(const std::vector<std::vector<T>>& states, std::vector<T>& lower, std::vector<T>& upper);
+
     #ifdef THAMES_USE_SMARTUQ
 
     /**
