@@ -46,23 +46,50 @@ int main(int argc, char **argv){
     std::vector<std::vector<double>> states;
     thames::io::point::load(filepathin, tstart, tend, scid, states);
 
+    // Calculate non-dimensionalisation factors based on first point
+    thames::conversions::dimensional::DimensionalFactors<double> factors = thames::conversions::dimensional::calculate_factors(states[0], mu);
+    double mu_nd = mu/factors.grav;
+    double radius_nd = radius/factors.length;
+    double tstart_nd = tstart/factors.time;
+    double tend_nd = tend/factors.time;
+
     // Declare propagator and perturbations
-    thames::perturbations::geopotential::J2<double> perturbation(mu, J2, radius);
-    thames::propagators::CowellPropagator<double> propagator(mu, &perturbation);
+    thames::perturbations::geopotential::J2<double> perturbation(mu_nd, J2, radius_nd);
+    thames::propagators::CowellPropagator<double> propagator(mu_nd, &perturbation);
 
     // Declare vector for propagated states
     std::vector<std::vector<double>> states_propagated(states.size(), std::vector<double>(6));
 
     // Declare temporary vectors
-    std::vector<double> state(6), state_propagated(6);
+    std::vector<double> state(6), state_nd(6), state_propagated(6), state_propagated_nd(6);
 
     // Iterate through samples
     for(std::size_t ii=0; ii<states.size(); ii++){
         // Extract state
         state = states[ii];
 
+        // Non-dimensionalise the state
+        state_nd = {
+            state[0]/factors.length,
+            state[1]/factors.length,
+            state[2]/factors.length,
+            state[3]/factors.velocity,
+            state[4]/factors.velocity,
+            state[5]/factors.velocity,            
+        };
+
         // Propagate state
-        state_propagated = propagator.propagate(tstart, tend, 30, state);
+        state_propagated_nd = propagator.propagate(tstart_nd, tend_nd, 30/factors.time, state_nd);
+
+        // Re-dimensionalise state
+        state_propagated = {
+            state_propagated_nd[0]*factors.length,
+            state_propagated_nd[1]*factors.length,
+            state_propagated_nd[2]*factors.length,
+            state_propagated_nd[3]*factors.velocity,
+            state_propagated_nd[4]*factors.velocity,
+            state_propagated_nd[5]*factors.velocity,            
+        };        
 
         // Store propagated state
         states_propagated[ii] = state_propagated;
