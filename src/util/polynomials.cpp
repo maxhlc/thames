@@ -50,6 +50,21 @@ namespace thames::util::polynomials {
     template std::vector<double> evaluate_polynomials(const std::vector<taylor_polynomial<double>>&, const std::vector<double>&);
     template std::vector<double> evaluate_polynomials(const std::vector<chebyshev_polynomial<double>>&, const std::vector<double>&);
 
+    template<class T, template<class> class P>
+    std::vector<std::vector<T>> evaluate_polynomials(const std::vector<P<T>>& polynomials, const std::vector<std::vector<T>>& x){
+        // Declare vector for states
+        std::vector<std::vector<T>> numeric(x.size(), std::vector<T>(x[0].size()));
+
+        // Iterate through states
+        for(std::size_t ii=0; ii<x.size(); ii++)
+            numeric[ii] = evaluate_polynomials(polynomials, x[ii]);
+
+        // Return point state vectors
+        return numeric;
+    }
+    template std::vector<std::vector<double>> evaluate_polynomials(const std::vector<taylor_polynomial<double>>&, const std::vector<std::vector<double>>&);
+    template std::vector<std::vector<double>> evaluate_polynomials(const std::vector<chebyshev_polynomial<double>>&, const std::vector<std::vector<double>>&);
+
     #endif
 
 }

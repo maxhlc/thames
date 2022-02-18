@@ -46,6 +46,21 @@ namespace thames::util::polynomials {
     template<class T, template<class> class P>
     std::vector<T> evaluate_polynomials(const std::vector<P<T>>& polynomials, const std::vector<T>& x);
 
+    /**
+     * @brief Evaluate vector of polynomials at a set of points.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-02-18
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] polynomials Vector of polynomials.
+     * @param[in] x Evaluation points. 
+     * @return std::vector<std::vector<T>> Point state vectors.
+     */   
+    template<class T, template<class> class P>
+    std::vector<std::vector<T>> evaluate_polynomials(const std::vector<P<T>>& polynomials, const std::vector<std::vector<T>>& x);
+
     #endif
 
 }
