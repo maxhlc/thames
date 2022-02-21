@@ -47,7 +47,8 @@ int main(int argc, char **argv){
     thames::io::point::load(filepathin, tstart, tend, scid, states);
 
     // Declare propagator and perturbations
-    thames::perturbations::geopotential::J2<double> perturbation(mu, J2, radius);
+    //thames::perturbations::geopotential::J2<double> perturbation(mu, J2, radius);		// J2 perturbation
+	thames::perturbations::baseperturbation::BasePerturbation<double> perturbation;		// No perturbations
     thames::propagators::CowellPropagator<double> propagator(mu, &perturbation);
 
     // Declare vector for propagated states
