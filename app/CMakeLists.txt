@@ -30,4 +30,15 @@ if(THAMES_BUILD_APP)
         target_link_libraries(thames_cowell_discrete_point smart-uq)
         target_link_libraries(thames_cowell_discrete_point ${FFTW_LIBRARIES})
     endif(THAMES_USE_SMARTUQ)
+
+    if(THAMES_USE_SMARTUQ)
+        # Add executable for Cowell for discrete points via polynomials
+        add_executable(thames_cowell_polynomial_point thames_cowell_polynomial_point.cpp)
+        # Link executables
+        target_link_libraries(thames_cowell_polynomial_point thames)
+        # Link SMART-UQ static library and FFTW libraries
+        target_link_libraries(thames_cowell_polynomial_point smart-uq)
+        target_link_libraries(thames_cowell_polynomial_point ${FFTW_LIBRARIES})
+    endif(THAMES_USE_SMARTUQ)
+
 endif(THAMES_BUILD_APP)

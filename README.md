@@ -9,7 +9,7 @@ THAMES (Toolkit for Heuristic and Analytical Methods for Estimating State) is a 
 * `g++`
 * `ODEINT`
 * `SMART-UQ` (optional, included automatically)
-* `Eigen` (optional, used for SMART-UQ, included automatically)
+* `Eigen` (optional, used for SMART-UQ)
 * `FFTW` (optional, used for SMART-UQ)
 
 ### Installing
