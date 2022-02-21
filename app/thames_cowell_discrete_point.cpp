@@ -54,14 +54,8 @@ int main(int argc, char **argv){
     double tend_nd = tend/factors.time;
 
     // Declare propagator and perturbations
-<<<<<<< HEAD
-    //thames::perturbations::geopotential::J2<double> perturbation(mu, J2, radius);		// J2 perturbation
-	thames::perturbations::baseperturbation::BasePerturbation<double> perturbation;		// No perturbations
-    thames::propagators::CowellPropagator<double> propagator(mu, &perturbation);
-=======
     thames::perturbations::geopotential::J2<double> perturbation(mu_nd, J2, radius_nd);
     thames::propagators::CowellPropagator<double> propagator(mu_nd, &perturbation);
->>>>>>> 7a4a66f84b8e8df2085ff4173b14fd14f840bebe
 
     // Declare vector for propagated states
     std::vector<std::vector<double>> states_propagated(states.size(), std::vector<double>(6));
