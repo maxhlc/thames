@@ -212,7 +212,7 @@ namespace thames::propagators {
      * @brief Propagator object for Cowell's method with polynomials.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-01-28
+     * @date 2022-02-22
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -251,15 +251,17 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state using Cowell's method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-27
+             * @date 2022-02-22
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
              * @param[in] tstep Initial timestep for propagation.
              * @param[in] RV Initial Cartesian state.
+             * @param[in] atol Solver absolute tolerance.
+             * @param[in] rtol Solver relative tolerance.
              * @return std::vector<P<T>> Final Cartesian state.
              */
-            std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV) const override;
+            std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV, T atol = 1e-10, T rtol = 1e-10) const override;
 
     };
 

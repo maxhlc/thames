@@ -29,7 +29,7 @@ SOFTWARE.
 #include <boost/numeric/odeint.hpp>
 
 #ifdef THAMES_USE_SMARTUQ
-#include "../../external/smart-uq/include/Integrators/rk4.h"
+#include "../../external/smart-uq/include/Integrators/rk45.h"
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 using namespace smartuq::integrator;
 using namespace smartuq::polynomial;
@@ -441,18 +441,18 @@ namespace thames::propagators {
     }
 
     template<class T, template<class> class P>
-    std::vector<P<T>> GEqOEPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV) const {
+    std::vector<P<T>> GEqOEPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV, T atol, T rtol) const {
         // Calculate number of steps based on time step
         unsigned int nstep = (int) ceil((tend - tstart)/tstep);
 
         // Create integrator
-        rk4<P<T>> integrator(&m_dyn);
+        rk45<P<T>> integrator(&m_dyn, atol);
 
         // Convert Cartesian state to GEqOE
         std::vector<P<T>> geqoe = thames::conversions::geqoe::cartesian_to_geqoe(tstart, RV, m_mu, m_perturbation);
 
         // Generate final GEqOE vector
-        std::vector<P<T>> geqoefinal;
+        std::vector<P<T>> geqoefinal(geqoe);
 
         // Integrate state
         integrator.integrate(tstart, tend, nstep, geqoe, geqoefinal);

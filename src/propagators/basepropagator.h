@@ -125,7 +125,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator abstract object for polynomial propagations.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-01-27
+     * @date 2022-02-22
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -141,15 +141,17 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-27
+             * @date 2022-02-22
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
              * @param[in] tstep Initial timestep for propagation.
              * @param[in] RV Initial Cartesian state.
+             * @param[in] atol Solver absolute tolerance.
+             * @param[in] rtol Solver relative tolerance.
              * @return std::vector<P<T>> Final state.
              */
-            virtual std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV) const;         
+            virtual std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV, T atol, T rtol) const;         
 
     };
 
