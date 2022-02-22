@@ -44,7 +44,7 @@ namespace thames::propagators {
      * @brief Propagator object for GEqOE.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-01-25
+     * @date 2022-02-22
      * 
      * @tparam T Numeric type.
      */
@@ -80,7 +80,7 @@ namespace thames::propagators {
              * @brief State derivative for propagation using Generalised Equinoctial Orbital Elements (GEqOE).
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-25
+             * @date 2022-02-22
              * 
              * @param[in] geqoe GEqOE state.
              * @param[out] geqoedot Time derivative of the GEqOE state.
@@ -112,7 +112,7 @@ namespace thames::propagators {
              * @brief State derivative for propagation using Generalised Equinoctial Orbital Elements (GEqOE).
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-25
+             * @date 2022-02-22
              * 
              * @param[in] geqoe GEqOE state.
              * @param[out] geqoedot Time derivative of the GEqOE state.
@@ -148,7 +148,7 @@ namespace thames::propagators {
      * @brief Object for GEqOE dynamics with polynomials, compatible with the SMART-UQ schema.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-01-31
+     * @date 2022-02-22
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -193,7 +193,7 @@ namespace thames::propagators {
              * @brief Evaluate the derivative of the GEqOE dynamics.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-31
+             * @date 2022-02-22
              * 
              * @param[in] t Current physical time.
              * @param[in] geqoe GEqOE state.
