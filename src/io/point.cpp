@@ -33,7 +33,7 @@ SOFTWARE.
 namespace thames::io::point {
 
     template<class T>
-    void load(const std::string filepath, T& tstart, T& tend, int& scid, std::vector<std::vector<T>>& states){
+    void load(const std::string filepath, T& tstart, T& tend, int& scid, int& statetype, std::vector<std::vector<T>>& states){
         // Clear states vector
         states.clear();
 
@@ -64,6 +64,10 @@ namespace thames::io::point {
         std::getline(str, word, ',');
         scid = std::stoi(word);
 
+        // Import statetype
+        std::getline(str, word, ',');
+        statetype = std::stoi(word);
+
         // Import states
         while(std::getline(filestream, line)){
             // Clear temporary state vector
@@ -79,6 +83,13 @@ namespace thames::io::point {
             // Add temporary state vector to overal states vector
             states.push_back(state);        
         }
+    }
+    template void load(const std::string, double&, double&, int&, int&, std::vector<std::vector<double>>&);
+
+    template<class T>
+    void load(const std::string filepath, T& tstart, T& tend, int& scid, std::vector<std::vector<T>>& states){
+        int statetype;
+        load(filepath, tstart, tend, scid, statetype, states);
     }
     template void load(const std::string, double&, double&, int&, std::vector<std::vector<double>>&);
 

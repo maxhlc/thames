@@ -36,7 +36,26 @@ namespace thames::io::point {
      * @todo This function is templated, however the conversion from string to a floating point representation currently only converts to double.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-16
+     * @date 2022-02-25
+     * 
+     * @tparam T Numeric type.
+     * @param[in] filepath Filepath to be read.
+     * @param[out] tstart Start time.
+     * @param[out] tend End time.
+     * @param[out] scid Spacecraft identifier.
+     * @param[out] statetype State type (e.g. Cartesian, GEqOE, etc.)
+     * @param[out] states State vectors.
+     */
+    template<class T>
+    void load(const std::string filepath, T& tstart, T& tend, int& scid, int& statetype, std::vector<std::vector<T>>& states);
+
+    /**
+     * @brief Function to load Cartesian state vectors from a text file.
+     * 
+     * @todo This function is templated, however the conversion from string to a floating point representation currently only converts to double.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-02-25
      * 
      * @tparam T Numeric type.
      * @param[in] filepath Filepath to be read.
