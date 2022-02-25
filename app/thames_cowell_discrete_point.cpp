@@ -36,6 +36,8 @@ int main(int argc, char **argv){
     double mu = thames::constants::earth::mu;
     double radius = thames::constants::earth::radius;
     double J2 = thames::constants::earth::J2;
+    double atol = 1e-13;
+    double rtol = 1e-13;
 
     // Store filepaths as strings
     std::string filepathin(argv[1]), filepathout(argv[2]);
@@ -79,7 +81,7 @@ int main(int argc, char **argv){
         };
 
         // Propagate state
-        state_propagated_nd = propagator.propagate(tstart_nd, tend_nd, 30/factors.time, state_nd);
+        state_propagated_nd = propagator.propagate(tstart_nd, tend_nd, 30/factors.time, state_nd, atol, rtol);
 
         // Re-dimensionalise state
         state_propagated = {

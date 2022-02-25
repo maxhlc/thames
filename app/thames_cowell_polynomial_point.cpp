@@ -36,6 +36,8 @@ int main(int argc, char **argv){
     double mu = thames::constants::earth::mu;
     double radius = thames::constants::earth::radius;
     double J2 = thames::constants::earth::J2;
+    double atol = 1e-13;
+    double rtol = 1e-13;
 
     // Store filepaths as strings
     std::string filepathin(argv[1]), filepathout(argv[2]);
@@ -67,7 +69,7 @@ int main(int argc, char **argv){
     thames::propagators::CowellPropagatorPolynomial<double, taylor_polynomial> propagator(mu, &perturbation);
 
     // Propagate polynomials
-    RVpolynomial_propagated = propagator.propagate(tstart, tend, tstep, RVpolynomial);
+    RVpolynomial_propagated = propagator.propagate(tstart, tend, tstep, RVpolynomial, atol, rtol);
 
     // Dimensionalise polynomials
     thames::conversions::dimensional::cartesian_dimensionalise(tstart, RVpolynomial_propagated, mu, factors);
