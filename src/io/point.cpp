@@ -29,11 +29,12 @@ SOFTWARE.
 #include <string>
 
 #include "point.h"
+#include "../constants/statetypes.h"
 
 namespace thames::io::point {
 
     template<class T>
-    void load(const std::string filepath, T& tstart, T& tend, int& scid, int& statetype, std::vector<std::vector<T>>& states){
+    void load(const std::string filepath, T& tstart, T& tend, int& scid, thames::constants::statetypes::StateTypes& statetype, std::vector<std::vector<T>>& states){
         // Clear states vector
         states.clear();
 
@@ -66,7 +67,7 @@ namespace thames::io::point {
 
         // Import statetype
         std::getline(str, word, ',');
-        statetype = std::stoi(word);
+        statetype = (thames::constants::statetypes::StateTypes) std::stoi(word);
 
         // Import states
         while(std::getline(filestream, line)){
@@ -84,11 +85,11 @@ namespace thames::io::point {
             states.push_back(state);        
         }
     }
-    template void load(const std::string, double&, double&, int&, int&, std::vector<std::vector<double>>&);
+    template void load(const std::string, double&, double&, int&, thames::constants::statetypes::StateTypes&, std::vector<std::vector<double>>&);
 
     template<class T>
     void load(const std::string filepath, T& tstart, T& tend, int& scid, std::vector<std::vector<T>>& states){
-        int statetype;
+        thames::constants::statetypes::StateTypes statetype;
         load(filepath, tstart, tend, scid, statetype, states);
     }
     template void load(const std::string, double&, double&, int&, std::vector<std::vector<double>>&);

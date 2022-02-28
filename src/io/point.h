@@ -28,6 +28,8 @@ SOFTWARE.
 #include <vector>
 #include <string>
 
+#include "../constants/statetypes.h"
+
 namespace thames::io::point {
 
     /**
@@ -36,7 +38,7 @@ namespace thames::io::point {
      * @todo This function is templated, however the conversion from string to a floating point representation currently only converts to double.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-25
+     * @date 2022-02-28
      * 
      * @tparam T Numeric type.
      * @param[in] filepath Filepath to be read.
@@ -47,7 +49,7 @@ namespace thames::io::point {
      * @param[out] states State vectors.
      */
     template<class T>
-    void load(const std::string filepath, T& tstart, T& tend, int& scid, int& statetype, std::vector<std::vector<T>>& states);
+    void load(const std::string filepath, T& tstart, T& tend, int& scid, thames::constants::statetypes::StateTypes& statetype, std::vector<std::vector<T>>& states);
 
     /**
      * @brief Function to load Cartesian state vectors from a text file.
@@ -55,7 +57,7 @@ namespace thames::io::point {
      * @todo This function is templated, however the conversion from string to a floating point representation currently only converts to double.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-25
+     * @date 2022-02-28
      * 
      * @tparam T Numeric type.
      * @param[in] filepath Filepath to be read.

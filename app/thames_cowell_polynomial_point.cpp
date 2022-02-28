@@ -46,8 +46,9 @@ int main(int argc, char **argv){
     double tstart, tend;
     double tstep = 30;
     int scid;
+    thames::constants::statetypes::StateTypes statetype;
     std::vector<std::vector<double>> states;
-    thames::io::point::load(filepathin, tstart, tend, scid, states);
+    thames::io::point::load(filepathin, tstart, tend, scid, statetype, states);
 
     // Generate polynomials
     std::vector<double> lower, upper;

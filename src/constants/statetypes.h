@@ -22,10 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef THAMES_CONSTANTS
-#define THAMES_CONSTANTS
+#ifndef THAMES_CONSTANTS_STATETYPES
+#define THAMES_CONSTANTS_STATETYPES
 
-#include "earth.h"
-#include "statetypes.h"
+namespace thames::constants::statetypes {
+
+    /// Enumeration to store types of state
+    enum StateTypes {
+        CARTESIAN,
+        GEQOE
+    };
+
+}
 
 #endif

@@ -45,8 +45,9 @@ int main(int argc, char **argv){
     // Load sample states
     double tstart, tend;
     int scid;
+    thames::constants::statetypes::StateTypes statetype;
     std::vector<std::vector<double>> states;
-    thames::io::point::load(filepathin, tstart, tend, scid, states);
+    thames::io::point::load(filepathin, tstart, tend, scid, statetype, states);
 
     // Calculate non-dimensionalisation factors based on first point
     thames::conversions::dimensional::DimensionalFactors<double> factors = thames::conversions::dimensional::calculate_factors(states[0], mu);
