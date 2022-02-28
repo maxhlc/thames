@@ -171,22 +171,24 @@ namespace thames::propagators {
     }
 
     template<class T>
-    std::array<T, 6> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T atol, T rtol) const {
+    std::array<T, 6> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> state, T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const {
         // Transform initial state
-        std::array<T, 6> geqoe = thames::conversions::geqoe::cartesian_to_geqoe(tstart, RV, m_mu, m_perturbation);
+        if(statetype == thames::constants::statetypes::CARTESIAN)
+            state = thames::conversions::geqoe::cartesian_to_geqoe(tstart, state, m_mu, m_perturbation);
 
         // Declare stepper
         boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
         auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
 
         // Propagate orbit
-        boost::numeric::odeint::integrate_adaptive(steppercontrolled, [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);}, geqoe, tstart, tend, tstep);
+        boost::numeric::odeint::integrate_adaptive(steppercontrolled, [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);}, state, tstart, tend, tstep);
 
         // Transform final state
-        RV = thames::conversions::geqoe::geqoe_to_cartesian<T>(tend, geqoe, m_mu, m_perturbation);
+        if(statetype == thames::constants::statetypes::CARTESIAN)
+            state = thames::conversions::geqoe::geqoe_to_cartesian<T>(tend, state, m_mu, m_perturbation);
 
         // Return final state
-        return RV;
+        return state;
     }
 
     /////////////
@@ -308,22 +310,24 @@ namespace thames::propagators {
     }
 
     template<class T>
-    std::vector<T> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> RV, T atol, T rtol) const {
+    std::vector<T> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> state, T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const {
         // Transform initial state
-        std::vector<T> geqoe = thames::conversions::geqoe::cartesian_to_geqoe<T>(tstart, RV, m_mu, m_perturbation);
+        if(statetype == thames::constants::statetypes::CARTESIAN)
+            state = thames::conversions::geqoe::cartesian_to_geqoe<T>(tstart, state, m_mu, m_perturbation);
 
         // Declare stepper
         boost::numeric::odeint::runge_kutta_cash_karp54<std::vector<T>> stepper;
         auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
 
         // Propagate orbit
-        boost::numeric::odeint::integrate_adaptive(steppercontrolled, [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);}, geqoe, tstart, tend, tstep);
+        boost::numeric::odeint::integrate_adaptive(steppercontrolled, [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);}, state, tstart, tend, tstep);
 
         // Transform final state
-        RV = thames::conversions::geqoe::geqoe_to_cartesian<T>(tend, geqoe, m_mu, m_perturbation);
+        if(statetype == thames::constants::statetypes::CARTESIAN)
+            state = thames::conversions::geqoe::geqoe_to_cartesian<T>(tend, state, m_mu, m_perturbation);
 
         // Return final state
-        return RV;
+        return state;
     }
 
     template class GEqOEPropagator<double>;
@@ -475,27 +479,29 @@ namespace thames::propagators {
     }
 
     template<class T, template<class> class P>
-    std::vector<P<T>> GEqOEPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV, T atol, T rtol) const {
+    std::vector<P<T>> GEqOEPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const {
         // Calculate number of steps based on time step
         unsigned int nstep = (int) ceil((tend - tstart)/tstep);
 
         // Create integrator
         rk45<P<T>> integrator(&m_dyn, atol);
 
-        // Convert Cartesian state to GEqOE
-        std::vector<P<T>> geqoe = thames::conversions::geqoe::cartesian_to_geqoe(tstart, RV, m_mu, m_perturbation);
+        // Transform initial state
+        if(statetype == thames::constants::statetypes::CARTESIAN)
+            state = thames::conversions::geqoe::cartesian_to_geqoe(tstart, state, m_mu, m_perturbation);
 
         // Generate final GEqOE vector
-        std::vector<P<T>> geqoefinal(geqoe);
+        std::vector<P<T>> statefinal(state);
 
         // Integrate state
-        integrator.integrate(tstart, tend, nstep, geqoe, geqoefinal);
+        integrator.integrate(tstart, tend, nstep, state, statefinal);
 
-        // Calculate final Cartesian state
-        std::vector<P<T>> RVfinal = thames::conversions::geqoe::geqoe_to_cartesian(tend, geqoefinal, m_mu, m_perturbation);
+        // Transform final state
+        if(statetype == thames::constants::statetypes::CARTESIAN)
+            statefinal = thames::conversions::geqoe::geqoe_to_cartesian(tend, statefinal, m_mu, m_perturbation);
 
         // Return final state
-        return RVfinal;             
+        return statefinal;             
     }
 
     template class GEqOEPropagatorPolynomial<double, taylor_polynomial>;

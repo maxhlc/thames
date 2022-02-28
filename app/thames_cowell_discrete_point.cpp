@@ -82,7 +82,7 @@ int main(int argc, char **argv){
         };
 
         // Propagate state
-        state_propagated_nd = propagator.propagate(tstart_nd, tend_nd, 30/factors.time, state_nd, atol, rtol);
+        state_propagated_nd = propagator.propagate(tstart_nd, tend_nd, 30/factors.time, state_nd, atol, rtol, statetype);
 
         // Re-dimensionalise state
         state_propagated = {

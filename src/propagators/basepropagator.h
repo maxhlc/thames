@@ -28,6 +28,8 @@ SOFTWARE.
 #include <array>
 #include <vector>
 
+#include "../constants/statetypes.h"
+
 namespace thames::propagators::basepropagator {
 
     ///////////
@@ -38,7 +40,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator abstract object.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-01-26
+     * @date 2022-02-28
      * 
      * @tparam T Numeric type.
      */
@@ -69,17 +71,18 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-26
+             * @date 2022-02-28
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
              * @param[in] tstep Initial timestep for propagation.
-             * @param[in] RV Initial Cartesian state.
+             * @param[in] state Initial state.
              * @param[in] atol Solver absolute tolerance.
              * @param[in] rtol Solver relative tolerance.
+             * @param[in] statetype State type.
              * @return std::array<T, 6> Final state.
              */
-            virtual std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T atol, T rtol) const;
+            virtual std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const;
 
             /////////////
             // Vectors //
@@ -101,17 +104,17 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-26
+             * @date 2022-02-28
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
              * @param[in] tstep Initial timestep for propagation.
-             * @param[in] RV Initial Cartesian state.
+             * @param[in] state Initial state.
              * @param[in] atol Solver absolute tolerance.
              * @param[in] rtol Solver relative tolerance.
              * @return std::vector<T> Final state.
              */
-            virtual std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> RV, T atol, T rtol) const;           
+            virtual std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const;           
 
     };
 
@@ -125,7 +128,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator abstract object for polynomial propagations.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-22
+     * @date 2022-02-28
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -141,17 +144,17 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-02-22
+             * @date 2022-02-28
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
              * @param[in] tstep Initial timestep for propagation.
-             * @param[in] RV Initial Cartesian state.
+             * @param[in] state Initial state.
              * @param[in] atol Solver absolute tolerance.
              * @param[in] rtol Solver relative tolerance.
              * @return std::vector<P<T>> Final state.
              */
-            virtual std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV, T atol, T rtol) const;         
+            virtual std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const;         
 
     };
 

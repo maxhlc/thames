@@ -84,7 +84,7 @@ namespace thames::propagators {
     }
 
     template<class T>
-    std::array<T, 6> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> RV,  T atol, T rtol) const {
+    std::array<T, 6> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> RV,  T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const {
         // Declare stepper
         boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
         auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
@@ -126,7 +126,7 @@ namespace thames::propagators {
     }
 
     template<class T>
-    std::vector<T> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> RV, T atol, T rtol) const {
+    std::vector<T> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> RV, T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const {
         // Declare stepper
         boost::numeric::odeint::runge_kutta_cash_karp54<std::vector<T>> stepper;
         auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
@@ -195,7 +195,7 @@ namespace thames::propagators {
     }
 
     template<class T, template<class> class P>
-    std::vector<P<T>> CowellPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV, T atol, T rtol) const {
+    std::vector<P<T>> CowellPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV, T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const {
         // Calculate number of steps based on time step
         unsigned int nstep = (int) ceil((tend - tstart)/tstep);
 

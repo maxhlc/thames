@@ -34,6 +34,7 @@ SOFTWARE.
 
 #include "basepropagator.h"
 #include "../perturbations/baseperturbation.h"
+#include "../constants/statetypes.h"
 
 using namespace thames::propagators::basepropagator;
 using namespace thames::perturbations::baseperturbation;
@@ -48,7 +49,7 @@ namespace thames::propagators {
      * @brief Propagator object for Cowell's method.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-01-25
+     * @date 2022-02-28
      * 
      * @tparam T Numeric type.
      */
@@ -96,17 +97,18 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state using Cowell's method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-25
+             * @date 2022-02-28
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
              * @param[in] tstep Initial timestep for propagation.
-             * @param[in] RV Initial Cartesian state.
+             * @param[in] state Initial state.
              * @param[in] atol Solver absolute tolerance.
              * @param[in] rtol Solver relative tolerance.
+             * @param[in] statetype State type.
              * @return std::array<T, 6> Final Cartesian state.
              */
-            std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, T atol = 1e-10, T rtol = 1e-10) const override;
+            std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, T atol = 1e-10, T rtol = 1e-10, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
 
             /////////////
             // Vectors //
@@ -128,17 +130,18 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state using Cowell's method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-25
+             * @date 2022-02-28
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
              * @param[in] tstep Initial timestep for propagation.
-             * @param[in] RV Initial Cartesian state.
+             * @param[in] state Initial Cartesian state.
              * @param[in] atol Solver absolute tolerance.
              * @param[in] rtol Solver relative tolerance.
+             * @param[in] statetype State type.
              * @return std::vector<T> Final Cartesian state.
              */
-            std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> RV, T atol = 1e-10, T rtol = 1e-10) const override;
+            std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, T atol = 1e-10, T rtol = 1e-10, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
 
     };
 
@@ -212,7 +215,7 @@ namespace thames::propagators {
      * @brief Propagator object for Cowell's method with polynomials.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-22
+     * @date 2022-02-28
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -251,17 +254,18 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state using Cowell's method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-02-22
+             * @date 2022-02-28
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
              * @param[in] tstep Initial timestep for propagation.
-             * @param[in] RV Initial Cartesian state.
+             * @param[in] state Initial state.
              * @param[in] atol Solver absolute tolerance.
              * @param[in] rtol Solver relative tolerance.
+             * @param[in] statetype State type.
              * @return std::vector<P<T>> Final Cartesian state.
              */
-            std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV, T atol = 1e-10, T rtol = 1e-10) const override;
+            std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, T atol = 1e-10, T rtol = 1e-10, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
 
     };
 
