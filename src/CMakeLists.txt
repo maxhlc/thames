@@ -30,6 +30,7 @@ if(THAMES_BUILD_STATIC)
                 conversions/keplerian.cpp
                 # Input/output
                 io/point.cpp
+                io/polynomial.cpp
                 # Perturbations
                 perturbations/baseperturbation.cpp
                 perturbations/geopotential/J2.cpp

@@ -26,5 +26,6 @@ SOFTWARE.
 #define THAMES_IO
 
 #include "point.h"
+#include "polynomial.h"
 
 #endif
