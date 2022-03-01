@@ -126,8 +126,6 @@ namespace thames::io::point {
                     filestream << "\n";
                 }
             }
-
-            std::cout << ii << "\n";
         }
 
         // Print footer
