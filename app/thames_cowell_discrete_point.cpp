@@ -99,7 +99,7 @@ int main(int argc, char **argv){
     }
 
     // Save propagated states
-    thames::io::point::save(filepathout, tstart, tend, scid, states_propagated);
+    thames::io::point::save(filepathout, tstart, tend, scid, statetype, states_propagated);
 
     // Return zero
     return 0;

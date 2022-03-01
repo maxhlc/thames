@@ -73,18 +73,19 @@ namespace thames::io::point {
      * @brief Function to save Cartesian state vectors to a text file.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-16
+     * @date 2022-03-01
      * 
      * @tparam T Numeric type.
      * @param[in] filepath Filepath to be read.
      * @param[in] tstart Start time.
      * @param[in] tend End time.
      * @param[in] scid Spacecraft identifier.
+     * @param[in] statetype State type (e.g. Cartesian, GEqOE, etc.)
      * @param[in] states State vectors.
      * @param[in] precision Output precision.
      */
     template<class T>
-    void save(const std::string filepath, const T& tstart, const T& tend, const int& scid, const std::vector<std::vector<T>>& states, const unsigned int precision = 15);
+    void save(const std::string filepath, const T& tstart, const T& tend, const int& scid, const thames::constants::statetypes::StateTypes& statetype, const std::vector<std::vector<T>>& states, const unsigned int precision = 15);
 
 }
 

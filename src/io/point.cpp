@@ -95,7 +95,7 @@ namespace thames::io::point {
     template void load(const std::string, double&, double&, int&, std::vector<std::vector<double>>&);
 
     template<class T>
-    void save(const std::string filepath, const T& tstart, const T& tend, const int& scid, const std::vector<std::vector<T>>& states, const unsigned int precision){
+    void save(const std::string filepath, const T& tstart, const T& tend, const int& scid, const thames::constants::statetypes::StateTypes& statetype, const std::vector<std::vector<T>>& states, const unsigned int precision){
         // Open filestream
         std::ofstream filestream(filepath);
 
@@ -111,8 +111,8 @@ namespace thames::io::point {
             filestream << states[ii][0] << ", " << states[ii][1] << ", " << states[ii][2] << ", " << states[ii][3] << ", " << states[ii][4] << ", " << states[ii][5] << "\n";
 
         // Print footer
-        filestream << tstart << ", " << tend << ", " << scid;
+        filestream << tstart << ", " << tend << ", " << scid << ", " << statetype;
     }
-    template void save(const std::string, const double&, const double&, const int&, const std::vector<std::vector<double>>&, const unsigned int);
+    template void save(const std::string, const double&, const double&, const int&, const thames::constants::statetypes::StateTypes&, const std::vector<std::vector<double>>&, const unsigned int);
 
 }

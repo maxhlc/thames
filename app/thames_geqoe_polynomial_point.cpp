@@ -80,7 +80,7 @@ int main(int argc, char **argv){
     std::vector<std::vector<double>> states_propagated = thames::util::polynomials::evaluate_polynomials(RVpolynomial_propagated, samples);
     
     // Save propagated states
-    thames::io::point::save(filepathout, tstart, tend, scid, states_propagated);
+    thames::io::point::save(filepathout, tstart, tend, scid, statetype, states_propagated);
 
     // Return zero
     return 0;
