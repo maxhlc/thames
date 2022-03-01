@@ -138,6 +138,8 @@ namespace thames::io::polynomial {
 
             // Calculate number of coefficients
             ncoeffs = coeffs.size();
+
+            // Output coefficients
             for(std::size_t jj=0; jj<ncoeffs; jj++){
                 // Output coefficient
                 filestream << coeffs[jj];

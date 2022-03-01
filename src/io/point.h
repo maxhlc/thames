@@ -33,12 +33,12 @@ SOFTWARE.
 namespace thames::io::point {
 
     /**
-     * @brief Function to load Cartesian state vectors from a text file.
+     * @brief Function to load state vectors from a text file.
      * 
      * @todo This function is templated, however the conversion from string to a floating point representation currently only converts to double.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-28
+     * @date 2022-03-01
      * 
      * @tparam T Numeric type.
      * @param[in] filepath Filepath to be read.
@@ -52,12 +52,12 @@ namespace thames::io::point {
     void load(const std::string filepath, T& tstart, T& tend, int& scid, thames::constants::statetypes::StateTypes& statetype, std::vector<std::vector<T>>& states);
 
     /**
-     * @brief Function to load Cartesian state vectors from a text file.
+     * @brief Function to load state vectors from a text file.
      * 
      * @todo This function is templated, however the conversion from string to a floating point representation currently only converts to double.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-28
+     * @date 2022-03-01
      * 
      * @tparam T Numeric type.
      * @param[in] filepath Filepath to be read.
@@ -70,7 +70,7 @@ namespace thames::io::point {
     void load(const std::string filepath, T& tstart, T& tend, int& scid, std::vector<std::vector<T>>& states);
 
     /**
-     * @brief Function to save Cartesian state vectors to a text file.
+     * @brief Function to save state vectors to a text file.
      * 
      * @author Max Hallgarten La Casta
      * @date 2022-03-01

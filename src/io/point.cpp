@@ -106,9 +106,29 @@ namespace thames::io::point {
         // Set precision
         filestream << std::setprecision(precision);
 
+        // Declare temporary variables
+        std::size_t nstate;
+
         // Print states
-        for(std::size_t ii=0; ii<states.size(); ii++)
-            filestream << states[ii][0] << ", " << states[ii][1] << ", " << states[ii][2] << ", " << states[ii][3] << ", " << states[ii][4] << ", " << states[ii][5] << "\n";
+        for(std::size_t ii=0; ii<states.size(); ii++){
+            // Calculate the number of state variables
+            nstate = states[ii].size();
+
+            // Output state variables
+            for(std::size_t jj=0; jj<nstate; jj++){
+                // Output state variable
+                filestream << states[ii][jj];
+
+                // Output trailing character (comma or newline)
+                if(jj < nstate - 1){
+                    filestream << ", ";
+                } else {
+                    filestream << "\n";
+                }
+            }
+
+            std::cout << ii << "\n";
+        }
 
         // Print footer
         filestream << tstart << ", " << tend << ", " << scid << ", " << statetype;
