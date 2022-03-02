@@ -41,7 +41,7 @@ namespace thames::io::polynomial {
     #ifdef THAMES_USE_SMARTUQ
 
     template<class T, template<class> class P>
-    void load(const std::string filepath, T& tstart, T& tend, int& scid, thames::constants::statetypes::StateTypes& statetype, int& degree, std::vector<P<T>>& polynomials){
+    void load(const std::string filepath, T& tstart, T& tend, int& scid, thames::constants::statetypes::StateTypes& statetype, int& degree, T& atol, T& rtol, std::vector<P<T>>& polynomials){
         // Clear polynomial vector
         polynomials.clear();
 
@@ -79,7 +79,15 @@ namespace thames::io::polynomial {
 
         // Import polynomial degree
         std::getline(str, word, ',');
-        degree = std::stoi(word);        
+        degree = std::stoi(word);
+
+        // Import absolute tolerance
+        std::getline(str, word, ',');
+        atol = std::stod(word);
+
+        // Import relative tolerance
+        std::getline(str, word, ',');
+        rtol = std::stod(word);
 
         // Import coefficients
         while(std::getline(filestream, line)){
@@ -112,11 +120,11 @@ namespace thames::io::polynomial {
             polynomials.push_back(polynomial);
         }
     }
-    template void load(const std::string, double&, double&, int&, thames::constants::statetypes::StateTypes&, int&, std::vector<taylor_polynomial<double>>&);
-    template void load(const std::string, double&, double&, int&, thames::constants::statetypes::StateTypes&, int&, std::vector<chebyshev_polynomial<double>>&);
+    template void load(const std::string, double&, double&, int&, thames::constants::statetypes::StateTypes&, int&, double&, double&, std::vector<taylor_polynomial<double>>&);
+    template void load(const std::string, double&, double&, int&, thames::constants::statetypes::StateTypes&, int&, double&, double&, std::vector<chebyshev_polynomial<double>>&);
 
     template<class T, template<class> class P>
-    void save(const std::string filepath, const T& tstart, const T& tend, const int& scid, const thames::constants::statetypes::StateTypes& statetype, const int& degree, const std::vector<P<T>>& polynomials, const unsigned int precision){
+    void save(const std::string filepath, const T& tstart, const T& tend, const int& scid, const thames::constants::statetypes::StateTypes& statetype, const int& degree, const T& atol, const T& rtol, const std::vector<P<T>>& polynomials, const unsigned int precision){
         // Open filestream
         std::ofstream filestream(filepath);
 
@@ -154,10 +162,10 @@ namespace thames::io::polynomial {
         }
 
         // Print footer
-        filestream << tstart << ", " << tend << ", " << scid << ", " << statetype << ", " << degree;
+        filestream << tstart << ", " << tend << ", " << scid << ", " << statetype << ", " << degree << ", " << atol << ", " << rtol;
     }
-    template void save(const std::string, const double&, const double&, const int&, const thames::constants::statetypes::StateTypes&, const int&, const std::vector<taylor_polynomial<double>>&, const unsigned int);
-    template void save(const std::string, const double&, const double&, const int&, const thames::constants::statetypes::StateTypes&, const int&, const std::vector<chebyshev_polynomial<double>>&, const unsigned int);
+    template void save(const std::string, const double&, const double&, const int&, const thames::constants::statetypes::StateTypes&, const int&, const double&, const double&, const std::vector<taylor_polynomial<double>>&, const unsigned int);
+    template void save(const std::string, const double&, const double&, const int&, const thames::constants::statetypes::StateTypes&, const int&, const double&, const double&, const std::vector<chebyshev_polynomial<double>>&, const unsigned int);
 
     #endif
 

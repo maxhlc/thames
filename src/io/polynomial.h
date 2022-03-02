@@ -53,7 +53,7 @@ namespace thames::io::polynomial {
      * @param[out] polynomials Polynomial states.
      */
     template<class T, template<class> class P>
-    void load(const std::string filepath, T& tstart, T& tend, int& scid, thames::constants::statetypes::StateTypes& statetype, int& degree, std::vector<P<T>>& polynomials);
+    void load(const std::string filepath, T& tstart, T& tend, int& scid, thames::constants::statetypes::StateTypes& statetype, int& degree, T& atol, T& rtol, std::vector<P<T>>& polynomials);
 
     /**
      * @brief Save polynomial coefficients.
@@ -73,7 +73,7 @@ namespace thames::io::polynomial {
      * @param[in] precision Output precision.
      */
     template<class T, template<class> class P>
-    void save(const std::string filepath, const T& tstart, const T& tend, const int& scid, const thames::constants::statetypes::StateTypes& statetype, const int& degree, const std::vector<P<T>>& polynomials, const unsigned int precision = 15);
+    void save(const std::string filepath, const T& tstart, const T& tend, const int& scid, const thames::constants::statetypes::StateTypes& statetype, const int& degree, const T& atol, const T& rtol, const std::vector<P<T>>& polynomials, const unsigned int precision = 15);
 
     #endif
 

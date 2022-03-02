@@ -36,18 +36,17 @@ int main(int argc, char **argv){
     double mu = thames::constants::earth::mu;
     double radius = thames::constants::earth::radius;
     double J2 = thames::constants::earth::J2;
-    double atol = 1e-13;
-    double rtol = 1e-13;
+    double atol, rtol;
 
     // Store filepaths as strings
     std::string filepathin(argv[1]), filepathout(argv[2]);
 
     // Load sample states
     double tstart, tend;
-    int scid;
+    int scid, degree;
     thames::constants::statetypes::StateTypes statetype;
     std::vector<std::vector<double>> states;
-    thames::io::point::load(filepathin, tstart, tend, scid, statetype, states);
+    thames::io::point::load(filepathin, tstart, tend, scid, statetype, degree, atol, rtol, states);
 
     // Calculate non-dimensionalisation factors based on first point
     thames::conversions::dimensional::DimensionalFactors<double> factors = thames::conversions::dimensional::calculate_factors(states[0], mu);
@@ -99,7 +98,7 @@ int main(int argc, char **argv){
     }
 
     // Save propagated states
-    thames::io::point::save(filepathout, tstart, tend, scid, statetype, states_propagated);
+    thames::io::point::save(filepathout, tstart, tend, scid, statetype, degree, atol, rtol, states_propagated);
 
     // Return zero
     return 0;

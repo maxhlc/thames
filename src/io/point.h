@@ -49,25 +49,7 @@ namespace thames::io::point {
      * @param[out] states State vectors.
      */
     template<class T>
-    void load(const std::string filepath, T& tstart, T& tend, int& scid, thames::constants::statetypes::StateTypes& statetype, std::vector<std::vector<T>>& states);
-
-    /**
-     * @brief Function to load state vectors from a text file.
-     * 
-     * @todo This function is templated, however the conversion from string to a floating point representation currently only converts to double.
-     * 
-     * @author Max Hallgarten La Casta
-     * @date 2022-03-01
-     * 
-     * @tparam T Numeric type.
-     * @param[in] filepath Filepath to be read.
-     * @param[out] tstart Start time.
-     * @param[out] tend End time.
-     * @param[out] scid Spacecraft identifier.
-     * @param[out] states State vectors.
-     */
-    template<class T>
-    void load(const std::string filepath, T& tstart, T& tend, int& scid, std::vector<std::vector<T>>& states);
+    void load(const std::string filepath, T& tstart, T& tend, int& scid, thames::constants::statetypes::StateTypes& statetype, int& degree, T& atol, T& rtol, std::vector<std::vector<T>>& states);
 
     /**
      * @brief Function to save state vectors to a text file.
@@ -85,7 +67,7 @@ namespace thames::io::point {
      * @param[in] precision Output precision.
      */
     template<class T>
-    void save(const std::string filepath, const T& tstart, const T& tend, const int& scid, const thames::constants::statetypes::StateTypes& statetype, const std::vector<std::vector<T>>& states, const unsigned int precision = 15);
+    void save(const std::string filepath, const T& tstart, const T& tend, const int& scid, const thames::constants::statetypes::StateTypes& statetype, const int& degree, const T& atol, const T& rtol, const std::vector<std::vector<T>>& states, const unsigned int precision = 15);
 
 }
 

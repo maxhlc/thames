@@ -36,8 +36,7 @@ int main(int argc, char **argv){
     double mu = thames::constants::earth::mu;
     double radius = thames::constants::earth::radius;
     double J2 = thames::constants::earth::J2;
-    double atol = 1e-13;
-    double rtol = 1e-13;
+    double atol, rtol;
 
     // Store filepaths as strings
     std::string filepathin(argv[1]), filepathout(argv[2]);
@@ -47,7 +46,7 @@ int main(int argc, char **argv){
     int scid, degree;
     thames::constants::statetypes::StateTypes statetype;
     std::vector<taylor_polynomial<double>> RVpolynomial, RVpolynomial_propagated;
-    thames::io::polynomial::load(filepathin, tstart, tend, scid, statetype, degree, RVpolynomial);
+    thames::io::polynomial::load(filepathin, tstart, tend, scid, statetype, degree, atol, rtol, RVpolynomial);
 
     // Non-dimensionalise polynomials
     thames::conversions::dimensional::DimensionalFactors<double> factors;
@@ -68,7 +67,7 @@ int main(int argc, char **argv){
     tend *= factors.time;
     
     // Save propagated polynomials
-    thames::io::polynomial::save(filepathout, tstart, tend, scid, statetype, degree, RVpolynomial_propagated);
+    thames::io::polynomial::save(filepathout, tstart, tend, scid, statetype, degree, atol, rtol, RVpolynomial_propagated);
 
     // Return zero
     return 0;
