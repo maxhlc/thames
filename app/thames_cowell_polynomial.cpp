@@ -41,20 +41,12 @@ int main(int argc, char **argv){
     // Store filepaths as strings
     std::string filepathin(argv[1]), filepathout(argv[2]);
 
-    // Load sample states
+    // Load initial polynomials
     double tstart, tend, tstep = 30;
     int scid, degree;
     thames::constants::statetypes::StateTypes statetype;
-    std::vector<std::vector<double>> states;
-    thames::io::point::load(filepathin, tstart, tend, scid, statetype, degree, atol, rtol, states);
-
-    // Generate polynomials
     std::vector<taylor_polynomial<double>> RVpolynomial, RVpolynomial_propagated;
-    std::vector<double> lower, upper;
-    thames::conversions::cartesian::cartesian_to_polynomial(states, degree, RVpolynomial, lower, upper);
-
-    // Calculate sample points
-    std::vector<std::vector<double>> samples = thames::conversions::cartesian::state_to_sample(states, lower, upper);
+    thames::io::polynomial::load(filepathin, tstart, tend, scid, statetype, degree, atol, rtol, RVpolynomial);
 
     // Non-dimensionalise polynomials
     thames::conversions::dimensional::DimensionalFactors<double> factors;
@@ -73,12 +65,9 @@ int main(int argc, char **argv){
     // Dimensionalise polynomials
     thames::conversions::dimensional::cartesian_dimensionalise(tstart, RVpolynomial_propagated, mu, factors);
     tend *= factors.time;
-
-    // Sample polynomials
-    std::vector<std::vector<double>> states_propagated = thames::util::polynomials::evaluate_polynomials(RVpolynomial_propagated, samples);
-
-    // Save propagated states
-    thames::io::point::save(filepathout, tstart, tend, scid, statetype, degree, atol, rtol, states_propagated);
+    
+    // Save propagated polynomials
+    thames::io::polynomial::save(filepathout, tstart, tend, scid, statetype, degree, atol, rtol, RVpolynomial_propagated);
 
     // Return zero
     return 0;
