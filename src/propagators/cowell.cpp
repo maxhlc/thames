@@ -36,6 +36,7 @@ using namespace smartuq::polynomial;
 #endif
 
 #include "cowell.h"
+#include "options.h"
 #include "../perturbations/baseperturbation.h"
 #include "../vector/arithmeticoverloads.h"
 #include "../vector/geometry.h"
@@ -84,10 +85,10 @@ namespace thames::propagators {
     }
 
     template<class T>
-    std::array<T, 6> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> RV,  T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const {
+    std::array<T, 6> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
         // Declare stepper
         boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
-        auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
+        auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
 
         // Propagate orbit
         boost::numeric::odeint::integrate_adaptive(steppercontrolled, [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);}, RV, tstart, tend, tstep);
@@ -126,10 +127,10 @@ namespace thames::propagators {
     }
 
     template<class T>
-    std::vector<T> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> RV, T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const {
+    std::vector<T> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> RV, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
         // Declare stepper
         boost::numeric::odeint::runge_kutta_cash_karp54<std::vector<T>> stepper;
-        auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
+        auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
 
         // Propagate orbit
         boost::numeric::odeint::integrate_adaptive(steppercontrolled, [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);}, RV, tstart, tend, tstep);
@@ -195,7 +196,7 @@ namespace thames::propagators {
     }
 
     template<class T, template<class> class P>
-    std::vector<P<T>> CowellPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV, T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const {
+    std::vector<P<T>> CowellPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
         // Calculate number of steps based on time step
         unsigned int nstep = (int) ceil((tend - tstart)/tstep);
 
@@ -203,10 +204,10 @@ namespace thames::propagators {
         std::vector<P<T>> RVfinal(RV);
 
         // Create integrator
-        rk45<P<T>> integrator(&m_dyn, atol);
+        rk45<P<T>> integrator(&m_dyn, options.atol);
 
         // Integrate state
-        integrator.integrate(tstart,tend, nstep, RV, RVfinal);
+        integrator.integrate(tstart, tend, nstep, RV, RVfinal);
 
         // Return final state
         return RVfinal;        

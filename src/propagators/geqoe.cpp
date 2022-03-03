@@ -36,6 +36,7 @@ using namespace smartuq::polynomial;
 #endif
 
 #include "geqoe.h"
+#include "options.h"
 #include "../conversions/geqoe.h"
 #include "../perturbations/baseperturbation.h"
 #include "../util/root.h"
@@ -171,14 +172,14 @@ namespace thames::propagators {
     }
 
     template<class T>
-    std::array<T, 6> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> state, T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const {
+    std::array<T, 6> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
         // Transform initial state
         if(statetype == thames::constants::statetypes::CARTESIAN)
             state = thames::conversions::geqoe::cartesian_to_geqoe(tstart, state, m_mu, m_perturbation);
 
         // Declare stepper
         boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
-        auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
+        auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
 
         // Propagate orbit
         boost::numeric::odeint::integrate_adaptive(steppercontrolled, [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);}, state, tstart, tend, tstep);
@@ -310,14 +311,14 @@ namespace thames::propagators {
     }
 
     template<class T>
-    std::vector<T> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> state, T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const {
+    std::vector<T> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
         // Transform initial state
         if(statetype == thames::constants::statetypes::CARTESIAN)
             state = thames::conversions::geqoe::cartesian_to_geqoe<T>(tstart, state, m_mu, m_perturbation);
 
         // Declare stepper
         boost::numeric::odeint::runge_kutta_cash_karp54<std::vector<T>> stepper;
-        auto steppercontrolled = boost::numeric::odeint::make_controlled(atol, rtol, stepper);
+        auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
 
         // Propagate orbit
         boost::numeric::odeint::integrate_adaptive(steppercontrolled, [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);}, state, tstart, tend, tstep);
@@ -479,12 +480,12 @@ namespace thames::propagators {
     }
 
     template<class T, template<class> class P>
-    std::vector<P<T>> GEqOEPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, T atol, T rtol, thames::constants::statetypes::StateTypes statetype) const {
+    std::vector<P<T>> GEqOEPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
         // Calculate number of steps based on time step
         unsigned int nstep = (int) ceil((tend - tstart)/tstep);
 
         // Create integrator
-        rk45<P<T>> integrator(&m_dyn, atol);
+        rk45<P<T>> integrator(&m_dyn, options.atol);
 
         // Transform initial state
         if(statetype == thames::constants::statetypes::CARTESIAN)

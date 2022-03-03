@@ -33,6 +33,7 @@ SOFTWARE.
 #endif
 
 #include "basepropagator.h"
+#include "options.h"
 #include "../perturbations/baseperturbation.h"
 #include "../constants/statetypes.h"
 
@@ -93,18 +94,17 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-02-28
+             * @date 2022-03-03
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
              * @param[in] tstep Initial timestep for propagation.
              * @param[in] state Initial state.
-             * @param[in] atol Solver absolute tolerance.
-             * @param[in] rtol Solver relative tolerance.
+             * @param[in] options Propagator options.
              * @param[in] statetype State type.
              * @return std::array<T, 6> Final Cartesian state.
              */
-            std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, T atol = 1e-10, T rtol = 1e-10, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
+            std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
 
             /////////////
             // Vectors //
@@ -126,18 +126,17 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-02-28
+             * @date 2022-03-03
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
              * @param[in] tstep Initial timestep for propagation.
              * @param[in] state Initial state.
-             * @param[in] atol Solver absolute tolerance.
-             * @param[in] rtol Solver relative tolerance.
+             * @param[in] options Propagator options.
              * @param[in] statetype State type.
              * @return std::vector<T> Final Cartesian state.
              */
-            std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, T atol = 1e-10, T rtol = 1e-10, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
+            std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
 
     };
 
@@ -256,18 +255,17 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state using GEqOE.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-02-28
+             * @date 2022-03-03
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
              * @param[in] tstep Initial timestep for propagation.
              * @param[in] state Initial Cartesian state.
-             * @param[in] atol Solver absolute tolerance.
-             * @param[in] rtol Solver relative tolerance.
+             * @param[in] options Propagator options.
              * @param[in] statetype State type.
              * @return std::vector<P<T>> Final Cartesian state.
              */
-            std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, T atol = 1e-10, T rtol = 1e-10, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
+            std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
 
     };
 

@@ -48,6 +48,11 @@ int main(int argc, char **argv){
     std::vector<std::vector<double>> states;
     thames::io::point::load(filepathin, tstart, tend, scid, statetype, degree, atol, rtol, states);
 
+    // Create propagator options
+    thames::propagators::options::PropagatorOptions<double> options;
+    options.atol = atol;
+    options.rtol = rtol;
+
     // Calculate non-dimensionalisation factors based on first point
     thames::conversions::dimensional::DimensionalFactors<double> factors = thames::conversions::dimensional::calculate_factors(states[0], mu);
     double mu_nd = mu/factors.grav;
@@ -81,7 +86,7 @@ int main(int argc, char **argv){
         };
 
         // Propagate state
-        state_propagated_nd = propagator.propagate(tstart_nd, tend_nd, 30/factors.time, state_nd, atol, rtol, statetype);
+        state_propagated_nd = propagator.propagate(tstart_nd, tend_nd, 30/factors.time, state_nd, options, statetype);
 
         // Re-dimensionalise state
         state_propagated = {

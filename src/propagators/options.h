@@ -22,12 +22,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef THAMES_PROPAGATORS
-#define THAMES_PROPAGATORS
+#ifndef THAMES_PROPAGATORS_OPTIONS
+#define THAMES_PROPAGATORS_OPTIONS
 
-#include "basepropagator.h"
-#include "cowell.h"
-#include "geqoe.h"
-#include "options.h"
+namespace thames::propagators::options {
+
+    /// Struct to store options for propagators
+    template<class T>
+    struct PropagatorOptions {
+        bool fixed = false;
+        T atol = 1e-10;
+        T rtol = 1e-10;
+    };
+
+}
 
 #endif

@@ -48,6 +48,11 @@ int main(int argc, char **argv){
     std::vector<std::vector<double>> states;
     thames::io::point::load(filepathin, tstart, tend, scid, statetype, degree, atol, rtol, states);
 
+    // Create propagator options
+    thames::propagators::options::PropagatorOptions<double> options;
+    options.atol = atol;
+    options.rtol = rtol;
+
     // Generate polynomials
     std::vector<taylor_polynomial<double>> RVpolynomial, RVpolynomial_propagated;
     std::vector<double> lower, upper;
@@ -68,7 +73,7 @@ int main(int argc, char **argv){
     thames::propagators::GEqOEPropagatorPolynomial<double, taylor_polynomial> propagator(mu, &perturbation);
 
     // Propagate polynomials
-    RVpolynomial_propagated = propagator.propagate(tstart, tend, tstep, RVpolynomial, atol, rtol, statetype);
+    RVpolynomial_propagated = propagator.propagate(tstart, tend, tstep, RVpolynomial, options, statetype);
 
     // Dimensionalise polynomials
     thames::conversions::dimensional::cartesian_dimensionalise(tstart, RVpolynomial_propagated, mu, factors);
