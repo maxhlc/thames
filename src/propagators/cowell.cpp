@@ -29,6 +29,7 @@ SOFTWARE.
 #include <boost/numeric/odeint.hpp>
 
 #ifdef THAMES_USE_SMARTUQ
+#include "../../external/smart-uq/include/Integrators/rk4.h"
 #include "../../external/smart-uq/include/Integrators/rk45.h"
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 using namespace smartuq::integrator;
@@ -86,12 +87,24 @@ namespace thames::propagators {
 
     template<class T>
     std::array<T, 6> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
-        // Declare stepper
-        boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
-        auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
+        // Declare state derivative
+        auto func = [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);};
 
-        // Propagate orbit
-        boost::numeric::odeint::integrate_adaptive(steppercontrolled, [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);}, RV, tstart, tend, tstep);
+        // Propagate according to the fixed flag
+        if(options.fixed){
+            // Declare stepper
+            boost::numeric::odeint::runge_kutta4<std::array<T, 6>> stepper;
+
+            // Propagate orbit
+            boost::numeric::odeint::integrate_const(stepper, func, RV, tstart, tend, tstep);
+        } else {
+            // Declare stepper
+            boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
+            auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
+
+            // Propagate orbit
+            boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, RV, tstart, tend, tstep);
+        }
 
         // Return final state
         return RV;
@@ -128,12 +141,24 @@ namespace thames::propagators {
 
     template<class T>
     std::vector<T> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> RV, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
-        // Declare stepper
-        boost::numeric::odeint::runge_kutta_cash_karp54<std::vector<T>> stepper;
-        auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
+        // Declare state derivative
+        auto func = [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);};
 
-        // Propagate orbit
-        boost::numeric::odeint::integrate_adaptive(steppercontrolled, [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);}, RV, tstart, tend, tstep);
+        // Propagate according to the fixed flag
+        if(options.fixed){
+            // Declare stepper
+            boost::numeric::odeint::runge_kutta4<std::vector<T>> stepper;
+
+            // Propagate orbit
+            boost::numeric::odeint::integrate_const(stepper, func, RV, tstart, tend, tstep);
+        } else {
+            // Declare stepper
+            boost::numeric::odeint::runge_kutta_cash_karp54<std::vector<T>> stepper;
+            auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
+
+            // Propagate orbit
+            boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, RV, tstart, tend, tstep);
+        }
 
         // Return final state
         return RV;
@@ -203,11 +228,20 @@ namespace thames::propagators {
         // Create final state vector
         std::vector<P<T>> RVfinal(RV);
 
-        // Create integrator
-        rk45<P<T>> integrator(&m_dyn, options.atol);
+        // Propagate according to the fixed flag
+        if(options.fixed){
+            // Create integrator
+            rk4<P<T>> integrator(&m_dyn);
 
-        // Integrate state
-        integrator.integrate(tstart, tend, nstep, RV, RVfinal);
+            // Integrate state
+            integrator.integrate(tstart, tend, nstep, RV, RVfinal);  
+        } else {
+            // Create integrator
+            rk45<P<T>> integrator(&m_dyn, options.atol);
+
+            // Integrate state
+            integrator.integrate(tstart, tend, nstep, RV, RVfinal);  
+        }
 
         // Return final state
         return RVfinal;        

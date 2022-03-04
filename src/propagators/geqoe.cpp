@@ -29,6 +29,7 @@ SOFTWARE.
 #include <boost/numeric/odeint.hpp>
 
 #ifdef THAMES_USE_SMARTUQ
+#include "../../external/smart-uq/include/Integrators/rk4.h"
 #include "../../external/smart-uq/include/Integrators/rk45.h"
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 using namespace smartuq::integrator;
@@ -177,12 +178,24 @@ namespace thames::propagators {
         if(statetype == thames::constants::statetypes::CARTESIAN)
             state = thames::conversions::geqoe::cartesian_to_geqoe(tstart, state, m_mu, m_perturbation);
 
-        // Declare stepper
-        boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
-        auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
+        // Declare state derivative
+        auto func = [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);};
 
-        // Propagate orbit
-        boost::numeric::odeint::integrate_adaptive(steppercontrolled, [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);}, state, tstart, tend, tstep);
+        // Propagate according to the fixed flag
+        if(options.fixed){
+            // Declare stepper
+            boost::numeric::odeint::runge_kutta4<std::array<T, 6>> stepper;
+
+            // Propagate orbit
+            boost::numeric::odeint::integrate_const(stepper, func, state, tstart, tend, tstep);
+        } else {
+            // Declare stepper
+            boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
+            auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
+
+            // Propagate orbit
+            boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, state, tstart, tend, tstep);
+        }
 
         // Transform final state
         if(statetype == thames::constants::statetypes::CARTESIAN)
@@ -316,13 +329,25 @@ namespace thames::propagators {
         if(statetype == thames::constants::statetypes::CARTESIAN)
             state = thames::conversions::geqoe::cartesian_to_geqoe<T>(tstart, state, m_mu, m_perturbation);
 
-        // Declare stepper
-        boost::numeric::odeint::runge_kutta_cash_karp54<std::vector<T>> stepper;
-        auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
+        // Declare state derivative
+        auto func = [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);};
 
-        // Propagate orbit
-        boost::numeric::odeint::integrate_adaptive(steppercontrolled, [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);}, state, tstart, tend, tstep);
+        // Propagate according to the fixed flag
+        if(options.fixed){
+            // Declare stepper
+            boost::numeric::odeint::runge_kutta4<std::vector<T>> stepper;
 
+            // Propagate orbit
+            boost::numeric::odeint::integrate_const(stepper, func, state, tstart, tend, tstep);
+        } else {
+            // Declare stepper
+            boost::numeric::odeint::runge_kutta_cash_karp54<std::vector<T>> stepper;
+            auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
+
+            // Propagate orbit
+            boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, state, tstart, tend, tstep);
+        }
+        
         // Transform final state
         if(statetype == thames::constants::statetypes::CARTESIAN)
             state = thames::conversions::geqoe::geqoe_to_cartesian<T>(tend, state, m_mu, m_perturbation);
@@ -494,8 +519,20 @@ namespace thames::propagators {
         // Generate final GEqOE vector
         std::vector<P<T>> statefinal(state);
 
-        // Integrate state
-        integrator.integrate(tstart, tend, nstep, state, statefinal);
+        // Propagate according to the fixed flag
+        if(options.fixed){
+            // Create integrator
+            rk4<P<T>> integrator(&m_dyn);
+
+            // Integrate state
+            integrator.integrate(tstart, tend, nstep, state, statefinal);
+        } else {
+            // Create integrator
+            rk45<P<T>> integrator(&m_dyn, options.atol);
+
+            // Integrate state
+            integrator.integrate(tstart, tend, nstep, state, statefinal);  
+        }
 
         // Transform final state
         if(statetype == thames::constants::statetypes::CARTESIAN)
