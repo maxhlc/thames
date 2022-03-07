@@ -356,6 +356,23 @@ namespace thames::propagators {
         return state;
     }
 
+    template<class T>
+    std::vector<std::vector<T>> GEqOEPropagator<T>::propagate(std::vector<T> tvector, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+        // Declare output vector
+        std::vector<std::vector<T>> states(tvector.size());
+
+        // Add initial state to output vector
+        states[0] = state;
+
+        // Propagate between times
+        for(std::size_t ii=0; ii<tvector.size()-1; ii++){
+            states[ii+1] = propagate(tvector[ii], tvector[ii+1], tstep, states[ii], options, statetype);
+        }
+
+        // Return states
+        return states;
+    }
+
     template class GEqOEPropagator<double>;
 
     /////////////////
@@ -540,6 +557,23 @@ namespace thames::propagators {
 
         // Return final state
         return statefinal;             
+    }
+
+    template<class T, template<class> class P>
+    std::vector<std::vector<P<T>>> GEqOEPropagatorPolynomial<T, P>::propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+        // Declare output vector
+        std::vector<std::vector<P<T>>> states(tvector.size());
+
+        // Add initial state to output vector
+        states[0] = state;
+
+        // Propagate between times
+        for(std::size_t ii=0; ii<tvector.size()-1; ii++){
+            states[ii+1] = propagate(tvector[ii], tvector[ii+1], tstep, states[ii], options, statetype);
+        }
+
+        // Return states
+        return states;
     }
 
     template class GEqOEPropagatorPolynomial<double, taylor_polynomial>;

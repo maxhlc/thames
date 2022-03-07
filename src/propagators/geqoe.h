@@ -138,6 +138,21 @@ namespace thames::propagators {
              */
             std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
 
+            /**
+             * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-03-07
+             * 
+             * @param[in] tvector Vector of times.
+             * @param[in] tstep Initial timestep for propagation
+             * @param[in] state Initial state.
+             * @param[in] options Propagator options.
+             * @param[in] statetype State type.
+             * @return std::vector<std::vector<T>> Propagated states.
+             */
+            std::vector<std::vector<T>> propagate(std::vector<T> tvector, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
+
     };
 
     /////////////////
@@ -252,10 +267,10 @@ namespace thames::propagators {
             ~GEqOEPropagatorPolynomial();
 
             /**
-             * @brief Propagate Cartesian state using GEqOE.
+             * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-03-03
+             * @date 2022-03-07
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -266,6 +281,21 @@ namespace thames::propagators {
              * @return std::vector<P<T>> Final Cartesian state.
              */
             std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
+
+            /**
+             * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-03-07
+             * 
+             * @param[in] tvector Vector of times.
+             * @param[in] tstep Initial timestep for propagation
+             * @param[in] state Initial state.
+             * @param[in] options Propagator options.
+             * @param[in] statetype State type.
+             * @return std::vector<std::vector<P<T>>> Propagated states.
+             */
+            std::vector<std::vector<P<T>>> propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;  
 
     };
 

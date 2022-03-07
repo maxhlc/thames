@@ -114,7 +114,22 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::vector<T> Final state.
              */
-            virtual std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const;           
+            virtual std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const;
+
+            /**
+             * @brief Propagation method.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-03-07
+             * 
+             * @param[in] tvector Vector of times.
+             * @param[in] tstep Initial timestep for propagation
+             * @param[in] state Initial state.
+             * @param[in] options Propagator options.
+             * @param[in] statetype State type.
+             * @return std::vector<std::vector<T>> Propagated states.
+             */
+            virtual std::vector<std::vector<T>> propagate(std::vector<T> tvector, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const;         
 
     };
 
@@ -154,7 +169,22 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::vector<P<T>> Final state.
              */
-            virtual std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const;         
+            virtual std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const;
+
+            /**
+             * @brief Propagation method.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-03-07
+             * 
+             * @param[in] tvector Vector of times.
+             * @param[in] tstep Initial timestep for propagation
+             * @param[in] state Initial state.
+             * @param[in] options Propagator options.
+             * @param[in] statetype State type.
+             * @return std::vector<std::vector<P<T>>> Propagated states.
+             */
+            virtual std::vector<std::vector<P<T>>> propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const;
 
     };
 

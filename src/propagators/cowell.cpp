@@ -86,7 +86,7 @@ namespace thames::propagators {
     }
 
     template<class T>
-    std::array<T, 6> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> RV, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+    std::array<T, 6> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
         // Declare state derivative
         auto func = [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);};
 
@@ -96,18 +96,18 @@ namespace thames::propagators {
             boost::numeric::odeint::runge_kutta4<std::array<T, 6>> stepper;
 
             // Propagate orbit
-            boost::numeric::odeint::integrate_const(stepper, func, RV, tstart, tend, tstep);
+            boost::numeric::odeint::integrate_const(stepper, func, state, tstart, tend, tstep);
         } else {
             // Declare stepper
             boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
             auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
 
             // Propagate orbit
-            boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, RV, tstart, tend, tstep);
+            boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, state, tstart, tend, tstep);
         }
 
         // Return final state
-        return RV;
+        return state;
     }
 
     /////////////
@@ -140,7 +140,7 @@ namespace thames::propagators {
     }
 
     template<class T>
-    std::vector<T> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> RV, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+    std::vector<T> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
         // Declare state derivative
         auto func = [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);};
 
@@ -150,18 +150,35 @@ namespace thames::propagators {
             boost::numeric::odeint::runge_kutta4<std::vector<T>> stepper;
 
             // Propagate orbit
-            boost::numeric::odeint::integrate_const(stepper, func, RV, tstart, tend, tstep);
+            boost::numeric::odeint::integrate_const(stepper, func, state, tstart, tend, tstep);
         } else {
             // Declare stepper
             boost::numeric::odeint::runge_kutta_cash_karp54<std::vector<T>> stepper;
             auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
 
             // Propagate orbit
-            boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, RV, tstart, tend, tstep);
+            boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, state, tstart, tend, tstep);
         }
 
         // Return final state
-        return RV;
+        return state;
+    }
+
+    template<class T>
+    std::vector<std::vector<T>> CowellPropagator<T>::propagate(std::vector<T> tvector, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+        // Declare output vector
+        std::vector<std::vector<T>> states(tvector.size());
+
+        // Add initial state to output vector
+        states[0] = state;
+
+        // Propagate between times
+        for(std::size_t ii=0; ii<tvector.size()-1; ii++){
+            states[ii+1] = propagate(tvector[ii], tvector[ii+1], tstep, states[ii], options, statetype);
+        }
+
+        // Return states
+        return states;
     }
 
     template class CowellPropagator<double>;
@@ -221,12 +238,12 @@ namespace thames::propagators {
     }
 
     template<class T, template<class> class P>
-    std::vector<P<T>> CowellPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> RV, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+    std::vector<P<T>> CowellPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
         // Calculate number of steps based on time step
         unsigned int nstep = (int) ceil((tend - tstart)/tstep);
 
         // Create final state vector
-        std::vector<P<T>> RVfinal(RV);
+        std::vector<P<T>> statefinal(state);
 
         // Propagate according to the fixed flag
         if(options.fixed){
@@ -234,17 +251,34 @@ namespace thames::propagators {
             rk4<P<T>> integrator(&m_dyn);
 
             // Integrate state
-            integrator.integrate(tstart, tend, nstep, RV, RVfinal);  
+            integrator.integrate(tstart, tend, nstep, state, statefinal);  
         } else {
             // Create integrator
             rk45<P<T>> integrator(&m_dyn, options.atol);
 
             // Integrate state
-            integrator.integrate(tstart, tend, nstep, RV, RVfinal);  
+            integrator.integrate(tstart, tend, nstep, state, statefinal);  
         }
 
         // Return final state
-        return RVfinal;        
+        return statefinal;        
+    }
+
+    template<class T, template<class> class P>
+    std::vector<std::vector<P<T>>> CowellPropagatorPolynomial<T, P>::propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+        // Declare output vector
+        std::vector<std::vector<P<T>>> states(tvector.size());
+
+        // Add initial state to output vector
+        states[0] = state;
+
+        // Propagate between times
+        for(std::size_t ii=0; ii<tvector.size()-1; ii++){
+            states[ii+1] = propagate(tvector[ii], tvector[ii+1], tstep, states[ii], options, statetype);
+        }
+
+        // Return states
+        return states;
     }
 
     template class CowellPropagatorPolynomial<double, taylor_polynomial>;
