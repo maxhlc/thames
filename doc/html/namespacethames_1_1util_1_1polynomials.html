@@ -82,10 +82,18 @@ Functions</h2></td></tr>
 <tr class="separator:ad751fbc40791f824a036d7b86039fffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1789c2627ad1e6e91674f258728891a"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1polynomials.html#aa1789c2627ad1e6e91674f258728891a">evaluate_polynomials</a> (const std::vector&lt; chebyshev_polynomial&lt; double &gt;&gt; &amp;, const std::vector&lt; double &gt; &amp;)</td></tr>
 <tr class="separator:aa1789c2627ad1e6e91674f258728891a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f897d913339fde185792d91f9f9c290"><td class="memTemplParams" colspan="2">template&lt;class T , template&lt; class &gt; class P&gt; </td></tr>
+<tr class="memitem:a0f897d913339fde185792d91f9f9c290"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1polynomials.html#a0f897d913339fde185792d91f9f9c290">evaluate_polynomials</a> (const std::vector&lt; P&lt; T &gt;&gt; &amp;polynomials, const std::vector&lt; std::vector&lt; T &gt;&gt; &amp;x)</td></tr>
+<tr class="memdesc:a0f897d913339fde185792d91f9f9c290"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate vector of polynomials at a set of points.  <a href="namespacethames_1_1util_1_1polynomials.html#a0f897d913339fde185792d91f9f9c290">More...</a><br /></td></tr>
+<tr class="separator:a0f897d913339fde185792d91f9f9c290"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a101ed25467bf76fc161341fe26d79df1"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1polynomials.html#a101ed25467bf76fc161341fe26d79df1">evaluate_polynomials</a> (const std::vector&lt; taylor_polynomial&lt; double &gt;&gt; &amp;, const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;)</td></tr>
+<tr class="separator:a101ed25467bf76fc161341fe26d79df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af77d3f09e044cf198a4d3a9d24e220d1"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1util_1_1polynomials.html#af77d3f09e044cf198a4d3a9d24e220d1">evaluate_polynomials</a> (const std::vector&lt; chebyshev_polynomial&lt; double &gt;&gt; &amp;, const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;)</td></tr>
+<tr class="separator:af77d3f09e044cf198a4d3a9d24e220d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="aa1789c2627ad1e6e91674f258728891a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1789c2627ad1e6e91674f258728891a">&#9670;&nbsp;</a></span>evaluate_polynomials() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1789c2627ad1e6e91674f258728891a">&#9670;&nbsp;</a></span>evaluate_polynomials() <span class="overload">[1/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -112,8 +120,85 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="af77d3f09e044cf198a4d3a9d24e220d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af77d3f09e044cf198a4d3a9d24e220d1">&#9670;&nbsp;</a></span>evaluate_polynomials() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template std::vector&lt;std::vector&lt;double&gt; &gt; thames::util::polynomials::evaluate_polynomials </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; chebyshev_polynomial&lt; double &gt;&gt; &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0f897d913339fde185792d91f9f9c290"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f897d913339fde185792d91f9f9c290">&#9670;&nbsp;</a></span>evaluate_polynomials() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , template&lt; class &gt; class P&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::vector&lt; T &gt; &gt; thames::util::polynomials::evaluate_polynomials </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; P&lt; T &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>polynomials</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::vector&lt; T &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Evaluate vector of polynomials at a set of points. </p>
+<dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-02-18</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Numeric type. </td></tr>
+    <tr><td class="paramname">P</td><td>Polynomial type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">polynomials</td><td>Vector of polynomials. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>Evaluation points. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;std::vector&lt;T&gt;&gt; Point state vectors. </dd></dl>
+
+</div>
+</div>
 <a id="ab82989cad6e38686f56122138e552685"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab82989cad6e38686f56122138e552685">&#9670;&nbsp;</a></span>evaluate_polynomials() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab82989cad6e38686f56122138e552685">&#9670;&nbsp;</a></span>evaluate_polynomials() <span class="overload">[4/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -162,7 +247,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 </div>
 </div>
 <a id="ad751fbc40791f824a036d7b86039fffb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad751fbc40791f824a036d7b86039fffb">&#9670;&nbsp;</a></span>evaluate_polynomials() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad751fbc40791f824a036d7b86039fffb">&#9670;&nbsp;</a></span>evaluate_polynomials() <span class="overload">[5/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,6 +262,34 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a101ed25467bf76fc161341fe26d79df1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a101ed25467bf76fc161341fe26d79df1">&#9670;&nbsp;</a></span>evaluate_polynomials() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template std::vector&lt;std::vector&lt;double&gt; &gt; thames::util::polynomials::evaluate_polynomials </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; taylor_polynomial&lt; double &gt;&gt; &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>

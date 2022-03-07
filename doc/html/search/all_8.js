@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['keplerian_2ecpp_66',['keplerian.cpp',['../keplerian_8cpp.html',1,'']]],
-  ['keplerian_2eh_67',['keplerian.h',['../keplerian_8h.html',1,'']]],
-  ['keplerian_5fto_5fcartesian_68',['keplerian_to_cartesian',['../namespacethames_1_1conversions_1_1keplerian.html#a92c34df4e7879d7948759d25dc2fd3d5',1,'thames::conversions::keplerian::keplerian_to_cartesian(const std::array&lt; T, 6 &gt; &amp;keplerian, const T &amp;mu)'],['../namespacethames_1_1conversions_1_1keplerian.html#ace08620357b8c3b2305f02a08d6162cf',1,'thames::conversions::keplerian::keplerian_to_cartesian(const std::vector&lt; T &gt; &amp;keplerian, const T &amp;mu)']]],
-  ['keplerian_5fto_5fcartesian_3c_20double_20_3e_69',['keplerian_to_cartesian&lt; double &gt;',['../namespacethames_1_1conversions_1_1keplerian.html#a713771f310636225f3ec6ec408fb9a34',1,'thames::conversions::keplerian::keplerian_to_cartesian&lt; double &gt;(const std::array&lt; double, 6 &gt; &amp;, const double &amp;)'],['../namespacethames_1_1conversions_1_1keplerian.html#ab4b4762945abc63d22a48e0bad08bf99',1,'thames::conversions::keplerian::keplerian_to_cartesian&lt; double &gt;(const std::vector&lt; double &gt; &amp;, const double &amp;)']]]
+  ['j2_66',['J2',['../classthames_1_1perturbations_1_1geopotential_1_1J2.html',1,'thames::perturbations::geopotential::J2&lt; T &gt;'],['../classthames_1_1perturbations_1_1geopotential_1_1J2.html#aef1f4b8e4fff458758900897f6a52169',1,'thames::perturbations::geopotential::J2::J2()'],['../namespacethames_1_1constants_1_1earth.html#a046a5d85b76e60f10013af278a6b9e23',1,'thames::constants::earth::J2()']]],
+  ['j2_2ecpp_67',['J2.cpp',['../J2_8cpp.html',1,'']]],
+  ['j2_2eh_68',['J2.h',['../J2_8h.html',1,'']]],
+  ['j2polynomial_69',['J2Polynomial',['../classthames_1_1perturbations_1_1geopotential_1_1J2Polynomial.html',1,'thames::perturbations::geopotential::J2Polynomial&lt; T, P &gt;'],['../classthames_1_1perturbations_1_1geopotential_1_1J2Polynomial.html#a5f55afc0d996c207d4fed20dfb1afbe9',1,'thames::perturbations::geopotential::J2Polynomial::J2Polynomial()']]]
 ];

@@ -96,9 +96,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2887588f0f5701d0ba27e6e9a57066c8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1CowellPropagatorPolynomial.html#a2887588f0f5701d0ba27e6e9a57066c8">~CowellPropagatorPolynomial</a> ()</td></tr>
 <tr class="memdesc:a2887588f0f5701d0ba27e6e9a57066c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the Cowell Propagator Polynomial object.  <a href="classthames_1_1propagators_1_1CowellPropagatorPolynomial.html#a2887588f0f5701d0ba27e6e9a57066c8">More...</a><br /></td></tr>
 <tr class="separator:a2887588f0f5701d0ba27e6e9a57066c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acefa59ba5a79e1c2ac2519b62f02ea14"><td class="memItemLeft" align="right" valign="top">std::vector&lt; P&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1CowellPropagatorPolynomial.html#acefa59ba5a79e1c2ac2519b62f02ea14">propagate</a> (T tstart, T tend, T tstep, std::vector&lt; P&lt; T &gt;&gt; RV) const override</td></tr>
-<tr class="memdesc:acefa59ba5a79e1c2ac2519b62f02ea14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagate Cartesian state using Cowell's method.  <a href="classthames_1_1propagators_1_1CowellPropagatorPolynomial.html#acefa59ba5a79e1c2ac2519b62f02ea14">More...</a><br /></td></tr>
-<tr class="separator:acefa59ba5a79e1c2ac2519b62f02ea14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8b19bc346becf293201a57a909af60d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; P&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1CowellPropagatorPolynomial.html#ad8b19bc346becf293201a57a909af60d">propagate</a> (T tstart, T tend, T tstep, std::vector&lt; P&lt; T &gt;&gt; state, <a class="el" href="structthames_1_1propagators_1_1options_1_1PropagatorOptions.html">thames::propagators::options::PropagatorOptions</a>&lt; T &gt; options, <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> statetype=<a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323afb03445c3be3e744cd97989b2776e64b">thames::constants::statetypes::CARTESIAN</a>) const override</td></tr>
+<tr class="memdesc:ad8b19bc346becf293201a57a909af60d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagate Cartesian state using Cowell's method.  <a href="classthames_1_1propagators_1_1CowellPropagatorPolynomial.html#ad8b19bc346becf293201a57a909af60d">More...</a><br /></td></tr>
+<tr class="separator:ad8b19bc346becf293201a57a909af60d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T, template&lt; class &gt; class P&gt;<br />
@@ -106,7 +106,7 @@ class thames::propagators::CowellPropagatorPolynomial&lt; T, P &gt;</h3>
 
 <p>Propagator object for Cowell's method with polynomials. </p>
 <dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-01-28</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-02-28</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Numeric type. </td></tr>
@@ -177,8 +177,8 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="acefa59ba5a79e1c2ac2519b62f02ea14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acefa59ba5a79e1c2ac2519b62f02ea14">&#9670;&nbsp;</a></span>propagate()</h2>
+<a id="ad8b19bc346becf293201a57a909af60d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8b19bc346becf293201a57a909af60d">&#9670;&nbsp;</a></span>propagate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,7 +210,19 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::vector&lt; P&lt; T &gt;&gt;&#160;</td>
-          <td class="paramname"><em>RV</em>&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structthames_1_1propagators_1_1options_1_1PropagatorOptions.html">thames::propagators::options::PropagatorOptions</a>&lt; T &gt;&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a>&#160;</td>
+          <td class="paramname"><em>statetype</em> = <code><a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323afb03445c3be3e744cd97989b2776e64b">thames::constants::statetypes::CARTESIAN</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -227,19 +239,21 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 
 <p>Propagate Cartesian state using Cowell's method. </p>
 <dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-01-27</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-03-03</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">tstart</td><td>Propagation start time in physical time. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">tend</td><td>Propagation end time in physical time. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">tstep</td><td>Initial timestep for propagation. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">RV</td><td>Initial Cartesian state. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">state</td><td>Initial state. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">options</td><td>Propagator options. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">statetype</td><td>State type. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;P&lt;T&gt;&gt; Final Cartesian state. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagatorPolynomial.html#a83e9b3e572d22045b58d5f9a92476981">thames::propagators::basepropagator::BasePropagatorPolynomial&lt; T, P &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagatorPolynomial.html#af23b92d2521337c6627f905cbae8fca1">thames::propagators::basepropagator::BasePropagatorPolynomial&lt; T, P &gt;</a>.</p>
 
 </div>
 </div>

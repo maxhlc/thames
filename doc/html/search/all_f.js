@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['sampling_2ecpp_107',['sampling.cpp',['../sampling_8cpp.html',1,'']]],
-  ['sampling_2eh_108',['sampling.h',['../sampling_8h.html',1,'']]],
-  ['save_109',['save',['../namespacethames_1_1io_1_1point.html#a3153ae2957999b1712a4eb99e3e19309',1,'thames::io::point::save(const std::string filepath, const T &amp;tstart, const T &amp;tend, const int &amp;scid, const std::vector&lt; std::vector&lt; T &gt;&gt; &amp;states, const unsigned int precision=15)'],['../namespacethames_1_1io_1_1point.html#a04a381a5078a1e6e0e894b554fc04647',1,'thames::io::point::save(const std::string, const double &amp;, const double &amp;, const int &amp;, const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;, const unsigned int)']]],
-  ['sleep_110',['Sleep',['../classthames_1_1perturbations_1_1testing_1_1Sleep.html',1,'thames::perturbations::testing::Sleep&lt; T &gt;'],['../classthames_1_1perturbations_1_1testing_1_1Sleep.html#a463bd673a7aa0de4908eaf6572ef3989',1,'thames::perturbations::testing::Sleep::Sleep()']]],
-  ['sleep_2ecpp_111',['sleep.cpp',['../sleep_8cpp.html',1,'']]],
-  ['sleep_2eh_112',['sleep.h',['../sleep_8h.html',1,'']]]
+  ['radius_111',['radius',['../namespacethames_1_1constants_1_1earth.html#a419ed35e0eb49571f71227d6d2a7fa81',1,'thames::constants::earth']]],
+  ['readme_2emd_112',['README.md',['../README_8md.html',1,'']]],
+  ['root_2ecpp_113',['root.cpp',['../root_8cpp.html',1,'']]],
+  ['root_2eh_114',['root.h',['../root_8h.html',1,'']]],
+  ['rtol_115',['rtol',['../structthames_1_1propagators_1_1options_1_1PropagatorOptions.html#af39d11a257ba595b0d00c7a340a0f1b8',1,'thames::propagators::options::PropagatorOptions']]]
 ];

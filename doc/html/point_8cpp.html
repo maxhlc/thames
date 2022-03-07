@@ -78,6 +78,7 @@ $(function() {
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &quot;<a class="el" href="point_8h_source.html">point.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="statetypes_8h_source.html">../constants/statetypes.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for point.cpp:</div>
 <div class="dyncontent">
@@ -95,18 +96,18 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aafeb8b86f26f5600ec44b6fc55e530f7"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:aafeb8b86f26f5600ec44b6fc55e530f7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1point.html#aafeb8b86f26f5600ec44b6fc55e530f7">thames::io::point::load</a> (const std::string filepath, T &amp;tstart, T &amp;tend, int &amp;scid, std::vector&lt; std::vector&lt; T &gt;&gt; &amp;states)</td></tr>
-<tr class="memdesc:aafeb8b86f26f5600ec44b6fc55e530f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to load Cartesian state vectors from a text file.  <a href="namespacethames_1_1io_1_1point.html#aafeb8b86f26f5600ec44b6fc55e530f7">More...</a><br /></td></tr>
-<tr class="separator:aafeb8b86f26f5600ec44b6fc55e530f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afad94b2bf76403de8fe4ada49f3ecc47"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1point.html#afad94b2bf76403de8fe4ada49f3ecc47">thames::io::point::load</a> (const std::string, double &amp;, double &amp;, int &amp;, std::vector&lt; std::vector&lt; double &gt;&gt; &amp;)</td></tr>
-<tr class="separator:afad94b2bf76403de8fe4ada49f3ecc47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3153ae2957999b1712a4eb99e3e19309"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a3153ae2957999b1712a4eb99e3e19309"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1point.html#a3153ae2957999b1712a4eb99e3e19309">thames::io::point::save</a> (const std::string filepath, const T &amp;tstart, const T &amp;tend, const int &amp;scid, const std::vector&lt; std::vector&lt; T &gt;&gt; &amp;states, const unsigned int precision=15)</td></tr>
-<tr class="memdesc:a3153ae2957999b1712a4eb99e3e19309"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to save Cartesian state vectors to a text file.  <a href="namespacethames_1_1io_1_1point.html#a3153ae2957999b1712a4eb99e3e19309">More...</a><br /></td></tr>
-<tr class="separator:a3153ae2957999b1712a4eb99e3e19309"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04a381a5078a1e6e0e894b554fc04647"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1point.html#a04a381a5078a1e6e0e894b554fc04647">thames::io::point::save</a> (const std::string, const double &amp;, const double &amp;, const int &amp;, const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;, const unsigned int)</td></tr>
-<tr class="separator:a04a381a5078a1e6e0e894b554fc04647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadf85bb1dc62096d4acd32db03859d4d"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:aadf85bb1dc62096d4acd32db03859d4d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1point.html#aadf85bb1dc62096d4acd32db03859d4d">thames::io::point::load</a> (const std::string filepath, T &amp;tstart, T &amp;tend, int &amp;scid, <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> &amp;statetype, int &amp;degree, T &amp;atol, T &amp;rtol, std::vector&lt; std::vector&lt; T &gt;&gt; &amp;states)</td></tr>
+<tr class="memdesc:aadf85bb1dc62096d4acd32db03859d4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to load state vectors from a text file.  <a href="namespacethames_1_1io_1_1point.html#aadf85bb1dc62096d4acd32db03859d4d">More...</a><br /></td></tr>
+<tr class="separator:aadf85bb1dc62096d4acd32db03859d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac492e90461794d7fb7f39a6c07d28e3a"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1point.html#ac492e90461794d7fb7f39a6c07d28e3a">thames::io::point::load</a> (const std::string, double &amp;, double &amp;, int &amp;, <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> &amp;, int &amp;, double &amp;, double &amp;, std::vector&lt; std::vector&lt; double &gt;&gt; &amp;)</td></tr>
+<tr class="separator:ac492e90461794d7fb7f39a6c07d28e3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37ee267be0c578944cbc7dc3f60bc5ea"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a37ee267be0c578944cbc7dc3f60bc5ea"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1point.html#a37ee267be0c578944cbc7dc3f60bc5ea">thames::io::point::save</a> (const std::string filepath, const T &amp;tstart, const T &amp;tend, const int &amp;scid, const <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> &amp;statetype, const int &amp;degree, const T &amp;atol, const T &amp;rtol, const std::vector&lt; std::vector&lt; T &gt;&gt; &amp;states, const unsigned int precision=15)</td></tr>
+<tr class="memdesc:a37ee267be0c578944cbc7dc3f60bc5ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to save state vectors to a text file.  <a href="namespacethames_1_1io_1_1point.html#a37ee267be0c578944cbc7dc3f60bc5ea">More...</a><br /></td></tr>
+<tr class="separator:a37ee267be0c578944cbc7dc3f60bc5ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5562ff4804cb07271cc11a4f20e27e5"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1point.html#ad5562ff4804cb07271cc11a4f20e27e5">thames::io::point::save</a> (const std::string, const double &amp;, const double &amp;, const int &amp;, const <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> &amp;, const int &amp;, const double &amp;, const double &amp;, const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;, const unsigned int)</td></tr>
+<tr class="separator:ad5562ff4804cb07271cc11a4f20e27e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
