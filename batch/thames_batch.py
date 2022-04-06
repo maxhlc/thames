@@ -141,7 +141,7 @@ with multiprocessing.Pool() as pool:
 
 # Calculate current time for output file name
 now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-csv_path = f"sweep_{now}.csv"
+csv_path = f"batch_{now}.csv"
 
 # Generate pandas table of propagated states
 states_propagated = pd.concat(states_propagated)
