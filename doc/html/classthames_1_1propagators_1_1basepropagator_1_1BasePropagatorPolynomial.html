@@ -88,6 +88,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af23b92d2521337c6627f905cbae8fca1"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; P&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagatorPolynomial.html#af23b92d2521337c6627f905cbae8fca1">propagate</a> (T tstart, T tend, T tstep, std::vector&lt; P&lt; T &gt;&gt; state, <a class="el" href="structthames_1_1propagators_1_1options_1_1PropagatorOptions.html">thames::propagators::options::PropagatorOptions</a>&lt; T &gt; options, <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> statetype) const</td></tr>
 <tr class="memdesc:af23b92d2521337c6627f905cbae8fca1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagation method.  <a href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagatorPolynomial.html#af23b92d2521337c6627f905cbae8fca1">More...</a><br /></td></tr>
 <tr class="separator:af23b92d2521337c6627f905cbae8fca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c317f892d7aa164c984ac29af328ea9"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; std::vector&lt; P&lt; T &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagatorPolynomial.html#a5c317f892d7aa164c984ac29af328ea9">propagate</a> (std::vector&lt; T &gt; tvector, T tstep, std::vector&lt; P&lt; T &gt;&gt; state, <a class="el" href="structthames_1_1propagators_1_1options_1_1PropagatorOptions.html">thames::propagators::options::PropagatorOptions</a>&lt; T &gt; options, <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> statetype) const</td></tr>
+<tr class="memdesc:a5c317f892d7aa164c984ac29af328ea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagation method.  <a href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagatorPolynomial.html#a5c317f892d7aa164c984ac29af328ea9">More...</a><br /></td></tr>
+<tr class="separator:a5c317f892d7aa164c984ac29af328ea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T, template&lt; class &gt; class P&gt;<br />
@@ -104,8 +107,81 @@ class thames::propagators::basepropagator::BasePropagatorPolynomial&lt; T, P &gt
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5c317f892d7aa164c984ac29af328ea9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c317f892d7aa164c984ac29af328ea9">&#9670;&nbsp;</a></span>propagate() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , template&lt; class &gt; class P&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::vector&lt;std::vector&lt;P&lt;T&gt; &gt; &gt; <a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagatorPolynomial.html">thames::propagators::basepropagator::BasePropagatorPolynomial</a>&lt; T, P &gt;::propagate </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; T &gt;&#160;</td>
+          <td class="paramname"><em>tvector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>tstep</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; P&lt; T &gt;&gt;&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structthames_1_1propagators_1_1options_1_1PropagatorOptions.html">thames::propagators::options::PropagatorOptions</a>&lt; T &gt;&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a>&#160;</td>
+          <td class="paramname"><em>statetype</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Propagation method. </p>
+<dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-03-07</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">tvector</td><td>Vector of times. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tstep</td><td>Initial timestep for propagation </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">state</td><td>Initial state. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">options</td><td>Propagator options. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">statetype</td><td>State type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;std::vector&lt;P&lt;T&gt;&gt;&gt; Propagated states. </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classthames_1_1propagators_1_1GEqOEPropagatorPolynomial.html#a54da3bcdf7c648c566e602a29152e9dc">thames::propagators::GEqOEPropagatorPolynomial&lt; T, P &gt;</a>, and <a class="el" href="classthames_1_1propagators_1_1CowellPropagatorPolynomial.html#afd8104ffa81f8afea85c56a9e7ba5c78">thames::propagators::CowellPropagatorPolynomial&lt; T, P &gt;</a>.</p>
+
+</div>
+</div>
 <a id="af23b92d2521337c6627f905cbae8fca1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af23b92d2521337c6627f905cbae8fca1">&#9670;&nbsp;</a></span>propagate()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af23b92d2521337c6627f905cbae8fca1">&#9670;&nbsp;</a></span>propagate() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
