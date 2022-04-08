@@ -7,7 +7,7 @@ THAMES (Toolkit for Heuristic and Analytical Methods for Estimating State) is a 
 * `Git`
 * `CMake`
 * `g++`
-* `ODEINT`
+* `Boost.Numeric.Odeint`
 * `SMART-UQ` (optional, included automatically)
 * `Eigen` (optional, used for SMART-UQ)
 * `FFTW` (optional, used for SMART-UQ)
@@ -18,6 +18,7 @@ THAMES (Toolkit for Heuristic and Analytical Methods for Estimating State) is a 
 
 ### Executing
 * Executables are built in the `\bin\` directory
+* Batch run scripts are available in the `\batch\` directory (additional Python dependencies required)
 
 ## Authors
 * Max Hallgarten La Casta (m.hallgarten-la-casta21@imperial.ac.uk)
