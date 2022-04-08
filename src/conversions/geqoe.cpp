@@ -29,7 +29,6 @@ SOFTWARE.
 
 #ifdef THAMES_USE_SMARTUQ
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
-using namespace smartuq::polynomial;
 #endif
 
 #include "geqoe.h"
@@ -39,10 +38,10 @@ using namespace smartuq::polynomial;
 #include "../vector/arithmeticoverloads.h"
 #include "../vector/geometry.h"
 
-using namespace thames::perturbations::baseperturbation;
-using namespace thames::vector::arithmeticoverloads;
-
 namespace thames::conversions::geqoe{
+
+    using namespace thames::perturbations::baseperturbation;
+    using namespace thames::vector::arithmeticoverloads;
 
     ////////////
     // Arrays //
@@ -373,6 +372,8 @@ namespace thames::conversions::geqoe{
     /////////////////
 
     #ifdef THAMES_USE_SMARTUQ
+
+    using namespace smartuq::polynomial;
 
     template<class T, template<class> class P>
     std::vector<P<T>> cartesian_to_geqoe(const T& t, const std::vector<P<T>>& RV, const T& mu, const BasePerturbationPolynomial<T, P>* perturbation){

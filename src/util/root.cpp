@@ -27,7 +27,6 @@ SOFTWARE.
 
 #ifdef THAMES_USE_SMARTUQ
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
-using namespace smartuq::polynomial;
 #endif
 
 #include "optimise.h"
@@ -83,6 +82,8 @@ namespace thames::util::root{
     /////////////////
 
     #ifdef THAMES_USE_SMARTUQ
+
+    using namespace smartuq::polynomial;
 
     template<class T, template<class> class P>
     P<T> newton_raphson(const std::function<P<T> (P<T>)>& func, const std::function<P<T> (P<T>)>& dfunc, P<T> xn, T tol){

@@ -30,9 +30,9 @@ SOFTWARE.
 #include "../vector/arithmeticoverloads.h"
 #include "../vector/geometry.h"
 
-using namespace thames::vector::arithmeticoverloads;
-
 namespace thames::conversions::keplerian{
+
+    using namespace thames::vector::arithmeticoverloads;
 
     ////////////
     // Arrays //

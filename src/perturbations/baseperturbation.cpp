@@ -27,7 +27,6 @@ SOFTWARE.
 
 #ifdef THAMES_USE_SMARTUQ
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
-using namespace smartuq::polynomial;
 #endif
 
 #include "baseperturbation.h"
@@ -111,6 +110,8 @@ namespace thames::perturbations::baseperturbation{
     /////////////////
 
     #ifdef THAMES_USE_SMARTUQ
+
+    using namespace smartuq::polynomial;
     
     template<class T, template<class> class P>
     BasePerturbationPolynomial<T, P>::BasePerturbationPolynomial(){

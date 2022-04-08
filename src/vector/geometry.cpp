@@ -27,7 +27,6 @@ SOFTWARE.
 
 #ifdef THAMES_USE_SMARTUQ
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
-using namespace smartuq::polynomial;
 #endif
 
 #include "geometry.h"
@@ -119,6 +118,8 @@ namespace thames::vector::geometry{
     /////////////////
 
     #ifdef THAMES_USE_SMARTUQ
+
+    using namespace smartuq::polynomial;
 
     template<class T, template<class> class P>
     P<T> dot3(const std::vector<P<T>>& a, const std::vector<P<T>>& b){

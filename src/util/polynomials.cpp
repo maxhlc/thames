@@ -26,7 +26,6 @@ SOFTWARE.
 
 #ifdef THAMES_USE_SMARTUQ
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
-using namespace smartuq::polynomial;
 #endif
 
 #include "polynomials.h"
@@ -34,6 +33,8 @@ using namespace smartuq::polynomial;
 namespace thames::util::polynomials {
 
     #ifdef THAMES_USE_SMARTUQ
+
+    using namespace smartuq::polynomial;
 
     template<class T, template<class> class P>
     std::vector<T> evaluate_polynomials(const std::vector<P<T>>& polynomials, const std::vector<T>& x) {

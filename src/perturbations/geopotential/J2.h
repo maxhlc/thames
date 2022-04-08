@@ -30,9 +30,9 @@ SOFTWARE.
 
 #include "../baseperturbation.h"
 
-using namespace thames::perturbations::baseperturbation;
-
 namespace thames::perturbations::geopotential{
+
+    using namespace thames::perturbations::baseperturbation;
 
     ///////////
     // Reals //

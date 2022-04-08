@@ -32,8 +32,6 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Integrators/rk4.h"
 #include "../../external/smart-uq/include/Integrators/rk45.h"
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
-using namespace smartuq::integrator;
-using namespace smartuq::polynomial;
 #endif
 
 #include "cowell.h"
@@ -42,10 +40,10 @@ using namespace smartuq::polynomial;
 #include "../vector/arithmeticoverloads.h"
 #include "../vector/geometry.h"
 
-using namespace thames::perturbations::baseperturbation;
-using namespace thames::vector::arithmeticoverloads;
-
 namespace thames::propagators {
+
+    using namespace thames::perturbations::baseperturbation;
+    using namespace thames::vector::arithmeticoverloads;
 
     ///////////
     // Reals //
@@ -188,6 +186,9 @@ namespace thames::propagators {
     /////////////////
 
     #ifdef THAMES_USE_SMARTUQ
+
+    using namespace smartuq::integrator;
+    using namespace smartuq::polynomial;
 
     template<class T, template<class> class P>
     CowellPropagatorPolynomialDynamics<T, P>::CowellPropagatorPolynomialDynamics(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation) : smartuq::dynamics::base_dynamics<P<T>>("Cowell"), m_mu(mu), m_perturbation(perturbation) {

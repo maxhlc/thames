@@ -37,10 +37,10 @@ SOFTWARE.
 #include "../perturbations/baseperturbation.h"
 #include "../constants/statetypes.h"
 
-using namespace thames::propagators::basepropagator;
-using namespace thames::perturbations::baseperturbation;
-
 namespace thames::propagators {
+
+    using namespace thames::propagators::basepropagator;
+    using namespace thames::perturbations::baseperturbation;
 
     /**
      * @brief Propagator object for GEqOE.

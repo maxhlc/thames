@@ -27,7 +27,6 @@ SOFTWARE.
 
 #ifdef THAMES_USE_SMARTUQ
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
-using namespace smartuq::polynomial;
 #endif
 
 #include "arithmeticoverloads.h"
@@ -147,6 +146,8 @@ namespace thames::vector::arithmeticoverloads {
     /////////////////
 
     #ifdef THAMES_USE_SMARTUQ
+
+    using namespace smartuq::polynomial;
 
     template<class T, template<class> class P>
     std::vector<P<T>> operator+(const std::vector<P<T>>& a, const std::vector<P<T>>& b){

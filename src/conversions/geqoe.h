@@ -30,9 +30,9 @@ SOFTWARE.
 
 #include "../perturbations/baseperturbation.h"
 
-using namespace thames::perturbations::baseperturbation;
-
 namespace thames::conversions::geqoe{
+
+    using namespace thames::perturbations::baseperturbation;
 
     ////////////
     // Arrays //

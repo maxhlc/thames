@@ -26,7 +26,6 @@ SOFTWARE.
 
 #ifdef THAMES_USE_SMARTUQ
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
-using namespace smartuq::polynomial;
 #endif
 
 #include "cartesian.h"
@@ -96,6 +95,8 @@ namespace thames::conversions::cartesian {
     template std::vector<std::vector<double>> state_to_sample(const std::vector<std::vector<double>>&, const std::vector<double>&, const std::vector<double>&);
 
     #ifdef THAMES_USE_SMARTUQ
+    
+    using namespace smartuq::polynomial;
 
     template<class T, template<class> class P>
     void cartesian_to_polynomial(const std::vector<T>& RV, const std::vector<T>& RVunc, int degree, std::vector<P<T>>& RVPolynomial) {
