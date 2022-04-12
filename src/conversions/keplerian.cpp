@@ -26,9 +26,9 @@ SOFTWARE.
 #include <cmath>
 #include <vector>
 
-#include "keplerian.h"
-#include "../vector/arithmeticoverloads.h"
-#include "../vector/geometry.h"
+#include "../../include/conversions/keplerian.h"
+#include "../../include/vector/arithmeticoverloads.h"
+#include "../../include/vector/geometry.h"
 
 namespace thames::conversions::keplerian{
 

@@ -29,7 +29,7 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "baseperturbation.h"
+#include "../../include/perturbations/baseperturbation.h"
 
 namespace thames::perturbations::baseperturbation{
 

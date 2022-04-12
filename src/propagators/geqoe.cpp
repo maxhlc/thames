@@ -34,13 +34,13 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "geqoe.h"
-#include "options.h"
-#include "../conversions/geqoe.h"
-#include "../perturbations/baseperturbation.h"
-#include "../util/root.h"
-#include "../vector/arithmeticoverloads.h"
-#include "../vector/geometry.h"
+#include "../../include/propagators/geqoe.h"
+#include "../../include/propagators/options.h"
+#include "../../include/conversions/geqoe.h"
+#include "../../include/perturbations/baseperturbation.h"
+#include "../../include/util/root.h"
+#include "../../include/vector/arithmeticoverloads.h"
+#include "../../include/vector/geometry.h"
 
 namespace thames::propagators {
 

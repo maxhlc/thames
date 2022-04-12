@@ -28,7 +28,7 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "polynomials.h"
+#include "../../include/util/polynomials.h"
 
 namespace thames::util::polynomials {
 

@@ -31,12 +31,12 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "geqoe.h"
-#include "keplerian.h"
-#include "../perturbations/baseperturbation.h"
-#include "../util/root.h"
-#include "../vector/arithmeticoverloads.h"
-#include "../vector/geometry.h"
+#include "../../include/conversions/geqoe.h"
+#include "../../include/conversions/keplerian.h"
+#include "../../include/perturbations/baseperturbation.h"
+#include "../../include/util/root.h"
+#include "../../include/vector/arithmeticoverloads.h"
+#include "../../include/vector/geometry.h"
 
 namespace thames::conversions::geqoe{
 

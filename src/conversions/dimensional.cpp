@@ -30,9 +30,9 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "dimensional.h"
-#include "keplerian.h"
-#include "../vector/geometry.h"
+#include "../../include/conversions/dimensional.h"
+#include "../../include/conversions/keplerian.h"
+#include "../../include/vector/geometry.h"
 
 namespace thames::conversions::dimensional{
 

@@ -30,8 +30,8 @@ SOFTWARE.
 #include "../../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "J2.h"
-#include "../../vector/geometry.h"
+#include "../../../include/perturbations/geopotential/J2.h"
+#include "../../../include/vector/geometry.h"
 
 namespace thames::perturbations::geopotential{
 

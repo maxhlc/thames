@@ -34,11 +34,11 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "cowell.h"
-#include "options.h"
-#include "../perturbations/baseperturbation.h"
-#include "../vector/arithmeticoverloads.h"
-#include "../vector/geometry.h"
+#include "../../include/propagators/cowell.h"
+#include "../../include/propagators/options.h"
+#include "../../include/perturbations/baseperturbation.h"
+#include "../../include/vector/arithmeticoverloads.h"
+#include "../../include/vector/geometry.h"
 
 namespace thames::propagators {
 

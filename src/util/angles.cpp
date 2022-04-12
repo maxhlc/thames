@@ -24,7 +24,7 @@ SOFTWARE.
 
 #include <cmath>
 
-#include "angles.h"
+#include "../../include/util/angles.h"
 
 namespace thames::util::angles{
 

@@ -28,7 +28,7 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "cartesian.h"
+#include "../../include/conversions/cartesian.h"
 
 namespace thames::conversions::cartesian {
 

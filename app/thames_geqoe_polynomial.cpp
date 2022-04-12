@@ -29,7 +29,7 @@ SOFTWARE.
 #include <sstream>
 #include <string>
 
-#include "../src/thames.h"
+#include "../include/thames.h"
 
 int main(int argc, char **argv){
     // Set constants
