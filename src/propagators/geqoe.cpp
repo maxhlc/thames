@@ -527,9 +527,6 @@ namespace thames::propagators {
         // Calculate number of steps based on time step
         unsigned int nstep = (int) ceil((tend - tstart)/tstep);
 
-        // Create integrator
-        rk45<P<T>> integrator(&m_dyn, options.atol);
-
         // Transform initial state
         if(statetype == thames::constants::statetypes::CARTESIAN)
             state = thames::conversions::geqoe::cartesian_to_geqoe(tstart, state, m_mu, m_perturbation);
@@ -546,7 +543,7 @@ namespace thames::propagators {
             integrator.integrate(tstart, tend, nstep, state, statefinal);
         } else {
             // Create integrator
-            rk45<P<T>> integrator(&m_dyn, options.atol);
+            rk45<P<T>> integrator(&m_dyn, options.atol, options.rtol);
 
             // Integrate state
             integrator.integrate(tstart, tend, nstep, state, statefinal);  

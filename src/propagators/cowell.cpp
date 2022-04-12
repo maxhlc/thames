@@ -255,7 +255,7 @@ namespace thames::propagators {
             integrator.integrate(tstart, tend, nstep, state, statefinal);  
         } else {
             // Create integrator
-            rk45<P<T>> integrator(&m_dyn, options.atol);
+            rk45<P<T>> integrator(&m_dyn, options.atol, options.rtol);
 
             // Integrate state
             integrator.integrate(tstart, tend, nstep, state, statefinal);  
