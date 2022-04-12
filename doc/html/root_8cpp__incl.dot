@@ -11,9 +11,9 @@ digraph "src/util/root.cpp"
   Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node4 [label="../../external/smart\l-uq/include/Polynomial\l/smartuq_polynomial.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="optimise.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$optimise_8h.html",tooltip=" "];
+  Node5 [label="../../include/util\l/optimise.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$optimise_8h.html",tooltip=" "];
   Node5 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="root.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$root_8h.html",tooltip=" "];
+  Node6 [label="../../include/util\l/root.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$root_8h.html",tooltip=" "];
   Node6 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

@@ -51,6 +51,6 @@ digraph "src/conversions/cartesian.cpp"
   Node1 -> Node24 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node24 [label="/home/max/thames/external\l/smart-uq/include/Polynomial\l/taylor_functions.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node1 -> Node25 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node25 [label="cartesian.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$cartesian_8h.html",tooltip=" "];
+  Node25 [label="../../include/conversions\l/cartesian.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$cartesian_8h.html",tooltip=" "];
   Node25 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

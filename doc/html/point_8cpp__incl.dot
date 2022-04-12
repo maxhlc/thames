@@ -15,7 +15,7 @@ digraph "src/io/point.cpp"
   Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node6 [label="string",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
   Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node7 [label="point.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$point_8h.html",tooltip=" "];
+  Node7 [label="../../include/io/point.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$point_8h.html",tooltip=" "];
   Node7 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node7 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
