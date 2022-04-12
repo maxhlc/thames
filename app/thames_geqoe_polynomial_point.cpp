@@ -54,7 +54,7 @@ int main(int argc, char **argv){
     options.rtol = rtol;
 
     // Generate polynomials
-    std::vector<taylor_polynomial<double>> RVpolynomial, RVpolynomial_propagated;
+    std::vector<smartuq::polynomial::taylor_polynomial<double>> RVpolynomial, RVpolynomial_propagated;
     std::vector<double> lower, upper;
     thames::conversions::cartesian::cartesian_to_polynomial(states, degree, RVpolynomial, lower, upper);
 
@@ -69,8 +69,8 @@ int main(int argc, char **argv){
     tstep /= factors.time;
 
     // Declare propagator and perturbation
-    thames::perturbations::geopotential::J2Polynomial<double, taylor_polynomial> perturbation(mu, J2, radius);
-    thames::propagators::GEqOEPropagatorPolynomial<double, taylor_polynomial> propagator(mu, &perturbation);
+    thames::perturbations::geopotential::J2Polynomial<double, smartuq::polynomial::taylor_polynomial> perturbation(mu, J2, radius);
+    thames::propagators::GEqOEPropagatorPolynomial<double, smartuq::polynomial::taylor_polynomial> propagator(mu, &perturbation);
 
     // Propagate polynomials
     RVpolynomial_propagated = propagator.propagate(tstart, tend, tstep, RVpolynomial, options, statetype);

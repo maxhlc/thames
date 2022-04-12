@@ -45,7 +45,7 @@ int main(int argc, char **argv){
     double tstart, tend, tstep = 30;
     int scid, degree;
     thames::constants::statetypes::StateTypes statetype;
-    std::vector<taylor_polynomial<double>> RVpolynomial, RVpolynomial_propagated;
+    std::vector<smartuq::polynomial::taylor_polynomial<double>> RVpolynomial, RVpolynomial_propagated;
     thames::io::polynomial::load(filepathin, tstart, tend, scid, statetype, degree, atol, rtol, RVpolynomial);
 
     // Create propagator options
@@ -61,8 +61,8 @@ int main(int argc, char **argv){
     tstep /= factors.time;
 
     // Declare propagator and perturbation
-    thames::perturbations::geopotential::J2Polynomial<double, taylor_polynomial> perturbation(mu, J2, radius);
-    thames::propagators::CowellPropagatorPolynomial<double, taylor_polynomial> propagator(mu, &perturbation);
+    thames::perturbations::geopotential::J2Polynomial<double, smartuq::polynomial::taylor_polynomial> perturbation(mu, J2, radius);
+    thames::propagators::CowellPropagatorPolynomial<double, smartuq::polynomial::taylor_polynomial> propagator(mu, &perturbation);
 
     // Propagate polynomials
     RVpolynomial_propagated = propagator.propagate(tstart, tend, tstep, RVpolynomial, options, statetype);
