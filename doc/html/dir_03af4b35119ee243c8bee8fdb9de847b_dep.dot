@@ -1,9 +1,0 @@
-digraph "include/perturbations/geopotential" {
-  compound=true
-  node [ fontsize="10", fontname="Helvetica"];
-  edge [ labelfontsize="10", labelfontname="Helvetica"];
-  subgraph clusterdir_f6e74ef265a9a28212a0395aaf58c8fe {
-    graph [ bgcolor="#ddddee", pencolor="black", label="perturbations" fontname="Helvetica", fontsize="10", URL="dir_f6e74ef265a9a28212a0395aaf58c8fe.html"]
-  dir_03af4b35119ee243c8bee8fdb9de847b [shape=box, label="geopotential", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_03af4b35119ee243c8bee8fdb9de847b.html"];
-  }
-}
