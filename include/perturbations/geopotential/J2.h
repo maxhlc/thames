@@ -29,10 +29,12 @@ SOFTWARE.
 #include <vector>
 
 #include "../baseperturbation.h"
+#include "../../conversions/dimensional.h"
 
 namespace thames::perturbations::geopotential{
 
-    using namespace thames::perturbations::baseperturbation;
+    using thames::perturbations::baseperturbation::BasePerturbation;
+    using thames::conversions::dimensional::DimensionalFactors;
 
     ///////////
     // Reals //
@@ -42,7 +44,7 @@ namespace thames::perturbations::geopotential{
      * @brief Class for the perturbation resulting from the J2-term.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-01-25
+     * @date 2022-04-29
      * 
      * @tparam T Numeric type.
      */
@@ -50,13 +52,16 @@ namespace thames::perturbations::geopotential{
     class J2 : public BasePerturbation<T> {
         private:
 
-            /// Central body gravitational parameter.
+            /// Dimensional factors
+            using BasePerturbation<T>::m_factors;
+
+            /// Central body gravitational parameter
             const T m_mu;
 
-            /// Central body J2-term.
+            /// Central body J2-term
             const T m_J2;
 
-            /// Central body radius.
+            /// Central body radius
             const T m_radius;
 
         public:
@@ -65,13 +70,14 @@ namespace thames::perturbations::geopotential{
              * @brief Construct a new J2 object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-25
+             * @date 2022-04-29
              * 
              * @param[in] mu Central body gravitational parameter.
              * @param[in] J2 Central body J2-term.
              * @param[in] radius Central body radius.
+             * @param[in] factors Dimensional factors.
              */
-            J2(const T& mu, const T& J2, const T& radius);
+            J2(const T& mu, const T& J2, const T& radius, const DimensionalFactors<T>& factors = DimensionalFactors<T>());
 
             /**
              * @brief Destroy the J2 object.
@@ -148,21 +154,27 @@ namespace thames::perturbations::geopotential{
 
     #ifdef THAMES_USE_SMARTUQ
 
+    using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
+
     /**
      * @brief Class for the perturbation resulting from the J2-term.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-01-27
+     * @date 2022-04-29
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      */
     template<class T, template<class> class P>
     class J2Polynomial : public BasePerturbationPolynomial<T, P> {
+        
         private:
 
+            /// Dimensional factors
+            using BasePerturbationPolynomial<T, P>::m_factors;
+
             /// Central body gravitational parameter
-            const T m_mu;
+            const T m_mu;       
 
             /// Central body J2-term
             const T m_J2;
@@ -176,13 +188,14 @@ namespace thames::perturbations::geopotential{
              * @brief Construct a new J2Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-28
+             * @date 2022-04-29
              * 
              * @param[in] mu Central body gravitational parameter.
              * @param[in] J2 Central body J2-term.
              * @param[in] radius Central body radius.
+             * @param[in] factors Dimensional factors.
              */
-            J2Polynomial(const T& mu, const T& J2, const T& radius);
+            J2Polynomial(const T& mu, const T& J2, const T& radius, const DimensionalFactors<T>& factors = DimensionalFactors<T>());
 
             /**
              * @brief Destroy the J2Polynomial object

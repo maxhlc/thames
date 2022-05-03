@@ -30,8 +30,11 @@ SOFTWARE.
 
 #include "options.h"
 #include "../constants/statetypes.h"
+#include "../conversions/dimensional.h"
 
 namespace thames::propagators::basepropagator {
+
+    using thames::conversions::dimensional::DimensionalFactors;
 
     ///////////
     // Reals //
@@ -48,9 +51,24 @@ namespace thames::propagators::basepropagator {
     template<class T>
     class BasePropagator {
 
-        private:
+        protected:
+
+            /// Dimensional factors
+            const DimensionalFactors<T> m_factors;
 
         public:
+
+            /**
+             * @brief Construct a new Base Propagator object.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-04-29
+             * 
+             * @param[in] factors Dimensional factors.
+             */
+            BasePropagator(const DimensionalFactors<T>& factors) : m_factors(factors) {
+
+            }
 
             ////////////
             // Arrays //
@@ -143,7 +161,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator abstract object for polynomial propagations.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-28
+     * @date 2022-04-29
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -151,9 +169,24 @@ namespace thames::propagators::basepropagator {
     template<class T, template<class> class P>
     class BasePropagatorPolynomial {
 
-        private:
+        protected:
+
+            /// Dimensional factors
+            const DimensionalFactors<T> m_factors;
 
         public:
+
+            /**
+             * @brief Construct a new Base Propagator Polynomial object.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-04-29
+             * 
+             * @param[in] factors Dimensional factors.
+             */
+            BasePropagatorPolynomial(const DimensionalFactors<T>& factors) : m_factors(factors) {
+
+            }
 
             /**
              * @brief Propagation method.

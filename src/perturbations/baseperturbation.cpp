@@ -33,12 +33,14 @@ SOFTWARE.
 
 namespace thames::perturbations::baseperturbation{
 
+    using thames::conversions::dimensional::DimensionalFactors;
+
     ///////////
     // Reals //
     ///////////
 
     template<class T>
-    BasePerturbation<T>::BasePerturbation(){
+    BasePerturbation<T>::BasePerturbation(const DimensionalFactors<T>& factors) : m_factors(factors) {
 
     };
 
@@ -112,9 +114,10 @@ namespace thames::perturbations::baseperturbation{
     #ifdef THAMES_USE_SMARTUQ
 
     using namespace smartuq::polynomial;
+    using thames::conversions::dimensional::DimensionalFactors;
     
     template<class T, template<class> class P>
-    BasePerturbationPolynomial<T, P>::BasePerturbationPolynomial(){
+    BasePerturbationPolynomial<T, P>::BasePerturbationPolynomial(const DimensionalFactors<T>& factors) : m_factors(factors) {
 
     };
 

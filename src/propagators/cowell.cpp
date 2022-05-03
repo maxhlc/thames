@@ -34,6 +34,7 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
+#include "../../include/conversions/dimensional.h"
 #include "../../include/propagators/cowell.h"
 #include "../../include/propagators/options.h"
 #include "../../include/perturbations/baseperturbation.h"
@@ -42,15 +43,16 @@ SOFTWARE.
 
 namespace thames::propagators {
 
-    using namespace thames::perturbations::baseperturbation;
+    using thames::perturbations::baseperturbation::BasePerturbation;
     using namespace thames::vector::arithmeticoverloads;
+    using thames::conversions::dimensional::DimensionalFactors;
 
     ///////////
     // Reals //
     ///////////
 
     template<class T>
-    CowellPropagator<T>::CowellPropagator(const T& mu, const BasePerturbation<T>* perturbation) : m_mu(mu), m_perturbation(perturbation) {
+    CowellPropagator<T>::CowellPropagator(const T& mu, const BasePerturbation<T>* perturbation, const DimensionalFactors<T>& factors) : BasePropagator<T>(factors), m_mu(mu/factors.grav), m_perturbation(perturbation) {
 
     }
 
@@ -85,6 +87,18 @@ namespace thames::propagators {
 
     template<class T>
     std::array<T, 6> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+        // Check that input is Cartesian state
+        if(statetype != thames::constants::statetypes::CARTESIAN)
+            throw std::runtime_error("Unsupported state type");
+        
+        // Non-dimensionalise times
+        tstart /= m_factors.time;
+        tend /= m_factors.time;
+        tstep /= m_factors.time;
+
+        // Non-dimensionalise state
+        state = thames::conversions::dimensional::cartesian_nondimensionalise(state, m_factors);
+        
         // Declare state derivative
         auto func = [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);};
 
@@ -103,6 +117,9 @@ namespace thames::propagators {
             // Propagate orbit
             boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, state, tstart, tend, tstep);
         }
+
+        // Re-dimensionalise state
+        state = thames::conversions::dimensional::cartesian_dimensionalise(state, m_factors);
 
         // Return final state
         return state;
@@ -139,6 +156,18 @@ namespace thames::propagators {
 
     template<class T>
     std::vector<T> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+        // Check that input is Cartesian state
+        if(statetype != thames::constants::statetypes::CARTESIAN)
+            throw std::runtime_error("Unsupported state type");
+        
+        // Non-dimensionalise times
+        tstart /= m_factors.time;
+        tend /= m_factors.time;
+        tstep /= m_factors.time;
+
+        // Non-dimensionalise state
+        state = thames::conversions::dimensional::cartesian_nondimensionalise(state, m_factors);
+        
         // Declare state derivative
         auto func = [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);};
 
@@ -157,6 +186,9 @@ namespace thames::propagators {
             // Propagate orbit
             boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, state, tstart, tend, tstep);
         }
+
+        // Re-dimensionalise state
+        state = thames::conversions::dimensional::cartesian_dimensionalise(state, m_factors);
 
         // Return final state
         return state;
@@ -189,6 +221,7 @@ namespace thames::propagators {
 
     using namespace smartuq::integrator;
     using namespace smartuq::polynomial;
+    using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     template<class T, template<class> class P>
     CowellPropagatorPolynomialDynamics<T, P>::CowellPropagatorPolynomialDynamics(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation) : smartuq::dynamics::base_dynamics<P<T>>("Cowell"), m_mu(mu), m_perturbation(perturbation) {
@@ -229,7 +262,7 @@ namespace thames::propagators {
     template class CowellPropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
-    CowellPropagatorPolynomial<T, P>::CowellPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation) : m_dyn(mu, perturbation) {
+    CowellPropagatorPolynomial<T, P>::CowellPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation, const DimensionalFactors<T>& factors) : BasePropagatorPolynomial<T, P>(factors), m_dyn(mu/factors.grav, perturbation) {
 
     }
 
@@ -240,6 +273,18 @@ namespace thames::propagators {
 
     template<class T, template<class> class P>
     std::vector<P<T>> CowellPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+        // Check that input is Cartesian state
+        if(statetype != thames::constants::statetypes::CARTESIAN)
+            throw std::runtime_error("Unsupported state type");
+        
+        // Non-dimensionalise times
+        tstart /= m_factors.time;
+        tend /= m_factors.time;
+        tstep /= m_factors.time;
+
+        // Non-dimensionalise state
+        state = thames::conversions::dimensional::cartesian_nondimensionalise(state, m_factors);
+        
         // Calculate number of steps based on time step
         unsigned int nstep = (int) ceil((tend - tstart)/tstep);
 
@@ -260,6 +305,9 @@ namespace thames::propagators {
             // Integrate state
             integrator.integrate(tstart, tend, nstep, state, statefinal);  
         }
+
+        // Re-dimensionalise state
+        statefinal = thames::conversions::dimensional::cartesian_dimensionalise(statefinal, m_factors);
 
         // Return final state
         return statefinal;        

@@ -36,17 +36,19 @@ SOFTWARE.
 #include "options.h"
 #include "../perturbations/baseperturbation.h"
 #include "../constants/statetypes.h"
+#include "../conversions/dimensional.h"
 
 namespace thames::propagators {
 
-    using namespace thames::propagators::basepropagator;
-    using namespace thames::perturbations::baseperturbation;
+    using thames::propagators::basepropagator::BasePropagator;
+    using thames::perturbations::baseperturbation::BasePerturbation;
+    using thames::conversions::dimensional::DimensionalFactors;
 
     /**
      * @brief Propagator object for GEqOE.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-28
+     * @date 2022-04-29
      * 
      * @tparam T Numeric type.
      */
@@ -54,6 +56,9 @@ namespace thames::propagators {
     class GEqOEPropagator : public BasePropagator<T> {
 
         private:
+
+            /// Dimensional factors
+            using BasePropagator<T>::m_factors;
 
             /// Gravitational parameter
             const T m_mu;
@@ -67,12 +72,13 @@ namespace thames::propagators {
              * @brief Construct a new GEqOE Propagator object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-25
+             * @date 2022-05-02
              * 
              * @param[in] mu Gravitational parameter.
-             * @param[in] perturbation Perturbation object. 
+             * @param[in] perturbation Perturbation object.
+             * @param[in] factors Dimensional factors.
              */
-            GEqOEPropagator(const T& mu, const BasePerturbation<T>* perturbation);
+            GEqOEPropagator(const T& mu, const BasePerturbation<T>* perturbation, const DimensionalFactors<T>& factors = DimensionalFactors<T>());
 
             ////////////
             // Arrays //
@@ -94,7 +100,7 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-03-03
+             * @date 2022-05-02
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -126,7 +132,7 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-03-03
+             * @date 2022-05-02
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -160,6 +166,9 @@ namespace thames::propagators {
     /////////////////
 
     #ifdef THAMES_USE_SMARTUQ
+
+    using thames::propagators::basepropagator::BasePropagatorPolynomial;
+    using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     /**
      * @brief Object for GEqOE dynamics with polynomials, compatible with the SMART-UQ schema.
@@ -225,7 +234,7 @@ namespace thames::propagators {
      * @brief Propagator object for GEqOE with polynomials.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-22
+     * @date 2022-04-29
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -234,6 +243,9 @@ namespace thames::propagators {
     class GEqOEPropagatorPolynomial : public BasePropagatorPolynomial<T, P> {
         
         private:
+
+            /// Dimensional factors
+            using BasePropagatorPolynomial<T, P>::m_factors;
 
             /// Gravitational parameter
             const T m_mu;
@@ -250,12 +262,13 @@ namespace thames::propagators {
              * @brief Construct a new GEqOE Propagator Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-31
+             * @date 2022-05-02
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
+             * @param[in] factors Dimensional factors.
              */
-            GEqOEPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation);
+            GEqOEPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation, const DimensionalFactors<T>& factors = DimensionalFactors<T>());
 
             /**
              * @brief Destroy the GEqOE Propagator Polynomial object
@@ -270,7 +283,7 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-03-07
+             * @date 2022-05-02
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.

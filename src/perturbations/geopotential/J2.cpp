@@ -30,17 +30,20 @@ SOFTWARE.
 #include "../../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
+#include "../../../include/conversions/dimensional.h"
 #include "../../../include/perturbations/geopotential/J2.h"
 #include "../../../include/vector/geometry.h"
 
 namespace thames::perturbations::geopotential{
+
+    using thames::conversions::dimensional::DimensionalFactors;
 
     ///////////
     // Reals //
     ///////////
 
     template <class T>
-    J2<T>::J2(const T& mu, const T& J2, const T& radius) : m_mu(mu), m_J2(J2), m_radius(radius) {
+    J2<T>::J2(const T& mu, const T& J2, const T& radius, const DimensionalFactors<T>& factors) : BasePerturbation<T>(factors), m_mu(mu/factors.grav), m_J2(J2), m_radius(radius/factors.length) {
 
     }
 
@@ -148,9 +151,10 @@ namespace thames::perturbations::geopotential{
     #ifdef THAMES_USE_SMARTUQ
 
     using namespace smartuq::polynomial;
+    using thames::conversions::dimensional::DimensionalFactors;
 
     template<class T, template<class> class P>
-    J2Polynomial<T, P>::J2Polynomial(const T& mu, const T& J2, const T& radius) : m_mu(mu), m_J2(J2), m_radius(radius) {
+    J2Polynomial<T, P>::J2Polynomial(const T& mu, const T& J2, const T& radius, const DimensionalFactors<T>& factors) : BasePerturbationPolynomial<T, P>(factors), m_mu(mu/factors.grav), m_J2(J2), m_radius(radius/factors.length) {
 
     }
 
