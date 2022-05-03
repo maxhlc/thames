@@ -55,21 +55,14 @@ int main(int argc, char **argv){
 
     // Non-dimensionalise polynomials
     thames::conversions::dimensional::DimensionalFactors<double> factors;
-    thames::conversions::dimensional::cartesian_nondimensionalise(tstart, RVpolynomial, mu, factors);
-    radius /= factors.length;
-    tend /= factors.time;
-    tstep /= factors.time;
+    factors = thames::conversions::dimensional::calculate_factors(RVpolynomial, mu);
 
     // Declare propagator and perturbation
-    thames::perturbations::geopotential::J2Polynomial<double, smartuq::polynomial::taylor_polynomial> perturbation(mu, J2, radius);
-    thames::propagators::GEqOEPropagatorPolynomial<double, smartuq::polynomial::taylor_polynomial> propagator(mu, &perturbation);
+    thames::perturbations::geopotential::J2Polynomial<double, smartuq::polynomial::taylor_polynomial> perturbation(mu, J2, radius, factors);
+    thames::propagators::GEqOEPropagatorPolynomial<double, smartuq::polynomial::taylor_polynomial> propagator(mu, &perturbation, factors);
 
     // Propagate polynomials
     RVpolynomial_propagated = propagator.propagate(tstart, tend, tstep, RVpolynomial, options, statetype);
-
-    // Dimensionalise polynomials
-    thames::conversions::dimensional::cartesian_dimensionalise(tstart, RVpolynomial_propagated, mu, factors);
-    tend *= factors.time;
     
     // Save propagated states
     thames::io::polynomial::save(filepathout, tstart, tend, scid, statetype, degree, atol, rtol, RVpolynomial_propagated);
