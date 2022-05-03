@@ -94,7 +94,7 @@ sampling = LHS(xlimits=RVbound)
 states = sampling(10**3)
 
 # Set desired point, and polynomial commands
-command = ["thames_cowell_discrete_point"]
+command = ["thames_cowell_discrete_point", "thames_geqoe_discrete_point"]
 command_poly = ["thames_cowell_polynomial_point", "thames_geqoe_polynomial_point"]
 
 # Set desired polynomial degrees
