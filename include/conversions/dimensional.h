@@ -51,37 +51,35 @@ namespace thames::conversions::dimensional{
      * @brief Non-dimensionalise Cartesian state.
      *
      * @author Max Hallgarten La Casta
-     * @date 2022-02-09
+     * @date 2022-04-29
      * 
      * @tparam T Numeric type.
-     * @param[in,out] t Current physical time.
-     * @param[in,out] RV Current Cartesian state vector (position and velocity).
-     * @param[in,out] mu Gravitational parameter.
-     * @param[out] factors Structure containing the factors for non-dimensionalisation.
+     * @param[in] RV Dimensional Cartesian state vector.
+     * @param[in] factors Structure containing the factors for non-dimensionalisation.
+     * @return std::array<T, 6> Non-dimensional Cartesian state vector.
      */
     template<class T>
-    void cartesian_nondimensionalise(T& t, std::array<T, 6>& RV, T& mu, DimensionalFactors<T>& factors);
+    std::array<T, 6> cartesian_nondimensionalise(const std::array<T, 6>& RV, const DimensionalFactors<T>& factors);
 
     /**
      * @brief Dimensionalise Cartesian state.
      *
      * @author Max Hallgarten La Casta
-     * @date 2022-02-09
+     * @date 2022-04-29
      * 
      * @tparam T Numeric type.
-     * @param[in,out] t Current physical time.
-     * @param[in,out] RV Current Cartesian state vector (position and velocity).
-     * @param[in,out] mu Gravitational parameter.
+     * @param[in] RVnd Non-dimensional Cartesian state vector.
      * @param[in] factors Structure containing the factors for dimensionalisation.
+     * @return std::array<T, 6> Dimensional Cartesian state vector.
      */ 
     template<class T>
-    void cartesian_dimensionalise(T& t, std::array<T, 6>& RV, T& mu, const DimensionalFactors<T>& factors);
+    std::array<T, 6> cartesian_dimensionalise(const std::array<T, 6>& RVnd, const DimensionalFactors<T>& factors);
 
     /**
      * @brief Calculate non-dimensionalisation factors.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-09
+     * @date 2022-05-03
      * 
      * @tparam T Numeric type.
      * @param[in] RV Cartesian state vector. 
@@ -89,7 +87,7 @@ namespace thames::conversions::dimensional{
      * @return DimensionalFactors<T> Non-dimensionalisation factors.
      */
     template<class T>
-    DimensionalFactors<T> calculate_factors(const std::array<T, 6> RV, const T mu);
+    DimensionalFactors<T> calculate_factors(const std::array<T, 6>& RV, const T& mu);
 
     /////////////
     // Vectors //
@@ -99,37 +97,35 @@ namespace thames::conversions::dimensional{
      * @brief Non-dimensionalise Cartesian state.
      *
      * @author Max Hallgarten La Casta
-     * @date 2022-02-09
+     * @date 2022-04-29
      * 
      * @tparam T Numeric type.
-     * @param[in,out] t Current physical time.
-     * @param[in,out] RV Current Cartesian state vector (position and velocity).
-     * @param[in,out] mu Gravitational parameter.
-     * @param[out] factors Structure containing the factors for non-dimensionalisation.
+     * @param[in] RV Dimensional Cartesian state vector.
+     * @param[in] factors Structure containing the factors for non-dimensionalisation.
+     * @return std::vector<T> Non-dimensionalised Cartesian state vector.
      */
     template<class T>
-    void cartesian_nondimensionalise(T& t, std::vector<T>& RV, T& mu, DimensionalFactors<T>& factors);
+    std::vector<T> cartesian_nondimensionalise(const std::vector<T>& RV, const DimensionalFactors<T>& factors);
 
     /**
      * @brief Dimensionalise Cartesian state.
      *
      * @author Max Hallgarten La Casta
-     * @date 2022-02-09
+     * @date 2022-04-29
      * 
      * @tparam T Numeric type.
-     * @param[in,out] t Current physical time.
-     * @param[in,out] RV Current Cartesian state vector (position and velocity).
-     * @param[in,out] mu Gravitational parameter.
+     * @param[in] RVnd Non-dimensional Cartesian state vector.
      * @param[in] factors Structure containing the factors for dimensionalisation.
+     * @return std::vector<T> Dimensional Cartesian state vector.
      */ 
     template<class T>
-    void cartesian_dimensionalise(T& t, std::vector<T>& RV, T& mu, const DimensionalFactors<T>& factors);
+    std::vector<T> cartesian_dimensionalise(const std::vector<T>& RVnd, const DimensionalFactors<T>& factors);
 
     /**
      * @brief Calculate non-dimensionalisation factors.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-09
+     * @date 2022-04-29
      * 
      * @tparam T Numeric type.
      * @param[in] RV Cartesian state vector. 
@@ -137,7 +133,7 @@ namespace thames::conversions::dimensional{
      * @return DimensionalFactors<T> Non-dimensionalisation factors.
      */
     template<class T>
-    DimensionalFactors<T> calculate_factors(const std::vector<T> RV, const T mu);
+    DimensionalFactors<T> calculate_factors(const std::vector<T>& RV, const T& mu);
 
     /////////////////
     // Polynomials //
@@ -149,33 +145,45 @@ namespace thames::conversions::dimensional{
      * @brief Non-dimensionalise Cartesian state polynomial.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-16
+     * @date 2022-04-29
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
-     * @param[in,out] t Current physical time.
-     * @param[in,out] RV Current Cartesian state vector (position and velocity).
-     * @param[in,out] mu Gravitational parameter.
+     * @param[in] RV Dimensional Cartesian state vector.
      * @param[in] factors Structure containing the factors for dimensionalisation.
+     * @return std::vector<P<T>> Non-dimensional Cartesian state vector.
      */
     template<class T, template<class> class P>
-    void cartesian_nondimensionalise(T& t, std::vector<P<T>>& RV, T& mu, DimensionalFactors<T>& factors);
+    std::vector<P<T>> cartesian_nondimensionalise(const std::vector<P<T>>& RV, const DimensionalFactors<T>& factors);
 
     /**
      * @brief Dimensionalise Cartesian state polynomial.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-16
+     * @date 2022-04-29
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
-     * @param[in,out] t Current physical time.
-     * @param[in,out] RV Current Cartesian state vector (position and velocity).
-     * @param[in,out] mu Gravitational parameter.
+     * @param[in] RVnd Non-dimensional Cartesian state vector.
      * @param[in] factors Structure containing the factors for dimensionalisation.
+     * @return std::vector<P<T>> Dimensional Cartesian state vector.
      */
     template<class T, template<class> class P>
-    void cartesian_dimensionalise(T& t, std::vector<P<T>>& RV, T& mu, DimensionalFactors<T>& factors);
+    std::vector<P<T>> cartesian_dimensionalise(const std::vector<P<T>>& RVnd, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Calculate non-dimensionalisation factors.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-04-29
+     * 
+     * @tparam T Numeric type.
+     * @param[in] RV Cartesian state vector. 
+     * @param[in] mu Gravitational parameter.
+     * @return DimensionalFactors<T> Non-dimensionalisation factors.
+     */
+    template<class T, template<class> class P>
+    DimensionalFactors<T> calculate_factors(const std::vector<P<T>>& RV, const T& mu);
 
     #endif
 
