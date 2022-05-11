@@ -42,7 +42,7 @@ namespace thames::perturbations::baseperturbation{
      * @brief Class for the base perturbation.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-04-29
+     * @date 2022-05-11
      * 
      * @tparam T Numeric type.
      */
@@ -52,7 +52,7 @@ namespace thames::perturbations::baseperturbation{
         protected:
 
             /// Dimensional factors
-            const DimensionalFactors<T> m_factors;
+            const DimensionalFactors<T>* m_factors;
 
         public:
 
@@ -60,12 +60,12 @@ namespace thames::perturbations::baseperturbation{
              * @brief Construct a new Base Perturbation object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-04-29
+             * @date 2022-05-11
              * 
              * @param[in] factors Factors for non-dimensionalisation.
              * 
              */
-            BasePerturbation(const DimensionalFactors<T>& factors = DimensionalFactors<T>());
+            BasePerturbation(const DimensionalFactors<T>* factors);
 
             /**
              * @brief Destroy the Base Perturbation object.
@@ -214,7 +214,7 @@ namespace thames::perturbations::baseperturbation{
      * @brief Class for the base perturbation for polynomial distributions.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-04-29
+     * @date 2022-05-11
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -225,7 +225,7 @@ namespace thames::perturbations::baseperturbation{
         protected:
 
             /// Dimensional factors
-            const DimensionalFactors<T> m_factors;
+            const DimensionalFactors<T>* m_factors;
 
         public:
 
@@ -233,12 +233,12 @@ namespace thames::perturbations::baseperturbation{
              * @brief Construct a new Base Perturbation Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-04-29
+             * @date 2022-05-11
              * 
              * @param[in] factors Factors for non-dimensionalisation.
              * 
              */
-            BasePerturbationPolynomial(const DimensionalFactors<T>& factors = DimensionalFactors<T>());
+            BasePerturbationPolynomial(const DimensionalFactors<T>* factors);
 
             /**
              * @brief Destroy the Base Perturbation Polynomial object.

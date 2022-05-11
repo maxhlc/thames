@@ -48,7 +48,7 @@ namespace thames::propagators {
      * @brief Propagator object for GEqOE.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-04-29
+     * @date 2022-05-11
      * 
      * @tparam T Numeric type.
      */
@@ -72,13 +72,13 @@ namespace thames::propagators {
              * @brief Construct a new GEqOE Propagator object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-02
+             * @date 2022-05-11
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            GEqOEPropagator(const T& mu, const BasePerturbation<T>* perturbation, const DimensionalFactors<T>& factors = DimensionalFactors<T>());
+            GEqOEPropagator(const T& mu, const BasePerturbation<T>* perturbation, const DimensionalFactors<T>* factors);
 
             ////////////
             // Arrays //
@@ -234,7 +234,7 @@ namespace thames::propagators {
      * @brief Propagator object for GEqOE with polynomials.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-04-29
+     * @date 2022-05-11
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -262,13 +262,13 @@ namespace thames::propagators {
              * @brief Construct a new GEqOE Propagator Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-02
+             * @date 2022-05-11
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            GEqOEPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation, const DimensionalFactors<T>& factors = DimensionalFactors<T>());
+            GEqOEPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation, const DimensionalFactors<T>* factors);
 
             /**
              * @brief Destroy the GEqOE Propagator Polynomial object

@@ -43,7 +43,7 @@ namespace thames::perturbations::geopotential{
     ///////////
 
     template <class T>
-    J2<T>::J2(const T& mu, const T& J2, const T& radius, const DimensionalFactors<T>& factors) : BasePerturbation<T>(factors), m_mu(mu/factors.grav), m_J2(J2), m_radius(radius/factors.length) {
+    J2<T>::J2(const T& mu, const T& J2, const T& radius, const DimensionalFactors<T>* factors) : BasePerturbation<T>(factors), m_mu(mu/factors->grav), m_J2(J2), m_radius(radius/factors->length) {
 
     }
 
@@ -154,7 +154,7 @@ namespace thames::perturbations::geopotential{
     using thames::conversions::dimensional::DimensionalFactors;
 
     template<class T, template<class> class P>
-    J2Polynomial<T, P>::J2Polynomial(const T& mu, const T& J2, const T& radius, const DimensionalFactors<T>& factors) : BasePerturbationPolynomial<T, P>(factors), m_mu(mu/factors.grav), m_J2(J2), m_radius(radius/factors.length) {
+    J2Polynomial<T, P>::J2Polynomial(const T& mu, const T& J2, const T& radius, const DimensionalFactors<T>* factors) : BasePerturbationPolynomial<T, P>(factors), m_mu(mu/factors->grav), m_J2(J2), m_radius(radius/factors->length) {
 
     }
 

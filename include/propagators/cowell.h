@@ -52,7 +52,7 @@ namespace thames::propagators {
      * @brief Propagator object for Cowell's method.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-02
+     * @date 2022-05-11
      * 
      * @tparam T Numeric type.
      */
@@ -76,13 +76,13 @@ namespace thames::propagators {
              * @brief Construct a new Cowell Propagator object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-04-29
+             * @date 2022-05-11
              * 
              * @param[in] mu Gravitational parameter. 
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            CowellPropagator(const T& mu, const BasePerturbation<T>* perturbation, const DimensionalFactors<T>& factors = DimensionalFactors<T>());
+            CowellPropagator(const T& mu, const BasePerturbation<T>* perturbation, const DimensionalFactors<T>* factors);
 
             ////////////
             // Arrays //
@@ -238,7 +238,7 @@ namespace thames::propagators {
      * @brief Propagator object for Cowell's method with polynomials.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-02
+     * @date 2022-05-11
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -260,13 +260,13 @@ namespace thames::propagators {
              * @brief Construct a new Cowell Propagator Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-02
+             * @date 2022-05-11
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            CowellPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation, const DimensionalFactors<T>& factors = DimensionalFactors<T>());
+            CowellPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation, const DimensionalFactors<T>* factors);
 
             /**
              * @brief Destroy the Cowell Propagator Polynomial object

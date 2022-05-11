@@ -44,7 +44,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator abstract object.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-28
+     * @date 2022-05-11
      * 
      * @tparam T Numeric type.
      */
@@ -54,7 +54,7 @@ namespace thames::propagators::basepropagator {
         protected:
 
             /// Dimensional factors
-            const DimensionalFactors<T> m_factors;
+            const DimensionalFactors<T>* m_factors;
 
         public:
 
@@ -62,11 +62,11 @@ namespace thames::propagators::basepropagator {
              * @brief Construct a new Base Propagator object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-04-29
+             * @date 2022-05-11
              * 
              * @param[in] factors Dimensional factors.
              */
-            BasePropagator(const DimensionalFactors<T>& factors) : m_factors(factors) {
+            BasePropagator(const DimensionalFactors<T>* factors) : m_factors(factors) {
 
             }
 
@@ -161,7 +161,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator abstract object for polynomial propagations.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-04-29
+     * @date 2022-05-11
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -172,7 +172,7 @@ namespace thames::propagators::basepropagator {
         protected:
 
             /// Dimensional factors
-            const DimensionalFactors<T> m_factors;
+            const DimensionalFactors<T>* m_factors;
 
         public:
 
@@ -180,11 +180,11 @@ namespace thames::propagators::basepropagator {
              * @brief Construct a new Base Propagator Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-04-29
+             * @date 2022-05-11
              * 
              * @param[in] factors Dimensional factors.
              */
-            BasePropagatorPolynomial(const DimensionalFactors<T>& factors) : m_factors(factors) {
+            BasePropagatorPolynomial(const DimensionalFactors<T>* factors) : m_factors(factors) {
 
             }
 
