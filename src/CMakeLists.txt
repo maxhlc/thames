@@ -20,33 +20,80 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# Bundle source files together
+# TODO: cleaner implementation
+set(THAMES_SOURCE
+    # Conversions
+    conversions/cartesian.cpp
+    conversions/dimensional.cpp
+    conversions/geqoe.cpp
+    conversions/keplerian.cpp
+    # Input/output
+    io/point.cpp
+    io/polynomial.cpp
+    # Perturbations
+    perturbations/geopotential/J2.cpp
+    perturbations/baseperturbation.cpp
+    # Propagators
+    propagators/cowell.cpp
+    propagators/geqoe.cpp
+    # Util
+    util/angles.cpp
+    util/optimise.cpp
+    util/polynomials.cpp
+    util/root.cpp
+    util/sampling.cpp
+    # Vector
+    vector/arithmeticoverloads.cpp
+    vector/geometry.cpp
+)
+
+# Bundle header files together
+# TODO: cleaner implementation
+set(THAMES_HEADERS
+    # Constants
+    ../include/constants/constants.h
+    ../include/constants/earth.h
+    ../include/constants/statetypes.h
+    # Conversions
+    ../include/conversions/cartesian.h
+    ../include/conversions/conversions.h
+    ../include/conversions/dimensional.h
+    ../include/conversions/geqoe.h
+    ../include/conversions/keplerian.h
+    # Input/output
+    ../include/io/io.h
+    ../include/io/point.h
+    ../include/io/polynomial.h
+    # Perturbations
+    ../include/perturbations/geopotential/J2.h
+    ../include/perturbations/baseperturbation.h
+    ../include/perturbations/perturbations.h
+    # Propagators
+    ../include/propagators/basepropagator.h
+    ../include/propagators/cowell.h
+    ../include/propagators/geqoe.h
+    ../include/propagators/options.h
+    ../include/propagators/propagators.h
+    # Util
+    ../include/util/angles.h
+    ../include/util/optimise.h
+    ../include/util/polynomials.h
+    ../include/util/root.h
+    ../include/util/sampling.h
+    ../include/util/util.h
+    # Vector
+    ../include/vector/arithmeticoverloads.h
+    ../include/vector/geometry.h
+    ../include/vector/vector.h
+
+    # THAMES
+    ../include/thames.h
+)
+
 if(THAMES_BUILD_STATIC)
     # Build thames static library
-    add_library(${PROJECT_NAME} STATIC
-                # Conversions
-                conversions/cartesian.cpp
-                conversions/dimensional.cpp
-                conversions/geqoe.cpp
-                conversions/keplerian.cpp
-                # Input/output
-                io/point.cpp
-                io/polynomial.cpp
-                # Perturbations
-                perturbations/baseperturbation.cpp
-                perturbations/geopotential/J2.cpp
-                # Propagators
-                propagators/cowell.cpp
-                propagators/geqoe.cpp
-                # Util
-                util/angles.cpp
-                util/root.cpp
-                util/polynomials.cpp
-                util/optimise.cpp
-                util/sampling.cpp
-                # Vector
-                vector/arithmeticoverloads.cpp
-                vector/geometry.cpp
-    )
+    add_library(${PROJECT_NAME} STATIC ${THAMES_SOURCE} ${THAMES_HEADERS})
 endif(THAMES_BUILD_STATIC)
 
 if(THAMES_BUILD_MAIN)
