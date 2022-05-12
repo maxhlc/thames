@@ -54,6 +54,9 @@ namespace thames::perturbations::baseperturbation{
             /// Dimensional factors
             const DimensionalFactors<T>* m_factors;
 
+            /// Flag for whether to expect non-dimensional inputs/outputs
+            bool m_isNonDimensional;
+
         public:
 
             /**
@@ -75,6 +78,26 @@ namespace thames::perturbations::baseperturbation{
              * 
              */
             ~BasePerturbation();
+
+            /**
+             * @brief Get the non-dimensional flag.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-11
+             * 
+             * @return bool
+             */
+            virtual bool get_nondimensional();
+
+            /**
+             * @brief Set the non-dimensional flag.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-11
+             * 
+             * @param isNonDimensional Non-dimensional flag.
+             */
+            virtual void set_nondimensional(bool isNonDimensional);
 
             ////////////
             // Arrays //
@@ -227,6 +250,9 @@ namespace thames::perturbations::baseperturbation{
             /// Dimensional factors
             const DimensionalFactors<T>* m_factors;
 
+            /// Flag for whether to expect non-dimensional inputs/outputs
+            bool m_isNonDimensional;
+
         public:
 
             /**
@@ -248,6 +274,26 @@ namespace thames::perturbations::baseperturbation{
              * 
              */
             ~BasePerturbationPolynomial();
+
+            /**
+             * @brief Get the non-dimensional flag.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-11
+             * 
+             * @return bool
+             */
+            virtual bool get_nondimensional();
+
+            /**
+             * @brief Set the non-dimensional flag.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-11
+             * 
+             * @param isNonDimensional Non-dimensional flag.
+             */
+            virtual void set_nondimensional(bool isNonDimensional);
 
             /**
              * @brief Default total perturbing acceleration.

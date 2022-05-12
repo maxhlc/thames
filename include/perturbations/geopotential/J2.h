@@ -50,10 +50,14 @@ namespace thames::perturbations::geopotential{
      */
     template<class T>
     class J2 : public BasePerturbation<T> {
+
         private:
 
             /// Dimensional factors
             using BasePerturbation<T>::m_factors;
+
+            /// Non-dimensional flag
+            using BasePerturbation<T>::m_isNonDimensional;
 
             /// Central body gravitational parameter
             const T m_mu;
@@ -172,6 +176,9 @@ namespace thames::perturbations::geopotential{
 
             /// Dimensional factors
             using BasePerturbationPolynomial<T, P>::m_factors;
+
+            /// Non-dimensional flag
+            using BasePerturbationPolynomial<T, P>::m_isNonDimensional;
 
             /// Central body gravitational parameter
             const T m_mu;       

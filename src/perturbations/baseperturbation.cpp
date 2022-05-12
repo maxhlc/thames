@@ -41,13 +41,24 @@ namespace thames::perturbations::baseperturbation{
 
     template<class T>
     BasePerturbation<T>::BasePerturbation(const DimensionalFactors<T>* factors) : m_factors(factors) {
-
+        // Default to dimensional form
+        m_isNonDimensional = false;
     };
 
     template<class T>
     BasePerturbation<T>::~BasePerturbation(){
 
     };
+
+    template<class T>
+    bool BasePerturbation<T>::get_nondimensional() {
+        return m_isNonDimensional;
+    }
+
+    template<class T>
+    void BasePerturbation<T>::set_nondimensional(bool isNonDimensional) {
+        m_isNonDimensional = isNonDimensional;
+    }
 
     ////////////
     // Arrays //
@@ -118,13 +129,24 @@ namespace thames::perturbations::baseperturbation{
     
     template<class T, template<class> class P>
     BasePerturbationPolynomial<T, P>::BasePerturbationPolynomial(const DimensionalFactors<T>* factors) : m_factors(factors) {
-
+        // Default to dimensional form
+        m_isNonDimensional = false;
     };
 
     template<class T, template<class> class P>
     BasePerturbationPolynomial<T, P>::~BasePerturbationPolynomial(){
 
     };
+
+    template<class T, template<class> class P>
+    bool BasePerturbationPolynomial<T, P>::get_nondimensional() {
+        return m_isNonDimensional;
+    }
+
+    template<class T, template<class> class P>
+    void BasePerturbationPolynomial<T, P>::set_nondimensional(bool isNonDimensional) {
+        m_isNonDimensional = isNonDimensional;
+    }
 
     template<class T, template<class> class P>
     std::vector<P<T>> BasePerturbationPolynomial<T, P>::acceleration_total(const T& t, const std::vector<P<T>>& R, const std::vector<P<T>>& V) const {
