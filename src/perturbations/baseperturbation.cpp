@@ -41,8 +41,7 @@ namespace thames::perturbations::baseperturbation{
 
     template<class T>
     BasePerturbation<T>::BasePerturbation(const DimensionalFactors<T>* factors) : m_factors(factors) {
-        // Default to dimensional form
-        m_isNonDimensional = false;
+
     };
 
     template<class T>
@@ -129,8 +128,7 @@ namespace thames::perturbations::baseperturbation{
     
     template<class T, template<class> class P>
     BasePerturbationPolynomial<T, P>::BasePerturbationPolynomial(const DimensionalFactors<T>* factors) : m_factors(factors) {
-        // Default to dimensional form
-        m_isNonDimensional = false;
+
     };
 
     template<class T, template<class> class P>

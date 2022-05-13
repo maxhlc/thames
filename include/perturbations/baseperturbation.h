@@ -42,7 +42,7 @@ namespace thames::perturbations::baseperturbation{
      * @brief Class for the base perturbation.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-11
+     * @date 2022-05-13
      * 
      * @tparam T Numeric type.
      */
@@ -55,7 +55,7 @@ namespace thames::perturbations::baseperturbation{
             const DimensionalFactors<T>* m_factors;
 
             /// Flag for whether to expect non-dimensional inputs/outputs
-            bool m_isNonDimensional;
+            bool m_isNonDimensional = false;
 
         public:
 
@@ -63,7 +63,7 @@ namespace thames::perturbations::baseperturbation{
              * @brief Construct a new Base Perturbation object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-11
+             * @date 2022-05-13
              * 
              * @param[in] factors Factors for non-dimensionalisation.
              * 
@@ -237,7 +237,7 @@ namespace thames::perturbations::baseperturbation{
      * @brief Class for the base perturbation for polynomial distributions.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-11
+     * @date 2022-05-13
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -251,7 +251,7 @@ namespace thames::perturbations::baseperturbation{
             const DimensionalFactors<T>* m_factors;
 
             /// Flag for whether to expect non-dimensional inputs/outputs
-            bool m_isNonDimensional;
+            bool m_isNonDimensional = false;
 
         public:
 
@@ -259,7 +259,7 @@ namespace thames::perturbations::baseperturbation{
              * @brief Construct a new Base Perturbation Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-11
+             * @date 2022-05-13
              * 
              * @param[in] factors Factors for non-dimensionalisation.
              * 
