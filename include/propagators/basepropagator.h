@@ -37,7 +37,6 @@ namespace thames::propagators::basepropagator {
 
     using thames::conversions::dimensional::DimensionalFactors;
     using thames::perturbations::baseperturbation::BasePerturbation;
-    using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     ///////////
     // Reals //
@@ -166,6 +165,8 @@ namespace thames::propagators::basepropagator {
     /////////////////
 
     #ifdef THAMES_USE_SMARTUQ
+
+    using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     /**
      * @brief Base propagator abstract object for polynomial propagations.
