@@ -52,7 +52,7 @@ namespace thames::propagators {
      * @brief Propagator object for Cowell's method.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-11
+     * @date 2022-05-12
      * 
      * @tparam T Numeric type.
      */
@@ -61,14 +61,14 @@ namespace thames::propagators {
 
         private:
 
+            /// Perturbation object
+            using BasePropagator<T>::m_perturbation;
+
             /// Dimensional factors
             using BasePropagator<T>::m_factors;
 
             /// Gravitational parameter
             const T m_mu;
-
-            /// Perturbation object
-            const BasePerturbation<T>* m_perturbation;
 
         public:
 
@@ -82,7 +82,7 @@ namespace thames::propagators {
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            CowellPropagator(const T& mu, const BasePerturbation<T>* perturbation, const DimensionalFactors<T>* factors);
+            CowellPropagator(const T& mu, BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors);
 
             ////////////
             // Arrays //
@@ -104,7 +104,7 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state using Cowell's method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-02
+             * @date 2022-05-12
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -136,7 +136,7 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state using Cowell's method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-02
+             * @date 2022-05-12
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -195,7 +195,7 @@ namespace thames::propagators {
             const T m_mu;
 
             /// Perturbation object
-            const BasePerturbationPolynomial<T, P>* m_perturbation;
+            BasePerturbationPolynomial<T, P>* const m_perturbation;
 
         public:
 
@@ -208,7 +208,7 @@ namespace thames::propagators {
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              */
-            CowellPropagatorPolynomialDynamics(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation);
+            CowellPropagatorPolynomialDynamics(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation);
 
             /**
              * @brief Destroy the Cowell Propagator Polynomial Dynamics object.
@@ -238,7 +238,7 @@ namespace thames::propagators {
      * @brief Propagator object for Cowell's method with polynomials.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-11
+     * @date 2022-05-12
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -247,6 +247,9 @@ namespace thames::propagators {
     class CowellPropagatorPolynomial : public BasePropagatorPolynomial<T, P> {
         
         private:
+
+            /// Perturbation object
+            using BasePropagatorPolynomial<T, P>::m_perturbation;
 
             /// Dimensional factors
             using BasePropagatorPolynomial<T, P>::m_factors;
@@ -266,7 +269,7 @@ namespace thames::propagators {
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            CowellPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation, const DimensionalFactors<T>* factors);
+            CowellPropagatorPolynomial(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors);
 
             /**
              * @brief Destroy the Cowell Propagator Polynomial object
@@ -281,7 +284,7 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state using Cowell's method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-04-29
+             * @date 2022-05-12
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.

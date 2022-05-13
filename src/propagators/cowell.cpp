@@ -52,7 +52,7 @@ namespace thames::propagators {
     ///////////
 
     template<class T>
-    CowellPropagator<T>::CowellPropagator(const T& mu, const BasePerturbation<T>* perturbation, const DimensionalFactors<T>* factors) : BasePropagator<T>(factors), m_mu(mu/factors->grav), m_perturbation(perturbation) {
+    CowellPropagator<T>::CowellPropagator(const T& mu, BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagator<T>(perturbation, factors), m_mu(mu/factors->grav) {
 
     }
 
@@ -98,6 +98,9 @@ namespace thames::propagators {
 
         // Non-dimensionalise state
         state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
+
+        // Set perturbation to non-dimensional
+        m_perturbation->set_nondimensional(true);
         
         // Declare state derivative
         auto func = [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);};
@@ -167,6 +170,9 @@ namespace thames::propagators {
 
         // Non-dimensionalise state
         state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
+
+        // Set perturbation to non-dimensional
+        m_perturbation->set_nondimensional(true);
         
         // Declare state derivative
         auto func = [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);};
@@ -224,7 +230,7 @@ namespace thames::propagators {
     using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     template<class T, template<class> class P>
-    CowellPropagatorPolynomialDynamics<T, P>::CowellPropagatorPolynomialDynamics(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation) : smartuq::dynamics::base_dynamics<P<T>>("Cowell"), m_mu(mu), m_perturbation(perturbation) {
+    CowellPropagatorPolynomialDynamics<T, P>::CowellPropagatorPolynomialDynamics(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation) : smartuq::dynamics::base_dynamics<P<T>>("Cowell"), m_mu(mu), m_perturbation(perturbation) {
 
     }
 
@@ -262,7 +268,7 @@ namespace thames::propagators {
     template class CowellPropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
-    CowellPropagatorPolynomial<T, P>::CowellPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomial<T, P>(factors), m_dyn(mu/factors->grav, perturbation) {
+    CowellPropagatorPolynomial<T, P>::CowellPropagatorPolynomial(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomial<T, P>(perturbation, factors), m_dyn(mu/factors->grav, perturbation) {
 
     }
 
@@ -284,6 +290,9 @@ namespace thames::propagators {
 
         // Non-dimensionalise state
         state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
+
+        // Set perturbation to non-dimensional
+        m_perturbation->set_nondimensional(true);
         
         // Calculate number of steps based on time step
         unsigned int nstep = (int) ceil((tend - tstart)/tstep);

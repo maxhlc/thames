@@ -31,10 +31,13 @@ SOFTWARE.
 #include "options.h"
 #include "../constants/statetypes.h"
 #include "../conversions/dimensional.h"
+#include "../perturbations/baseperturbation.h"
 
 namespace thames::propagators::basepropagator {
 
     using thames::conversions::dimensional::DimensionalFactors;
+    using thames::perturbations::baseperturbation::BasePerturbation;
+    using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     ///////////
     // Reals //
@@ -44,7 +47,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator abstract object.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-11
+     * @date 2022-05-12
      * 
      * @tparam T Numeric type.
      */
@@ -52,6 +55,9 @@ namespace thames::propagators::basepropagator {
     class BasePropagator {
 
         protected:
+
+            /// Perturbation object
+            BasePerturbation<T>* const m_perturbation;
 
             /// Dimensional factors
             const DimensionalFactors<T>* m_factors;
@@ -64,9 +70,10 @@ namespace thames::propagators::basepropagator {
              * @author Max Hallgarten La Casta
              * @date 2022-05-11
              * 
+             * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            BasePropagator(const DimensionalFactors<T>* factors) : m_factors(factors) {
+            BasePropagator(BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors) : m_perturbation(perturbation), m_factors(factors) {
 
             }
 
@@ -161,7 +168,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator abstract object for polynomial propagations.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-11
+     * @date 2022-05-12
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -170,6 +177,9 @@ namespace thames::propagators::basepropagator {
     class BasePropagatorPolynomial {
 
         protected:
+
+            /// Perturbation object
+            BasePerturbationPolynomial<T, P>* const m_perturbation;
 
             /// Dimensional factors
             const DimensionalFactors<T>* m_factors;
@@ -180,11 +190,12 @@ namespace thames::propagators::basepropagator {
              * @brief Construct a new Base Propagator Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-11
+             * @date 2022-05-12
              * 
+             * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            BasePropagatorPolynomial(const DimensionalFactors<T>* factors) : m_factors(factors) {
+            BasePropagatorPolynomial(BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : m_perturbation(perturbation), m_factors(factors) {
 
             }
 

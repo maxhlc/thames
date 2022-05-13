@@ -48,7 +48,7 @@ namespace thames::propagators {
     using namespace thames::vector::arithmeticoverloads;
 
     template<class T>
-    GEqOEPropagator<T>::GEqOEPropagator(const T& mu, const BasePerturbation<T>* perturbation, const DimensionalFactors<T>* factors) : BasePropagator<T>(factors), m_mu(mu/factors->grav), m_perturbation(perturbation) {
+    GEqOEPropagator<T>::GEqOEPropagator(const T& mu, BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagator<T>(perturbation, factors), m_mu(mu/factors->grav) {
 
     }
 
@@ -180,6 +180,9 @@ namespace thames::propagators {
         tstart /= m_factors->time;
         tend /= m_factors->time;
         tstep /= m_factors->time;
+
+        // Set perturbation to non-dimensional
+        m_perturbation->set_nondimensional(true);
 
         // Transform initial state
         state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
@@ -340,6 +343,9 @@ namespace thames::propagators {
         tstart /= m_factors->time;
         tend /= m_factors->time;
         tstep /= m_factors->time;
+
+        // Set perturbation to non-dimensional
+        m_perturbation->set_nondimensional(true);
 
         // Transform initial state
         state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
@@ -532,7 +538,7 @@ namespace thames::propagators {
     template class GEqOEPropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
-    GEqOEPropagatorPolynomial<T, P>::GEqOEPropagatorPolynomial(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomial<T, P>(factors), m_mu(mu/factors->grav), m_perturbation(perturbation), m_dyn(mu/factors->grav, perturbation) {
+    GEqOEPropagatorPolynomial<T, P>::GEqOEPropagatorPolynomial(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomial<T, P>(perturbation, factors), m_mu(mu/factors->grav), m_dyn(mu/factors->grav, perturbation) {
 
     }
 
@@ -551,6 +557,9 @@ namespace thames::propagators {
         tstart /= m_factors->time;
         tend /= m_factors->time;
         tstep /= m_factors->time;
+
+        // Set perturbation to non-dimensional
+        m_perturbation->set_nondimensional(true);
 
         // Transform initial state
         state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
