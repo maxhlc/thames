@@ -30,8 +30,16 @@ namespace thames::propagators::options {
     /// Struct to store options for propagators
     template<class T>
     struct PropagatorOptions {
-        bool fixed = false;
+        /// Flag for fixed- or variable-step propagation
+        bool isfixedStep = false;
+
+        /// Flag for whether to convert to, and propagate with non-dimensional state
+        bool isNonDimensional = true;
+
+        /// Absolute tolerance for variable-step propagation
         T atol = 1e-10;
+
+        /// Relative tolerance for variable-step propagation
         T rtol = 1e-10;
     };
 

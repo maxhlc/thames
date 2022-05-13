@@ -47,7 +47,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator abstract object.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-12
+     * @date 2022-05-13
      * 
      * @tparam T Numeric type.
      */
@@ -61,6 +61,9 @@ namespace thames::propagators::basepropagator {
 
             /// Dimensional factors
             const DimensionalFactors<T>* m_factors;
+
+            /// Flag for whether to propagate in non-dimensional form
+            bool m_isNonDimensional = false;
 
         public:
 
@@ -97,7 +100,7 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-03-03
+             * @date 2022-05-13
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -107,7 +110,7 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::array<T, 6> Final state.
              */
-            virtual std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const;
+            virtual std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype);
 
             /////////////
             // Vectors //
@@ -129,7 +132,7 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-03-03
+             * @date 2022-05-13
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -139,13 +142,13 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::vector<T> Final state.
              */
-            virtual std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const;
+            virtual std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype);
 
             /**
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-03-07
+             * @date 2022-05-13
              * 
              * @param[in] tvector Vector of times.
              * @param[in] tstep Initial timestep for propagation
@@ -154,7 +157,7 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::vector<std::vector<T>> Propagated states.
              */
-            virtual std::vector<std::vector<T>> propagate(std::vector<T> tvector, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const;         
+            virtual std::vector<std::vector<T>> propagate(std::vector<T> tvector, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype);         
 
     };
 
@@ -203,7 +206,7 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-03-03
+             * @date 2022-05-13
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -213,13 +216,13 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::vector<P<T>> Final state.
              */
-            virtual std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const;
+            virtual std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype);
 
             /**
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-03-07
+             * @date 2022-05-13
              * 
              * @param[in] tvector Vector of times.
              * @param[in] tstep Initial timestep for propagation
@@ -228,7 +231,7 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::vector<std::vector<P<T>>> Propagated states.
              */
-            virtual std::vector<std::vector<P<T>>> propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const;
+            virtual std::vector<std::vector<P<T>>> propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype);
 
     };
 

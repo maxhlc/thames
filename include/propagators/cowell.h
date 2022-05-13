@@ -52,7 +52,7 @@ namespace thames::propagators {
      * @brief Propagator object for Cowell's method.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-12
+     * @date 2022-05-13
      * 
      * @tparam T Numeric type.
      */
@@ -70,13 +70,16 @@ namespace thames::propagators {
             /// Gravitational parameter
             const T m_mu;
 
+            /// Flag for whether to propagate in non-dimensional form
+            using BasePropagator<T>::m_isNonDimensional;
+
         public:
 
             /**
              * @brief Construct a new Cowell Propagator object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-11
+             * @date 2022-05-13
              * 
              * @param[in] mu Gravitational parameter. 
              * @param[in] perturbation Perturbation object.
@@ -92,7 +95,7 @@ namespace thames::propagators {
              * @brief State derivative for Cowell's method propagation.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-25
+             * @date 2022-05-13
              * 
              * @param[in] RV Cartesian state.
              * @param[out] RVdot Time derivative of the Cartesian state.
@@ -104,7 +107,7 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state using Cowell's method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-12
+             * @date 2022-05-13
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -114,7 +117,7 @@ namespace thames::propagators {
              * @param[in] statetype State type.
              * @return std::array<T, 6> Final state.
              */
-            std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
+            std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;
 
             /////////////
             // Vectors //
@@ -124,7 +127,7 @@ namespace thames::propagators {
              * @brief State derivative for Cowell's method propagation.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-25
+             * @date 2022-05-13
              * 
              * @param[in] RV Cartesian state.
              * @param[out] RVdot Time derivative of the Cartesian state.
@@ -136,7 +139,7 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state using Cowell's method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-12
+             * @date 2022-05-13
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -146,13 +149,13 @@ namespace thames::propagators {
              * @param[in] statetype State type.
              * @return std::vector<T> Final state.
              */
-            std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
+            std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;
             
             /**
              * @brief Propagate Cartesian state using Cowell's method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-03-07
+             * @date 2022-05-13
              * 
              * @param[in] tvector Vector of times.
              * @param[in] tstep Initial timestep for propagation
@@ -161,7 +164,7 @@ namespace thames::propagators {
              * @param[in] statetype State type.
              * @return std::vector<std::vector<T>> Propagated states.
              */
-            std::vector<std::vector<T>> propagate(std::vector<T> tvector, T tstep, std::vector<T> RV, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
+            std::vector<std::vector<T>> propagate(std::vector<T> tvector, T tstep, std::vector<T> RV, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;
 
     };
 
@@ -178,13 +181,18 @@ namespace thames::propagators {
      * @brief Object for Cowell's method dynamics with polynomials, compatible with the SMART-UQ schema.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-01-28
+     * @date 2022-05-13
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      */
     template<class T, template<class> class P>
     class CowellPropagatorPolynomialDynamics : public smartuq::dynamics::base_dynamics<P<T>> {
+
+        public:
+
+            /// Flag for whether to propagate in non-dimensional form
+            bool m_isNonDimensional = false;
 
         private:
 
@@ -197,18 +205,21 @@ namespace thames::propagators {
             /// Perturbation object
             BasePerturbationPolynomial<T, P>* const m_perturbation;
 
+            /// Dimensional factors
+            const DimensionalFactors<T>* m_factors;
+
         public:
 
             /**
              * @brief Construct a new Cowell Propagator Polynomial Dynamics object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-28
+             * @date 2022-05-13
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              */
-            CowellPropagatorPolynomialDynamics(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation);
+            CowellPropagatorPolynomialDynamics(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors);
 
             /**
              * @brief Destroy the Cowell Propagator Polynomial Dynamics object.
@@ -223,7 +234,7 @@ namespace thames::propagators {
              * @brief Evaluate the derivative of the Cowell's method dynamics.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-27
+             * @date 2022-05-13
              * 
              * @param[in] t Current physical time.
              * @param[in] RV Cartesian state.
@@ -238,7 +249,7 @@ namespace thames::propagators {
      * @brief Propagator object for Cowell's method with polynomials.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-12
+     * @date 2022-05-13
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -255,7 +266,7 @@ namespace thames::propagators {
             using BasePropagatorPolynomial<T, P>::m_factors;
 
             /// Dynamics object
-            const CowellPropagatorPolynomialDynamics<T, P> m_dyn;
+            CowellPropagatorPolynomialDynamics<T, P> m_dyn;
 
         public:
 
@@ -263,7 +274,7 @@ namespace thames::propagators {
              * @brief Construct a new Cowell Propagator Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-11
+             * @date 2022-05-13
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
@@ -284,7 +295,7 @@ namespace thames::propagators {
              * @brief Propagate Cartesian state using Cowell's method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-12
+             * @date 2022-05-13
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -294,13 +305,13 @@ namespace thames::propagators {
              * @param[in] statetype State type.
              * @return std::vector<P<T>> Final state.
              */
-            std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
+            std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;
 
             /**
              * @brief Propagate Cartesian state using Cowell's method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-03-07
+             * @date 2022-05-13
              * 
              * @param[in] tvector Vector of times.
              * @param[in] tstep Initial timestep for propagation
@@ -309,7 +320,7 @@ namespace thames::propagators {
              * @param[in] statetype State type.
              * @return std::vector<std::vector<P<T>>> Propagated states.
              */
-            std::vector<std::vector<P<T>>> propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) const override;
+            std::vector<std::vector<P<T>>> propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;
 
     };
 

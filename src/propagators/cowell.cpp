@@ -52,7 +52,7 @@ namespace thames::propagators {
     ///////////
 
     template<class T>
-    CowellPropagator<T>::CowellPropagator(const T& mu, BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagator<T>(perturbation, factors), m_mu(mu/factors->grav) {
+    CowellPropagator<T>::CowellPropagator(const T& mu, BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagator<T>(perturbation, factors), m_mu(mu) {
 
     }
 
@@ -62,6 +62,9 @@ namespace thames::propagators {
 
     template<class T>
     void CowellPropagator<T>::derivative(const std::array<T, 6>& RV, std::array<T, 6>& RVdot, const T t) const {
+        // Calculate factors
+        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+
         // Extract Cartesian state vectors
         std::array<T, 3> R = {RV[0], RV[1], RV[2]};
         std::array<T, 3> V = {RV[3], RV[4], RV[5]};
@@ -73,7 +76,7 @@ namespace thames::propagators {
         std::array<T, 3> F = m_perturbation->acceleration_total(t, R, V);
 
         // Calculate central body acceleration
-        std::array<T, 3> G = -m_mu/pow(r, 3.0)*R;
+        std::array<T, 3> G = -mu/pow(r, 3.0)*R;
 
         // Calculate acceleration
         std::array<T, 3> A = G + F;
@@ -86,27 +89,30 @@ namespace thames::propagators {
     }
 
     template<class T>
-    std::array<T, 6> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+    std::array<T, 6> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
         // Check that input is Cartesian state
         if(statetype != thames::constants::statetypes::CARTESIAN)
             throw std::runtime_error("Unsupported state type");
+
+        // Set non-dimensional flag
+        m_isNonDimensional = options.isNonDimensional;
+
+        // Set perturbation non-dimensional flag
+        m_perturbation->set_nondimensional(options.isNonDimensional);
         
-        // Non-dimensionalise times
-        tstart /= m_factors->time;
-        tend /= m_factors->time;
-        tstep /= m_factors->time;
-
-        // Non-dimensionalise state
-        state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
-
-        // Set perturbation to non-dimensional
-        m_perturbation->set_nondimensional(true);
+        // Non-dimensionalise
+        if (options.isNonDimensional) {
+            tstart /= m_factors->time;
+            tend /= m_factors->time;
+            tstep /= m_factors->time;
+            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
+        }
         
         // Declare state derivative
         auto func = [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);};
 
         // Propagate according to the fixed flag
-        if(options.fixed){
+        if(options.isfixedStep){
             // Declare stepper
             boost::numeric::odeint::runge_kutta4<std::array<T, 6>> stepper;
 
@@ -121,8 +127,10 @@ namespace thames::propagators {
             boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, state, tstart, tend, tstep);
         }
 
-        // Re-dimensionalise state
-        state = thames::conversions::dimensional::cartesian_dimensionalise(state, *m_factors);
+        // Re-dimensionalise
+        if (options.isNonDimensional) {
+            state = thames::conversions::dimensional::cartesian_dimensionalise(state, *m_factors);
+        }
 
         // Return final state
         return state;
@@ -134,6 +142,9 @@ namespace thames::propagators {
 
     template<class T>
     void CowellPropagator<T>::derivative(const std::vector<T>& RV, std::vector<T>& RVdot, const T t) const {
+        // Calculate factors
+        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+
         // Extract Cartesian state vectors
         std::vector<T> R = {RV[0], RV[1], RV[2]};
         std::vector<T> V = {RV[3], RV[4], RV[5]};
@@ -145,7 +156,7 @@ namespace thames::propagators {
         std::vector<T> F = m_perturbation->acceleration_total(t, R, V);
 
         // Calculate central body acceleration
-        std::vector<T> G = -m_mu/pow(r, 3.0)*R;
+        std::vector<T> G = -mu/pow(r, 3.0)*R;
 
         // Calculate acceleration
         std::vector<T> A = G + F;
@@ -158,27 +169,30 @@ namespace thames::propagators {
     }
 
     template<class T>
-    std::vector<T> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+    std::vector<T> CowellPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
         // Check that input is Cartesian state
         if(statetype != thames::constants::statetypes::CARTESIAN)
             throw std::runtime_error("Unsupported state type");
+
+        // Set non-dimensional flag
+        m_isNonDimensional = options.isNonDimensional;
+
+        // Set perturbation non-dimensional flag
+        m_perturbation->set_nondimensional(options.isNonDimensional);
         
-        // Non-dimensionalise times
-        tstart /= m_factors->time;
-        tend /= m_factors->time;
-        tstep /= m_factors->time;
-
-        // Non-dimensionalise state
-        state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
-
-        // Set perturbation to non-dimensional
-        m_perturbation->set_nondimensional(true);
+        // Non-dimensionalise
+        if (options.isNonDimensional) {
+            tstart /= m_factors->time;
+            tend /= m_factors->time;
+            tstep /= m_factors->time;
+            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
+        }
         
         // Declare state derivative
         auto func = [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);};
 
         // Propagate according to the fixed flag
-        if(options.fixed){
+        if(options.isfixedStep){
             // Declare stepper
             boost::numeric::odeint::runge_kutta4<std::vector<T>> stepper;
 
@@ -193,15 +207,17 @@ namespace thames::propagators {
             boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, state, tstart, tend, tstep);
         }
 
-        // Re-dimensionalise state
-        state = thames::conversions::dimensional::cartesian_dimensionalise(state, *m_factors);
+        // Re-dimensionalise
+        if (options.isNonDimensional) {
+            state = thames::conversions::dimensional::cartesian_dimensionalise(state, *m_factors);
+        }
 
         // Return final state
         return state;
     }
 
     template<class T>
-    std::vector<std::vector<T>> CowellPropagator<T>::propagate(std::vector<T> tvector, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+    std::vector<std::vector<T>> CowellPropagator<T>::propagate(std::vector<T> tvector, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
         // Declare output vector
         std::vector<std::vector<T>> states(tvector.size());
 
@@ -230,7 +246,7 @@ namespace thames::propagators {
     using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     template<class T, template<class> class P>
-    CowellPropagatorPolynomialDynamics<T, P>::CowellPropagatorPolynomialDynamics(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation) : smartuq::dynamics::base_dynamics<P<T>>("Cowell"), m_mu(mu), m_perturbation(perturbation) {
+    CowellPropagatorPolynomialDynamics<T, P>::CowellPropagatorPolynomialDynamics(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : smartuq::dynamics::base_dynamics<P<T>>("Cowell"), m_mu(mu), m_perturbation(perturbation), m_factors(factors) {
 
     }
 
@@ -241,6 +257,9 @@ namespace thames::propagators {
 
     template<class T, template<class> class P>
     int CowellPropagatorPolynomialDynamics<T, P>::evaluate(const T& t, const std::vector<P<T>>& RV, std::vector<P<T>>& RVdot) const {
+        // Calculate factors
+        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+
         // Extract Cartesian state vectors
         std::vector<P<T>> R = {RV[0], RV[1], RV[2]};
         std::vector<P<T>> V = {RV[3], RV[4], RV[5]};
@@ -252,7 +271,7 @@ namespace thames::propagators {
         std::vector<P<T>> F = m_perturbation->acceleration_total(t, R, V);
 
         // Calculate central body acceleration
-        std::vector<P<T>> G = -m_mu/pow(r, 3)*R;
+        std::vector<P<T>> G = -mu/pow(r, 3)*R;
 
         // Calculate acceleration
         std::vector<P<T>> A = G + F;
@@ -268,7 +287,7 @@ namespace thames::propagators {
     template class CowellPropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
-    CowellPropagatorPolynomial<T, P>::CowellPropagatorPolynomial(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomial<T, P>(perturbation, factors), m_dyn(mu/factors->grav, perturbation) {
+    CowellPropagatorPolynomial<T, P>::CowellPropagatorPolynomial(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomial<T, P>(perturbation, factors), m_dyn(mu, perturbation, factors) {
 
     }
 
@@ -278,21 +297,24 @@ namespace thames::propagators {
     }
 
     template<class T, template<class> class P>
-    std::vector<P<T>> CowellPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+    std::vector<P<T>> CowellPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
         // Check that input is Cartesian state
         if(statetype != thames::constants::statetypes::CARTESIAN)
             throw std::runtime_error("Unsupported state type");
+
+        // Set non-dimensional flag
+        m_dyn.m_isNonDimensional = options.isNonDimensional;
+
+        // Set perturbation non-dimensional flag
+        m_perturbation->set_nondimensional(options.isNonDimensional);
         
-        // Non-dimensionalise times
-        tstart /= m_factors->time;
-        tend /= m_factors->time;
-        tstep /= m_factors->time;
-
-        // Non-dimensionalise state
-        state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
-
-        // Set perturbation to non-dimensional
-        m_perturbation->set_nondimensional(true);
+        // Non-dimensionalise
+        if (options.isNonDimensional) {
+            tstart /= m_factors->time;
+            tend /= m_factors->time;
+            tstep /= m_factors->time;
+            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
+        }
         
         // Calculate number of steps based on time step
         unsigned int nstep = (int) ceil((tend - tstart)/tstep);
@@ -301,7 +323,7 @@ namespace thames::propagators {
         std::vector<P<T>> statefinal(state);
 
         // Propagate according to the fixed flag
-        if(options.fixed){
+        if(options.isfixedStep){
             // Create integrator
             rk4<P<T>> integrator(&m_dyn);
 
@@ -315,15 +337,17 @@ namespace thames::propagators {
             integrator.integrate(tstart, tend, nstep, state, statefinal);  
         }
 
-        // Re-dimensionalise state
-        statefinal = thames::conversions::dimensional::cartesian_dimensionalise(statefinal, *m_factors);
+        // Re-dimensionalise
+        if (options.isNonDimensional) {
+            statefinal = thames::conversions::dimensional::cartesian_dimensionalise(statefinal, *m_factors);
+        }
 
         // Return final state
         return statefinal;        
     }
 
     template<class T, template<class> class P>
-    std::vector<std::vector<P<T>>> CowellPropagatorPolynomial<T, P>::propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+    std::vector<std::vector<P<T>>> CowellPropagatorPolynomial<T, P>::propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
         // Declare output vector
         std::vector<std::vector<P<T>>> states(tvector.size());
 

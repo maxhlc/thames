@@ -48,7 +48,7 @@ namespace thames::propagators {
     using namespace thames::vector::arithmeticoverloads;
 
     template<class T>
-    GEqOEPropagator<T>::GEqOEPropagator(const T& mu, BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagator<T>(perturbation, factors), m_mu(mu/factors->grav) {
+    GEqOEPropagator<T>::GEqOEPropagator(const T& mu, BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagator<T>(perturbation, factors), m_mu(mu) {
 
     }
 
@@ -58,6 +58,9 @@ namespace thames::propagators {
 
     template<class T>
     void GEqOEPropagator<T>::derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t) const {
+        // Calculate factors
+        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+
         // Extract elements
         T nu = geqoe[0];
         T p1 = geqoe[1];
@@ -74,11 +77,11 @@ namespace thames::propagators {
         T cosk = cos(k);
 
         // Calculate generalised semi-major axis
-        T a = pow(m_mu/pow(nu, 2.0), 1.0/3.0);
+        T a = pow(mu/pow(nu, 2.0), 1.0/3.0);
 
         // Calculate range and range rate
         T r = a*(1.0 - p1*sink - p2*cosk);
-        T drdt = sqrt(m_mu*a)/r*(p2*sink - p1*cosk);
+        T drdt = sqrt(mu*a)/r*(p2*sink - p1*cosk);
 
         // Calculate trig of the true longitude
         T alpha = 1.0/(1.0 + sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0)));
@@ -106,7 +109,7 @@ namespace thames::propagators {
         std::array<T, 3> R = r*er;
 
         // Calculate generalised angular momentum
-        T c = pow(pow(m_mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
+        T c = pow(pow(mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
 
         // Calculate angular momentum
         T h = sqrt(pow(c, 2.0) - 2.0*pow(r, 2.0)*m_perturbation->potential(t, R));
@@ -124,7 +127,7 @@ namespace thames::propagators {
         T edot = Ut + thames::vector::geometry::dot3(P, V);
 
         // Calculate time derivative of nu
-        T nudot = -3.0*pow(nu/pow(m_mu, 2.0), 1.0/3.0)*edot;
+        T nudot = -3.0*pow(nu/pow(mu, 2.0), 1.0/3.0)*edot;
 
         // Calculate trig of the true longitude
         T cl = thames::vector::geometry::dot3(er, ex);
@@ -138,7 +141,7 @@ namespace thames::propagators {
         std::array<T, 3> eh = H/h;
 
         // Calculate the generalised semi-latus rectum
-        T p = pow(c, 2.0)/m_mu;
+        T p = pow(c, 2.0)/mu;
 
         // Calculate perturbation components
         T Fr = thames::vector::geometry::dot3(F, er);
@@ -149,11 +152,11 @@ namespace thames::propagators {
         T zetatilde = 1 + zeta;
 
         // Calculate time derivatives of the second and third elements
-        T p1dot = p2*((h - c)/pow(r, 2.0) - r/h*hwh*Fh) + 1.0/c*(r*drdt/c*p1 + zetatilde*p2 + zeta*cl)*(2.0*U - r*Fr) + r/m_mu*(zeta*p1 + zetatilde*sl)*edot;
-        T p2dot = p1*(r/h*hwh*Fh - (h-c)/pow(r, 2.0)) + 1.0/c*(r*drdt/c*p2 - zetatilde*p1 - zeta*sl)*(2.0*U - r*Fr) + r/m_mu*(zeta*p2 + zetatilde*cl)*edot;
+        T p1dot = p2*((h - c)/pow(r, 2.0) - r/h*hwh*Fh) + 1.0/c*(r*drdt/c*p1 + zetatilde*p2 + zeta*cl)*(2.0*U - r*Fr) + r/mu*(zeta*p1 + zetatilde*sl)*edot;
+        T p2dot = p1*(r/h*hwh*Fh - (h-c)/pow(r, 2.0)) + 1.0/c*(r*drdt/c*p2 - zetatilde*p1 - zeta*sl)*(2.0*U - r*Fr) + r/mu*(zeta*p2 + zetatilde*cl)*edot;
 
         // Calculate time derivative of the generalised mean longitude
-        T Ldot = nu + (h - c)/pow(r, 2.0) - r/h*hwh*Fh + (r*drdt*c/pow(m_mu, 2.0)*zetatilde*alpha)*edot + 1.0/c*(1.0/alpha + alpha*(1.0 - r/a))*(2.0*U - r*Fr);
+        T Ldot = nu + (h - c)/pow(r, 2.0) - r/h*hwh*Fh + (r*drdt*c/pow(mu, 2.0)*zetatilde*alpha)*edot + 1.0/c*(1.0/alpha + alpha*(1.0 - r/a))*(2.0*U - r*Fr);
 
         // Calculate time derivatives of the remaining elements
         T q1dot = r/(2.0*h)*Fh*(1.0 + pow(q1, 2.0) + pow(q2, 2.0))*sl;
@@ -171,28 +174,33 @@ namespace thames::propagators {
     }
 
     template<class T>
-    std::array<T, 6> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+    std::array<T, 6> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
         // Check that input is Cartesian state
         if(statetype != thames::constants::statetypes::CARTESIAN)
             throw std::runtime_error("Unsupported state type");
 
-        // Non-dimensionalise times
-        tstart /= m_factors->time;
-        tend /= m_factors->time;
-        tstep /= m_factors->time;
+        // Set non-dimensional flag
+        m_isNonDimensional = options.isNonDimensional;
 
-        // Set perturbation to non-dimensional
-        m_perturbation->set_nondimensional(true);
+        // Set perturbation non-dimensional flag
+        m_perturbation->set_nondimensional(options.isNonDimensional);
+        
+        // Non-dimensionalise
+        if (options.isNonDimensional) {
+            tstart /= m_factors->time;
+            tend /= m_factors->time;
+            tstep /= m_factors->time;
+            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
+        }
 
         // Transform initial state
-        state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
         state = thames::conversions::geqoe::cartesian_to_geqoe(tstart, state, m_mu, m_perturbation);
 
         // Declare state derivative
         auto func = [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);};
 
         // Propagate according to the fixed flag
-        if(options.fixed){
+        if(options.isfixedStep){
             // Declare stepper
             boost::numeric::odeint::runge_kutta4<std::array<T, 6>> stepper;
 
@@ -207,9 +215,16 @@ namespace thames::propagators {
             boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, state, tstart, tend, tstep);
         }
 
+        // Calculate factors
+        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+
         // Transform final state
-        state = thames::conversions::geqoe::geqoe_to_cartesian(tend, state, m_mu, m_perturbation);
-        state = thames::conversions::dimensional::cartesian_dimensionalise(state, *m_factors);
+        state = thames::conversions::geqoe::geqoe_to_cartesian(tend, state, mu, m_perturbation);
+
+        // Re-dimensionalise
+        if (options.isNonDimensional) {
+            state = thames::conversions::dimensional::cartesian_dimensionalise(state, *m_factors);
+        }
 
         // Return final state
         return state;
@@ -221,6 +236,9 @@ namespace thames::propagators {
 
     template<class T>
     void GEqOEPropagator<T>::derivative(const std::vector<T>& geqoe, std::vector<T>& geqoedot, const T t) const {
+        // Calculate factors
+        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+
         // Extract elements
         T nu = geqoe[0];
         T p1 = geqoe[1];
@@ -237,11 +255,11 @@ namespace thames::propagators {
         T cosk = cos(k);
 
         // Calculate generalised semi-major axis
-        T a = pow(m_mu/pow(nu, 2.0), 1.0/3.0);
+        T a = pow(mu/pow(nu, 2.0), 1.0/3.0);
 
         // Calculate range and range rate
         T r = a*(1.0 - p1*sink - p2*cosk);
-        T drdt = sqrt(m_mu*a)/r*(p2*sink - p1*cosk);
+        T drdt = sqrt(mu*a)/r*(p2*sink - p1*cosk);
 
         // Calculate trig of the true longitude
         T alpha = 1.0/(1.0 + sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0)));
@@ -269,7 +287,7 @@ namespace thames::propagators {
         std::vector<T> R = r*er;
 
         // Calculate generalised angular momentum
-        T c = pow(pow(m_mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
+        T c = pow(pow(mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
 
         // Calculate angular momentum
         T h = sqrt(pow(c, 2.0) - 2.0*pow(r, 2.0)*m_perturbation->potential(t, R));
@@ -287,7 +305,7 @@ namespace thames::propagators {
         T edot = Ut + thames::vector::geometry::dot3(P, V);
 
         // Calculate time derivative of nu
-        T nudot = -3.0*pow(nu/pow(m_mu, 2.0), 1.0/3.0)*edot;
+        T nudot = -3.0*pow(nu/pow(mu, 2.0), 1.0/3.0)*edot;
 
         // Calculate trig of the true longitude
         T cl = thames::vector::geometry::dot3(er, ex);
@@ -301,7 +319,7 @@ namespace thames::propagators {
         std::vector<T> eh = H/h;
 
         // Calculate the generalised semi-latus rectum
-        T p = pow(c, 2.0)/m_mu;
+        T p = pow(c, 2.0)/mu;
 
         // Calculate perturbation components
         T Fr = thames::vector::geometry::dot3(F, er);
@@ -312,11 +330,11 @@ namespace thames::propagators {
         T zetatilde = 1 + zeta;
 
         // Calculate time derivatives of the second and third elements
-        T p1dot = p2*((h - c)/pow(r, 2.0) - r/h*hwh*Fh) + 1.0/c*(r*drdt/c*p1 + zetatilde*p2 + zeta*cl)*(2.0*U - r*Fr) + r/m_mu*(zeta*p1 + zetatilde*sl)*edot;
-        T p2dot = p1*(r/h*hwh*Fh - (h-c)/pow(r, 2.0)) + 1.0/c*(r*drdt/c*p2 - zetatilde*p1 - zeta*sl)*(2.0*U - r*Fr) + r/m_mu*(zeta*p2 + zetatilde*cl)*edot;
+        T p1dot = p2*((h - c)/pow(r, 2.0) - r/h*hwh*Fh) + 1.0/c*(r*drdt/c*p1 + zetatilde*p2 + zeta*cl)*(2.0*U - r*Fr) + r/mu*(zeta*p1 + zetatilde*sl)*edot;
+        T p2dot = p1*(r/h*hwh*Fh - (h-c)/pow(r, 2.0)) + 1.0/c*(r*drdt/c*p2 - zetatilde*p1 - zeta*sl)*(2.0*U - r*Fr) + r/mu*(zeta*p2 + zetatilde*cl)*edot;
 
         // Calculate time derivative of the generalised mean longitude
-        T Ldot = nu + (h - c)/pow(r, 2.0) - r/h*hwh*Fh + (r*drdt*c/pow(m_mu, 2.0)*zetatilde*alpha)*edot + 1.0/c*(1.0/alpha + alpha*(1.0 - r/a))*(2.0*U - r*Fr);
+        T Ldot = nu + (h - c)/pow(r, 2.0) - r/h*hwh*Fh + (r*drdt*c/pow(mu, 2.0)*zetatilde*alpha)*edot + 1.0/c*(1.0/alpha + alpha*(1.0 - r/a))*(2.0*U - r*Fr);
 
         // Calculate time derivatives of the remaining elements
         T q1dot = r/(2.0*h)*Fh*(1.0 + pow(q1, 2.0) + pow(q2, 2.0))*sl;
@@ -334,28 +352,36 @@ namespace thames::propagators {
     }
 
     template<class T>
-    std::vector<T> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+    std::vector<T> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
         // Check that input is Cartesian state
         if(statetype != thames::constants::statetypes::CARTESIAN)
             throw std::runtime_error("Unsupported state type");
 
-        // Non-dimensionalise times
-        tstart /= m_factors->time;
-        tend /= m_factors->time;
-        tstep /= m_factors->time;
+        // Set non-dimensional flag
+        m_isNonDimensional = options.isNonDimensional;
 
-        // Set perturbation to non-dimensional
-        m_perturbation->set_nondimensional(true);
+        // Set perturbation non-dimensional flag
+        m_perturbation->set_nondimensional(options.isNonDimensional);
+        
+        // Non-dimensionalise
+        if (options.isNonDimensional) {
+            tstart /= m_factors->time;
+            tend /= m_factors->time;
+            tstep /= m_factors->time;
+            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
+        }
+
+        // Calculate factors
+        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
 
         // Transform initial state
-        state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
-        state = thames::conversions::geqoe::cartesian_to_geqoe(tstart, state, m_mu, m_perturbation);
+        state = thames::conversions::geqoe::cartesian_to_geqoe(tstart, state, mu, m_perturbation);
 
         // Declare state derivative
         auto func = [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);};
 
         // Propagate according to the fixed flag
-        if(options.fixed){
+        if(options.isfixedStep){
             // Declare stepper
             boost::numeric::odeint::runge_kutta4<std::vector<T>> stepper;
 
@@ -372,14 +398,18 @@ namespace thames::propagators {
         
         // Transform final state
         state = thames::conversions::geqoe::geqoe_to_cartesian(tend, state, m_mu, m_perturbation);
-        state = thames::conversions::dimensional::cartesian_dimensionalise(state, *m_factors);
+
+        // Re-dimensionalise
+        if (options.isNonDimensional) {
+            state = thames::conversions::dimensional::cartesian_dimensionalise(state, *m_factors);
+        }
 
         // Return final state
         return state;
     }
 
     template<class T>
-    std::vector<std::vector<T>> GEqOEPropagator<T>::propagate(std::vector<T> tvector, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+    std::vector<std::vector<T>> GEqOEPropagator<T>::propagate(std::vector<T> tvector, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
         // Declare output vector
         std::vector<std::vector<T>> states(tvector.size());
 
@@ -408,7 +438,7 @@ namespace thames::propagators {
     using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     template<class T, template<class> class P>
-    GEqOEPropagatorPolynomialDynamics<T, P>::GEqOEPropagatorPolynomialDynamics(const T& mu, const BasePerturbationPolynomial<T, P>* perturbation) : smartuq::dynamics::base_dynamics<P<T>>("GEqOE"), m_mu(mu), m_perturbation(perturbation) {
+    GEqOEPropagatorPolynomialDynamics<T, P>::GEqOEPropagatorPolynomialDynamics(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : smartuq::dynamics::base_dynamics<P<T>>("GEqOE"), m_mu(mu), m_perturbation(perturbation), m_factors(factors) {
 
     }
 
@@ -419,6 +449,9 @@ namespace thames::propagators {
 
     template<class T, template<class> class W>
     int GEqOEPropagatorPolynomialDynamics<T, W>::evaluate(const T& t, const std::vector<W<T>>& geqoe, std::vector<W<T>>& geqoedot) const {
+        // Calculate factors
+        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+
         // Extract elements
         W<T> nu = geqoe[0];
         W<T> p1 = geqoe[1];
@@ -435,11 +468,11 @@ namespace thames::propagators {
         W<T> cosk = cos(k);
 
         // Calculate generalised semi-major axis
-        W<T> a = pow(m_mu/pow(nu, 2.0), 1.0/3.0);
+        W<T> a = pow(mu/pow(nu, 2.0), 1.0/3.0);
 
         // Calculate range and range rate
         W<T> r = a*(1.0 - p1*sink - p2*cosk);
-        W<T> drdt = sqrt(m_mu*a)/r*(p2*sink - p1*cosk);
+        W<T> drdt = sqrt(mu*a)/r*(p2*sink - p1*cosk);
 
         // Calculate trig of the true longitude
         W<T> alpha = 1.0/(1.0 + sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0)));
@@ -467,7 +500,7 @@ namespace thames::propagators {
         std::vector<W<T>> R = r*er;
 
         // Calculate generalised angular momentum
-        W<T> c = pow(pow(m_mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
+        W<T> c = pow(pow(mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
 
         // Calculate angular momentum
         W<T> h = sqrt(pow(c, 2.0) - 2.0*pow(r, 2.0)*m_perturbation->potential(t, R));
@@ -485,7 +518,7 @@ namespace thames::propagators {
         W<T> edot = Ut + thames::vector::geometry::dot3(P, V);
 
         // Calculate time derivative of nu
-        W<T> nudot = -3.0*pow(nu/pow(m_mu, 2.0), 1.0/3.0)*edot;
+        W<T> nudot = -3.0*pow(nu/pow(mu, 2.0), 1.0/3.0)*edot;
 
         // Calculate trig of the true longitude
         W<T> cl = thames::vector::geometry::dot3(er, ex);
@@ -499,7 +532,7 @@ namespace thames::propagators {
         std::vector<W<T>> eh = H/h;
 
         // Calculate the generalised semi-latus rectum
-        W<T> p = pow(c, 2.0)/m_mu;
+        W<T> p = pow(c, 2.0)/mu;
 
         // Calculate perturbation components
         W<T> Fr = thames::vector::geometry::dot3(F, er);
@@ -510,11 +543,11 @@ namespace thames::propagators {
         W<T> zetatilde = 1 + zeta;
 
         // Calculate time derivatives of the second and third elements
-        W<T> p1dot = p2*((h - c)/pow(r, 2.0) - r/h*hwh*Fh) + 1.0/c*(r*drdt/c*p1 + zetatilde*p2 + zeta*cl)*(2.0*U - r*Fr) + r/m_mu*(zeta*p1 + zetatilde*sl)*edot;
-        W<T> p2dot = p1*(r/h*hwh*Fh - (h-c)/pow(r, 2.0)) + 1.0/c*(r*drdt/c*p2 - zetatilde*p1 - zeta*sl)*(2.0*U - r*Fr) + r/m_mu*(zeta*p2 + zetatilde*cl)*edot;
+        W<T> p1dot = p2*((h - c)/pow(r, 2.0) - r/h*hwh*Fh) + 1.0/c*(r*drdt/c*p1 + zetatilde*p2 + zeta*cl)*(2.0*U - r*Fr) + r/mu*(zeta*p1 + zetatilde*sl)*edot;
+        W<T> p2dot = p1*(r/h*hwh*Fh - (h-c)/pow(r, 2.0)) + 1.0/c*(r*drdt/c*p2 - zetatilde*p1 - zeta*sl)*(2.0*U - r*Fr) + r/mu*(zeta*p2 + zetatilde*cl)*edot;
 
         // Calculate time derivative of the generalised mean longitude
-        W<T> Ldot = nu + (h - c)/pow(r, 2.0) - r/h*hwh*Fh + (r*drdt*c/pow(m_mu, 2.0)*zetatilde*alpha)*edot + 1.0/c*(1.0/alpha + alpha*(1.0 - r/a))*(2.0*U - r*Fr);
+        W<T> Ldot = nu + (h - c)/pow(r, 2.0) - r/h*hwh*Fh + (r*drdt*c/pow(mu, 2.0)*zetatilde*alpha)*edot + 1.0/c*(1.0/alpha + alpha*(1.0 - r/a))*(2.0*U - r*Fr);
 
         // Calculate time derivatives of the remaining elements
         W<T> q1dot = r/(2.0*h)*Fh*(1.0 + pow(q1, 2.0) + pow(q2, 2.0))*sl;
@@ -538,7 +571,7 @@ namespace thames::propagators {
     template class GEqOEPropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
-    GEqOEPropagatorPolynomial<T, P>::GEqOEPropagatorPolynomial(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomial<T, P>(perturbation, factors), m_mu(mu/factors->grav), m_dyn(mu/factors->grav, perturbation) {
+    GEqOEPropagatorPolynomial<T, P>::GEqOEPropagatorPolynomial(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomial<T, P>(perturbation, factors), m_mu(mu), m_dyn(mu, perturbation, factors) {
 
     }
 
@@ -548,22 +581,30 @@ namespace thames::propagators {
     }
 
     template<class T, template<class> class P>
-    std::vector<P<T>> GEqOEPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+    std::vector<P<T>> GEqOEPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
         // Check that input is Cartesian state
         if(statetype != thames::constants::statetypes::CARTESIAN)
             throw std::runtime_error("Unsupported state type");
 
-        // Non-dimensionalise times
-        tstart /= m_factors->time;
-        tend /= m_factors->time;
-        tstep /= m_factors->time;
+        // Set non-dimensional flag
+        m_dyn.m_isNonDimensional = options.isNonDimensional;
 
-        // Set perturbation to non-dimensional
-        m_perturbation->set_nondimensional(true);
+        // Set perturbation non-dimensional flag
+        m_perturbation->set_nondimensional(options.isNonDimensional);
+        
+        // Non-dimensionalise
+        if (options.isNonDimensional) {
+            tstart /= m_factors->time;
+            tend /= m_factors->time;
+            tstep /= m_factors->time;
+            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
+        }
+
+        // Calculate factors
+        const T mu = (m_dyn.m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
 
         // Transform initial state
-        state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
-        state = thames::conversions::geqoe::cartesian_to_geqoe(tstart, state, m_mu, m_perturbation);
+        state = thames::conversions::geqoe::cartesian_to_geqoe(tstart, state, mu, m_perturbation);
         
         // Calculate number of steps based on time step
         unsigned int nstep = (int) ceil((tend - tstart)/tstep);
@@ -572,7 +613,7 @@ namespace thames::propagators {
         std::vector<P<T>> statefinal(state);
 
         // Propagate according to the fixed flag
-        if(options.fixed){
+        if(options.isfixedStep){
             // Create integrator
             rk4<P<T>> integrator(&m_dyn);
 
@@ -587,15 +628,19 @@ namespace thames::propagators {
         }
 
         // Transform final state
-        statefinal = thames::conversions::geqoe::geqoe_to_cartesian(tend, statefinal, m_mu, m_perturbation);
-        statefinal = thames::conversions::dimensional::cartesian_dimensionalise(statefinal, *m_factors);
+        statefinal = thames::conversions::geqoe::geqoe_to_cartesian(tend, statefinal, mu, m_perturbation);
+
+        // Re-dimensionalise
+        if (options.isNonDimensional) {
+            statefinal = thames::conversions::dimensional::cartesian_dimensionalise(statefinal, *m_factors);
+        }
 
         // Return final state
         return statefinal;             
     }
 
     template<class T, template<class> class P>
-    std::vector<std::vector<P<T>>> GEqOEPropagatorPolynomial<T, P>::propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) const {
+    std::vector<std::vector<P<T>>> GEqOEPropagatorPolynomial<T, P>::propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
         // Declare output vector
         std::vector<std::vector<P<T>>> states(tvector.size());
 
