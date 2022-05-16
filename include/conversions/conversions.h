@@ -29,5 +29,6 @@ SOFTWARE.
 #include "dimensional.h"
 #include "geqoe.h"
 #include "keplerian.h"
+#include "universal.h"
 
 #endif

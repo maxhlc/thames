@@ -28,6 +28,7 @@ set(THAMES_SOURCE
     conversions/dimensional.cpp
     conversions/geqoe.cpp
     conversions/keplerian.cpp
+    conversions/universal.cpp
     # Input/output
     io/point.cpp
     io/polynomial.cpp
@@ -61,6 +62,7 @@ set(THAMES_HEADERS
     ../include/conversions/dimensional.h
     ../include/conversions/geqoe.h
     ../include/conversions/keplerian.h
+    ../include/conversions/universal.h
     # Input/output
     ../include/io/io.h
     ../include/io/point.h

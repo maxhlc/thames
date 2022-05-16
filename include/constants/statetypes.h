@@ -30,7 +30,8 @@ namespace thames::constants::statetypes {
     /// Enumeration to store types of state
     enum StateTypes {
         CARTESIAN,
-        GEQOE
+        GEQOE,
+        KEPLERIAN
     };
 
 }
