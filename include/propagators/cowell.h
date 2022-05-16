@@ -68,10 +68,13 @@ namespace thames::propagators {
             using BasePropagator<T>::m_factors;
 
             /// Gravitational parameter
-            const T m_mu;
+            using BasePropagator<T>::m_mu;
 
             /// Flag for whether to propagate in non-dimensional form
             using BasePropagator<T>::m_isNonDimensional;
+
+            /// State type for propagation
+            using BasePropagator<T>::m_propstatetype;
 
         public:
 
@@ -103,22 +106,6 @@ namespace thames::propagators {
              */
             void derivative(const std::array<T, 6>& RV, std::array<T, 6>& RVdot, const T t) const override;
 
-            /**
-             * @brief Propagate Cartesian state using Cowell's method.
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] tstart Propagation start time in physical time.
-             * @param[in] tend Propagation end time in physical time.
-             * @param[in] tstep Initial timestep for propagation.
-             * @param[in] state Initial state.
-             * @param[in] options Propagator options.
-             * @param[in] statetype State type.
-             * @return std::array<T, 6> Final state.
-             */
-            std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;
-
             /////////////
             // Vectors //
             /////////////
@@ -135,37 +122,6 @@ namespace thames::propagators {
              */
             void derivative(const std::vector<T>& RV, std::vector<T>& RVdot, const T t) const override;
 
-            /**
-             * @brief Propagate Cartesian state using Cowell's method.
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] tstart Propagation start time in physical time.
-             * @param[in] tend Propagation end time in physical time.
-             * @param[in] tstep Initial timestep for propagation.
-             * @param[in] state Initial state.
-             * @param[in] options Propagator options.
-             * @param[in] statetype State type.
-             * @return std::vector<T> Final state.
-             */
-            std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;
-            
-            /**
-             * @brief Propagate Cartesian state using Cowell's method.
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] tvector Vector of times.
-             * @param[in] tstep Initial timestep for propagation
-             * @param[in] state Initial state.
-             * @param[in] options Propagator options.
-             * @param[in] statetype State type.
-             * @return std::vector<std::vector<T>> Propagated states.
-             */
-            std::vector<std::vector<T>> propagate(std::vector<T> tvector, T tstep, std::vector<T> RV, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;
-
     };
 
     /////////////////
@@ -175,6 +131,7 @@ namespace thames::propagators {
     #ifdef THAMES_USE_SMARTUQ
 
     using thames::propagators::basepropagator::BasePropagatorPolynomial;
+    using thames::propagators::basepropagator::BasePropagatorPolynomialDynamics;
     using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     /**
@@ -187,26 +144,23 @@ namespace thames::propagators {
      * @tparam P Polynomial type.
      */
     template<class T, template<class> class P>
-    class CowellPropagatorPolynomialDynamics : public smartuq::dynamics::base_dynamics<P<T>> {
+    class CowellPropagatorPolynomialDynamics : public BasePropagatorPolynomialDynamics<T, P> {
 
         public:
 
             /// Flag for whether to propagate in non-dimensional form
-            bool m_isNonDimensional = false;
+            using BasePropagatorPolynomialDynamics<T, P>::m_isNonDimensional;
 
         private:
 
-            /// Dynamics name
-            using smartuq::dynamics::base_dynamics<P<T>>::m_name;
-
             /// Gravitational parameter
-            const T m_mu;
+            using BasePropagatorPolynomialDynamics<T, P>::m_mu;
 
             /// Perturbation object
-            BasePerturbationPolynomial<T, P>* const m_perturbation;
+            using BasePropagatorPolynomialDynamics<T, P>::m_perturbation;
 
             /// Dimensional factors
-            const DimensionalFactors<T>* m_factors;
+            using BasePropagatorPolynomialDynamics<T, P>::m_factors;
 
         public:
 
@@ -218,6 +172,7 @@ namespace thames::propagators {
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
+             * @param[in] factors Dimensional factors.
              */
             CowellPropagatorPolynomialDynamics(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors);
 
@@ -241,7 +196,7 @@ namespace thames::propagators {
              * @param[out] RVdot Derivative of the Cartesian state.
              * @return int 
              */
-            int evaluate(const T& t, const std::vector<P<T>>& RV, std::vector<P<T>>& RVdot) const;
+            int evaluate(const T& t, const std::vector<P<T>>& RV, std::vector<P<T>>& RVdot) const override;
 
     };
 
@@ -265,8 +220,11 @@ namespace thames::propagators {
             /// Dimensional factors
             using BasePropagatorPolynomial<T, P>::m_factors;
 
+            /// Gravitational parameter
+            using BasePropagatorPolynomial<T, P>::m_mu;
+
             /// Dynamics object
-            CowellPropagatorPolynomialDynamics<T, P> m_dyn;
+            using BasePropagatorPolynomial<T, P>::m_dyn;
 
         public:
 
@@ -290,37 +248,6 @@ namespace thames::propagators {
              * 
              */
             ~CowellPropagatorPolynomial();
-
-            /**
-             * @brief Propagate Cartesian state using Cowell's method.
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] tstart Propagation start time in physical time.
-             * @param[in] tend Propagation end time in physical time.
-             * @param[in] tstep Initial timestep for propagation.
-             * @param[in] state Initial state.
-             * @param[in] options Propagator options.
-             * @param[in] statetype State type.
-             * @return std::vector<P<T>> Final state.
-             */
-            std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;
-
-            /**
-             * @brief Propagate Cartesian state using Cowell's method.
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] tvector Vector of times.
-             * @param[in] tstep Initial timestep for propagation
-             * @param[in] state Initial state.
-             * @param[in] options Propagator options.
-             * @param[in] statetype State type.
-             * @return std::vector<std::vector<P<T>>> Propagated states.
-             */
-            std::vector<std::vector<P<T>>> propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;
 
     };
 

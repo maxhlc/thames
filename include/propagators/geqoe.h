@@ -64,10 +64,13 @@ namespace thames::propagators {
             using BasePropagator<T>::m_factors;
 
             /// Gravitational parameter
-            const T m_mu;
+            using BasePropagator<T>::m_mu;
 
             /// Flag for whether to propagate in non-dimensional form
             using BasePropagator<T>::m_isNonDimensional;
+
+            /// State type for propagation
+            using BasePropagator<T>::m_propstatetype;
 
         public:
 
@@ -99,22 +102,6 @@ namespace thames::propagators {
              */
             void derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t) const override;
 
-            /**
-             * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] tstart Propagation start time in physical time.
-             * @param[in] tend Propagation end time in physical time.
-             * @param[in] tstep Initial timestep for propagation.
-             * @param[in] state Initial state.
-             * @param[in] options Propagator options.
-             * @param[in] statetype State type.
-             * @return std::array<T, 6> Final Cartesian state.
-             */
-            std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;
-
             /////////////
             // Vectors //
             /////////////
@@ -131,37 +118,6 @@ namespace thames::propagators {
              */
             void derivative(const std::vector<T>& geqoe, std::vector<T>& geqoedot, const T t) const override;
 
-            /**
-             * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] tstart Propagation start time in physical time.
-             * @param[in] tend Propagation end time in physical time.
-             * @param[in] tstep Initial timestep for propagation.
-             * @param[in] state Initial state.
-             * @param[in] options Propagator options.
-             * @param[in] statetype State type.
-             * @return std::vector<T> Final Cartesian state.
-             */
-            std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;
-
-            /**
-             * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] tvector Vector of times.
-             * @param[in] tstep Initial timestep for propagation
-             * @param[in] state Initial state.
-             * @param[in] options Propagator options.
-             * @param[in] statetype State type.
-             * @return std::vector<std::vector<T>> Propagated states.
-             */
-            std::vector<std::vector<T>> propagate(std::vector<T> tvector, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;
-
     };
 
     /////////////////
@@ -171,38 +127,36 @@ namespace thames::propagators {
     #ifdef THAMES_USE_SMARTUQ
 
     using thames::propagators::basepropagator::BasePropagatorPolynomial;
+    using thames::propagators::basepropagator::BasePropagatorPolynomialDynamics;
     using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     /**
      * @brief Object for GEqOE dynamics with polynomials, compatible with the SMART-UQ schema.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-13
+     * @date 2022-05-16
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      */
     template<class T, template<class> class P>
-    class GEqOEPropagatorPolynomialDynamics : public smartuq::dynamics::base_dynamics<P<T>> {
+    class GEqOEPropagatorPolynomialDynamics : public BasePropagatorPolynomialDynamics<T, P> {
 
         public:
 
             /// Flag for whether to propagate in non-dimensional form
-            bool m_isNonDimensional = false;
+            using BasePropagatorPolynomialDynamics<T, P>::m_isNonDimensional;
 
         private:
 
-            /// Dynamics name
-            using smartuq::dynamics::base_dynamics<P<T>>::m_name;
-
             /// Gravitational parameter
-            const T m_mu;
+            using BasePropagatorPolynomialDynamics<T, P>::m_mu;
 
             /// Perturbation object
-            BasePerturbationPolynomial<T, P>* const m_perturbation;
+            using BasePropagatorPolynomialDynamics<T, P>::m_perturbation;
 
             /// Dimensional factors
-            const DimensionalFactors<T>* m_factors;
+            using BasePropagatorPolynomialDynamics<T, P>::m_factors;
 
         public:
 
@@ -210,10 +164,11 @@ namespace thames::propagators {
              * @brief Construct a new GEqOE Propagator Polynomial Dynamics object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-13
+             * @date 2022-05-16
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
+             * @param[in] factors Dimensional factors.
              */
             GEqOEPropagatorPolynomialDynamics(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors);
 
@@ -230,14 +185,14 @@ namespace thames::propagators {
              * @brief Evaluate the derivative of the GEqOE dynamics.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-13
+             * @date 2022-05-16
              * 
              * @param[in] t Current physical time.
              * @param[in] geqoe GEqOE state.
              * @param[out] geoqedot Derivative of the GEqOE state.
              * @return int 
              */
-            int evaluate(const T& t, const std::vector<P<T>>& geqoe, std::vector<P<T>>& geoqedot) const;
+            int evaluate(const T& t, const std::vector<P<T>>& geqoe, std::vector<P<T>>& geoqedot) const override;
 
     };
 
@@ -245,7 +200,7 @@ namespace thames::propagators {
      * @brief Propagator object for GEqOE with polynomials.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-13
+     * @date 2022-05-16
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -262,10 +217,10 @@ namespace thames::propagators {
             using BasePropagatorPolynomial<T, P>::m_factors;
 
             /// Gravitational parameter
-            const T m_mu;
+            using BasePropagatorPolynomial<T, P>::m_mu;
 
             /// Dynamics object
-            GEqOEPropagatorPolynomialDynamics<T, P> m_dyn;
+            using BasePropagatorPolynomial<T, P>::m_dyn;
 
         public:
 
@@ -273,7 +228,7 @@ namespace thames::propagators {
              * @brief Construct a new GEqOE Propagator Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-13
+             * @date 2022-05-16
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
@@ -289,37 +244,6 @@ namespace thames::propagators {
              * 
              */
             ~GEqOEPropagatorPolynomial();
-
-            /**
-             * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] tstart Propagation start time in physical time.
-             * @param[in] tend Propagation end time in physical time.
-             * @param[in] tstep Initial timestep for propagation.
-             * @param[in] state Initial Cartesian state.
-             * @param[in] options Propagator options.
-             * @param[in] statetype State type.
-             * @return std::vector<P<T>> Final Cartesian state.
-             */
-            std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;
-
-            /**
-             * @brief Propagate Cartesian state via Generalised Equinoctial Orbital Elements (GEqOE).
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] tvector Vector of times.
-             * @param[in] tstep Initial timestep for propagation
-             * @param[in] state Initial state.
-             * @param[in] options Propagator options.
-             * @param[in] statetype State type.
-             * @return std::vector<std::vector<P<T>>> Propagated states.
-             */
-            std::vector<std::vector<P<T>>> propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype = thames::constants::statetypes::CARTESIAN) override;  
 
     };
 

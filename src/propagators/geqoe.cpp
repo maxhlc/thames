@@ -44,11 +44,12 @@ SOFTWARE.
 
 namespace thames::propagators {
 
+    using thames::constants::statetypes::GEQOE;
     using thames::perturbations::baseperturbation::BasePerturbation;
     using namespace thames::vector::arithmeticoverloads;
 
     template<class T>
-    GEqOEPropagator<T>::GEqOEPropagator(const T& mu, BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagator<T>(perturbation, factors), m_mu(mu) {
+    GEqOEPropagator<T>::GEqOEPropagator(const T& mu, BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagator<T>(mu, perturbation, factors, GEQOE) {
 
     }
 
@@ -173,63 +174,6 @@ namespace thames::propagators {
         };
     }
 
-    template<class T>
-    std::array<T, 6> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
-        // Check that input is Cartesian state
-        if(statetype != thames::constants::statetypes::CARTESIAN)
-            throw std::runtime_error("Unsupported state type");
-
-        // Set non-dimensional flag
-        m_isNonDimensional = options.isNonDimensional;
-
-        // Set perturbation non-dimensional flag
-        m_perturbation->set_nondimensional(options.isNonDimensional);
-        
-        // Non-dimensionalise
-        if (options.isNonDimensional) {
-            tstart /= m_factors->time;
-            tend /= m_factors->time;
-            tstep /= m_factors->time;
-            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
-        }
-
-        // Transform initial state
-        state = thames::conversions::geqoe::cartesian_to_geqoe(tstart, state, m_mu, m_perturbation);
-
-        // Declare state derivative
-        auto func = [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);};
-
-        // Propagate according to the fixed flag
-        if(options.isfixedStep){
-            // Declare stepper
-            boost::numeric::odeint::runge_kutta4<std::array<T, 6>> stepper;
-
-            // Propagate orbit
-            boost::numeric::odeint::integrate_const(stepper, func, state, tstart, tend, tstep);
-        } else {
-            // Declare stepper
-            boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
-            auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
-
-            // Propagate orbit
-            boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, state, tstart, tend, tstep);
-        }
-
-        // Calculate factors
-        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
-
-        // Transform final state
-        state = thames::conversions::geqoe::geqoe_to_cartesian(tend, state, mu, m_perturbation);
-
-        // Re-dimensionalise
-        if (options.isNonDimensional) {
-            state = thames::conversions::dimensional::cartesian_dimensionalise(state, *m_factors);
-        }
-
-        // Return final state
-        return state;
-    }
-
     /////////////
     // Vectors //
     /////////////
@@ -351,80 +295,6 @@ namespace thames::propagators {
         };
     }
 
-    template<class T>
-    std::vector<T> GEqOEPropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
-        // Check that input is Cartesian state
-        if(statetype != thames::constants::statetypes::CARTESIAN)
-            throw std::runtime_error("Unsupported state type");
-
-        // Set non-dimensional flag
-        m_isNonDimensional = options.isNonDimensional;
-
-        // Set perturbation non-dimensional flag
-        m_perturbation->set_nondimensional(options.isNonDimensional);
-        
-        // Non-dimensionalise
-        if (options.isNonDimensional) {
-            tstart /= m_factors->time;
-            tend /= m_factors->time;
-            tstep /= m_factors->time;
-            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
-        }
-
-        // Calculate factors
-        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
-
-        // Transform initial state
-        state = thames::conversions::geqoe::cartesian_to_geqoe(tstart, state, mu, m_perturbation);
-
-        // Declare state derivative
-        auto func = [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);};
-
-        // Propagate according to the fixed flag
-        if(options.isfixedStep){
-            // Declare stepper
-            boost::numeric::odeint::runge_kutta4<std::vector<T>> stepper;
-
-            // Propagate orbit
-            boost::numeric::odeint::integrate_const(stepper, func, state, tstart, tend, tstep);
-        } else {
-            // Declare stepper
-            boost::numeric::odeint::runge_kutta_cash_karp54<std::vector<T>> stepper;
-            auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
-
-            // Propagate orbit
-            boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, state, tstart, tend, tstep);
-        }
-        
-        // Transform final state
-        state = thames::conversions::geqoe::geqoe_to_cartesian(tend, state, m_mu, m_perturbation);
-
-        // Re-dimensionalise
-        if (options.isNonDimensional) {
-            state = thames::conversions::dimensional::cartesian_dimensionalise(state, *m_factors);
-        }
-
-        // Return final state
-        return state;
-    }
-
-    template<class T>
-    std::vector<std::vector<T>> GEqOEPropagator<T>::propagate(std::vector<T> tvector, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
-        // Declare output vector
-        std::vector<std::vector<T>> states(tvector.size());
-
-        // Add initial state to output vector
-        states[0] = state;
-
-        // Propagate between times
-        for(std::size_t ii=0; ii<tvector.size()-1; ii++){
-            states[ii+1] = propagate(tvector[ii], tvector[ii+1], tstep, states[ii], options, statetype);
-        }
-
-        // Return states
-        return states;
-    }
-
     template class GEqOEPropagator<double>;
 
     /////////////////
@@ -438,7 +308,7 @@ namespace thames::propagators {
     using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     template<class T, template<class> class P>
-    GEqOEPropagatorPolynomialDynamics<T, P>::GEqOEPropagatorPolynomialDynamics(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : smartuq::dynamics::base_dynamics<P<T>>("GEqOE"), m_mu(mu), m_perturbation(perturbation), m_factors(factors) {
+    GEqOEPropagatorPolynomialDynamics<T, P>::GEqOEPropagatorPolynomialDynamics(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomialDynamics<T, P>("GEqOE", mu, perturbation, factors) {
 
     }
 
@@ -571,89 +441,13 @@ namespace thames::propagators {
     template class GEqOEPropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
-    GEqOEPropagatorPolynomial<T, P>::GEqOEPropagatorPolynomial(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomial<T, P>(perturbation, factors), m_mu(mu), m_dyn(mu, perturbation, factors) {
+    GEqOEPropagatorPolynomial<T, P>::GEqOEPropagatorPolynomial(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomial<T, P>(mu, perturbation, factors, new GEqOEPropagatorPolynomialDynamics<T, P>(mu, perturbation, factors), GEQOE) {
 
     }
 
     template<class T, template<class> class P>
     GEqOEPropagatorPolynomial<T, P>::~GEqOEPropagatorPolynomial() {
 
-    }
-
-    template<class T, template<class> class P>
-    std::vector<P<T>> GEqOEPropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
-        // Check that input is Cartesian state
-        if(statetype != thames::constants::statetypes::CARTESIAN)
-            throw std::runtime_error("Unsupported state type");
-
-        // Set non-dimensional flag
-        m_dyn.m_isNonDimensional = options.isNonDimensional;
-
-        // Set perturbation non-dimensional flag
-        m_perturbation->set_nondimensional(options.isNonDimensional);
-        
-        // Non-dimensionalise
-        if (options.isNonDimensional) {
-            tstart /= m_factors->time;
-            tend /= m_factors->time;
-            tstep /= m_factors->time;
-            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
-        }
-
-        // Calculate factors
-        const T mu = (m_dyn.m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
-
-        // Transform initial state
-        state = thames::conversions::geqoe::cartesian_to_geqoe(tstart, state, mu, m_perturbation);
-        
-        // Calculate number of steps based on time step
-        unsigned int nstep = (int) ceil((tend - tstart)/tstep);
-
-        // Generate final GEqOE vector
-        std::vector<P<T>> statefinal(state);
-
-        // Propagate according to the fixed flag
-        if(options.isfixedStep){
-            // Create integrator
-            rk4<P<T>> integrator(&m_dyn);
-
-            // Integrate state
-            integrator.integrate(tstart, tend, nstep, state, statefinal);
-        } else {
-            // Create integrator
-            rk45<P<T>> integrator(&m_dyn, options.atol, options.rtol);
-
-            // Integrate state
-            integrator.integrate(tstart, tend, nstep, state, statefinal);  
-        }
-
-        // Transform final state
-        statefinal = thames::conversions::geqoe::geqoe_to_cartesian(tend, statefinal, mu, m_perturbation);
-
-        // Re-dimensionalise
-        if (options.isNonDimensional) {
-            statefinal = thames::conversions::dimensional::cartesian_dimensionalise(statefinal, *m_factors);
-        }
-
-        // Return final state
-        return statefinal;             
-    }
-
-    template<class T, template<class> class P>
-    std::vector<std::vector<P<T>>> GEqOEPropagatorPolynomial<T, P>::propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype) {
-        // Declare output vector
-        std::vector<std::vector<P<T>>> states(tvector.size());
-
-        // Add initial state to output vector
-        states[0] = state;
-
-        // Propagate between times
-        for(std::size_t ii=0; ii<tvector.size()-1; ii++){
-            states[ii+1] = propagate(tvector[ii], tvector[ii+1], tstep, states[ii], options, statetype);
-        }
-
-        // Return states
-        return states;
     }
 
     template class GEqOEPropagatorPolynomial<double, taylor_polynomial>;

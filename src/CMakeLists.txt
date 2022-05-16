@@ -36,6 +36,7 @@ set(THAMES_SOURCE
     perturbations/geopotential/J2.cpp
     perturbations/baseperturbation.cpp
     # Propagators
+    propagators/basepropagator.cpp
     propagators/cowell.cpp
     propagators/geqoe.cpp
     # Util

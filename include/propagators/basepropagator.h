@@ -27,6 +27,11 @@ SOFTWARE.
 
 #include <array>
 #include <vector>
+#include <string>
+
+#ifdef THAMES_USE_SMARTUQ
+#include "../../external/smart-uq/include/Dynamics/base_dynamics.h"
+#endif
 
 #include "options.h"
 #include "../constants/statetypes.h"
@@ -35,18 +40,20 @@ SOFTWARE.
 
 namespace thames::propagators::basepropagator {
 
+    using thames::constants::statetypes::StateTypes;
     using thames::conversions::dimensional::DimensionalFactors;
     using thames::perturbations::baseperturbation::BasePerturbation;
+    using thames::propagators::options::PropagatorOptions;
 
     ///////////
     // Reals //
     ///////////
 
     /**
-     * @brief Base propagator abstract object.
+     * @brief Base propagator object.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-13
+     * @date 2022-05-16
      * 
      * @tparam T Numeric type.
      */
@@ -54,6 +61,9 @@ namespace thames::propagators::basepropagator {
     class BasePropagator {
 
         protected:
+
+            /// Gravitational parameter
+            const T m_mu;
 
             /// Perturbation object
             BasePerturbation<T>* const m_perturbation;
@@ -64,20 +74,32 @@ namespace thames::propagators::basepropagator {
             /// Flag for whether to propagate in non-dimensional form
             bool m_isNonDimensional = false;
 
+            /// State type for propagation
+            const StateTypes m_propstatetype;
+
         public:
 
             /**
              * @brief Construct a new Base Propagator object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-11
+             * @date 2022-05-13
              * 
+             * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
+             * @param[in] propstatetype Type of state used during propagation.
              */
-            BasePropagator(BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors) : m_perturbation(perturbation), m_factors(factors) {
+            BasePropagator(const T& mu, BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors, const StateTypes propstatetype);
 
-            }
+            /**
+             * @brief Destroy the Base Propagator object
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-16
+             * 
+             */
+            ~BasePropagator();
 
             ////////////
             // Arrays //
@@ -87,7 +109,7 @@ namespace thames::propagators::basepropagator {
              * @brief State derivative method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-26
+             * @date 2022-05-13
              * 
              * @param[in] x State.
              * @param[out] dxdt State derivative.
@@ -109,7 +131,7 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::array<T, 6> Final state.
              */
-            virtual std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype);
+            virtual std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, const PropagatorOptions<T> options, const StateTypes statetype);
 
             /////////////
             // Vectors //
@@ -119,7 +141,7 @@ namespace thames::propagators::basepropagator {
              * @brief State derivative method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-01-26
+             * @date 2022-05-13
              * 
              * @param[in] x State.
              * @param[out] dxdt State derivative.
@@ -141,22 +163,7 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::vector<T> Final state.
              */
-            virtual std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype);
-
-            /**
-             * @brief Propagation method.
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] tvector Vector of times.
-             * @param[in] tstep Initial timestep for propagation
-             * @param[in] state Initial state.
-             * @param[in] options Propagator options.
-             * @param[in] statetype State type.
-             * @return std::vector<std::vector<T>> Propagated states.
-             */
-            virtual std::vector<std::vector<T>> propagate(std::vector<T> tvector, T tstep, std::vector<T> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype);         
+            std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, PropagatorOptions<T> options, StateTypes statetype);       
 
     };
 
@@ -169,18 +176,29 @@ namespace thames::propagators::basepropagator {
     using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     /**
-     * @brief Base propagator abstract object for polynomial propagations.
+     * @brief Base object for dynamics with polynomials, compatible with the SMART-UQ schema.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-12
+     * @date 2022-05-16
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      */
     template<class T, template<class> class P>
-    class BasePropagatorPolynomial {
+    class BasePropagatorPolynomialDynamics : public smartuq::dynamics::base_dynamics<P<T>> {
+
+        public:
+
+            /// Flag for whether to propagate in non-dimensional form
+            bool m_isNonDimensional = false;
 
         protected:
+
+            /// Dynamics name
+            using smartuq::dynamics::base_dynamics<P<T>>::m_name;
+
+            /// Gravitational parameter
+            const T m_mu;
 
             /// Perturbation object
             BasePerturbationPolynomial<T, P>* const m_perturbation;
@@ -191,17 +209,86 @@ namespace thames::propagators::basepropagator {
         public:
 
             /**
-             * @brief Construct a new Base Propagator Polynomial object.
+             * @brief Construct a new Base Propagator Polynomial Dynamics object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-12
+             * @date 2022-05-16
              * 
+             * @param[in] name Dynamics object name.
+             * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            BasePropagatorPolynomial(BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : m_perturbation(perturbation), m_factors(factors) {
+            BasePropagatorPolynomialDynamics(std::string name, const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors);
 
-            }
+            /**
+             * @brief Destroy the Base Propagator Polynomial Dynamics object.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-13
+             * 
+             */
+            ~BasePropagatorPolynomialDynamics();
+
+            /**
+             * @brief Evaluate the derivative of the dynamics.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-16
+             * 
+             * @param[in] t Current physical time.
+             * @param[in] x Current state.
+             * @param[out] dxdt Derivative of the state.
+             * @return int 
+             */
+            virtual int evaluate(const T& t, const std::vector<P<T>>& x, std::vector<P<T>>& dxdt) const;
+
+    };
+
+    /**
+     * @brief Base propagator abstract object for polynomial propagations.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-05-13
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     */
+    template<class T, template<class> class P>
+    class BasePropagatorPolynomial {
+
+        protected:
+
+            /// Gravitational parameter
+            const T m_mu;
+
+            /// Perturbation object
+            BasePerturbationPolynomial<T, P>* const m_perturbation;
+
+            /// Dimensional factors
+            const DimensionalFactors<T>* m_factors;
+
+            /// Dynamics object
+            BasePropagatorPolynomialDynamics<T, P>* const m_dyn;
+
+            /// State type for propagation
+            const StateTypes m_propstatetype;
+
+        public:
+
+            /**
+             * @brief Construct a new Base Propagator Polynomial object.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-16
+             * 
+             * @param[in] mu Gravitational parameter.
+             * @param[in] perturbation Perturbation object.
+             * @param[in] factors Dimensional factors.
+             * @param[in] dyn Dynamics object.
+             * @param[in] propstatetype Type of state used during propagation.
+             */
+            BasePropagatorPolynomial(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors, BasePropagatorPolynomialDynamics<T, P>* const dyn, const StateTypes propstatetype);
 
             /**
              * @brief Propagation method.
@@ -217,22 +304,7 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::vector<P<T>> Final state.
              */
-            virtual std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype);
-
-            /**
-             * @brief Propagation method.
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] tvector Vector of times.
-             * @param[in] tstep Initial timestep for propagation
-             * @param[in] state Initial state.
-             * @param[in] options Propagator options.
-             * @param[in] statetype State type.
-             * @return std::vector<std::vector<P<T>>> Propagated states.
-             */
-            virtual std::vector<std::vector<P<T>>> propagate(std::vector<T> tvector, T tstep, std::vector<P<T>> state, thames::propagators::options::PropagatorOptions<T> options, thames::constants::statetypes::StateTypes statetype);
+            std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, PropagatorOptions<T> options, StateTypes statetype);
 
     };
 
