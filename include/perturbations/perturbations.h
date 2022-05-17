@@ -25,7 +25,10 @@ SOFTWARE.
 #ifndef THAMES_PERTURBATIONS
 #define THAMES_PERTURBATIONS
 
-#include "baseperturbation.h"
+#include "atmosphere/atmospheremodel.h"
+#include "atmosphere/drag.h"
+#include "atmosphere/ussa76.h"
 #include "geopotential/J2.h"
+#include "baseperturbation.h"
 
 #endif

@@ -33,6 +33,8 @@ set(THAMES_SOURCE
     io/point.cpp
     io/polynomial.cpp
     # Perturbations
+    perturbations/atmosphere/atmospheremodel.cpp
+    perturbations/atmosphere/drag.cpp
     perturbations/geopotential/J2.cpp
     perturbations/baseperturbation.cpp
     # Propagators
@@ -69,6 +71,9 @@ set(THAMES_HEADERS
     ../include/io/point.h
     ../include/io/polynomial.h
     # Perturbations
+    ../include/perturbations/atmosphere/atmospheremodel.h
+    ../include/perturbations/atmosphere/drag.h
+    ../include/perturbations/atmosphere/ussa76.h
     ../include/perturbations/geopotential/J2.h
     ../include/perturbations/baseperturbation.h
     ../include/perturbations/perturbations.h
