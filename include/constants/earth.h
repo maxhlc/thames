@@ -36,6 +36,9 @@ namespace thames::constants::earth{
     /// Earth's J2 term [-]
     const double J2 = 1.082635854E-03;
 
+    /// Earth's rotation rate [rad/s]
+    const double w = 7.2921159E-05;
+
 }
 
 #endif
