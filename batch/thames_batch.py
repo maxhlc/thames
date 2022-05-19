@@ -108,8 +108,8 @@ perms = [(commandi, degreei, atoli) for commandi in command for degreei in [0] f
 perms_poly = [(commandi, degreei, atoli) for commandi in command_poly for degreei in degree for atoli in atol]
 perms.extend(perms_poly)
 
-# Shuffle permutations
-random.shuffle(perms)
+# Sort to start with most computationally expensive permutations
+perms.sort(key= lambda x: (-x[1], x[2]))
 
 # Declare empty list to store propagated states
 states_propagated = []
