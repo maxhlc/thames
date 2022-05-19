@@ -36,6 +36,10 @@ namespace thames::perturbations::atmosphere::models {
         USSA76
     };
 
+    ///////////
+    // Reals //
+    ///////////
+
     /**
      * @brief Retrieve geometric altitudes
      * 
@@ -144,6 +148,84 @@ namespace thames::perturbations::atmosphere::models {
             T density(T alt) const;
 
     };
+
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    /**
+     * @brief Atmosphere Model
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-05-17
+     * 
+     * @tparam T Numeric type
+     */
+    template<class T, template <class> class P>
+    class AtmosphereModelPolynomial {
+
+        private:
+
+            /// Geometric altitudes
+            const std::vector<T> m_geo;
+
+            /// Atmospheric densities
+            const std::vector<T> m_rho;
+
+            /// Scale heights
+            const std::vector<T> m_scale;
+
+        public:
+
+            /**
+             * @brief Construct a new Atmosphere Model object for use with polynomials
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-17
+             * 
+             * @param[in] geo Geometric altitudes
+             * @param[in] rho Atmospheric densities
+             * @param[in] scale Scale heights
+             */
+            AtmosphereModelPolynomial(const std::vector<T>& geo, const std::vector<T>& rho, const std::vector<T>& scale);
+
+            /**
+             * @brief Construct a new Atmosphere Model object for use with polynomials
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-17
+             * 
+             * @param[in] model Atmosphere model
+             */
+            AtmosphereModelPolynomial(const AtmosphereModels& model);
+
+            /**
+             * @brief Destroy the Atmosphere Model object for use with polynomials
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-17
+             * 
+             */
+            ~AtmosphereModelPolynomial();
+
+            /**
+             * @brief Calculate density
+             * 
+             * Modified from Curtis, 2014
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-17
+             * 
+             * @param[in] alt Altitude
+             * @return T Numeric type
+             */
+            P<T> density(P<T> alt) const;
+
+    };
+
+    #endif
 
 }
 

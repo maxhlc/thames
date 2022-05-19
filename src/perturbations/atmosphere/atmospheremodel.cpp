@@ -25,9 +25,17 @@ SOFTWARE.
 #include <cmath>
 #include <stdexcept>
 
+#ifdef THAMES_USE_SMARTUQ
+#include "../../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
+#endif
+
 #include "../../../include/perturbations/atmosphere/atmospheremodel.h"
 
 namespace thames::perturbations::atmosphere::models {
+
+    ///////////
+    // Reals //
+    ///////////
 
     template<class T>
     std::vector<T> get_geo(const AtmosphereModels& model) {
@@ -106,5 +114,61 @@ namespace thames::perturbations::atmosphere::models {
     }
 
     template class AtmosphereModel<double>;
+
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    using namespace smartuq::polynomial;
+
+    template<class T, template <class> class P>
+    AtmosphereModelPolynomial<T, P>::AtmosphereModelPolynomial(const std::vector<T>& geo, const std::vector<T>& rho, const std::vector<T>& scale) : m_geo(geo), m_rho(rho), m_scale(scale) {
+
+    }
+
+    template<class T, template <class> class P>
+    AtmosphereModelPolynomial<T, P>::AtmosphereModelPolynomial(const AtmosphereModels& model) : m_geo(get_geo<T>(model)), m_rho(get_rho<T>(model)), m_scale(get_scale<T>(model)) {
+
+    }
+
+    template<class T, template <class> class P>
+    AtmosphereModelPolynomial<T, P>::~AtmosphereModelPolynomial() {
+
+    }
+
+    template<class T, template <class> class P>
+    P<T> AtmosphereModelPolynomial<T, P>::density(P<T> alt) const {
+        // Declare index variable
+        std::size_t ii;
+
+        // Handle altitudes outside of the range
+        T altselect = alt.get_coeffs()[0];
+        if (altselect > m_geo.back()) {
+            altselect = m_geo.back();
+        } else if (altselect < m_geo.front()) {
+            altselect = m_geo.front();
+        }
+
+        // Determine interpolation interval
+        for (std::size_t jj = 0; jj < m_geo.size() - 1; jj++) {
+            if (altselect >= m_geo[jj] && altselect < m_geo[jj+1])
+                ii = jj;
+        }
+        if (altselect >= m_geo.back())
+            ii = m_geo.size() - 1;
+
+        // Exponential interpolation
+        P<T> rho = m_rho[ii]*exp(-(alt - m_geo[ii])/m_scale[ii]);
+
+        // Return density
+        return rho;
+    }
+
+    template class AtmosphereModelPolynomial<double, taylor_polynomial>;
+    template class AtmosphereModelPolynomial<double, chebyshev_polynomial>;
+
+    #endif
 
 }

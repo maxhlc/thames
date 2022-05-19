@@ -37,7 +37,7 @@ namespace thames::perturbations::atmosphere::drag {
     using thames::conversions::dimensional::DimensionalFactors;
 
     /**
-     * @brief Class for the perturbation resulting from the J2-term.
+     * @brief Class for the perturbation resulting from atmospheric drag.
      * 
      * @author Max Hallgarten La Casta
      * @date 2022-05-17
@@ -161,6 +161,110 @@ namespace thames::perturbations::atmosphere::drag {
             std::vector<T> acceleration_nonpotential(const T& t, const std::vector<T>& R, const std::vector<T>& V) const override;
 
     };
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    using thames::perturbations::atmosphere::models::AtmosphereModelPolynomial;
+    using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
+
+    /**
+     * @brief Class for the perturbation resulting from atmospheric drag.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-05-17
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     */
+    template<class T, template <class> class P>
+    class DragPolynomial : public BasePerturbationPolynomial<T, P> {
+
+        private:
+
+            /// Dimensional factors
+            using BasePerturbationPolynomial<T, P>::m_factors;
+
+            /// Non-dimensional flag
+            using BasePerturbationPolynomial<T, P>::m_isNonDimensional;
+
+            /// Central body radius
+            const T m_radius;
+
+            /// Central body rotation rate
+            const T m_w;
+
+            /// Spacecraft drag coefficient
+            const T m_Cd;
+
+            /// Spacecraft drag area
+            const T m_A;
+
+            /// Spacecraft mass
+            const T m_m;
+
+            /// Atmosphere model
+            AtmosphereModelPolynomial<T, P> m_model;
+
+        public:
+
+            /**
+             * @brief Construct a new Drag object for use with polynomials.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-17
+             * 
+             * @param[in] radius Central body radius.
+             * @param[in] w Central body rotation rate.
+             * @param[in] Cd Spacecraft drag coefficient.
+             * @param[in] A Spacecraft drag area.
+             * @param[in] m Spacecraft mass.
+             * @param[in] model Atmosphere model.
+             * @param[in] factors Dimensional factors.
+             */
+            DragPolynomial(const T& radius, const T& w, const T& Cd, const T& A, const T& m, const AtmosphereModels& model, const DimensionalFactors<T>* factors);
+
+            /**
+             * @brief Destroy the Drag object for use with polynomials.
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-17
+             * 
+             */
+            ~DragPolynomial();
+
+            ////////////
+            // Arrays //
+            ////////////
+
+            /**
+             * @brief Calculate perturbing acceleration resulting from drag. 
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-17
+             * 
+             * @param[in] t Current physical time.
+             * @param[in] R Position vector.
+             * @param[in] V Velocity vector.
+             * @return std::vector<P<T>> Total perturbing acceleration due to drag.
+             */
+            std::vector<P<T>> acceleration_total(const T& t, const std::vector<P<T>>& R, const std::vector<P<T>>& V) const override;
+
+            /**
+             * @brief Calculate perturbing acceleration resulting from drag. 
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-17
+             * 
+             * @param[in] t Current physical time.
+             * @param[in] R Position vector.
+             * @param[in] V Velocity vector.
+             * @return std::vector<P<T>> Non-potential perturbing acceleration due to drag.
+             */
+            std::vector<P<T>> acceleration_nonpotential(const T& t, const std::vector<P<T>>& R, const std::vector<P<T>>& V) const override;
+
+    };
+
+    #endif
 
 }
 
