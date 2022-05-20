@@ -217,9 +217,145 @@ namespace thames::perturbations::perturbationcombiner {
              * @return T Time derivative of the perturbing potential
              */
             T potential_derivative(const T& t, const std::vector<T>& R, const std::vector<T>& V) const override;
-
         
     };
+
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
+
+    /**
+     * @brief Class to combine multiple polynomial perturbations
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-05-20
+     * 
+     * @tparam T Numeric type
+     * @tparam P Polynomial type
+     */
+    template<class T, template <class> class P>
+    class PerturbationCombinerPolynomial : public BasePerturbationPolynomial<T, P> {
+
+        private:
+
+            /// Dimensional factors
+            using BasePerturbationPolynomial<T, P>::m_factors;
+
+            /// Non-dimensional flag
+            using BasePerturbationPolynomial<T, P>::m_isNonDimensional;
+
+            /// Underlying perturbation models
+            std::vector<std::shared_ptr<BasePerturbationPolynomial<T, P>>> m_models;
+
+        public:
+
+            /**
+             * @brief Construct a new Perturbation Combiner object
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-20
+             * 
+             * @param[in] factors Dimensional factors
+             */
+            PerturbationCombinerPolynomial(const DimensionalFactors<T>* const factors);
+
+            /**
+             * @brief Construct a new Perturbation Combiner object
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-20
+             * 
+             * @param[in] models Perturbation models
+             * @param[in] factors Dimensional factors
+             */
+            PerturbationCombinerPolynomial(const std::vector<std::shared_ptr<BasePerturbationPolynomial<T, P>>>& models, const DimensionalFactors<T>* const factors);
+
+            /**
+             * @brief Destroy the Perturbation Combiner object
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-20
+             */
+            ~PerturbationCombinerPolynomial();
+
+            /**
+             * @brief Set the non-dimensional flag
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-20
+             * 
+             * @param[in] isNonDimensional Non-dimensional flag
+             */
+            void set_nondimensional(const bool isNonDimensional) override;
+
+            /**
+             * @brief Add perturbation model to combiner
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-20
+             * 
+             * @param[in] model 
+             */
+            void add_model(const std::shared_ptr<BasePerturbationPolynomial<T, P>>& model);
+
+            /**
+             * @brief Total perturbing acceleration
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-20
+             * 
+             * @param[in] t Current physical time
+             * @param[in] R Position vector
+             * @param[in] V Velocity vector
+             * @return std::vector<P<T>> Total perturbing acceleration
+             */
+            std::vector<P<T>> acceleration_total(const T& t, const std::vector<P<T>>& R, const std::vector<P<T>>& V) const override;
+
+            /**
+             * @brief Non-potential perturbing acceleration
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-20
+             * 
+             * @param[in] t Current physical time
+             * @param[in] R Position vector
+             * @param[in] V Velocity vector
+             * @return std::vector<P<T>> Non-potential perturbing acceleration
+             */
+            std::vector<P<T>> acceleration_nonpotential(const T& t, const std::vector<P<T>>& R, const std::vector<P<T>>& V) const override;
+
+            /**
+             * @brief Perturbing potential
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-20
+             * 
+             * @param[in] t Current physical time
+             * @param[in] R Position vector
+             * @return P<T> Perturbing potential
+             */
+            P<T> potential(const T& t, const std::vector<P<T>>& R) const override;
+
+            /**
+             * @brief Time derivative of the perturbing potential
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-05-20
+             * 
+             * @param[in] t Current physical time
+             * @param[in] R Position vector
+             * @param[in] V Velocity vector
+             * @return P<T> Time derivative of the perturbing potential
+             */
+            P<T> potential_derivative(const T& t, const std::vector<P<T>>& R, const std::vector<P<T>>& V) const override;
+        
+    };
+
+    #endif
 
 }
 
