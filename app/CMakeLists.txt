@@ -25,20 +25,12 @@ if(THAMES_BUILD_APP)
     add_executable(thames_cowell_discrete_point thames_cowell_discrete_point.cpp)
     # Link executables
     target_link_libraries(thames_cowell_discrete_point thames)
-    # Link SMART-UQ static library and FFTW libraries
-    if(THAMES_USE_SMARTUQ)
-        target_link_libraries(thames_cowell_discrete_point smart-uq)
-        target_link_libraries(thames_cowell_discrete_point ${FFTW_LIBRARIES})
-    endif(THAMES_USE_SMARTUQ)
 
     if(THAMES_USE_SMARTUQ)
         # Add executable for Cowell for polynomials
         add_executable(thames_cowell_polynomial thames_cowell_polynomial.cpp)
         # Link executables
         target_link_libraries(thames_cowell_polynomial thames)
-        # Link SMART-UQ static library and FFTW libraries
-        target_link_libraries(thames_cowell_polynomial smart-uq)
-        target_link_libraries(thames_cowell_polynomial ${FFTW_LIBRARIES})
     endif(THAMES_USE_SMARTUQ)
 
     if(THAMES_USE_SMARTUQ)
@@ -46,29 +38,18 @@ if(THAMES_BUILD_APP)
         add_executable(thames_cowell_polynomial_point thames_cowell_polynomial_point.cpp)
         # Link executables
         target_link_libraries(thames_cowell_polynomial_point thames)
-        # Link SMART-UQ static library and FFTW libraries
-        target_link_libraries(thames_cowell_polynomial_point smart-uq)
-        target_link_libraries(thames_cowell_polynomial_point ${FFTW_LIBRARIES})
     endif(THAMES_USE_SMARTUQ)
 
     # Add executable for GEqOE for discrete points
     add_executable(thames_geqoe_discrete_point thames_geqoe_discrete_point.cpp)
     # Link executables
     target_link_libraries(thames_geqoe_discrete_point thames)
-    # Link SMART-UQ static library and FFTW libraries
-    if(THAMES_USE_SMARTUQ)
-        target_link_libraries(thames_geqoe_discrete_point smart-uq)
-        target_link_libraries(thames_geqoe_discrete_point ${FFTW_LIBRARIES})
-    endif(THAMES_USE_SMARTUQ)
 
     if(THAMES_USE_SMARTUQ)
         # Add executable for GEqOE via polynomials
         add_executable(thames_geqoe_polynomial thames_geqoe_polynomial.cpp)
         # Link executables
         target_link_libraries(thames_geqoe_polynomial thames)
-        # Link SMART-UQ static library and FFTW libraries
-        target_link_libraries(thames_geqoe_polynomial smart-uq)
-        target_link_libraries(thames_geqoe_polynomial ${FFTW_LIBRARIES})
     endif(THAMES_USE_SMARTUQ)
 
     if(THAMES_USE_SMARTUQ)
@@ -76,9 +57,6 @@ if(THAMES_BUILD_APP)
         add_executable(thames_geqoe_polynomial_point thames_geqoe_polynomial_point.cpp)
         # Link executables
         target_link_libraries(thames_geqoe_polynomial_point thames)
-        # Link SMART-UQ static library and FFTW libraries
-        target_link_libraries(thames_geqoe_polynomial_point smart-uq)
-        target_link_libraries(thames_geqoe_polynomial_point ${FFTW_LIBRARIES})
     endif(THAMES_USE_SMARTUQ)
 
 endif(THAMES_BUILD_APP)

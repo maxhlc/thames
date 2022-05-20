@@ -104,16 +104,15 @@ set(THAMES_HEADERS
 if(THAMES_BUILD_STATIC)
     # Build thames static library
     add_library(${PROJECT_NAME} STATIC ${THAMES_SOURCE} ${THAMES_HEADERS})
+    # Link to SMART-UQ
+    if(THAMES_USE_SMARTUQ)
+        target_link_libraries(${PROJECT_NAME} smart-uq)
+    endif(THAMES_USE_SMARTUQ)
 endif(THAMES_BUILD_STATIC)
 
 if(THAMES_BUILD_MAIN)
     # Build main executable
     add_executable(main main.cpp)
     # Link thames library
-    target_link_libraries(main thames)
-    # Link SMART-UQ static library and FFTW libraries
-    if(THAMES_USE_SMARTUQ)
-        target_link_libraries(main smart-uq)
-        target_link_libraries(main ${FFTW_LIBRARIES})
-    endif(THAMES_USE_SMARTUQ)
+    target_link_libraries(main ${PROJECT_NAME})
 endif(THAMES_BUILD_MAIN)
