@@ -30,5 +30,6 @@ SOFTWARE.
 #include "atmosphere/ussa76.h"
 #include "geopotential/J2.h"
 #include "baseperturbation.h"
+#include "perturbationcombiner.h"
 
 #endif

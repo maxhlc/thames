@@ -37,6 +37,7 @@ set(THAMES_SOURCE
     perturbations/atmosphere/drag.cpp
     perturbations/geopotential/J2.cpp
     perturbations/baseperturbation.cpp
+    perturbations/perturbationcombiner.cpp
     # Propagators
     propagators/basepropagator.cpp
     propagators/cowell.cpp
@@ -76,6 +77,7 @@ set(THAMES_HEADERS
     ../include/perturbations/atmosphere/ussa76.h
     ../include/perturbations/geopotential/J2.h
     ../include/perturbations/baseperturbation.h
+    ../include/perturbations/perturbationcombiner.h
     ../include/perturbations/perturbations.h
     # Propagators
     ../include/propagators/basepropagator.h
