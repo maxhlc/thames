@@ -142,7 +142,7 @@ namespace thames::perturbations::baseperturbation{
     }
 
     template<class T, template<class> class P>
-    void BasePerturbationPolynomial<T, P>::set_nondimensional(bool isNonDimensional) {
+    void BasePerturbationPolynomial<T, P>::set_nondimensional(const bool isNonDimensional) {
         m_isNonDimensional = isNonDimensional;
     }
 

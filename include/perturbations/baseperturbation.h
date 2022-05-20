@@ -83,21 +83,21 @@ namespace thames::perturbations::baseperturbation{
              * @brief Get the non-dimensional flag.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-11
+             * @date 2022-05-19
              * 
              * @return bool
              */
-            virtual bool get_nondimensional();
+            bool get_nondimensional();
 
             /**
              * @brief Set the non-dimensional flag.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-11
+             * @date 2022-05-20
              * 
-             * @param isNonDimensional Non-dimensional flag.
+             * @param[in] isNonDimensional Non-dimensional flag.
              */
-            virtual void set_nondimensional(bool isNonDimensional);
+            virtual void set_nondimensional(const bool isNonDimensional);
 
             ////////////
             // Arrays //
