@@ -31,7 +31,6 @@ option(THAMES_BUILD_MAIN "Build THAMES main" ON)
 option(THAMES_BUILD_STATIC "Build THAMES static library" ON)
 option(THAMES_BUILD_APP "Build THAMES applications" ON)
 option(THAMES_USE_SMARTUQ "Use SMART-UQ" ON)
-option(THAMES_USE_FFTW "Use FFTW" OFF)
 
 # Set output directories
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
