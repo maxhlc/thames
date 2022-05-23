@@ -66,17 +66,7 @@ if(THAMES_USE_SMARTUQ)
     add_subdirectory(external/smart-uq external/smart-uq)
     # Add flag to include SMART-UQ
     add_definitions(-DTHAMES_USE_SMARTUQ)
-    # Set FFTW to true
-    set(THAMES_USE_FFTW ON)
 endif(THAMES_USE_SMARTUQ)
-
-# Find FFTW libraries
-if(THAMES_USE_FFTW)
-    find_library(FFTW_LIBRARY fftw3)
-    find_library(FFTWF_LIBRARY fftw3f)
-    find_library(FFTWL_LIBRARY fftw3l)
-    set(FFTW_LIBRARIES "${FFTW_LIBRARY}" "${FFTWF_LIBRARY}" "${FFTWL_LIBRARY}")
-endif(THAMES_USE_FFTW)
 
 # Set C++ compiler flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3")
