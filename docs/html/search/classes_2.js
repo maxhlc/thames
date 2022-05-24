@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['dimensionalfactors_172',['DimensionalFactors',['../structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html',1,'thames::conversions::dimensional']]]
+  ['cowellpropagator_261',['CowellPropagator',['../classthames_1_1propagators_1_1CowellPropagator.html',1,'thames::propagators']]],
+  ['cowellpropagatorpolynomial_262',['CowellPropagatorPolynomial',['../classthames_1_1propagators_1_1CowellPropagatorPolynomial.html',1,'thames::propagators']]],
+  ['cowellpropagatorpolynomialdynamics_263',['CowellPropagatorPolynomialDynamics',['../classthames_1_1propagators_1_1CowellPropagatorPolynomialDynamics.html',1,'thames::propagators']]]
 ];

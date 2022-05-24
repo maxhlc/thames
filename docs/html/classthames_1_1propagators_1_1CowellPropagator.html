@@ -83,7 +83,7 @@ Inheritance diagram for thames::propagators::CowellPropagator&lt; T &gt;:</div>
 <div class="center"><img src="classthames_1_1propagators_1_1CowellPropagator__inherit__graph.png" border="0" usemap="#thames_1_1propagators_1_1CowellPropagator_3_01T_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="thames_1_1propagators_1_1CowellPropagator_3_01T_01_4_inherit__map" id="thames_1_1propagators_1_1CowellPropagator_3_01T_01_4_inherit__map">
 <area shape="rect" title="Propagator object for Cowell&#39;s method." alt="" coords="55,95,237,136"/>
-<area shape="rect" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html" title="Base propagator abstract object." alt="" coords="5,5,287,47"/>
+<area shape="rect" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html" title="Base propagator object." alt="" coords="5,5,287,47"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -91,31 +91,55 @@ Collaboration diagram for thames::propagators::CowellPropagator&lt; T &gt;:</div
 <div class="dyncontent">
 <div class="center"><img src="classthames_1_1propagators_1_1CowellPropagator__coll__graph.png" border="0" usemap="#thames_1_1propagators_1_1CowellPropagator_3_01T_01_4_coll__map" alt="Collaboration graph"/></div>
 <map name="thames_1_1propagators_1_1CowellPropagator_3_01T_01_4_coll__map" id="thames_1_1propagators_1_1CowellPropagator_3_01T_01_4_coll__map">
-<area shape="rect" title="Propagator object for Cowell&#39;s method." alt="" coords="55,95,237,136"/>
-<area shape="rect" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html" title="Base propagator abstract object." alt="" coords="5,5,287,47"/>
+<area shape="rect" title="Propagator object for Cowell&#39;s method." alt="" coords="55,185,237,227"/>
+<area shape="rect" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html" title="Base propagator object." alt="" coords="5,95,287,136"/>
+<area shape="rect" title=" " alt="" coords="99,5,193,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a06bc315e696f0108a5a52bdbbede5175"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1CowellPropagator.html#a06bc315e696f0108a5a52bdbbede5175">CowellPropagator</a> (const T &amp;mu, const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; *perturbation)</td></tr>
-<tr class="memdesc:a06bc315e696f0108a5a52bdbbede5175"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Cowell Propagator object.  <a href="classthames_1_1propagators_1_1CowellPropagator.html#a06bc315e696f0108a5a52bdbbede5175">More...</a><br /></td></tr>
-<tr class="separator:a06bc315e696f0108a5a52bdbbede5175"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b3b89cd9ab45dde0291f1d1a7cd52f5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1CowellPropagator.html#a6b3b89cd9ab45dde0291f1d1a7cd52f5">CowellPropagator</a> (const T &amp;mu, <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; *const perturbation, const <a class="el" href="structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html">DimensionalFactors</a>&lt; T &gt; *factors)</td></tr>
+<tr class="memdesc:a6b3b89cd9ab45dde0291f1d1a7cd52f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Cowell Propagator object.  <a href="classthames_1_1propagators_1_1CowellPropagator.html#a6b3b89cd9ab45dde0291f1d1a7cd52f5">More...</a><br /></td></tr>
+<tr class="separator:a6b3b89cd9ab45dde0291f1d1a7cd52f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1919f197a0e6fb292279b1af031f922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1CowellPropagator.html#ae1919f197a0e6fb292279b1af031f922">derivative</a> (const std::array&lt; T, 6 &gt; &amp;RV, std::array&lt; T, 6 &gt; &amp;RVdot, const T t) const override</td></tr>
 <tr class="memdesc:ae1919f197a0e6fb292279b1af031f922"><td class="mdescLeft">&#160;</td><td class="mdescRight">State derivative for Cowell's method propagation.  <a href="classthames_1_1propagators_1_1CowellPropagator.html#ae1919f197a0e6fb292279b1af031f922">More...</a><br /></td></tr>
 <tr class="separator:ae1919f197a0e6fb292279b1af031f922"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56fd05e55090aca035a858d612c94b58"><td class="memItemLeft" align="right" valign="top">std::array&lt; T, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1CowellPropagator.html#a56fd05e55090aca035a858d612c94b58">propagate</a> (T tstart, T tend, T tstep, std::array&lt; T, 6 &gt; state, <a class="el" href="structthames_1_1propagators_1_1options_1_1PropagatorOptions.html">thames::propagators::options::PropagatorOptions</a>&lt; T &gt; options, <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> statetype=<a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323afb03445c3be3e744cd97989b2776e64b">thames::constants::statetypes::CARTESIAN</a>) const override</td></tr>
-<tr class="memdesc:a56fd05e55090aca035a858d612c94b58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagate Cartesian state using Cowell's method.  <a href="classthames_1_1propagators_1_1CowellPropagator.html#a56fd05e55090aca035a858d612c94b58">More...</a><br /></td></tr>
-<tr class="separator:a56fd05e55090aca035a858d612c94b58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63470864645728b6a7b927e0891e953e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1CowellPropagator.html#a63470864645728b6a7b927e0891e953e">derivative</a> (const std::vector&lt; T &gt; &amp;RV, std::vector&lt; T &gt; &amp;RVdot, const T t) const override</td></tr>
 <tr class="memdesc:a63470864645728b6a7b927e0891e953e"><td class="mdescLeft">&#160;</td><td class="mdescRight">State derivative for Cowell's method propagation.  <a href="classthames_1_1propagators_1_1CowellPropagator.html#a63470864645728b6a7b927e0891e953e">More...</a><br /></td></tr>
 <tr class="separator:a63470864645728b6a7b927e0891e953e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81b70bcb80df87a4632e25bffca46042"><td class="memItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1CowellPropagator.html#a81b70bcb80df87a4632e25bffca46042">propagate</a> (T tstart, T tend, T tstep, std::vector&lt; T &gt; state, <a class="el" href="structthames_1_1propagators_1_1options_1_1PropagatorOptions.html">thames::propagators::options::PropagatorOptions</a>&lt; T &gt; options, <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> statetype=<a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323afb03445c3be3e744cd97989b2776e64b">thames::constants::statetypes::CARTESIAN</a>) const override</td></tr>
-<tr class="memdesc:a81b70bcb80df87a4632e25bffca46042"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagate Cartesian state using Cowell's method.  <a href="classthames_1_1propagators_1_1CowellPropagator.html#a81b70bcb80df87a4632e25bffca46042">More...</a><br /></td></tr>
-<tr class="separator:a81b70bcb80df87a4632e25bffca46042"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca67a808aa6fbfc33b3bef62f82a2c41"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1CowellPropagator.html#aca67a808aa6fbfc33b3bef62f82a2c41">propagate</a> (std::vector&lt; T &gt; tvector, T tstep, std::vector&lt; T &gt; RV, <a class="el" href="structthames_1_1propagators_1_1options_1_1PropagatorOptions.html">thames::propagators::options::PropagatorOptions</a>&lt; T &gt; options, <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> statetype=<a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323afb03445c3be3e744cd97989b2776e64b">thames::constants::statetypes::CARTESIAN</a>) const override</td></tr>
-<tr class="memdesc:aca67a808aa6fbfc33b3bef62f82a2c41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagate Cartesian state using Cowell's method.  <a href="classthames_1_1propagators_1_1CowellPropagator.html#aca67a808aa6fbfc33b3bef62f82a2c41">More...</a><br /></td></tr>
-<tr class="separator:aca67a808aa6fbfc33b3bef62f82a2c41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html">thames::propagators::basepropagator::BasePropagator&lt; T &gt;</a></td></tr>
+<tr class="memitem:a3d88cdfe308a4ee3d4eb885f338131f8 inherit pub_methods_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#a3d88cdfe308a4ee3d4eb885f338131f8">BasePropagator</a> (const T &amp;mu, <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; *const perturbation, const <a class="el" href="structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html">DimensionalFactors</a>&lt; T &gt; *factors, const StateTypes propstatetype)</td></tr>
+<tr class="memdesc:a3d88cdfe308a4ee3d4eb885f338131f8 inherit pub_methods_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Base Propagator object.  <a href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#a3d88cdfe308a4ee3d4eb885f338131f8">More...</a><br /></td></tr>
+<tr class="separator:a3d88cdfe308a4ee3d4eb885f338131f8 inherit pub_methods_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9e04bc05435ea4b99941fd843904a7c inherit pub_methods_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#af9e04bc05435ea4b99941fd843904a7c">~BasePropagator</a> ()</td></tr>
+<tr class="memdesc:af9e04bc05435ea4b99941fd843904a7c inherit pub_methods_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the Base Propagator object.  <a href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#af9e04bc05435ea4b99941fd843904a7c">More...</a><br /></td></tr>
+<tr class="separator:af9e04bc05435ea4b99941fd843904a7c inherit pub_methods_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab070987fb5b34943b4e8a725bb2249ef inherit pub_methods_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memItemLeft" align="right" valign="top">virtual std::array&lt; T, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#ab070987fb5b34943b4e8a725bb2249ef">propagate</a> (T tstart, T tend, T tstep, std::array&lt; T, 6 &gt; state, const <a class="el" href="structthames_1_1propagators_1_1options_1_1PropagatorOptions.html">PropagatorOptions</a>&lt; T &gt; options, const StateTypes statetype)</td></tr>
+<tr class="memdesc:ab070987fb5b34943b4e8a725bb2249ef inherit pub_methods_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagation method.  <a href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#ab070987fb5b34943b4e8a725bb2249ef">More...</a><br /></td></tr>
+<tr class="separator:ab070987fb5b34943b4e8a725bb2249ef inherit pub_methods_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5271c29a86232f9b50ab3a26757bae7f inherit pub_methods_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#a5271c29a86232f9b50ab3a26757bae7f">propagate</a> (T tstart, T tend, T tstep, std::vector&lt; T &gt; state, <a class="el" href="structthames_1_1propagators_1_1options_1_1PropagatorOptions.html">PropagatorOptions</a>&lt; T &gt; options, StateTypes statetype)</td></tr>
+<tr class="memdesc:a5271c29a86232f9b50ab3a26757bae7f inherit pub_methods_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagation method.  <a href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#a5271c29a86232f9b50ab3a26757bae7f">More...</a><br /></td></tr>
+<tr class="separator:a5271c29a86232f9b50ab3a26757bae7f inherit pub_methods_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html">thames::propagators::basepropagator::BasePropagator&lt; T &gt;</a></td></tr>
+<tr class="memitem:ae3723bc15abedf30aeaa48059401be32 inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memItemLeft" align="right" valign="top">const T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#ae3723bc15abedf30aeaa48059401be32">m_mu</a></td></tr>
+<tr class="memdesc:ae3723bc15abedf30aeaa48059401be32 inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gravitational parameter.  <a href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#ae3723bc15abedf30aeaa48059401be32">More...</a><br /></td></tr>
+<tr class="separator:ae3723bc15abedf30aeaa48059401be32 inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7acf9931a7e8b3d84a19c5c29955168c inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#a7acf9931a7e8b3d84a19c5c29955168c">m_perturbation</a></td></tr>
+<tr class="memdesc:a7acf9931a7e8b3d84a19c5c29955168c inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perturbation object.  <a href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#a7acf9931a7e8b3d84a19c5c29955168c">More...</a><br /></td></tr>
+<tr class="separator:a7acf9931a7e8b3d84a19c5c29955168c inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae06c89b22a81dfe677d29132ba58d280 inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html">DimensionalFactors</a>&lt; T &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#ae06c89b22a81dfe677d29132ba58d280">m_factors</a></td></tr>
+<tr class="memdesc:ae06c89b22a81dfe677d29132ba58d280 inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dimensional factors.  <a href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#ae06c89b22a81dfe677d29132ba58d280">More...</a><br /></td></tr>
+<tr class="separator:ae06c89b22a81dfe677d29132ba58d280 inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f26f0eea70dcd0ea5b5c5c23ef38cc8 inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#a9f26f0eea70dcd0ea5b5c5c23ef38cc8">m_isNonDimensional</a> = false</td></tr>
+<tr class="memdesc:a9f26f0eea70dcd0ea5b5c5c23ef38cc8 inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag for whether to propagate in non-dimensional form.  <a href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#a9f26f0eea70dcd0ea5b5c5c23ef38cc8">More...</a><br /></td></tr>
+<tr class="separator:a9f26f0eea70dcd0ea5b5c5c23ef38cc8 inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc46734a5b8e51fdddf03293592b795d inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memItemLeft" align="right" valign="top">const StateTypes&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#abc46734a5b8e51fdddf03293592b795d">m_propstatetype</a></td></tr>
+<tr class="memdesc:abc46734a5b8e51fdddf03293592b795d inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="mdescLeft">&#160;</td><td class="mdescRight">State type for propagation.  <a href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#abc46734a5b8e51fdddf03293592b795d">More...</a><br /></td></tr>
+<tr class="separator:abc46734a5b8e51fdddf03293592b795d inherit pro_attribs_classthames_1_1propagators_1_1basepropagator_1_1BasePropagator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T&gt;<br />
@@ -123,7 +147,7 @@ class thames::propagators::CowellPropagator&lt; T &gt;</h3>
 
 <p>Propagator object for Cowell's method. </p>
 <dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-02-28</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-05-13</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Numeric type. </td></tr>
@@ -131,10 +155,10 @@ class thames::propagators::CowellPropagator&lt; T &gt;</h3>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cowell_8h_source.html#l00058">58</a> of file <a class="el" href="cowell_8h_source.html">cowell.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cowell_8h_source.html#l00060">60</a> of file <a class="el" href="cowell_8h_source.html">cowell.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a06bc315e696f0108a5a52bdbbede5175"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06bc315e696f0108a5a52bdbbede5175">&#9670;&nbsp;</a></span>CowellPropagator()</h2>
+<a id="a6b3b89cd9ab45dde0291f1d1a7cd52f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b3b89cd9ab45dde0291f1d1a7cd52f5">&#9670;&nbsp;</a></span>CowellPropagator()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -150,8 +174,14 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; *&#160;</td>
-          <td class="paramname"><em>perturbation</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html">BasePerturbation</a>&lt; T &gt; *const&#160;</td>
+          <td class="paramname"><em>perturbation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html">DimensionalFactors</a>&lt; T &gt; *&#160;</td>
+          <td class="paramname"><em>factors</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -163,16 +193,17 @@ template&lt;class T &gt; </div>
 
 <p>Construct a new Cowell Propagator object. </p>
 <dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-01-25</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-05-13</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">mu</td><td>Gravitational parameter. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">perturbation</td><td>Perturbation object. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">factors</td><td>Dimensional factors. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cowell_8cpp_source.html#l00053">53</a> of file <a class="el" href="cowell_8cpp_source.html">cowell.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cowell_8cpp_source.html#l00058">58</a> of file <a class="el" href="cowell_8cpp_source.html">cowell.cpp</a>.</p>
 
 </div>
 </div>
@@ -221,7 +252,7 @@ template&lt;class T &gt; </div>
 
 <p>State derivative for Cowell's method propagation. </p>
 <dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-01-25</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-05-13</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">RV</td><td>Cartesian state. </td></tr>
@@ -231,9 +262,9 @@ template&lt;class T &gt; </div>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#a3882a9c4d5086906907ee17f544fb516">thames::propagators::basepropagator::BasePropagator&lt; T &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#a8348998189a1973bd0964970f841cab4">thames::propagators::basepropagator::BasePropagator&lt; T &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cowell_8cpp_source.html#l00062">62</a> of file <a class="el" href="cowell_8cpp_source.html">cowell.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cowell_8cpp_source.html#l00067">67</a> of file <a class="el" href="cowell_8cpp_source.html">cowell.cpp</a>.</p>
 
 </div>
 </div>
@@ -281,7 +312,7 @@ template&lt;class T &gt; </div>
 
 <p>State derivative for Cowell's method propagation. </p>
 <dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-01-25</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-05-13</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">RV</td><td>Cartesian state. </td></tr>
@@ -291,248 +322,9 @@ template&lt;class T &gt; </div>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#ae3852a5ea3a879b314f42edcd1f76630">thames::propagators::basepropagator::BasePropagator&lt; T &gt;</a>.</p>
+<p>Reimplemented from <a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#aa730e80ea99a962f26e68874a6dd4953">thames::propagators::basepropagator::BasePropagator&lt; T &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="cowell_8cpp_source.html#l00116">116</a> of file <a class="el" href="cowell_8cpp_source.html">cowell.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aca67a808aa6fbfc33b3bef62f82a2c41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca67a808aa6fbfc33b3bef62f82a2c41">&#9670;&nbsp;</a></span>propagate() <span class="overload">[1/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; std::vector&lt; T &gt; &gt; <a class="el" href="classthames_1_1propagators_1_1CowellPropagator.html">thames::propagators::CowellPropagator</a>&lt; T &gt;::propagate </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; T &gt;&#160;</td>
-          <td class="paramname"><em>tvector</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>tstep</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; T &gt;&#160;</td>
-          <td class="paramname"><em>RV</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structthames_1_1propagators_1_1options_1_1PropagatorOptions.html">thames::propagators::options::PropagatorOptions</a>&lt; T &gt;&#160;</td>
-          <td class="paramname"><em>options</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a>&#160;</td>
-          <td class="paramname"><em>statetype</em> = <code><a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323afb03445c3be3e744cd97989b2776e64b">thames::constants::statetypes::CARTESIAN</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Propagate Cartesian state using Cowell's method. </p>
-<dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-03-07</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">tvector</td><td>Vector of times. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tstep</td><td>Initial timestep for propagation </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">state</td><td>Initial state. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">options</td><td>Propagator options. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">statetype</td><td>State type. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;std::vector&lt;T&gt;&gt; Propagated states. </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#a84a01d4dedf3b48fc8e0447fbe074ba9">thames::propagators::basepropagator::BasePropagator&lt; T &gt;</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="cowell_8cpp_source.html#l00166">166</a> of file <a class="el" href="cowell_8cpp_source.html">cowell.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a56fd05e55090aca035a858d612c94b58"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56fd05e55090aca035a858d612c94b58">&#9670;&nbsp;</a></span>propagate() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::array&lt; T, 6 &gt; <a class="el" href="classthames_1_1propagators_1_1CowellPropagator.html">thames::propagators::CowellPropagator</a>&lt; T &gt;::propagate </td>
-          <td>(</td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>tstart</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>tend</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>tstep</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::array&lt; T, 6 &gt;&#160;</td>
-          <td class="paramname"><em>state</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structthames_1_1propagators_1_1options_1_1PropagatorOptions.html">thames::propagators::options::PropagatorOptions</a>&lt; T &gt;&#160;</td>
-          <td class="paramname"><em>options</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a>&#160;</td>
-          <td class="paramname"><em>statetype</em> = <code><a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323afb03445c3be3e744cd97989b2776e64b">thames::constants::statetypes::CARTESIAN</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Propagate Cartesian state using Cowell's method. </p>
-<dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-03-07</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">tstart</td><td>Propagation start time in physical time. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tend</td><td>Propagation end time in physical time. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tstep</td><td>Initial timestep for propagation. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">state</td><td>Initial state. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">options</td><td>Propagator options. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">statetype</td><td>State type. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>std::array&lt;T, 6&gt; Final state. </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#a0a9551b7964669c3b20a5d1e553f69a3">thames::propagators::basepropagator::BasePropagator&lt; T &gt;</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="cowell_8cpp_source.html#l00087">87</a> of file <a class="el" href="cowell_8cpp_source.html">cowell.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a81b70bcb80df87a4632e25bffca46042"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81b70bcb80df87a4632e25bffca46042">&#9670;&nbsp;</a></span>propagate() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; T &gt; <a class="el" href="classthames_1_1propagators_1_1CowellPropagator.html">thames::propagators::CowellPropagator</a>&lt; T &gt;::propagate </td>
-          <td>(</td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>tstart</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>tend</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>tstep</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; T &gt;&#160;</td>
-          <td class="paramname"><em>state</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structthames_1_1propagators_1_1options_1_1PropagatorOptions.html">thames::propagators::options::PropagatorOptions</a>&lt; T &gt;&#160;</td>
-          <td class="paramname"><em>options</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a>&#160;</td>
-          <td class="paramname"><em>statetype</em> = <code><a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323afb03445c3be3e744cd97989b2776e64b">thames::constants::statetypes::CARTESIAN</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Propagate Cartesian state using Cowell's method. </p>
-<dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-03-07</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">tstart</td><td>Propagation start time in physical time. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tend</td><td>Propagation end time in physical time. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">tstep</td><td>Initial timestep for propagation. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">state</td><td>Initial state. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">options</td><td>Propagator options. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">statetype</td><td>State type. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;T&gt; Final state. </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html#a23d9cafbd53c32a4920605e4fcc2d976">thames::propagators::basepropagator::BasePropagator&lt; T &gt;</a>.</p>
-
-<p class="definition">Definition at line <a class="el" href="cowell_8cpp_source.html#l00141">141</a> of file <a class="el" href="cowell_8cpp_source.html">cowell.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cowell_8cpp_source.html#l00099">99</a> of file <a class="el" href="cowell_8cpp_source.html">cowell.cpp</a>.</p>
 
 </div>
 </div>
@@ -543,7 +335,7 @@ template&lt;class T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 20 2022 12:25:33 for THAMES by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 24 2022 17:43:49 for THAMES by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>

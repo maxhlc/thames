@@ -1,0 +1,6 @@
+<map id="thames::propagators::basepropagator::BasePropagatorPolynomialDynamics&lt; T, P &gt;" name="thames::propagators::basepropagator::BasePropagatorPolynomialDynamics&lt; T, P &gt;">
+<area shape="rect" id="node1" title="Base object for dynamics with polynomials, compatible with the SMART&#45;UQ schema." alt="" coords="252,45,495,101"/>
+<area shape="rect" id="node3" href="$classthames_1_1propagators_1_1CowellPropagatorPolynomialDynamics.html" title="Object for Cowell&#39;s method dynamics with polynomials, compatible with the SMART&#45;UQ schema." alt="" coords="543,5,761,61"/>
+<area shape="rect" id="node4" href="$classthames_1_1propagators_1_1GEqOEPropagatorPolynomialDynamics.html" title="Object for GEqOE dynamics with polynomials, compatible with the SMART&#45;UQ schema." alt="" coords="543,85,761,141"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,53,204,94"/>
+</map>

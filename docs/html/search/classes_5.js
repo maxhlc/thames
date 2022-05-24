@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['propagatoroptions_178',['PropagatorOptions',['../structthames_1_1propagators_1_1options_1_1PropagatorOptions.html',1,'thames::propagators::options']]]
+  ['integratorparameters_271',['IntegratorParameters',['../structthames_1_1io_1_1json_1_1IntegratorParameters.html',1,'thames::io::json']]]
 ];

@@ -1,0 +1,5 @@
+<map id="thames::io::json::PerturbationParameters" name="thames::io::json::PerturbationParameters">
+<area shape="rect" id="node1" title="Struct to store perturbation model parameters." alt="" coords="359,39,573,80"/>
+<area shape="rect" id="node2" href="$structthames_1_1io_1_1json_1_1GeopotentialPerturbationParameters.html" title="Struct to store geopotential model parameters." alt="" coords="5,5,224,47"/>
+<area shape="rect" id="node3" href="$structthames_1_1io_1_1json_1_1AtmospherePerturbationParameters.html" title="Struct to store atmospheric model parameters." alt="" coords="8,71,221,112"/>
+</map>

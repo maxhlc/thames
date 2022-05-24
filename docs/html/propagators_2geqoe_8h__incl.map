@@ -1,10 +1,12 @@
 <map id="include/propagators/geqoe.h" name="include/propagators/geqoe.h">
-<area shape="rect" id="node1" title=" " alt="" coords="344,5,495,47"/>
-<area shape="rect" id="node2" title=" " alt="" coords="125,199,181,225"/>
-<area shape="rect" id="node3" title=" " alt="" coords="283,199,345,225"/>
-<area shape="rect" id="node4" title=" " alt="" coords="613,95,775,151"/>
-<area shape="rect" id="node5" href="$basepropagator_8h.html" title=" " alt="" coords="352,109,487,136"/>
-<area shape="rect" id="node6" href="$options_8h.html" title=" " alt="" coords="377,199,459,225"/>
-<area shape="rect" id="node7" href="$statetypes_8h.html" title=" " alt="" coords="484,199,667,225"/>
-<area shape="rect" id="node8" href="$baseperturbation_8h.html" title=" " alt="" coords="29,109,277,136"/>
+<area shape="rect" id="node1" title=" " alt="" coords="491,5,642,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="84,348,140,375"/>
+<area shape="rect" id="node3" title=" " alt="" coords="384,348,447,375"/>
+<area shape="rect" id="node4" title=" " alt="" coords="545,169,708,225"/>
+<area shape="rect" id="node5" href="$basepropagator_8h.html" title=" " alt="" coords="440,95,575,121"/>
+<area shape="rect" id="node7" href="$options_8h.html" title=" " alt="" coords="732,184,814,211"/>
+<area shape="rect" id="node8" href="$statetypes_8h.html" title=" " alt="" coords="839,184,1022,211"/>
+<area shape="rect" id="node9" href="$dimensional_8h.html" title=" " alt="" coords="78,273,286,300"/>
+<area shape="rect" id="node10" href="$baseperturbation_8h.html" title=" " alt="" coords="38,184,286,211"/>
+<area shape="rect" id="node6" title=" " alt="" coords="412,184,470,211"/>
 </map>

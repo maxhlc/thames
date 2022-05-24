@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['baseperturbation_165',['BasePerturbation',['../classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html',1,'thames::perturbations::baseperturbation']]],
-  ['baseperturbationpolynomial_166',['BasePerturbationPolynomial',['../classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbationPolynomial.html',1,'thames::perturbations::baseperturbation']]],
-  ['basepropagator_167',['BasePropagator',['../classthames_1_1propagators_1_1basepropagator_1_1BasePropagator.html',1,'thames::propagators::basepropagator']]],
-  ['basepropagatorpolynomial_168',['BasePropagatorPolynomial',['../classthames_1_1propagators_1_1basepropagator_1_1BasePropagatorPolynomial.html',1,'thames::propagators::basepropagator']]]
+  ['atmospheremodel_253',['AtmosphereModel',['../classthames_1_1perturbations_1_1atmosphere_1_1models_1_1AtmosphereModel.html',1,'thames::perturbations::atmosphere::models']]],
+  ['atmospheremodelpolynomial_254',['AtmosphereModelPolynomial',['../classthames_1_1perturbations_1_1atmosphere_1_1models_1_1AtmosphereModelPolynomial.html',1,'thames::perturbations::atmosphere::models']]],
+  ['atmosphereperturbationparameters_255',['AtmospherePerturbationParameters',['../structthames_1_1io_1_1json_1_1AtmospherePerturbationParameters.html',1,'thames::io::json']]]
 ];

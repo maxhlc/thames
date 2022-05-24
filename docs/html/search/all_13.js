@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['vector_2eh_155',['vector.h',['../vector_8h.html',1,'']]],
-  ['velocity_156',['velocity',['../structthames_1_1conversions_1_1dimensional_1_1DimensionalFactors.html#a463d937af0bbe81f49025bf0ae834f75',1,'thames::conversions::dimensional::DimensionalFactors']]]
+  ['w_236',['w',['../namespacethames_1_1constants_1_1earth.html#ab10848acd34ace340898ca05ac586a6c',1,'thames::constants::earth']]]
 ];

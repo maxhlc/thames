@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['j2_176',['J2',['../classthames_1_1perturbations_1_1geopotential_1_1J2.html',1,'thames::perturbations::geopotential']]],
-  ['j2polynomial_177',['J2Polynomial',['../classthames_1_1perturbations_1_1geopotential_1_1J2Polynomial.html',1,'thames::perturbations::geopotential']]]
+  ['geopotentialperturbationparameters_267',['GeopotentialPerturbationParameters',['../structthames_1_1io_1_1json_1_1GeopotentialPerturbationParameters.html',1,'thames::io::json']]],
+  ['geqoepropagator_268',['GEqOEPropagator',['../classthames_1_1propagators_1_1GEqOEPropagator.html',1,'thames::propagators']]],
+  ['geqoepropagatorpolynomial_269',['GEqOEPropagatorPolynomial',['../classthames_1_1propagators_1_1GEqOEPropagatorPolynomial.html',1,'thames::propagators']]],
+  ['geqoepropagatorpolynomialdynamics_270',['GEqOEPropagatorPolynomialDynamics',['../classthames_1_1propagators_1_1GEqOEPropagatorPolynomialDynamics.html',1,'thames::propagators']]]
 ];

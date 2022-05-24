@@ -1,8 +1,9 @@
 <map id="include/conversions/geqoe.h" name="include/conversions/geqoe.h">
-<area shape="rect" id="node1" title=" " alt="" coords="225,5,375,47"/>
+<area shape="rect" id="node1" title=" " alt="" coords="359,5,510,47"/>
 <area shape="rect" id="node2" href="$conversions_2geqoe_8cpp.html" title=" " alt="" coords="5,102,200,129"/>
-<area shape="rect" id="node3" href="$conversions_8h.html" title=" " alt="" coords="225,95,375,136"/>
-<area shape="rect" id="node6" href="$propagators_2geqoe_8cpp.html" title=" " alt="" coords="400,102,595,129"/>
-<area shape="rect" id="node4" href="$thames_8h.html" title=" " alt="" coords="233,184,367,211"/>
-<area shape="rect" id="node5" href="$main_8cpp.html" title=" " alt="" coords="247,259,353,285"/>
+<area shape="rect" id="node3" href="$universal_8cpp.html" title=" " alt="" coords="225,102,439,129"/>
+<area shape="rect" id="node4" href="$conversions_8h.html" title=" " alt="" coords="463,95,614,136"/>
+<area shape="rect" id="node7" href="$propagators_2geqoe_8cpp.html" title=" " alt="" coords="639,102,833,129"/>
+<area shape="rect" id="node5" href="$thames_8h.html" title=" " alt="" coords="471,184,606,211"/>
+<area shape="rect" id="node6" href="$main_8cpp.html" title=" " alt="" coords="486,259,591,285"/>
 </map>
