@@ -30,6 +30,7 @@ set(THAMES_SOURCE
     conversions/keplerian.cpp
     conversions/universal.cpp
     # Input/output
+    io/json.cpp
     io/point.cpp
     io/polynomial.cpp
     # Perturbations
@@ -69,6 +70,7 @@ set(THAMES_HEADERS
     ../include/conversions/universal.h
     # Input/output
     ../include/io/io.h
+    ../include/io/json.h
     ../include/io/point.h
     ../include/io/polynomial.h
     # Perturbations
@@ -106,8 +108,10 @@ if(THAMES_BUILD_STATIC)
     add_library(${PROJECT_NAME} STATIC ${THAMES_SOURCE} ${THAMES_HEADERS})
     # Link to SMART-UQ
     if(THAMES_USE_SMARTUQ)
-        target_link_libraries(${PROJECT_NAME} smart-uq)
+        target_link_libraries(${PROJECT_NAME} PUBLIC smart-uq)
     endif(THAMES_USE_SMARTUQ)
+    # Link to nlohmann_json
+    target_link_libraries(${PROJECT_NAME} PUBLIC nlohmann_json::nlohmann_json)
 endif(THAMES_BUILD_STATIC)
 
 if(THAMES_BUILD_MAIN)

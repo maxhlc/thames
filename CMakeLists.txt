@@ -40,6 +40,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 # Find packages
 find_package(Boost REQUIRED)
 
+# Fetch packages
+include(FetchContent)
+FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.10.5/json.tar.xz)
+FetchContent_MakeAvailable(json)
+
 # Download/update git submodules
 # Solution from: https://cliutils.gitlab.io/modern-cmake/chapters/projects/submodule.html
 find_package(Git QUIET)

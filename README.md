@@ -11,6 +11,7 @@ THAMES (Toolkit for Heuristic and Analytical Methods for Estimating State) is a 
 * `SMART-UQ` (optional, included automatically)
 * `Eigen` (optional, used for SMART-UQ)
 * `FFTW` (optional, used for SMART-UQ)
+* `nlohmann/json` (included automatically)
 
 ### Installing
 * Configure `CMake` using the `configure.sh` script
