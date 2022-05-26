@@ -66,8 +66,8 @@ int main(int argc, char **argv){
     factors = thames::conversions::dimensional::calculate_factors(RVpolynomial, mu);
 
     // Declare propagator and perturbation
-    thames::perturbations::geopotential::J2Polynomial<double, smartuq::polynomial::taylor_polynomial> perturbation(mu, J2, radius, &factors);
-    thames::propagators::CowellPropagatorPolynomial<double, smartuq::polynomial::taylor_polynomial> propagator(mu, &perturbation, &factors);
+    auto perturbation = std::make_shared<thames::perturbations::geopotential::J2Polynomial<double, smartuq::polynomial::taylor_polynomial>>(mu, J2, radius, &factors);
+    thames::propagators::CowellPropagatorPolynomial<double, smartuq::polynomial::taylor_polynomial> propagator(mu, perturbation, &factors);
 
     // Propagate polynomials
     RVpolynomial_propagated = propagator.propagate(tstart, tend, tstep, RVpolynomial, options, statetype);
