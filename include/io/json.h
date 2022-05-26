@@ -143,15 +143,17 @@ namespace thames::io::json {
      * @brief Structure to store propagator parameters
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-24
+     * @date 2022-05-26
      * 
+     * @tparam T Numeric type
      */
+    template<class T>
     struct PropagatorParameters {
         /// Propagation start time
-        std::string startTime;
+        T startTime;
 
         /// Propagation end time
-        std::string endTime;
+        T endTime;
 
         /// Propagation equations
         std::string equations;
@@ -214,14 +216,14 @@ namespace thames::io::json {
      * @brief Structure to store state parameters
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-24
+     * @date 2022-05-26
      * 
      * @tparam T Numeric type
      */
     template<class T>
     struct StateParameters {
         /// State time
-        std::string datetime;
+        T datetime;
 
         /// State vectors
         std::vector<std::vector<T>> states;
@@ -253,7 +255,7 @@ namespace thames::io::json {
         PerturbationParameters perturbation;
 
         /// Propagator parameters
-        PropagatorParameters propagator;
+        PropagatorParameters<T> propagator;
 
         /// Integrator parameters
         IntegratorParameters<T> integrator;
