@@ -24,6 +24,7 @@ SOFTWARE.
 
 #include <array>
 #include <cmath>
+#include <memory>
 #include <vector>
 
 #include <boost/numeric/odeint.hpp>
@@ -49,7 +50,7 @@ namespace thames::propagators {
     using namespace thames::vector::arithmeticoverloads;
 
     template<class T>
-    GEqOEPropagator<T>::GEqOEPropagator(const T& mu, BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagator<T>(mu, perturbation, factors, GEQOE) {
+    GEqOEPropagator<T>::GEqOEPropagator(const T& mu, const std::shared_ptr<BasePerturbation<T>> perturbation, const DimensionalFactors<T>* factors) : BasePropagator<T>(mu, perturbation, factors, GEQOE) {
 
     }
 
@@ -308,7 +309,7 @@ namespace thames::propagators {
     using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     template<class T, template<class> class P>
-    GEqOEPropagatorPolynomialDynamics<T, P>::GEqOEPropagatorPolynomialDynamics(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomialDynamics<T, P>("GEqOE", mu, perturbation, factors) {
+    GEqOEPropagatorPolynomialDynamics<T, P>::GEqOEPropagatorPolynomialDynamics(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomialDynamics<T, P>("GEqOE", mu, perturbation, factors) {
 
     }
 
@@ -441,7 +442,7 @@ namespace thames::propagators {
     template class GEqOEPropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
-    GEqOEPropagatorPolynomial<T, P>::GEqOEPropagatorPolynomial(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomial<T, P>(mu, perturbation, factors, new GEqOEPropagatorPolynomialDynamics<T, P>(mu, perturbation, factors), GEQOE) {
+    GEqOEPropagatorPolynomial<T, P>::GEqOEPropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomial<T, P>(mu, perturbation, factors, new GEqOEPropagatorPolynomialDynamics<T, P>(mu, perturbation, factors), GEQOE) {
 
     }
 

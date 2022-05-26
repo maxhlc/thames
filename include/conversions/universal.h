@@ -26,6 +26,7 @@ SOFTWARE.
 #define THAMES_CONVERSIONS_UNIVERSAL
 
 #include <array>
+#include <memory>
 #include <vector>
 
 #ifdef THAMES_USE_SMARTUQ
@@ -48,7 +49,7 @@ namespace thames::conversions::universal {
      * @brief Universal state conversion.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-13
+     * @date 2022-05-26
      * 
      * @tparam T Numeric type.
      * @param[in] t Time.
@@ -60,7 +61,7 @@ namespace thames::conversions::universal {
      * @return std::array<T, 6> Output state.
      */
     template<class T>
-    std::array<T, 6> convert_state(const T& t, const std::array<T, 6>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const BasePerturbation<T>* const perturbation);
+    std::array<T, 6> convert_state(const T& t, const std::array<T, 6>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const std::shared_ptr<const BasePerturbation<T>> perturbation);
 
     /////////////
     // Vectors //
@@ -70,7 +71,7 @@ namespace thames::conversions::universal {
      * @brief Universal state conversion.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-13
+     * @date 2022-05-26
      * 
      * @tparam T Numeric type.
      * @param[in] t Time.
@@ -82,7 +83,7 @@ namespace thames::conversions::universal {
      * @return std::vector<T> Output state.
      */
     template<class T>
-    std::vector<T> convert_state(const T& t, const std::vector<T>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const BasePerturbation<T>* const perturbation);
+    std::vector<T> convert_state(const T& t, const std::vector<T>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const std::shared_ptr<const BasePerturbation<T>> perturbation);
 
     /////////////////
     // Polynomials //
@@ -96,7 +97,7 @@ namespace thames::conversions::universal {
      * @brief Universal state conversion.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-13
+     * @date 2022-05-26
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -109,7 +110,7 @@ namespace thames::conversions::universal {
      * @return std::vector<P<T>> Output state.
      */
     template<class T, template <class> class P>
-    std::vector<P<T>> convert_state(const T& t, const std::vector<P<T>>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const BasePerturbationPolynomial<T, P>* const perturbation);
+    std::vector<P<T>> convert_state(const T& t, const std::vector<P<T>>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const std::shared_ptr<const BasePerturbationPolynomial<T, P>> perturbation);
 
     #endif
 

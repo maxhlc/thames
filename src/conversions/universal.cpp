@@ -23,6 +23,7 @@ SOFTWARE.
 */
 
 #include <array>
+#include <memory>
 #include <vector>
 
 #ifdef THAMES_USE_SMARTUQ
@@ -49,7 +50,7 @@ namespace thames::conversions::universal {
     ////////////
 
     template<class T>
-    std::array<T, 6> convert_state(const T& t, const std::array<T, 6>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const BasePerturbation<T>* const perturbation) {
+    std::array<T, 6> convert_state(const T& t, const std::array<T, 6>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const std::shared_ptr<const BasePerturbation<T>> perturbation) {
         // Return input directly if the two types match
         if (statetype1 == statetype2)
             return state;
@@ -73,14 +74,14 @@ namespace thames::conversions::universal {
         // Throw error if combinations not accepted
         throw std::runtime_error("Unsupported state conversion");
     }
-    template std::array<double, 6> convert_state(const double&, const std::array<double, 6>&, const double&, const StateTypes&, const StateTypes&, const BasePerturbation<double>* const);
+    template std::array<double, 6> convert_state(const double&, const std::array<double, 6>&, const double&, const StateTypes&, const StateTypes&, const std::shared_ptr<const BasePerturbation<double>> perturbation);
 
     /////////////
     // Vectors //
     /////////////
 
     template<class T>
-    std::vector<T> convert_state(const T& t, const std::vector<T>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const BasePerturbation<T>* const perturbation) {
+    std::vector<T> convert_state(const T& t, const std::vector<T>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const std::shared_ptr<const BasePerturbation<T>> perturbation) {
         // Return input directly if the two types match
         if (statetype1 == statetype2)
             return state;
@@ -104,7 +105,7 @@ namespace thames::conversions::universal {
         // Throw error if combinations not accepted
         throw std::runtime_error("Unsupported state conversion");
     }
-    template std::vector<double> convert_state(const double&, const std::vector<double>&, const double&, const StateTypes&, const StateTypes&, const BasePerturbation<double>* const);
+    template std::vector<double> convert_state(const double&, const std::vector<double>&, const double&, const StateTypes&, const StateTypes&, const std::shared_ptr<const BasePerturbation<double>> perturbation);
 
     /////////////////
     // Polynomials //
@@ -117,7 +118,7 @@ namespace thames::conversions::universal {
     using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     template<class T, template <class> class P>
-    std::vector<P<T>> convert_state(const T& t, const std::vector<P<T>>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const BasePerturbationPolynomial<T, P>* const perturbation) {
+    std::vector<P<T>> convert_state(const T& t, const std::vector<P<T>>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const std::shared_ptr<const BasePerturbationPolynomial<T, P>> perturbation) {
         // Return input directly if the two types match
         if (statetype1 == statetype2)
             return state;
@@ -133,8 +134,8 @@ namespace thames::conversions::universal {
         // Throw error if combinations not accepted
         throw std::runtime_error("Unsupported state conversion");
     }
-    template std::vector<taylor_polynomial<double>> convert_state(const double&, const std::vector<taylor_polynomial<double>>&, const double&, const StateTypes&, const StateTypes&, const BasePerturbationPolynomial<double, taylor_polynomial>* const);
-    template std::vector<chebyshev_polynomial<double>> convert_state(const double&, const std::vector<chebyshev_polynomial<double>>&, const double&, const StateTypes&, const StateTypes&, const BasePerturbationPolynomial<double, chebyshev_polynomial>* const);
+    template std::vector<taylor_polynomial<double>> convert_state(const double&, const std::vector<taylor_polynomial<double>>&, const double&, const StateTypes&, const StateTypes&, const std::shared_ptr<const BasePerturbationPolynomial<double, taylor_polynomial>>);
+    template std::vector<chebyshev_polynomial<double>> convert_state(const double&, const std::vector<chebyshev_polynomial<double>>&, const double&, const StateTypes&, const StateTypes&, const std::shared_ptr<const BasePerturbationPolynomial<double, chebyshev_polynomial>>);
 
     #endif
 

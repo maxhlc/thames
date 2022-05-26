@@ -23,6 +23,7 @@ SOFTWARE.
 */
 
 #include <array>
+#include <memory>
 #include <vector>
 
 #include <boost/numeric/odeint.hpp>
@@ -46,7 +47,7 @@ namespace thames::propagators::basepropagator {
     using thames::propagators::options::PropagatorOptions;
 
     template<class T>
-    BasePropagator<T>::BasePropagator(const T& mu, BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors, const StateTypes propstatetype) : m_mu(mu), m_perturbation(perturbation), m_factors(factors), m_propstatetype(propstatetype) {
+    BasePropagator<T>::BasePropagator(const T& mu, const std::shared_ptr<BasePerturbation<T>> perturbation, const DimensionalFactors<T>* factors, const StateTypes propstatetype) : m_mu(mu), m_perturbation(perturbation), m_factors(factors), m_propstatetype(propstatetype) {
 
     }
 
@@ -89,7 +90,7 @@ namespace thames::propagators::basepropagator {
         const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
 
         // Convert state
-        state = thames::conversions::universal::convert_state(tstart, state, mu, statetype, m_propstatetype, m_perturbation);
+        state = thames::conversions::universal::convert_state<T>(tstart, state, mu, statetype, m_propstatetype, m_perturbation);
 
         // Declare state derivative
         auto func = [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);};
@@ -111,7 +112,7 @@ namespace thames::propagators::basepropagator {
         }
 
         // Convert state
-        state = thames::conversions::universal::convert_state(tend, state, mu, m_propstatetype, statetype, m_perturbation);
+        state = thames::conversions::universal::convert_state<T>(tend, state, mu, m_propstatetype, statetype, m_perturbation);
 
         // Re-dimensionalise
         if (options.isNonDimensional) {
@@ -157,7 +158,7 @@ namespace thames::propagators::basepropagator {
         const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
 
         // Convert state
-        state = thames::conversions::universal::convert_state(tstart, state, mu, statetype, m_propstatetype, m_perturbation);
+        state = thames::conversions::universal::convert_state<T>(tstart, state, mu, statetype, m_propstatetype, m_perturbation);
 
         // Declare state derivative
         auto func = [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);};
@@ -179,7 +180,7 @@ namespace thames::propagators::basepropagator {
         }
 
         // Convert state
-        state = thames::conversions::universal::convert_state(tend, state, mu, m_propstatetype, statetype, m_perturbation);
+        state = thames::conversions::universal::convert_state<T>(tend, state, mu, m_propstatetype, statetype, m_perturbation);
 
         // Re-dimensionalise
         if (options.isNonDimensional) {
@@ -203,7 +204,7 @@ namespace thames::propagators::basepropagator {
     using namespace smartuq::polynomial;
 
     template<class T, template<class> class P>
-    BasePropagatorPolynomialDynamics<T, P>::BasePropagatorPolynomialDynamics(std::string name, const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : smartuq::dynamics::base_dynamics<P<T>>(name), m_mu(mu), m_perturbation(perturbation), m_factors(factors) {
+    BasePropagatorPolynomialDynamics<T, P>::BasePropagatorPolynomialDynamics(std::string name, const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const DimensionalFactors<T>* factors) : smartuq::dynamics::base_dynamics<P<T>>(name), m_mu(mu), m_perturbation(perturbation), m_factors(factors) {
 
     }
 
@@ -222,7 +223,7 @@ namespace thames::propagators::basepropagator {
     template class BasePropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
-    BasePropagatorPolynomial<T, P>::BasePropagatorPolynomial(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors, BasePropagatorPolynomialDynamics<T, P>* const dyn, const StateTypes propstatetype) : m_mu(mu), m_perturbation(perturbation), m_factors(factors), m_dyn(dyn), m_propstatetype(propstatetype) {
+    BasePropagatorPolynomial<T, P>::BasePropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const DimensionalFactors<T>* factors, BasePropagatorPolynomialDynamics<T, P>* const dyn, const StateTypes propstatetype) : m_mu(mu), m_perturbation(perturbation), m_factors(factors), m_dyn(dyn), m_propstatetype(propstatetype) {
 
     }
 
@@ -250,7 +251,7 @@ namespace thames::propagators::basepropagator {
         const T mu = (options.isNonDimensional) ? m_mu/m_factors->grav : m_mu;
 
         // Convert state
-        state = thames::conversions::universal::convert_state(tstart, state, mu, statetype, m_propstatetype, m_perturbation);
+        state = thames::conversions::universal::convert_state<T, P>(tstart, state, mu, statetype, m_propstatetype, m_perturbation);
         
         // Calculate number of steps based on time step
         unsigned int nstep = (int) ceil((tend - tstart)/tstep);
@@ -274,7 +275,7 @@ namespace thames::propagators::basepropagator {
         }
 
         // Convert state
-        statefinal = thames::conversions::universal::convert_state(tend, statefinal, mu, m_propstatetype, statetype, m_perturbation);
+        statefinal = thames::conversions::universal::convert_state<T, P>(tend, statefinal, mu, m_propstatetype, statetype, m_perturbation);
         
         // Re-dimensionalise
         if (options.isNonDimensional) {

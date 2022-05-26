@@ -24,6 +24,7 @@ SOFTWARE.
 
 #include <array>
 #include <cmath>
+#include <memory>
 #include <vector>
 
 #include <boost/numeric/odeint.hpp>
@@ -55,7 +56,7 @@ namespace thames::propagators {
     ///////////
 
     template<class T>
-    CowellPropagator<T>::CowellPropagator(const T& mu, BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagator<T>(mu, perturbation, factors, CARTESIAN) {
+    CowellPropagator<T>::CowellPropagator(const T& mu, const std::shared_ptr<BasePerturbation<T>> perturbation, const DimensionalFactors<T>* factors) : BasePropagator<T>(mu, perturbation, factors, CARTESIAN) {
 
     }
 
@@ -138,7 +139,7 @@ namespace thames::propagators {
     using thames::propagators::basepropagator::BasePropagatorPolynomialDynamics;
 
     template<class T, template<class> class P>
-    CowellPropagatorPolynomialDynamics<T, P>::CowellPropagatorPolynomialDynamics(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomialDynamics<T, P>("Cowell", mu, perturbation, factors) {
+    CowellPropagatorPolynomialDynamics<T, P>::CowellPropagatorPolynomialDynamics(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomialDynamics<T, P>("Cowell", mu, perturbation, factors) {
 
     }
 
@@ -179,7 +180,7 @@ namespace thames::propagators {
     template class CowellPropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
-    CowellPropagatorPolynomial<T, P>::CowellPropagatorPolynomial(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomial<T, P>(mu, perturbation, factors, new CowellPropagatorPolynomialDynamics<T, P>(mu, perturbation, factors), CARTESIAN) {
+    CowellPropagatorPolynomial<T, P>::CowellPropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const DimensionalFactors<T>* factors) : BasePropagatorPolynomial<T, P>(mu, perturbation, factors, new CowellPropagatorPolynomialDynamics<T, P>(mu, perturbation, factors), CARTESIAN) {
 
     }
 

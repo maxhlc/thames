@@ -26,6 +26,7 @@ SOFTWARE.
 #define THAMES_PROPAGATORS_COWELL
 
 #include <array>
+#include <memory>
 #include <vector>
 
 #ifdef THAMES_USE_SMARTUQ
@@ -52,7 +53,7 @@ namespace thames::propagators {
      * @brief Propagator object for Cowell's method.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-13
+     * @date 2022-05-26
      * 
      * @tparam T Numeric type.
      */
@@ -82,13 +83,13 @@ namespace thames::propagators {
              * @brief Construct a new Cowell Propagator object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-13
+             * @date 2022-05-26
              * 
              * @param[in] mu Gravitational parameter. 
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            CowellPropagator(const T& mu, BasePerturbation<T>* const perturbation, const DimensionalFactors<T>* factors);
+            CowellPropagator(const T& mu, std::shared_ptr<BasePerturbation<T>> perturbation, const DimensionalFactors<T>* factors);
 
             ////////////
             // Arrays //
@@ -138,7 +139,7 @@ namespace thames::propagators {
      * @brief Object for Cowell's method dynamics with polynomials, compatible with the SMART-UQ schema.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-13
+     * @date 2022-05-26
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -168,13 +169,13 @@ namespace thames::propagators {
              * @brief Construct a new Cowell Propagator Polynomial Dynamics object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-13
+             * @date 2022-05-26
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            CowellPropagatorPolynomialDynamics(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors);
+            CowellPropagatorPolynomialDynamics(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const DimensionalFactors<T>* factors);
 
             /**
              * @brief Destroy the Cowell Propagator Polynomial Dynamics object.
@@ -204,7 +205,7 @@ namespace thames::propagators {
      * @brief Propagator object for Cowell's method with polynomials.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-13
+     * @date 2022-05-26
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -232,13 +233,13 @@ namespace thames::propagators {
              * @brief Construct a new Cowell Propagator Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-13
+             * @date 2022-05-26
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            CowellPropagatorPolynomial(const T& mu, BasePerturbationPolynomial<T, P>* const perturbation, const DimensionalFactors<T>* factors);
+            CowellPropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const DimensionalFactors<T>* factors);
 
             /**
              * @brief Destroy the Cowell Propagator Polynomial object
