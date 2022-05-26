@@ -33,7 +33,7 @@ SOFTWARE.
 namespace thames::io::json {
 
     /**
-     * @brief Struct to store JSON file metadata
+     * @brief Structure to store JSON file metadata
      * 
      * @author Max Hallgarten La Casta
      * @date 2022-05-24
@@ -60,7 +60,7 @@ namespace thames::io::json {
     };
 
     /**
-     * @brief Struct to store spacecraft parameters
+     * @brief Structure to store spacecraft parameters
      * 
      * @author Max Hallgarten La Casta
      * @date 2022-05-24
@@ -80,7 +80,7 @@ namespace thames::io::json {
     };
 
     /**
-     * @brief Struct to store geopotential model parameters
+     * @brief Structure to store geopotential model parameters
      * 
      * @author Max Hallgarten La Casta
      * @date 2022-05-24
@@ -104,7 +104,7 @@ namespace thames::io::json {
     };
 
     /**
-     * @brief Struct to store atmospheric model parameters
+     * @brief Structure to store atmospheric model parameters
      * 
      * @author Max Hallgarten La Casta
      * @date 2022-05-24
@@ -122,7 +122,7 @@ namespace thames::io::json {
     };
 
     /**
-     * @brief Struct to store perturbation model parameters
+     * @brief Structure to store perturbation model parameters
      * 
      * @author Max Hallgarten La Casta
      * @date 2022-05-24
@@ -140,7 +140,7 @@ namespace thames::io::json {
     };
 
     /**
-     * @brief Struct to store propagator parameters
+     * @brief Structure to store propagator parameters
      * 
      * @author Max Hallgarten La Casta
      * @date 2022-05-24
@@ -161,7 +161,7 @@ namespace thames::io::json {
     };
 
     /**
-     * @brief Struct to store integrator parameters
+     * @brief Structure to store integrator parameters
      * 
      * @author Max Hallgarten La Casta
      * @date 2022-05-24
@@ -189,10 +189,8 @@ namespace thames::io::json {
         NLOHMANN_DEFINE_TYPE_INTRUSIVE(IntegratorParameters, isFixedStep, intermediateOutput, timeStep, absoluteTolerance, relativeTolerance)
     };
 
-    #ifdef THAMES_USE_SMARTUQ
-
     /**
-     * @brief Struct to store polynomial parameters
+     * @brief Structure to store polynomial parameters
      * 
      * @author Max Hallgarten La Casta
      * @date 2022-05-24
@@ -212,10 +210,8 @@ namespace thames::io::json {
         NLOHMANN_DEFINE_TYPE_INTRUSIVE(PolynomialParameters, isEnabled, type, maxDegree)
     };
 
-    #endif
-
     /**
-     * @brief Struct to store state parameters
+     * @brief Structure to store state parameters
      * 
      * @author Max Hallgarten La Casta
      * @date 2022-05-24
@@ -238,82 +234,65 @@ namespace thames::io::json {
     };
 
     /**
-     * @brief Load parameters from JSON
+     * @brief Structure to store all parameters
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-24
+     * @date 2022-05-26
      * 
      * @tparam T Numeric type
-     * @param[in] filepath Input file path
-     * @param[out] metadata File metadata
-     * @param[out] spacecraft Spacecraft parameters
-     * @param[out] perturbation Perturbation parameters
-     * @param[out] propagator Propagator parameters
-     * @param[out] integrator Integrator parameters
-     * @param[out] state State parameters
      */
     template<class T>
-    void load(const std::string& filepath, Metadata& metadata, SpacecraftParameters<T>& spacecraft, PerturbationParameters& perturbation, PropagatorParameters& propagator, IntegratorParameters<T>& integrator, StateParameters<T>& state);
+    struct Parameters {
+        /// File metadata
+        Metadata metadata;
 
-    /**
-     * @brief Save parameters to JSON
-     * 
-     * @author Max Hallgarten La Casta
-     * @date 2022-05-24
-     * 
-     * @tparam T Numeric type
-     * @param[in] filepath Input file path
-     * @param[in] metadata File metadata
-     * @param[in] spacecraft Spacecraft parameters
-     * @param[in] perturbation Perturbation parameters
-     * @param[in] propagator Propagator parameters
-     * @param[in] integrator Integrator parameters
-     * @param[in] states State parameters
-     */
-    template<class T>
-    void save(const std::string& filepath, const Metadata& metadata, const SpacecraftParameters<T>& spacecraft, const PerturbationParameters& perturbation, const PropagatorParameters& propagator, const IntegratorParameters<T>& integrator, const std::vector<StateParameters<T>>& states);
+        /// Spacecraft parameters
+        SpacecraftParameters<T> spacecraft;
 
-    #ifdef THAMES_USE_SMARTUQ
+        /// Perturbation parameters
+        PerturbationParameters perturbation;
+
+        /// Propagator parameters
+        PropagatorParameters propagator;
+
+        /// Integrator parameters
+        IntegratorParameters<T> integrator;
+
+        /// Polynomial parameters
+        PolynomialParameters polynomial;
+
+        /// State parameters
+        std::vector<StateParameters<T>> states;
+
+        // Macro to generate boilerplate to/from JSON
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(Parameters, metadata, spacecraft, perturbation, propagator, integrator, polynomial, states)
+    };
 
     /**
      * @brief Load parameters from JSON
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-24
+     * @date 2022-05-26
      * 
      * @tparam T Numeric type
      * @param[in] filepath Input file path
-     * @param[out] metadata File metadata
-     * @param[out] spacecraft Spacecraft parameters
-     * @param[out] perturbation Perturbation parameters
-     * @param[out] propagator Propagator parameters
-     * @param[out] integrator Integrator parameters
-     * @param[out] polynomial Polynomial parameters
-     * @param[out] state State parameters
+     * @param[out] parameters Parameters
      */
     template<class T>
-    void load(const std::string& filepath, Metadata& metadata, SpacecraftParameters<T>& spacecraft, PerturbationParameters& perturbation, PropagatorParameters& propagator, IntegratorParameters<T>& integrator, PolynomialParameters& polynomial, StateParameters<T>& state);
+    void load(const std::string& filepath, Parameters<T>& parameters);
 
     /**
      * @brief Save parameters to JSON
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-24
+     * @date 2022-05-26
      * 
      * @tparam T Numeric type
      * @param[in] filepath Input file path
-     * @param[in] metadata File metadata
-     * @param[in] spacecraft Spacecraft parameters
-     * @param[in] perturbation Perturbation parameters
-     * @param[in] propagator Propagator parameters
-     * @param[in] integrator Integrator parameters
-     * @param[in] polynomial Polynomial parameters
-     * @param[in] states State parameters
+     * @param[in] parameters Parameters
      */
     template<class T>
-    void save(const std::string& filepath, const Metadata& metadata, const SpacecraftParameters<T>& spacecraft, const PerturbationParameters& perturbation, const PropagatorParameters& propagator, const IntegratorParameters<T>& integrator, const PolynomialParameters& polynomial, const std::vector<StateParameters<T>>& states);
-
-    #endif
+    void save(const std::string& filepath, const Parameters<T>& parameters);
 
 }
 
