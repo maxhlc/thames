@@ -42,7 +42,7 @@ int main(int argc, char **argv){
     std::string filepathin(argv[1]), filepathout(argv[2]);
 
     // Load sample states
-    double tstart, tend;
+    double tstart, tend, tstep = 30;
     int scid, degree;
     thames::constants::statetypes::StateTypes statetype;
     std::vector<std::vector<double>> states;
@@ -53,30 +53,17 @@ int main(int argc, char **argv){
     options.atol = atol;
     options.rtol = rtol;
 
-    // Calculate non-dimensionalisation factors based on first point
-    auto factors = std::make_shared<thames::conversions::dimensional::DimensionalFactors<double>>(thames::conversions::dimensional::calculate_factors(states[0], mu));
+    // Declare factors
+    auto factors = std::make_shared<thames::conversions::dimensional::DimensionalFactors<double>>();
 
-    // Declare propagator and perturbations
+    // Declare perturbation
     auto perturbation = std::make_shared<thames::perturbations::geopotential::J2<double>>(mu, J2, radius, factors);
+
+    // Declare propagator
     thames::propagators::GEqOEPropagator<double> propagator(mu, perturbation, factors);
 
-    // Declare vector for propagated states
-    std::vector<std::vector<double>> states_propagated(states.size(), std::vector<double>(6));
-
-    // Declare temporary vectors
-    std::vector<double> state(6), state_propagated(6);
-
-    // Iterate through samples
-    for(std::size_t ii=0; ii<states.size(); ii++){
-        // Extract state
-        state = states[ii];
-
-        // Propagate state
-        state_propagated = propagator.propagate(tstart, tend, 30, state, options, statetype);   
-
-        // Store propagated state
-        states_propagated[ii] = state_propagated;
-    }
+    // Propagate states
+    std::vector<std::vector<double>> states_propagated = propagator.propagate(tstart, tend, tstep, states, options, statetype);   
 
     // Save propagated states
     thames::io::point::save(filepathout, tstart, tend, scid, statetype, degree, atol, rtol, states_propagated);

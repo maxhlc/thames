@@ -35,10 +35,12 @@ SOFTWARE.
 #endif
 
 #include "../../include/constants/statetypes.h"
+#include "../../include/conversions/cartesian.h"
 #include "../../include/conversions/dimensional.h"
 #include "../../include/conversions/universal.h"
 #include "../../include/propagators/basepropagator.h"
 #include "../../include/propagators/options.h"
+#include "../../include/util/polynomials.h"
 
 namespace thames::propagators::basepropagator {
 
@@ -80,9 +82,15 @@ namespace thames::propagators::basepropagator {
 
         // Non-dimensionalise
         if (options.isNonDimensional) {
+            // Update factors
+            *m_factors = thames::conversions::dimensional::calculate_factors(state, m_mu);
+
+            // Scale times
             tstart /= m_factors->time;
             tend /= m_factors->time;
             tstep /= m_factors->time;
+
+            // Scale state
             state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
         }
 
@@ -148,9 +156,15 @@ namespace thames::propagators::basepropagator {
 
         // Non-dimensionalise
         if (options.isNonDimensional) {
+            // Update factors
+            *m_factors = thames::conversions::dimensional::calculate_factors(state, m_mu);
+
+            // Scale times
             tstart /= m_factors->time;
             tend /= m_factors->time;
             tstep /= m_factors->time;
+
+            // Scale state
             state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
         }
 
@@ -192,6 +206,54 @@ namespace thames::propagators::basepropagator {
 
     }
 
+    template<class T>
+    std::vector<std::vector<T>> BasePropagator<T>::propagate(const std::vector<T> tvec, const T tstep, const std::vector<T> state, const PropagatorOptions<T> options, const StateTypes statetype) {
+        // Declare output vectors
+        std::vector<std::vector<T>> states_propagated(tvec.size());
+
+        // Append initial state to output
+        states_propagated[0] = state;
+
+        // Propagate state between times
+        for (std::size_t ii = 0; ii < tvec.size() - 1; ii++) {
+            states_propagated[ii+1] = propagate(tvec[ii], tvec[ii+1], tstep, states_propagated[ii], options, statetype);
+        }
+
+        // Return output vector
+        return states_propagated;
+    }
+
+    template<class T>
+    std::vector<std::vector<T>> BasePropagator<T>::propagate(const T tstart, const T tend, const T tstep, const std::vector<std::vector<T>> states, const PropagatorOptions<T> options, const StateTypes statetype) {
+        // Declare output states
+        std::vector<std::vector<T>> states_propagated(states);
+
+        // Iterate through states
+        for (std::vector<T>& state : states_propagated) {
+            state = propagate(tstart, tend, tstep, state, options, statetype);
+        }
+
+        // Return states
+        return states_propagated;
+    }
+
+    template<class T>
+    std::vector<std::vector<std::vector<T>>> propagate(const std::vector<T> tvec, const T tstep, const std::vector<std::vector<T>> states, const PropagatorOptions<T> options, const StateTypes statetype) {
+        // Declare output vectors
+        std::vector<std::vector<std::vector<T>>> states_propagated(tvec.size());
+
+        // Append initial state to output
+        states_propagated[0] = states;
+
+        // Propagate state between times
+        for (std::size_t ii = 0; ii < tvec.size() - 1; ii++) {
+            states_propagated[ii+1] = propagate(tvec[ii], tvec[ii+1], tstep, states_propagated[ii], options, statetype);
+        }
+
+        // Return output vector
+        return states;
+    }
+
     template class BasePropagator<double>;
 
     /////////////////
@@ -228,7 +290,7 @@ namespace thames::propagators::basepropagator {
     }
 
     template<class T, template<class> class P>
-    std::vector<P<T>> BasePropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, PropagatorOptions<T> options, StateTypes statetype) {
+    std::vector<P<T>> BasePropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, const PropagatorOptions<T> options, const StateTypes statetype) {
         // Check that input is Cartesian state
         if(statetype != thames::constants::statetypes::CARTESIAN)
             throw std::runtime_error("Unsupported state type");
@@ -241,9 +303,15 @@ namespace thames::propagators::basepropagator {
         
         // Non-dimensionalise
         if (options.isNonDimensional) {
+            // Update factors
+            *m_factors = thames::conversions::dimensional::calculate_factors(state, m_mu);
+
+            // Scale times
             tstart /= m_factors->time;
             tend /= m_factors->time;
             tstep /= m_factors->time;
+
+            // Scale state
             state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
         }
 
@@ -284,6 +352,80 @@ namespace thames::propagators::basepropagator {
 
         // Return final state
         return statefinal;        
+    }
+
+    template<class T, template <class> class P>
+    std::vector<std::vector<P<T>>> BasePropagatorPolynomial<T, P>::propagate(const std::vector<T> tvec, const T tstep, const std::vector<P<T>> state, const PropagatorOptions<T> options, const StateTypes statetype) {
+        // Declare output vectors
+        std::vector<std::vector<P<T>>> states_propagated(tvec.size());
+
+        // Append initial states to output
+        states_propagated[0] = state;
+
+        // Propagate state between times
+        for (std::size_t ii = 0; ii < tvec.size() - 1; ii++) {
+            states_propagated[ii+1] = propagate(tvec[ii], tvec[ii+1], tstep, states[ii], options, statetype);
+        }
+
+        // Return output vector
+        return states_propagated;
+    }
+
+    template<class T, template <class> class P>
+    std::vector<std::vector<T>> BasePropagatorPolynomial<T, P>::propagate(const T tstart, const T tend, const T tstep, std::vector<std::vector<T>> states, const PropagatorOptions<T> options, const StateTypes statetype, const unsigned int degree) {
+        // Check that input is Cartesian state
+        if(statetype != thames::constants::statetypes::CARTESIAN)
+            throw std::runtime_error("Unsupported state type");
+
+        // Generate polynomials
+        std::vector<P<T>> statepolynomial;
+        std::vector<T> lower, upper;
+        thames::conversions::cartesian::cartesian_to_polynomial(states, degree, statepolynomial, lower, upper);
+
+        // Calculate sample points
+        std::vector<std::vector<T>> samples = thames::conversions::cartesian::state_to_sample(states, lower, upper);
+
+        // Propagate polynomials
+        statepolynomial = propagate(tstart, tend, tstep, statepolynomial, options, statetype);
+ 
+        // Sample polynomials
+        states = thames::util::polynomials::evaluate_polynomials(statepolynomial, samples);
+
+        // Return propgated states
+        return states;
+    }
+
+    template<class T, template <class> class P>
+    std::vector<std::vector<std::vector<T>>> BasePropagatorPolynomial<T, P>::propagate(const std::vector<T> tvec, const T tstep, const std::vector<std::vector<T>> states, const PropagatorOptions<T> options, const StateTypes statetype, const unsigned int degree) {
+        // Check that input is Cartesian state
+        if(statetype != thames::constants::statetypes::CARTESIAN)
+            throw std::runtime_error("Unsupported state type");
+
+        // Declare output vectors
+        std::vector<std::vector<std::vector<T>>> states_propagated(tvec.size());
+
+        // Append initial states to output
+        states_propagated[0] = states;
+
+        // Generate polynomials
+        std::vector<P<T>> statepolynomial;
+        std::vector<T> lower, upper;
+        thames::conversions::cartesian::cartesian_to_polynomial(states, degree, statepolynomial, lower, upper);
+
+        // Calculate sample points
+        std::vector<std::vector<T>> samples = thames::conversions::cartesian::state_to_sample(states, lower, upper);
+
+        // Propagate state between times
+        for (std::size_t ii = 0; ii < tvec.size() - 1; ii++) {
+            // Update polynomials
+            statepolynomial = propagate(tvec[ii], tvec[ii+1], tstep, statepolynomial, options, statetype);
+
+            // Sample polynomials and store
+            states_propagated[ii+1] = thames::util::polynomials::evaluate_polynomials(statepolynomial, samples);
+        }
+
+        // Return propagated states
+        return states_propagated;        
     }
 
     template class BasePropagatorPolynomial<double, taylor_polynomial>;

@@ -53,26 +53,17 @@ int main(int argc, char **argv){
     options.atol = atol;
     options.rtol = rtol;
 
-    // Generate polynomials
-    std::vector<smartuq::polynomial::taylor_polynomial<double>> RVpolynomial, RVpolynomial_propagated;
-    std::vector<double> lower, upper;
-    thames::conversions::cartesian::cartesian_to_polynomial(states, degree, RVpolynomial, lower, upper);
+    // Declare factors
+    auto factors = std::make_shared<thames::conversions::dimensional::DimensionalFactors<double>>();
 
-    // Calculate sample points
-    std::vector<std::vector<double>> samples = thames::conversions::cartesian::state_to_sample(states, lower, upper);
-
-    // Non-dimensionalise polynomials
-    auto factors = std::make_shared<thames::conversions::dimensional::DimensionalFactors<double>>(thames::conversions::dimensional::calculate_factors(RVpolynomial, mu));
-
-    // Declare propagator and perturbation
+    // Declare perturbation
     auto perturbation = std::make_shared<thames::perturbations::geopotential::J2Polynomial<double, smartuq::polynomial::taylor_polynomial>>(mu, J2, radius, factors);
+
+    // Declare propagator
     thames::propagators::CowellPropagatorPolynomial<double, smartuq::polynomial::taylor_polynomial> propagator(mu, perturbation, factors);
 
-    // Propagate polynomials
-    RVpolynomial_propagated = propagator.propagate(tstart, tend, tstep, RVpolynomial, options, statetype);
-
-    // Sample polynomials
-    std::vector<std::vector<double>> states_propagated = thames::util::polynomials::evaluate_polynomials(RVpolynomial_propagated, samples);
+    // Propagate states
+    std::vector<std::vector<double>> states_propagated = propagator.propagate(tstart, tend, tstep, states, options, statetype, degree);
 
     // Save propagated states
     thames::io::point::save(filepathout, tstart, tend, scid, statetype, degree, atol, rtol, states_propagated);

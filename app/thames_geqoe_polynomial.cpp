@@ -53,11 +53,13 @@ int main(int argc, char **argv){
     options.atol = atol;
     options.rtol = rtol;
 
-    // Non-dimensionalise polynomials
-    auto factors = std::make_shared<thames::conversions::dimensional::DimensionalFactors<double>>(thames::conversions::dimensional::calculate_factors(RVpolynomial, mu));
+    // Declare factors
+    auto factors = std::make_shared<thames::conversions::dimensional::DimensionalFactors<double>>();
 
-    // Declare propagator and perturbation
+    // Declare perturbation
     auto perturbation = std::make_shared<thames::perturbations::geopotential::J2Polynomial<double, smartuq::polynomial::taylor_polynomial>>(mu, J2, radius, factors);
+
+    // Declare propagator
     thames::propagators::GEqOEPropagatorPolynomial<double, smartuq::polynomial::taylor_polynomial> propagator(mu, perturbation, factors);
 
     // Propagate polynomials
