@@ -364,7 +364,7 @@ namespace thames::propagators::basepropagator {
 
         // Propagate state between times
         for (std::size_t ii = 0; ii < tvec.size() - 1; ii++) {
-            states_propagated[ii+1] = propagate(tvec[ii], tvec[ii+1], tstep, states[ii], options, statetype);
+            states_propagated[ii+1] = propagate(tvec[ii], tvec[ii+1], tstep, states_propagated[ii], options, statetype);
         }
 
         // Return output vector
