@@ -63,7 +63,7 @@ namespace thames::io::json {
      * @brief Structure to store spacecraft parameters
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-24
+     * @date 2022-05-29
      * 
      * @tparam T Numeric type
      */
@@ -75,8 +75,11 @@ namespace thames::io::json {
         /// Spacecraft drag area [km^2]
         T dragArea;
 
+        /// Spacecraft drag coefficient [-]
+        T Cd;
+
         // Macro to generate boilerplate to/from JSON
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(SpacecraftParameters, mass, dragArea)
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(SpacecraftParameters, mass, dragArea, Cd)
     };
 
     /**
@@ -143,7 +146,7 @@ namespace thames::io::json {
      * @brief Structure to store propagator parameters
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-26
+     * @date 2022-05-29
      * 
      * @tparam T Numeric type
      */
@@ -158,8 +161,11 @@ namespace thames::io::json {
         /// Propagation equations
         std::string equations;
 
+        /// Propagate in non-dimensional form
+        bool isNonDimensional;
+
         // Macro to generate boilerplate to/from JSON
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(PropagatorParameters, startTime, endTime, equations)
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(PropagatorParameters, startTime, endTime, equations, isNonDimensional)
     };
 
     /**
