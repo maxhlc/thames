@@ -49,7 +49,7 @@ namespace thames::propagators {
      * @brief Propagator object for GEqOE.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-26
+     * @date 2022-05-27
      * 
      * @tparam T Numeric type.
      */
@@ -79,13 +79,13 @@ namespace thames::propagators {
              * @brief Construct a new GEqOE Propagator object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-26
+             * @date 2022-05-27
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            GEqOEPropagator(const T& mu, const std::shared_ptr<BasePerturbation<T>> perturbation, const DimensionalFactors<T>* factors);
+            GEqOEPropagator(const T& mu, const std::shared_ptr<BasePerturbation<T>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors);
 
             ////////////
             // Arrays //
@@ -135,7 +135,7 @@ namespace thames::propagators {
      * @brief Object for GEqOE dynamics with polynomials, compatible with the SMART-UQ schema.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-26
+     * @date 2022-05-27
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -165,13 +165,13 @@ namespace thames::propagators {
              * @brief Construct a new GEqOE Propagator Polynomial Dynamics object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-26
+             * @date 2022-05-27
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            GEqOEPropagatorPolynomialDynamics(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const DimensionalFactors<T>* factors);
+            GEqOEPropagatorPolynomialDynamics(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const std::shared_ptr<const DimensionalFactors<T>> factors);
 
             /**
              * @brief Destroy the GEqOE Propagator Polynomial Dynamics object.
@@ -201,7 +201,7 @@ namespace thames::propagators {
      * @brief Propagator object for GEqOE with polynomials.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-26
+     * @date 2022-05-27
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -229,13 +229,13 @@ namespace thames::propagators {
              * @brief Construct a new GEqOE Propagator Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-26
+             * @date 2022-05-27
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            GEqOEPropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const DimensionalFactors<T>* factors);
+            GEqOEPropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors);
 
             /**
              * @brief Destroy the GEqOE Propagator Polynomial object

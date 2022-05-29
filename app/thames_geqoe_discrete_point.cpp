@@ -54,11 +54,11 @@ int main(int argc, char **argv){
     options.rtol = rtol;
 
     // Calculate non-dimensionalisation factors based on first point
-    thames::conversions::dimensional::DimensionalFactors<double> factors = thames::conversions::dimensional::calculate_factors(states[0], mu);
+    auto factors = std::make_shared<thames::conversions::dimensional::DimensionalFactors<double>>(thames::conversions::dimensional::calculate_factors(states[0], mu));
 
     // Declare propagator and perturbations
-    auto perturbation = std::make_shared<thames::perturbations::geopotential::J2<double>>(mu, J2, radius, &factors);
-    thames::propagators::GEqOEPropagator<double> propagator(mu, perturbation, &factors);
+    auto perturbation = std::make_shared<thames::perturbations::geopotential::J2<double>>(mu, J2, radius, factors);
+    thames::propagators::GEqOEPropagator<double> propagator(mu, perturbation, factors);
 
     // Declare vector for propagated states
     std::vector<std::vector<double>> states_propagated(states.size(), std::vector<double>(6));

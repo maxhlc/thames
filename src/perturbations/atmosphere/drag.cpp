@@ -22,7 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <array>
 #include <cmath>
+#include <memory>
 
 #ifdef THAMES_USE_SMARTUQ
 #include "../../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
@@ -43,7 +45,7 @@ namespace thames::perturbations::atmosphere::drag {
     using namespace thames::vector::arithmeticoverloads;
 
     template<class T>
-    Drag<T>::Drag(const T& radius, const T& w, const T& Cd, const T& A, const T& m, const AtmosphereModels& model, const DimensionalFactors<T>* factors) : BasePerturbation<T>(factors), m_radius(radius), m_w(w), m_Cd(Cd), m_A(A), m_m(m), m_model(AtmosphereModel<T>(model)) {
+    Drag<T>::Drag(const T& radius, const T& w, const T& Cd, const T& A, const T& m, const AtmosphereModels& model, const std::shared_ptr<const DimensionalFactors<T>> factors) : BasePerturbation<T>(factors), m_radius(radius), m_w(w), m_Cd(Cd), m_A(A), m_m(m), m_model(AtmosphereModel<T>(model)) {
 
     }
 
@@ -139,7 +141,7 @@ namespace thames::perturbations::atmosphere::drag {
     using namespace smartuq::polynomial;
 
     template<class T, template <class> class P>
-    DragPolynomial<T, P>::DragPolynomial(const T& radius, const T& w, const T& Cd, const T& A, const T& m, const AtmosphereModels& model, const DimensionalFactors<T>* factors) : BasePerturbationPolynomial<T, P>(factors), m_radius(radius), m_w(w), m_Cd(Cd), m_A(A), m_m(m), m_model(AtmosphereModelPolynomial<T, P>(model)) {
+    DragPolynomial<T, P>::DragPolynomial(const T& radius, const T& w, const T& Cd, const T& A, const T& m, const AtmosphereModels& model, const std::shared_ptr<const DimensionalFactors<T>> factors) : BasePerturbationPolynomial<T, P>(factors), m_radius(radius), m_w(w), m_Cd(Cd), m_A(A), m_m(m), m_model(AtmosphereModelPolynomial<T, P>(model)) {
 
     }
 

@@ -47,7 +47,7 @@ namespace thames::propagators::basepropagator {
     using thames::propagators::options::PropagatorOptions;
 
     template<class T>
-    BasePropagator<T>::BasePropagator(const T& mu, const std::shared_ptr<BasePerturbation<T>> perturbation, const DimensionalFactors<T>* factors, const StateTypes propstatetype) : m_mu(mu), m_perturbation(perturbation), m_factors(factors), m_propstatetype(propstatetype) {
+    BasePropagator<T>::BasePropagator(const T& mu, const std::shared_ptr<BasePerturbation<T>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors, const StateTypes propstatetype) : m_mu(mu), m_perturbation(perturbation), m_factors(factors), m_propstatetype(propstatetype) {
 
     }
 
@@ -204,7 +204,7 @@ namespace thames::propagators::basepropagator {
     using namespace smartuq::polynomial;
 
     template<class T, template<class> class P>
-    BasePropagatorPolynomialDynamics<T, P>::BasePropagatorPolynomialDynamics(std::string name, const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const DimensionalFactors<T>* factors) : smartuq::dynamics::base_dynamics<P<T>>(name), m_mu(mu), m_perturbation(perturbation), m_factors(factors) {
+    BasePropagatorPolynomialDynamics<T, P>::BasePropagatorPolynomialDynamics(std::string name, const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const std::shared_ptr<const DimensionalFactors<T>> factors) : smartuq::dynamics::base_dynamics<P<T>>(name), m_mu(mu), m_perturbation(perturbation), m_factors(factors) {
 
     }
 
@@ -223,7 +223,7 @@ namespace thames::propagators::basepropagator {
     template class BasePropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
-    BasePropagatorPolynomial<T, P>::BasePropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const DimensionalFactors<T>* factors, BasePropagatorPolynomialDynamics<T, P>* const dyn, const StateTypes propstatetype) : m_mu(mu), m_perturbation(perturbation), m_factors(factors), m_dyn(dyn), m_propstatetype(propstatetype) {
+    BasePropagatorPolynomial<T, P>::BasePropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors, BasePropagatorPolynomialDynamics<T, P>* const dyn, const StateTypes propstatetype) : m_mu(mu), m_perturbation(perturbation), m_factors(factors), m_dyn(dyn), m_propstatetype(propstatetype) {
 
     }
 

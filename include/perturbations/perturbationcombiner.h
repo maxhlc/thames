@@ -39,7 +39,7 @@ namespace thames::perturbations::perturbationcombiner {
      * @brief Class to combine multiple perturbations
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-20
+     * @date 2022-05-27
      * 
      * @tparam T Numeric type
      */
@@ -63,22 +63,22 @@ namespace thames::perturbations::perturbationcombiner {
              * @brief Construct a new Perturbation Combiner object
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-20
+             * @date 2022-05-27
              * 
              * @param[in] factors Dimensional factors
              */
-            PerturbationCombiner(const DimensionalFactors<T>* const factors);
+            PerturbationCombiner(const std::shared_ptr<const DimensionalFactors<T>> factors);
 
             /**
              * @brief Construct a new Perturbation Combiner object
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-20
+             * @date 2022-05-27
              * 
              * @param[in] models Perturbation models
              * @param[in] factors Dimensional factors
              */
-            PerturbationCombiner(const std::vector<std::shared_ptr<BasePerturbation<T>>>& models, const DimensionalFactors<T>* const factors);
+            PerturbationCombiner(const std::vector<std::shared_ptr<BasePerturbation<T>>>& models, const std::shared_ptr<const DimensionalFactors<T>> factors);
 
             /**
              * @brief Destroy the Perturbation Combiner object
@@ -232,7 +232,7 @@ namespace thames::perturbations::perturbationcombiner {
      * @brief Class to combine multiple polynomial perturbations
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-20
+     * @date 2022-05-27
      * 
      * @tparam T Numeric type
      * @tparam P Polynomial type
@@ -257,22 +257,22 @@ namespace thames::perturbations::perturbationcombiner {
              * @brief Construct a new Perturbation Combiner object
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-20
+             * @date 2022-05-27
              * 
              * @param[in] factors Dimensional factors
              */
-            PerturbationCombinerPolynomial(const DimensionalFactors<T>* const factors);
+            PerturbationCombinerPolynomial(const std::shared_ptr<const DimensionalFactors<T>> factors);
 
             /**
              * @brief Construct a new Perturbation Combiner object
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-20
+             * @date 2022-05-27
              * 
              * @param[in] models Perturbation models
              * @param[in] factors Dimensional factors
              */
-            PerturbationCombinerPolynomial(const std::vector<std::shared_ptr<BasePerturbationPolynomial<T, P>>>& models, const DimensionalFactors<T>* const factors);
+            PerturbationCombinerPolynomial(const std::vector<std::shared_ptr<BasePerturbationPolynomial<T, P>>>& models, const std::shared_ptr<const DimensionalFactors<T>> factors);
 
             /**
              * @brief Destroy the Perturbation Combiner object

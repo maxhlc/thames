@@ -54,12 +54,11 @@ int main(int argc, char **argv){
     options.rtol = rtol;
 
     // Calculate non-dimensionalisation factors
-    thames::conversions::dimensional::DimensionalFactors<double> factors;
-    factors = thames::conversions::dimensional::calculate_factors(RVpolynomial, mu);
+    auto factors = std::make_shared<thames::conversions::dimensional::DimensionalFactors<double>>(thames::conversions::dimensional::calculate_factors(RVpolynomial, mu));
 
     // Declare propagator and perturbation
-    auto perturbation = std::make_shared<thames::perturbations::geopotential::J2Polynomial<double, smartuq::polynomial::taylor_polynomial>>(mu, J2, radius, &factors);
-    thames::propagators::CowellPropagatorPolynomial<double, smartuq::polynomial::taylor_polynomial> propagator(mu, perturbation, &factors);
+    auto perturbation = std::make_shared<thames::perturbations::geopotential::J2Polynomial<double, smartuq::polynomial::taylor_polynomial>>(mu, J2, radius, factors);
+    thames::propagators::CowellPropagatorPolynomial<double, smartuq::polynomial::taylor_polynomial> propagator(mu, perturbation, factors);
 
     // Propagate polynomials
     RVpolynomial_propagated = propagator.propagate(tstart, tend, tstep, RVpolynomial, options, statetype);

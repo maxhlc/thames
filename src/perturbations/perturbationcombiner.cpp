@@ -38,13 +38,13 @@ namespace thames::perturbations::perturbationcombiner {
     using namespace thames::vector::arithmeticoverloads;
 
     template<class T>
-    PerturbationCombiner<T>::PerturbationCombiner(const DimensionalFactors<T>* const factors) : BasePerturbation<T>(factors) {
+    PerturbationCombiner<T>::PerturbationCombiner(const std::shared_ptr<const DimensionalFactors<T>> factors) : BasePerturbation<T>(factors) {
         // Ensure all underlying models have same non-dimensional flag
         set_nondimensional(m_isNonDimensional);
     }
 
     template<class T>
-    PerturbationCombiner<T>::PerturbationCombiner(const std::vector<std::shared_ptr<BasePerturbation<T>>>& models, const DimensionalFactors<T>* const factors) : BasePerturbation<T>(factors), m_models(models) {
+    PerturbationCombiner<T>::PerturbationCombiner(const std::vector<std::shared_ptr<BasePerturbation<T>>>& models, const std::shared_ptr<const DimensionalFactors<T>> factors) : BasePerturbation<T>(factors), m_models(models) {
         // Ensure all underlying models have same non-dimensional flag
         set_nondimensional(m_isNonDimensional);
     }
@@ -195,13 +195,13 @@ namespace thames::perturbations::perturbationcombiner {
     using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     template<class T, template <class> class P>
-    PerturbationCombinerPolynomial<T, P>::PerturbationCombinerPolynomial(const DimensionalFactors<T>* const factors) : BasePerturbationPolynomial<T, P>(factors) {
+    PerturbationCombinerPolynomial<T, P>::PerturbationCombinerPolynomial(const std::shared_ptr<const DimensionalFactors<T>> factors) : BasePerturbationPolynomial<T, P>(factors) {
         // Ensure all underlying models have same non-dimensional flag
         set_nondimensional(m_isNonDimensional);
     }
 
     template<class T, template <class> class P>
-    PerturbationCombinerPolynomial<T, P>::PerturbationCombinerPolynomial(const std::vector<std::shared_ptr<BasePerturbationPolynomial<T, P>>>& models, const DimensionalFactors<T>* const factors) : BasePerturbationPolynomial<T, P>(factors), m_models(models) {
+    PerturbationCombinerPolynomial<T, P>::PerturbationCombinerPolynomial(const std::vector<std::shared_ptr<BasePerturbationPolynomial<T, P>>>& models, const std::shared_ptr<const DimensionalFactors<T>> factors) : BasePerturbationPolynomial<T, P>(factors), m_models(models) {
         // Ensure all underlying models have same non-dimensional flag
         set_nondimensional(m_isNonDimensional);
     }

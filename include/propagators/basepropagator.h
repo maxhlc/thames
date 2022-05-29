@@ -54,7 +54,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator object.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-26
+     * @date 2022-05-27
      * 
      * @tparam T Numeric type.
      */
@@ -70,7 +70,7 @@ namespace thames::propagators::basepropagator {
             const std::shared_ptr<BasePerturbation<T>> m_perturbation;
 
             /// Dimensional factors
-            const DimensionalFactors<T>* m_factors;
+            const std::shared_ptr<DimensionalFactors<T>> m_factors;
 
             /// Flag for whether to propagate in non-dimensional form
             bool m_isNonDimensional = false;
@@ -84,14 +84,14 @@ namespace thames::propagators::basepropagator {
              * @brief Construct a new Base Propagator object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-26
+             * @date 2022-05-27
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              * @param[in] propstatetype Type of state used during propagation.
              */
-            BasePropagator(const T& mu, const std::shared_ptr<BasePerturbation<T>> perturbation, const DimensionalFactors<T>* factors, const StateTypes propstatetype);
+            BasePropagator(const T& mu, const std::shared_ptr<BasePerturbation<T>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors, const StateTypes propstatetype);
 
             /**
              * @brief Destroy the Base Propagator object
@@ -180,7 +180,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base object for dynamics with polynomials, compatible with the SMART-UQ schema.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-26
+     * @date 2022-05-27
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -205,7 +205,7 @@ namespace thames::propagators::basepropagator {
             const std::shared_ptr<BasePerturbationPolynomial<T, P>> m_perturbation;
 
             /// Dimensional factors
-            const DimensionalFactors<T>* m_factors;
+            const std::shared_ptr<const DimensionalFactors<T>> m_factors;
 
         public:
 
@@ -213,14 +213,14 @@ namespace thames::propagators::basepropagator {
              * @brief Construct a new Base Propagator Polynomial Dynamics object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-26
+             * @date 2022-05-27
              * 
              * @param[in] name Dynamics object name.
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
              * @param[in] factors Dimensional factors.
              */
-            BasePropagatorPolynomialDynamics(std::string name, const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const DimensionalFactors<T>* factors);
+            BasePropagatorPolynomialDynamics(std::string name, const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const std::shared_ptr<const DimensionalFactors<T>> factors);
 
             /**
              * @brief Destroy the Base Propagator Polynomial Dynamics object.
@@ -250,7 +250,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator abstract object for polynomial propagations.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-26
+     * @date 2022-05-27
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -267,7 +267,7 @@ namespace thames::propagators::basepropagator {
             const std::shared_ptr<BasePerturbationPolynomial<T, P>> m_perturbation;
 
             /// Dimensional factors
-            const DimensionalFactors<T>* m_factors;
+            const std::shared_ptr<DimensionalFactors<T>> m_factors;
 
             /// Dynamics object
             BasePropagatorPolynomialDynamics<T, P>* const m_dyn;
@@ -281,7 +281,7 @@ namespace thames::propagators::basepropagator {
              * @brief Construct a new Base Propagator Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-26
+             * @date 2022-05-27
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
@@ -289,7 +289,7 @@ namespace thames::propagators::basepropagator {
              * @param[in] dyn Dynamics object.
              * @param[in] propstatetype Type of state used during propagation.
              */
-            BasePropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const DimensionalFactors<T>* factors, BasePropagatorPolynomialDynamics<T, P>* const dyn, const StateTypes propstatetype);
+            BasePropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors, BasePropagatorPolynomialDynamics<T, P>* const dyn, const StateTypes propstatetype);
 
             /**
              * @brief Propagation method.

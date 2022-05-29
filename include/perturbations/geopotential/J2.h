@@ -44,7 +44,7 @@ namespace thames::perturbations::geopotential{
      * @brief Class for the perturbation resulting from the J2-term.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-11
+     * @date 2022-05-27
      * 
      * @tparam T Numeric type.
      */
@@ -74,14 +74,14 @@ namespace thames::perturbations::geopotential{
              * @brief Construct a new J2 object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-11
+             * @date 2022-05-27
              * 
              * @param[in] mu Central body gravitational parameter.
              * @param[in] J2 Central body J2-term.
              * @param[in] radius Central body radius.
              * @param[in] factors Dimensional factors.
              */
-            J2(const T& mu, const T& J2, const T& radius, const DimensionalFactors<T>* factors);
+            J2(const T& mu, const T& J2, const T& radius, const std::shared_ptr<const DimensionalFactors<T>> factors);
 
             /**
              * @brief Destroy the J2 object.
@@ -164,7 +164,7 @@ namespace thames::perturbations::geopotential{
      * @brief Class for the perturbation resulting from the J2-term.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-11
+     * @date 2022-05-27
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -195,14 +195,14 @@ namespace thames::perturbations::geopotential{
              * @brief Construct a new J2Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-11
+             * @date 2022-05-27
              * 
              * @param[in] mu Central body gravitational parameter.
              * @param[in] J2 Central body J2-term.
              * @param[in] radius Central body radius.
              * @param[in] factors Dimensional factors.
              */
-            J2Polynomial(const T& mu, const T& J2, const T& radius, const DimensionalFactors<T>* factors);
+            J2Polynomial(const T& mu, const T& J2, const T& radius, const std::shared_ptr<const DimensionalFactors<T>> factors);
 
             /**
              * @brief Destroy the J2Polynomial object

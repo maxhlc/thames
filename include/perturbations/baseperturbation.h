@@ -26,6 +26,7 @@ SOFTWARE.
 #define THAMES_PERTURBATIONS_BASEPERTURBATION
 
 #include <array>
+#include <memory>
 #include <vector>
 
 #include "../conversions/dimensional.h"
@@ -42,7 +43,7 @@ namespace thames::perturbations::baseperturbation{
      * @brief Class for the base perturbation.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-13
+     * @date 2022-05-27
      * 
      * @tparam T Numeric type.
      */
@@ -52,7 +53,7 @@ namespace thames::perturbations::baseperturbation{
         protected:
 
             /// Dimensional factors
-            const DimensionalFactors<T>* m_factors;
+            const std::shared_ptr<const DimensionalFactors<T>> m_factors;
 
             /// Flag for whether to expect non-dimensional inputs/outputs
             bool m_isNonDimensional = false;
@@ -63,12 +64,12 @@ namespace thames::perturbations::baseperturbation{
              * @brief Construct a new Base Perturbation object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-13
+             * @date 2022-05-27
              * 
              * @param[in] factors Factors for non-dimensionalisation.
              * 
              */
-            BasePerturbation(const DimensionalFactors<T>* factors);
+            BasePerturbation(const std::shared_ptr<const DimensionalFactors<T>> factors);
 
             /**
              * @brief Destroy the Base Perturbation object.
@@ -237,7 +238,7 @@ namespace thames::perturbations::baseperturbation{
      * @brief Class for the base perturbation for polynomial distributions.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-13
+     * @date 2022-05-27
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -248,7 +249,7 @@ namespace thames::perturbations::baseperturbation{
         protected:
 
             /// Dimensional factors
-            const DimensionalFactors<T>* m_factors;
+            const std::shared_ptr<const DimensionalFactors<T>> m_factors;
 
             /// Flag for whether to expect non-dimensional inputs/outputs
             bool m_isNonDimensional = false;
@@ -259,12 +260,12 @@ namespace thames::perturbations::baseperturbation{
              * @brief Construct a new Base Perturbation Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-13
+             * @date 2022-05-27
              * 
              * @param[in] factors Factors for non-dimensionalisation.
              * 
              */
-            BasePerturbationPolynomial(const DimensionalFactors<T>* factors);
+            BasePerturbationPolynomial(const std::shared_ptr<const DimensionalFactors<T>> factors);
 
             /**
              * @brief Destroy the Base Perturbation Polynomial object.

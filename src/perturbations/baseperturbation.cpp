@@ -23,6 +23,7 @@ SOFTWARE.
 */
 
 #include <array>
+#include <memory>
 #include <vector>
 
 #ifdef THAMES_USE_SMARTUQ
@@ -40,7 +41,7 @@ namespace thames::perturbations::baseperturbation{
     ///////////
 
     template<class T>
-    BasePerturbation<T>::BasePerturbation(const DimensionalFactors<T>* factors) : m_factors(factors) {
+    BasePerturbation<T>::BasePerturbation(const std::shared_ptr<const DimensionalFactors<T>> factors) : m_factors(factors) {
 
     };
 
@@ -127,7 +128,7 @@ namespace thames::perturbations::baseperturbation{
     using thames::conversions::dimensional::DimensionalFactors;
     
     template<class T, template<class> class P>
-    BasePerturbationPolynomial<T, P>::BasePerturbationPolynomial(const DimensionalFactors<T>* factors) : m_factors(factors) {
+    BasePerturbationPolynomial<T, P>::BasePerturbationPolynomial(const std::shared_ptr<const DimensionalFactors<T>> factors) : m_factors(factors) {
 
     };
 
