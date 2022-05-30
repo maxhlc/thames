@@ -30,6 +30,7 @@ SOFTWARE.
 #include "conversions/conversions.h"
 #include "perturbations/perturbations.h"
 #include "propagators/propagators.h"
+#include "settings/settings.h"
 #include "util/util.h"
 #include "vector/vector.h"
 

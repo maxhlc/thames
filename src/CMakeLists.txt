@@ -87,6 +87,8 @@ set(THAMES_HEADERS
     ../include/propagators/geqoe.h
     ../include/propagators/options.h
     ../include/propagators/propagators.h
+    # Settings
+    ../include/settings/settings.h
     # Util
     ../include/util/angles.h
     ../include/util/optimise.h

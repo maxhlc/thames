@@ -29,11 +29,12 @@ SOFTWARE.
 #include <nlohmann/json.hpp>
 
 #include "../../include/io/json.h"
+#include "../../include/settings/settings.h"
 
 namespace thames::io::json {
 
     template<class T>
-    void load(const std::string& filepath, Parameters<T>& parameters) {
+    void load(const std::string& filepath, thames::settings::Parameters<T>& parameters) {
         /// @todo Input checking
 
         // Open file stream
@@ -44,12 +45,12 @@ namespace thames::io::json {
         filestream >> j;
 
         // Load parameters
-        parameters = j.get<Parameters<T>>();
+        parameters = j.get<thames::settings::Parameters<T>>();
     }
-    template void load(const std::string&, Parameters<double>&);
+    template void load(const std::string&, thames::settings::Parameters<double>&);
 
     template<class T>
-    void save(const std::string& filepath, const Parameters<T>& parameters) {
+    void save(const std::string& filepath, const thames::settings::Parameters<T>& parameters) {
         // Open file stream
         std::ofstream filestream(filepath);
 
@@ -59,6 +60,6 @@ namespace thames::io::json {
         // Output JSON object
         filestream << std::setw(4) << j;
     }
-    template void save(const std::string&, const Parameters<double>&); 
+    template void save(const std::string&, const thames::settings::Parameters<double>&); 
 
 }
