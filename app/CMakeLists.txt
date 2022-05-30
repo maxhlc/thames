@@ -59,4 +59,8 @@ if(THAMES_BUILD_APP)
         target_link_libraries(thames_geqoe_polynomial_point thames)
     endif(THAMES_USE_SMARTUQ)
 
+    # Add executable for general propagation
+    add_executable(${PROJECT_NAME}_main thames_main.cpp)
+    target_link_libraries(${PROJECT_NAME}_main ${PROJECT_NAME})
+
 endif(THAMES_BUILD_APP)
