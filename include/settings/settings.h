@@ -164,20 +164,6 @@ namespace thames::settings {
         /// Propagate in non-dimensional form
         bool isNonDimensional;
 
-        // Macro to generate boilerplate to/from JSON
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(PropagatorParameters, startTime, endTime, equations, isNonDimensional)
-    };
-
-    /**
-     * @brief Structure to store integrator parameters
-     * 
-     * @author Max Hallgarten La Casta
-     * @date 2022-05-30
-     * 
-     * @tparam T Numeric type
-     */
-    template<class T>
-    struct IntegratorParameters {
         /// Fixed- or variable-step flag
         bool isFixedStep;
 
@@ -194,7 +180,7 @@ namespace thames::settings {
         T relativeTolerance;
 
         // Macro to generate boilerplate to/from JSON
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(IntegratorParameters, isFixedStep, intermediateOutput, timeStep, absoluteTolerance, relativeTolerance)
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(PropagatorParameters, startTime, endTime, equations, isNonDimensional, isFixedStep, intermediateOutput, timeStep, absoluteTolerance, relativeTolerance)
     };
 
     /**
@@ -263,9 +249,6 @@ namespace thames::settings {
         /// Propagator parameters
         PropagatorParameters<T> propagator;
 
-        /// Integrator parameters
-        IntegratorParameters<T> integrator;
-
         /// Polynomial parameters
         PolynomialParameters polynomial;
 
@@ -273,7 +256,7 @@ namespace thames::settings {
         std::vector<StateParameters<T>> states;
 
         // Macro to generate boilerplate to/from JSON
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(Parameters, metadata, spacecraft, perturbation, propagator, integrator, polynomial, states)
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(Parameters, metadata, spacecraft, perturbation, propagator, polynomial, states)
     };
 
 }

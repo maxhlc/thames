@@ -68,13 +68,13 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
     std::vector<std::vector<T>> states_propagated;
     T tstart = parameters.propagator.startTime;
     T tend = parameters.propagator.endTime;
-    T tstep = parameters.integrator.timeStep;
+    T tstep = parameters.propagator.timeStep;
 
     // Import propagation parameters
     thames::propagators::options::PropagatorOptions<T> options;
-    options.isfixedStep = parameters.integrator.isFixedStep;
-    options.atol = parameters.integrator.absoluteTolerance;
-    options.rtol = parameters.integrator.relativeTolerance;
+    options.isfixedStep = parameters.propagator.isFixedStep;
+    options.atol = parameters.propagator.absoluteTolerance;
+    options.rtol = parameters.propagator.relativeTolerance;
     options.isNonDimensional = parameters.propagator.isNonDimensional;
 
     // Import state type
