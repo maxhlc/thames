@@ -46,14 +46,14 @@ namespace thames::io::json {
      * @brief Save parameters to JSON
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-30
+     * @date 2022-05-31
      * 
      * @tparam T Numeric type
      * @param[in] filepath Input file path
      * @param[in] parameters Parameters
      */
     template<class T>
-    void save(const std::string& filepath, const thames::settings::Parameters<T>& parameters);
+    void save(const std::string& filepath, thames::settings::Parameters<T> parameters);
 
 }
 

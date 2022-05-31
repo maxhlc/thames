@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <ctime>
 #include <fstream>
 #include <iomanip>
 #include <string>
@@ -50,9 +51,16 @@ namespace thames::io::json {
     template void load(const std::string&, thames::settings::Parameters<double>&);
 
     template<class T>
-    void save(const std::string& filepath, const thames::settings::Parameters<T>& parameters) {
+    void save(const std::string& filepath, thames::settings::Parameters<T> parameters) {
         // Open file stream
         std::ofstream filestream(filepath);
+
+        // Updated modified time
+        std::time_t now = std::time(0);
+        std::tm* now_gmt = std::gmtime(&now);
+        char buffer[25];
+        std::strftime(buffer, 25, "%Y-%m-%dT%X.000Z", now_gmt);
+        parameters.metadata.datetimeModified = buffer;
 
         // Construct JSON object
         nlohmann::json j = parameters;
@@ -60,6 +68,6 @@ namespace thames::io::json {
         // Output JSON object
         filestream << std::setw(4) << j;
     }
-    template void save(const std::string&, const thames::settings::Parameters<double>&); 
+    template void save(const std::string&, thames::settings::Parameters<double>); 
 
 }
