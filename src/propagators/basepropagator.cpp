@@ -285,7 +285,7 @@ namespace thames::propagators::basepropagator {
     template class BasePropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
-    BasePropagatorPolynomial<T, P>::BasePropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors, BasePropagatorPolynomialDynamics<T, P>* const dyn, const StateTypes propstatetype) : m_mu(mu), m_perturbation(perturbation), m_factors(factors), m_dyn(dyn), m_propstatetype(propstatetype) {
+    BasePropagatorPolynomial<T, P>::BasePropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors, const std::shared_ptr<BasePropagatorPolynomialDynamics<T, P>> dyn, const StateTypes propstatetype) : m_mu(mu), m_perturbation(perturbation), m_factors(factors), m_dyn(dyn), m_propstatetype(propstatetype) {
 
     }
 
@@ -330,13 +330,13 @@ namespace thames::propagators::basepropagator {
         // Propagate according to the fixed flag
         if(options.isfixedStep){
             // Create integrator
-            rk4<P<T>> integrator(m_dyn);
+            rk4<P<T>> integrator(m_dyn.get());
 
             // Integrate state
             integrator.integrate(tstart, tend, nstep, state, statefinal);  
         } else {
             // Create integrator
-            rk45<P<T>> integrator(m_dyn, options.atol, options.rtol);
+            rk45<P<T>> integrator(m_dyn.get(), options.atol, options.rtol);
 
             // Integrate state
             integrator.integrate(tstart, tend, nstep, state, statefinal);  

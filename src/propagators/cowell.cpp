@@ -180,7 +180,7 @@ namespace thames::propagators {
     template class CowellPropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
-    CowellPropagatorPolynomial<T, P>::CowellPropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors) : BasePropagatorPolynomial<T, P>(mu, perturbation, factors, new CowellPropagatorPolynomialDynamics<T, P>(mu, perturbation, factors), CARTESIAN) {
+    CowellPropagatorPolynomial<T, P>::CowellPropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors) : BasePropagatorPolynomial<T, P>(mu, perturbation, factors, std::make_shared<CowellPropagatorPolynomialDynamics<T, P>>(mu, perturbation, factors), CARTESIAN) {
 
     }
 

@@ -296,7 +296,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator abstract object for polynomial propagations.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-29
+     * @date 2022-05-31
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -316,7 +316,7 @@ namespace thames::propagators::basepropagator {
             const std::shared_ptr<DimensionalFactors<T>> m_factors;
 
             /// Dynamics object
-            BasePropagatorPolynomialDynamics<T, P>* const m_dyn;
+            const std::shared_ptr<BasePropagatorPolynomialDynamics<T, P>> m_dyn;
 
             /// State type for propagation
             const StateTypes m_propstatetype;
@@ -327,7 +327,7 @@ namespace thames::propagators::basepropagator {
              * @brief Construct a new Base Propagator Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-27
+             * @date 2022-05-31
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.
@@ -335,13 +335,13 @@ namespace thames::propagators::basepropagator {
              * @param[in] dyn Dynamics object.
              * @param[in] propstatetype Type of state used during propagation.
              */
-            BasePropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors, BasePropagatorPolynomialDynamics<T, P>* const dyn, const StateTypes propstatetype);
+            BasePropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors, const std::shared_ptr<BasePropagatorPolynomialDynamics<T, P>> dyn, const StateTypes propstatetype);
 
             /**
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-29
+             * @date 2022-05-31
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.

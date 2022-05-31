@@ -229,7 +229,7 @@ namespace thames::propagators {
              * @brief Construct a new GEqOE Propagator Polynomial object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-27
+             * @date 2022-05-31
              * 
              * @param[in] mu Gravitational parameter.
              * @param[in] perturbation Perturbation object.

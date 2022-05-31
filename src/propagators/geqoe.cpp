@@ -442,7 +442,7 @@ namespace thames::propagators {
     template class GEqOEPropagatorPolynomialDynamics<double, chebyshev_polynomial>;
 
     template<class T, template<class> class P>
-    GEqOEPropagatorPolynomial<T, P>::GEqOEPropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors) : BasePropagatorPolynomial<T, P>(mu, perturbation, factors, new GEqOEPropagatorPolynomialDynamics<T, P>(mu, perturbation, factors), GEQOE) {
+    GEqOEPropagatorPolynomial<T, P>::GEqOEPropagatorPolynomial(const T& mu, const std::shared_ptr<BasePerturbationPolynomial<T, P>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors) : BasePropagatorPolynomial<T, P>(mu, perturbation, factors, std::make_shared<GEqOEPropagatorPolynomialDynamics<T, P>>(mu, perturbation, factors), GEQOE) {
 
     }
 
