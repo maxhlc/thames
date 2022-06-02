@@ -121,6 +121,104 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
     return parameters_output;
 }
 
+template<class T, template <class> class P>
+thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>& parameters) {
+    // Load constants
+    T J2 = thames::constants::earth::J2;
+    T mu = thames::constants::earth::mu;
+    T radius = thames::constants::earth::radius;
+    T w = thames::constants::earth::w;
+
+    // Declare factors
+    auto factors = std::make_shared<thames::conversions::dimensional::DimensionalFactors<T>>();
+
+    // Set up perturbations
+    auto perturbation = std::make_shared<thames::perturbations::perturbationcombiner::PerturbationCombinerPolynomial<T, P>>(factors);
+
+    // Set up atmosphere model
+    if (parameters.perturbation.atmosphere.isEnabled) {
+        // Select atmosphere model
+        if (parameters.perturbation.atmosphere.model == "USSA76") {
+            auto atmospheremodel = thames::perturbations::atmosphere::models::USSA76;
+            auto atmosphereperturbation = std::make_shared<thames::perturbations::atmosphere::drag::DragPolynomial<T, P>>(radius, w, parameters.spacecraft.Cd, parameters.spacecraft.dragArea, parameters.spacecraft.mass, atmospheremodel, factors);
+            perturbation->add_model(atmosphereperturbation);
+        } else {
+            throw std::runtime_error("Unsupported atmosphere model requested");
+        }        
+    }
+
+    // Set up geopotential model
+    if (parameters.perturbation.geopotential.isEnabled) {
+        // Select geopotential model
+        if (parameters.perturbation.geopotential.model == "J2") {
+            auto geopotentialmodel = std::make_shared<thames::perturbations::geopotential::J2Polynomial<T, P>>(mu, J2, radius, factors);
+            perturbation->add_model(geopotentialmodel);
+        } else {
+            throw std::runtime_error("Unsupported geopotential model requested");
+        }
+    }
+
+    // Import states
+    std::vector<std::vector<T>> states = parameters.states[0].states;
+    std::vector<std::vector<T>> states_propagated;
+    T tstart = parameters.propagator.startTime;
+    T tend = parameters.propagator.endTime;
+    T tstep = parameters.propagator.timeStep;
+
+    // Import propagation parameters
+    thames::propagators::options::PropagatorOptions<T> options;
+    options.isfixedStep = parameters.propagator.isFixedStep;
+    options.atol = parameters.propagator.absoluteTolerance;
+    options.rtol = parameters.propagator.relativeTolerance;
+    options.isNonDimensional = parameters.propagator.isNonDimensional;
+
+    // Import polynomial parameters
+    unsigned int degree = parameters.polynomial.maxDegree;
+
+    // Import state type
+    thames::constants::statetypes::StateTypes statetype;
+    if (parameters.states[0].statetype == "Cartesian") {
+        statetype = thames::constants::statetypes::CARTESIAN;
+    } else if (parameters.states[0].statetype == "GEqOE") {
+        statetype = thames::constants::statetypes::GEQOE;
+    } else if (parameters.states[0].statetype == "Keplerian") {
+        statetype = thames::constants::statetypes::KEPLERIAN;
+    } else {
+        throw std::runtime_error("Unsupported state type provided");
+    }
+
+    // Propagator
+    if (parameters.propagator.equations == "Cowell") {
+        // Set up propagator
+        auto propagator = thames::propagators::CowellPropagatorPolynomial<T, P>(mu, perturbation, factors);
+        // Propagate
+        states_propagated = propagator.propagate(tstart, tend, tstep, states, options, statetype, degree);
+    } else if (parameters.propagator.equations == "GEqOE") {
+        // Set up propagator
+        auto propagator = thames::propagators::GEqOEPropagatorPolynomial<T, P>(mu, perturbation, factors);
+        // Propagate
+        states_propagated = propagator.propagate(tstart, tend, tstep, states, options, statetype, degree);        
+    } else {
+        throw std::runtime_error("Unsupported propagator requested");
+    }
+
+    // Declare output structure
+    thames::settings::Parameters<T> parameters_output(parameters);
+
+    // Set flag
+    parameters_output.metadata.isInputFile = false;
+
+    // Update output states
+    thames::settings::StateParameters<T> state_output;
+    state_output.datetime = tend;
+    state_output.states = states_propagated;
+    state_output.statetype = parameters.states[0].statetype;
+    parameters_output.states.push_back(state_output);
+
+    // Return parameters
+    return parameters_output;
+}
+
 int main(int argc, char **argv) {
     // Throw error if incorrect number of arguments are provided
     if (argc != 3)
@@ -149,7 +247,13 @@ int main(int argc, char **argv) {
 
     // Propagate
     if (parameters.polynomial.isEnabled) {
-        throw std::runtime_error("Polynomial propagation not configured");
+        if (parameters.polynomial.type == "Taylor") {
+            parameters_output = propagate<double, smartuq::polynomial::taylor_polynomial>(parameters);
+        } else if (parameters.polynomial.type == "Chebyshev") {
+            parameters_output = propagate<double, smartuq::polynomial::chebyshev_polynomial>(parameters);
+        } else {
+            throw std::runtime_error("Unsupported polynomial type requested");
+        }
     } else {
         parameters_output = propagate<double>(parameters);
     }
