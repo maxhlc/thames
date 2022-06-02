@@ -49,9 +49,9 @@ int main(int argc, char **argv){
     thames::io::point::load(filepathin, tstart, tend, scid, statetype, degree, atol, rtol, states);
 
     // Create propagator options
-    thames::propagators::options::PropagatorOptions<double> options;
-    options.atol = atol;
-    options.rtol = rtol;
+    thames::settings::PropagatorParameters<double> options;
+    options.absoluteTolerance = atol;
+    options.relativeTolerance = rtol;
 
     // Calculate non-dimensionalisation factors based on first point
     auto factors = std::make_shared<thames::conversions::dimensional::DimensionalFactors<double>>();

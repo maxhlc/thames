@@ -34,17 +34,17 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Dynamics/base_dynamics.h"
 #endif
 
-#include "options.h"
 #include "../constants/statetypes.h"
 #include "../conversions/dimensional.h"
 #include "../perturbations/baseperturbation.h"
+#include "../settings/settings.h"
 
 namespace thames::propagators::basepropagator {
 
     using thames::constants::statetypes::StateTypes;
     using thames::conversions::dimensional::DimensionalFactors;
     using thames::perturbations::baseperturbation::BasePerturbation;
-    using thames::propagators::options::PropagatorOptions;
+    using thames::settings::PropagatorParameters;
 
     ///////////
     // Reals //
@@ -54,7 +54,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator object.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-29
+     * @date 2022-06-02
      * 
      * @tparam T Numeric type.
      */
@@ -122,7 +122,7 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-29
+             * @date 2022-06-02
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -132,7 +132,7 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::array<T, 6> Final state.
              */
-            virtual std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, const PropagatorOptions<T> options, const StateTypes statetype);
+            virtual std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, const PropagatorParameters<T> options, const StateTypes statetype);
 
             /////////////
             // Vectors //
@@ -154,7 +154,7 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-29
+             * @date 2022-06-02
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -164,13 +164,13 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::vector<T> Final state.
              */
-            std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, const PropagatorOptions<T> options, const StateTypes statetype);
+            std::vector<T> propagate(T tstart, T tend, T tstep, std::vector<T> state, const PropagatorParameters<T> options, const StateTypes statetype);
 
             /**
              * @brief Propagation method (with intermediate output).
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-29
+             * @date 2022-06-02
              * 
              * @param[in] tvec Vector of physical propagation times.
              * @param[in] tstep Initial timestep for propagation.
@@ -179,13 +179,13 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::vector<std::vector<T>> Final state.
              */
-            std::vector<std::vector<T>> propagate(const std::vector<T> tvec, const T tstep, const std::vector<T> state, const PropagatorOptions<T> options, const StateTypes statetype);
+            std::vector<std::vector<T>> propagate(const std::vector<T> tvec, const T tstep, const std::vector<T> state, const PropagatorParameters<T> options, const StateTypes statetype);
 
             /**
              * @brief Propagation method for sets.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-29
+             * @date 2022-06-02
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -195,13 +195,13 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::vector<std::vector<T>> Final state.
              */
-            std::vector<std::vector<T>> propagate(const T tstart, const T tend, const T tstep, const std::vector<std::vector<T>> state, const PropagatorOptions<T> options, const StateTypes statetype);
+            std::vector<std::vector<T>> propagate(const T tstart, const T tend, const T tstep, const std::vector<std::vector<T>> state, const PropagatorParameters<T> options, const StateTypes statetype);
 
             /**
              * @brief Propagation method for sets (with intermediate output).
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-29
+             * @date 2022-06-02
              * 
              * @param[in] tvec Vector of physical propagation times.
              * @param[in] tstep Initial timestep for propagation.
@@ -210,7 +210,7 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::vector<std::vector<std::vector<T>>> Final state.
              */
-            std::vector<std::vector<std::vector<T>>> propagate(const std::vector<T> tvec, const T tstep, const std::vector<std::vector<T>> state, const PropagatorOptions<T> options, const StateTypes statetype);
+            std::vector<std::vector<std::vector<T>>> propagate(const std::vector<T> tvec, const T tstep, const std::vector<std::vector<T>> state, const PropagatorParameters<T> options, const StateTypes statetype);
 
     };
 
@@ -296,7 +296,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator abstract object for polynomial propagations.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-31
+     * @date 2022-06-02
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -341,7 +341,7 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-31
+             * @date 2022-06-02
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -351,13 +351,13 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::vector<P<T>> Final state.
              */
-            std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, const PropagatorOptions<T> options, const StateTypes statetype);
+            std::vector<P<T>> propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, const PropagatorParameters<T> options, const StateTypes statetype);
 
             /**
              * @brief Propagation method (with intermediate output).
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-29
+             * @date 2022-06-02
              * 
              * @param[in] tvec Vector of physical propagation times.
              * @param[in] tstep Initial timestep for propagation.
@@ -366,13 +366,13 @@ namespace thames::propagators::basepropagator {
              * @param[in] statetype State type.
              * @return std::vector<std::vector<P<T>>> Final state.
              */
-            std::vector<std::vector<P<T>>> propagate(const std::vector<T> tvec, const T tstep, const std::vector<P<T>> state, const PropagatorOptions<T> options, const StateTypes statetype);
+            std::vector<std::vector<P<T>>> propagate(const std::vector<T> tvec, const T tstep, const std::vector<P<T>> state, const PropagatorParameters<T> options, const StateTypes statetype);
 
             /**
              * @brief Propagation method for sets of points.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-29
+             * @date 2022-06-02
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -383,13 +383,13 @@ namespace thames::propagators::basepropagator {
              * @param[in] degree Polynomial degree.
              * @return std::vector<std::vector<T>> Final state.
              */
-            std::vector<std::vector<T>> propagate(const T tstart, const T tend, const T tstep, std::vector<std::vector<T>> states, const PropagatorOptions<T> options, const StateTypes statetype, const unsigned int degree);
+            std::vector<std::vector<T>> propagate(const T tstart, const T tend, const T tstep, std::vector<std::vector<T>> states, const PropagatorParameters<T> options, const StateTypes statetype, const unsigned int degree);
 
             /**
              * @brief Propagation method for sets of points (with intermediate output).
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-29
+             * @date 2022-06-02
              * 
              * @param[in] tvec Vector of physical propagation times.
              * @param[in] tstep Initial timestep for propagation.
@@ -399,7 +399,7 @@ namespace thames::propagators::basepropagator {
              * @param[in] degree Polynomial degree.
              * @return std::vector<std::vector<std::vector<T>>> Final state.
              */
-            std::vector<std::vector<std::vector<T>>> propagate(const std::vector<T> tvec, const T tstep, const std::vector<std::vector<T>> states, const PropagatorOptions<T> options, const StateTypes statetype, const unsigned int degree);
+            std::vector<std::vector<std::vector<T>>> propagate(const std::vector<T> tvec, const T tstep, const std::vector<std::vector<T>> states, const PropagatorParameters<T> options, const StateTypes statetype, const unsigned int degree);
 
     };
 

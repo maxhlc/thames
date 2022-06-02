@@ -36,7 +36,6 @@ SOFTWARE.
 #endif
 
 #include "../../include/propagators/geqoe.h"
-#include "../../include/propagators/options.h"
 #include "../../include/conversions/geqoe.h"
 #include "../../include/perturbations/baseperturbation.h"
 #include "../../include/util/root.h"

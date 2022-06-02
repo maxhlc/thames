@@ -39,7 +39,6 @@ SOFTWARE.
 #include "../../include/conversions/dimensional.h"
 #include "../../include/propagators/basepropagator.h"
 #include "../../include/propagators/cowell.h"
-#include "../../include/propagators/options.h"
 #include "../../include/perturbations/baseperturbation.h"
 #include "../../include/vector/arithmeticoverloads.h"
 #include "../../include/vector/geometry.h"

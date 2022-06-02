@@ -85,7 +85,6 @@ set(THAMES_HEADERS
     ../include/propagators/basepropagator.h
     ../include/propagators/cowell.h
     ../include/propagators/geqoe.h
-    ../include/propagators/options.h
     ../include/propagators/propagators.h
     # Settings
     ../include/settings/settings.h

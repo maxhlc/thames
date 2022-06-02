@@ -70,13 +70,6 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
     T tend = parameters.propagator.endTime;
     T tstep = parameters.propagator.timeStep;
 
-    // Import propagation parameters
-    thames::propagators::options::PropagatorOptions<T> options;
-    options.isfixedStep = parameters.propagator.isFixedStep;
-    options.atol = parameters.propagator.absoluteTolerance;
-    options.rtol = parameters.propagator.relativeTolerance;
-    options.isNonDimensional = parameters.propagator.isNonDimensional;
-
     // Import state type
     thames::constants::statetypes::StateTypes statetype;
     if (parameters.states[0].statetype == "Cartesian") {
@@ -94,12 +87,12 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
         // Set up propagator
         auto propagator = thames::propagators::CowellPropagator<T>(mu, perturbation, factors);
         // Propagate
-        states_propagated = propagator.propagate(tstart, tend, tstep, states, options, statetype);
+        states_propagated = propagator.propagate(tstart, tend, tstep, states, parameters.propagator, statetype);
     } else if (parameters.propagator.equations == "GEqOE") {
         // Set up propagator
         auto propagator = thames::propagators::GEqOEPropagator<T>(mu, perturbation, factors);
         // Propagate
-        states_propagated = propagator.propagate(tstart, tend, tstep, states, options, statetype);        
+        states_propagated = propagator.propagate(tstart, tend, tstep, states, parameters.propagator, statetype);        
     } else {
         throw std::runtime_error("Unsupported propagator requested");
     }
@@ -165,13 +158,6 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
     T tend = parameters.propagator.endTime;
     T tstep = parameters.propagator.timeStep;
 
-    // Import propagation parameters
-    thames::propagators::options::PropagatorOptions<T> options;
-    options.isfixedStep = parameters.propagator.isFixedStep;
-    options.atol = parameters.propagator.absoluteTolerance;
-    options.rtol = parameters.propagator.relativeTolerance;
-    options.isNonDimensional = parameters.propagator.isNonDimensional;
-
     // Import polynomial parameters
     unsigned int degree = parameters.polynomial.maxDegree;
 
@@ -192,12 +178,12 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
         // Set up propagator
         auto propagator = thames::propagators::CowellPropagatorPolynomial<T, P>(mu, perturbation, factors);
         // Propagate
-        states_propagated = propagator.propagate(tstart, tend, tstep, states, options, statetype, degree);
+        states_propagated = propagator.propagate(tstart, tend, tstep, states, parameters.propagator, statetype, degree);
     } else if (parameters.propagator.equations == "GEqOE") {
         // Set up propagator
         auto propagator = thames::propagators::GEqOEPropagatorPolynomial<T, P>(mu, perturbation, factors);
         // Propagate
-        states_propagated = propagator.propagate(tstart, tend, tstep, states, options, statetype, degree);        
+        states_propagated = propagator.propagate(tstart, tend, tstep, states, parameters.propagator, statetype, degree);        
     } else {
         throw std::runtime_error("Unsupported propagator requested");
     }

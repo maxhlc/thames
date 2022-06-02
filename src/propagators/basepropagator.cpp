@@ -39,14 +39,14 @@ SOFTWARE.
 #include "../../include/conversions/dimensional.h"
 #include "../../include/conversions/universal.h"
 #include "../../include/propagators/basepropagator.h"
-#include "../../include/propagators/options.h"
+#include "../../include/settings/settings.h"
 #include "../../include/util/polynomials.h"
 
 namespace thames::propagators::basepropagator {
 
     using thames::constants::statetypes::StateTypes;
     using thames::constants::statetypes::CARTESIAN;
-    using thames::propagators::options::PropagatorOptions;
+    using thames::settings::PropagatorParameters;
 
     template<class T>
     BasePropagator<T>::BasePropagator(const T& mu, const std::shared_ptr<BasePerturbation<T>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors, const StateTypes propstatetype) : m_mu(mu), m_perturbation(perturbation), m_factors(factors), m_propstatetype(propstatetype) {
@@ -69,7 +69,7 @@ namespace thames::propagators::basepropagator {
     }
 
     template<class T>
-    std::array<T, 6> BasePropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> state, const PropagatorOptions<T> options, const StateTypes statetype) {
+    std::array<T, 6> BasePropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> state, const PropagatorParameters<T> options, const StateTypes statetype) {
         // Check that input is Cartesian state
         if(statetype != CARTESIAN)
             throw std::runtime_error("Unsupported state type");
@@ -104,7 +104,7 @@ namespace thames::propagators::basepropagator {
         auto func = [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);};
 
         // Propagate according to the fixed flag
-        if(options.isfixedStep){
+        if(options.isFixedStep){
             // Declare stepper
             boost::numeric::odeint::runge_kutta4<std::array<T, 6>> stepper;
 
@@ -113,7 +113,7 @@ namespace thames::propagators::basepropagator {
         } else {
             // Declare stepper
             boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
-            auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
+            auto steppercontrolled = boost::numeric::odeint::make_controlled(options.absoluteTolerance, options.relativeTolerance, stepper);
 
             // Propagate orbit
             boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, state, tstart, tend, tstep);
@@ -143,7 +143,7 @@ namespace thames::propagators::basepropagator {
     }
 
     template<class T>
-    std::vector<T> BasePropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> state, const PropagatorOptions<T> options, const StateTypes statetype) {
+    std::vector<T> BasePropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> state, const PropagatorParameters<T> options, const StateTypes statetype) {
         // Check that input is Cartesian state
         if(statetype != CARTESIAN)
             throw std::runtime_error("Unsupported state type");
@@ -178,7 +178,7 @@ namespace thames::propagators::basepropagator {
         auto func = [this](const std::vector<T>& x, std::vector<T>& dxdt, const T t){return derivative(x, dxdt, t);};
 
         // Propagate according to the fixed flag
-        if(options.isfixedStep){
+        if(options.isFixedStep){
             // Declare stepper
             boost::numeric::odeint::runge_kutta4<std::vector<T>> stepper;
 
@@ -187,7 +187,7 @@ namespace thames::propagators::basepropagator {
         } else {
             // Declare stepper
             boost::numeric::odeint::runge_kutta_cash_karp54<std::vector<T>> stepper;
-            auto steppercontrolled = boost::numeric::odeint::make_controlled(options.atol, options.rtol, stepper);
+            auto steppercontrolled = boost::numeric::odeint::make_controlled(options.absoluteTolerance, options.relativeTolerance, stepper);
 
             // Propagate orbit
             boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, state, tstart, tend, tstep);
@@ -207,7 +207,7 @@ namespace thames::propagators::basepropagator {
     }
 
     template<class T>
-    std::vector<std::vector<T>> BasePropagator<T>::propagate(const std::vector<T> tvec, const T tstep, const std::vector<T> state, const PropagatorOptions<T> options, const StateTypes statetype) {
+    std::vector<std::vector<T>> BasePropagator<T>::propagate(const std::vector<T> tvec, const T tstep, const std::vector<T> state, const PropagatorParameters<T> options, const StateTypes statetype) {
         // Declare output vectors
         std::vector<std::vector<T>> states_propagated(tvec.size());
 
@@ -224,7 +224,7 @@ namespace thames::propagators::basepropagator {
     }
 
     template<class T>
-    std::vector<std::vector<T>> BasePropagator<T>::propagate(const T tstart, const T tend, const T tstep, const std::vector<std::vector<T>> states, const PropagatorOptions<T> options, const StateTypes statetype) {
+    std::vector<std::vector<T>> BasePropagator<T>::propagate(const T tstart, const T tend, const T tstep, const std::vector<std::vector<T>> states, const PropagatorParameters<T> options, const StateTypes statetype) {
         // Declare output states
         std::vector<std::vector<T>> states_propagated(states);
 
@@ -238,7 +238,7 @@ namespace thames::propagators::basepropagator {
     }
 
     template<class T>
-    std::vector<std::vector<std::vector<T>>> propagate(const std::vector<T> tvec, const T tstep, const std::vector<std::vector<T>> states, const PropagatorOptions<T> options, const StateTypes statetype) {
+    std::vector<std::vector<std::vector<T>>> propagate(const std::vector<T> tvec, const T tstep, const std::vector<std::vector<T>> states, const PropagatorParameters<T> options, const StateTypes statetype) {
         // Declare output vectors
         std::vector<std::vector<std::vector<T>>> states_propagated(tvec.size());
 
@@ -290,7 +290,7 @@ namespace thames::propagators::basepropagator {
     }
 
     template<class T, template<class> class P>
-    std::vector<P<T>> BasePropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, const PropagatorOptions<T> options, const StateTypes statetype) {
+    std::vector<P<T>> BasePropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, const PropagatorParameters<T> options, const StateTypes statetype) {
         // Check that input is Cartesian state
         if(statetype != thames::constants::statetypes::CARTESIAN)
             throw std::runtime_error("Unsupported state type");
@@ -328,7 +328,7 @@ namespace thames::propagators::basepropagator {
         std::vector<P<T>> statefinal(state);
 
         // Propagate according to the fixed flag
-        if(options.isfixedStep){
+        if(options.isFixedStep){
             // Create integrator
             rk4<P<T>> integrator(m_dyn.get());
 
@@ -336,7 +336,7 @@ namespace thames::propagators::basepropagator {
             integrator.integrate(tstart, tend, nstep, state, statefinal);  
         } else {
             // Create integrator
-            rk45<P<T>> integrator(m_dyn.get(), options.atol, options.rtol);
+            rk45<P<T>> integrator(m_dyn.get(), options.absoluteTolerance, options.relativeTolerance);
 
             // Integrate state
             integrator.integrate(tstart, tend, nstep, state, statefinal);  
@@ -355,7 +355,7 @@ namespace thames::propagators::basepropagator {
     }
 
     template<class T, template <class> class P>
-    std::vector<std::vector<P<T>>> BasePropagatorPolynomial<T, P>::propagate(const std::vector<T> tvec, const T tstep, const std::vector<P<T>> state, const PropagatorOptions<T> options, const StateTypes statetype) {
+    std::vector<std::vector<P<T>>> BasePropagatorPolynomial<T, P>::propagate(const std::vector<T> tvec, const T tstep, const std::vector<P<T>> state, const PropagatorParameters<T> options, const StateTypes statetype) {
         // Declare output vectors
         std::vector<std::vector<P<T>>> states_propagated(tvec.size());
 
@@ -372,7 +372,7 @@ namespace thames::propagators::basepropagator {
     }
 
     template<class T, template <class> class P>
-    std::vector<std::vector<T>> BasePropagatorPolynomial<T, P>::propagate(const T tstart, const T tend, const T tstep, std::vector<std::vector<T>> states, const PropagatorOptions<T> options, const StateTypes statetype, const unsigned int degree) {
+    std::vector<std::vector<T>> BasePropagatorPolynomial<T, P>::propagate(const T tstart, const T tend, const T tstep, std::vector<std::vector<T>> states, const PropagatorParameters<T> options, const StateTypes statetype, const unsigned int degree) {
         // Check that input is Cartesian state
         if(statetype != thames::constants::statetypes::CARTESIAN)
             throw std::runtime_error("Unsupported state type");
@@ -396,7 +396,7 @@ namespace thames::propagators::basepropagator {
     }
 
     template<class T, template <class> class P>
-    std::vector<std::vector<std::vector<T>>> BasePropagatorPolynomial<T, P>::propagate(const std::vector<T> tvec, const T tstep, const std::vector<std::vector<T>> states, const PropagatorOptions<T> options, const StateTypes statetype, const unsigned int degree) {
+    std::vector<std::vector<std::vector<T>>> BasePropagatorPolynomial<T, P>::propagate(const std::vector<T> tvec, const T tstep, const std::vector<std::vector<T>> states, const PropagatorParameters<T> options, const StateTypes statetype, const unsigned int degree) {
         // Check that input is Cartesian state
         if(statetype != thames::constants::statetypes::CARTESIAN)
             throw std::runtime_error("Unsupported state type");

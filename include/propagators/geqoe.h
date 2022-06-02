@@ -34,7 +34,6 @@ SOFTWARE.
 #endif
 
 #include "basepropagator.h"
-#include "options.h"
 #include "../perturbations/baseperturbation.h"
 #include "../constants/statetypes.h"
 #include "../conversions/dimensional.h"

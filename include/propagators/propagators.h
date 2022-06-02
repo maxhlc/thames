@@ -28,6 +28,5 @@ SOFTWARE.
 #include "basepropagator.h"
 #include "cowell.h"
 #include "geqoe.h"
-#include "options.h"
 
 #endif
