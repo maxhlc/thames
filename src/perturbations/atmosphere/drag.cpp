@@ -71,10 +71,10 @@ namespace thames::perturbations::atmosphere::drag {
         T r = thames::vector::geometry::norm3(R);
         T alt = r - radius;
 
-        // Calculate atmospheric density
+        // Calculate atmospheric density (including conversion to kg/km^3)
         if (m_isNonDimensional)
             alt *= m_factors->length;
-        T rho = m_model.density(alt);
+        T rho = m_model.density(alt) * 1e9;
         
         // Calculate factors which include mass (cancelled via rho/mass) and non-dimensionalise as required
         T massfac = rho/m_m;
@@ -111,10 +111,10 @@ namespace thames::perturbations::atmosphere::drag {
         T r = thames::vector::geometry::norm3(R);
         T alt = r - radius;
 
-        // Calculate atmospheric density
+        // Calculate atmospheric density (including conversion to kg/km^3)
         if (m_isNonDimensional)
             alt *= m_factors->length;
-        T rho = m_model.density(alt);
+        T rho = m_model.density(alt) * 1e9;
         
         // Calculate factors which include mass (cancelled via rho/mass) and non-dimensionalise as required
         T massfac = rho/m_m;
@@ -167,10 +167,10 @@ namespace thames::perturbations::atmosphere::drag {
         P<T> r = thames::vector::geometry::norm3(R);
         P<T> alt = r - radius;
 
-        // Calculate atmospheric density
+        // Calculate atmospheric density (including conversion to kg/km^3)
         if (m_isNonDimensional)
             alt *= m_factors->length;
-        P<T> rho = m_model.density(alt);
+        P<T> rho = m_model.density(alt) * 1e9;
         
         // Calculate factors which include mass (cancelled via rho/mass) and non-dimensionalise as required
         P<T> massfac = rho/m_m;

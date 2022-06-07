@@ -40,7 +40,7 @@ namespace thames::perturbations::atmosphere::drag {
      * @brief Class for the perturbation resulting from atmospheric drag.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-27
+     * @date 2022-06-07
      * 
      * @tparam T Numeric type.
      */
@@ -121,7 +121,7 @@ namespace thames::perturbations::atmosphere::drag {
              * @brief Calculate perturbing acceleration resulting from drag. 
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-17
+             * @date 2022-06-07
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
@@ -151,7 +151,7 @@ namespace thames::perturbations::atmosphere::drag {
              * @brief Calculate perturbing acceleration resulting from drag. 
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-17
+             * @date 2022-06-07
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
@@ -171,7 +171,7 @@ namespace thames::perturbations::atmosphere::drag {
      * @brief Class for the perturbation resulting from atmospheric drag.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-27
+     * @date 2022-06-07
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -253,7 +253,7 @@ namespace thames::perturbations::atmosphere::drag {
              * @brief Calculate perturbing acceleration resulting from drag. 
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-17
+             * @date 2022-06-07
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
