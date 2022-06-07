@@ -42,7 +42,8 @@ namespace thames::perturbations::atmosphere::models {
         switch (model) {
             case USSA76:
                 return thames::perturbations::atmosphere::models::ussa76::geo;
-            
+            case WERTZ:
+                return thames::perturbations::atmosphere::models::wertz::geo;
             default:
                 throw std::runtime_error("Unsupported model specified");
         }
@@ -53,7 +54,8 @@ namespace thames::perturbations::atmosphere::models {
         switch (model) {
             case USSA76:
                 return thames::perturbations::atmosphere::models::ussa76::rho;
-            
+            case WERTZ:
+                return thames::perturbations::atmosphere::models::wertz::rho;
             default:
                 throw std::runtime_error("Unsupported model specified");
         }
@@ -64,7 +66,8 @@ namespace thames::perturbations::atmosphere::models {
         switch (model) {
             case USSA76:
                 return thames::perturbations::atmosphere::models::ussa76::scale;
-            
+            case WERTZ:
+                return thames::perturbations::atmosphere::models::wertz::scale;
             default:
                 throw std::runtime_error("Unsupported model specified");
         }

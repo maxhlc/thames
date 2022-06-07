@@ -77,6 +77,7 @@ set(THAMES_HEADERS
     ../include/perturbations/atmosphere/atmospheremodel.h
     ../include/perturbations/atmosphere/drag.h
     ../include/perturbations/atmosphere/ussa76.h
+    ../include/perturbations/atmosphere/wertz.h
     ../include/perturbations/geopotential/J2.h
     ../include/perturbations/baseperturbation.h
     ../include/perturbations/perturbationcombiner.h

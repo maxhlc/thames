@@ -47,6 +47,10 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
             auto atmospheremodel = thames::perturbations::atmosphere::models::USSA76;
             auto atmosphereperturbation = std::make_shared<thames::perturbations::atmosphere::drag::Drag<T>>(radius, w, parameters.spacecraft.Cd, parameters.spacecraft.dragArea, parameters.spacecraft.mass, atmospheremodel, factors);
             perturbation->add_model(atmosphereperturbation);
+        } else if (parameters.perturbation.atmosphere.model == "Wertz") {
+            auto atmospheremodel = thames::perturbations::atmosphere::models::WERTZ;
+            auto atmosphereperturbation = std::make_shared<thames::perturbations::atmosphere::drag::Drag<T>>(radius, w, parameters.spacecraft.Cd, parameters.spacecraft.dragArea, parameters.spacecraft.mass, atmospheremodel, factors);
+            perturbation->add_model(atmosphereperturbation);
         } else {
             throw std::runtime_error("Unsupported atmosphere model requested");
         }        
@@ -133,6 +137,10 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
         // Select atmosphere model
         if (parameters.perturbation.atmosphere.model == "USSA76") {
             auto atmospheremodel = thames::perturbations::atmosphere::models::USSA76;
+            auto atmosphereperturbation = std::make_shared<thames::perturbations::atmosphere::drag::DragPolynomial<T, P>>(radius, w, parameters.spacecraft.Cd, parameters.spacecraft.dragArea, parameters.spacecraft.mass, atmospheremodel, factors);
+            perturbation->add_model(atmosphereperturbation);
+        } else if (parameters.perturbation.atmosphere.model == "Wertz") {
+            auto atmospheremodel = thames::perturbations::atmosphere::models::WERTZ;
             auto atmosphereperturbation = std::make_shared<thames::perturbations::atmosphere::drag::DragPolynomial<T, P>>(radius, w, parameters.spacecraft.Cd, parameters.spacecraft.dragArea, parameters.spacecraft.mass, atmospheremodel, factors);
             perturbation->add_model(atmosphereperturbation);
         } else {

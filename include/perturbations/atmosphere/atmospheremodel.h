@@ -28,12 +28,14 @@ SOFTWARE.
 #include <vector>
 
 #include "ussa76.h"
+#include "wertz.h"
 
 namespace thames::perturbations::atmosphere::models {
 
     /// Enumerate for atmosphere models
     enum AtmosphereModels {
-        USSA76
+        USSA76,
+        WERTZ
     };
 
     ///////////
@@ -44,7 +46,7 @@ namespace thames::perturbations::atmosphere::models {
      * @brief Retrieve geometric altitudes
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-17
+     * @date 2022-06-07
      * 
      * @tparam T Numeric type
      * @param[in] model Atmosphere model
@@ -57,7 +59,7 @@ namespace thames::perturbations::atmosphere::models {
      * @brief Retrieve atmospheric densities
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-17
+     * @date 2022-06-07
      * 
      * @tparam T Numeric type
      * @param[in] model Atmosphere model
@@ -70,7 +72,7 @@ namespace thames::perturbations::atmosphere::models {
      * @brief Retrieve scale heights
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-17
+     * @date 2022-06-07
      * 
      * @tparam T Numeric type
      * @param[in] model Atmosphere model
