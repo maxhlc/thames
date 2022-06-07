@@ -28,7 +28,7 @@ SOFTWARE.
 namespace thames::constants::earth{
 
     /// Radius of the Earth [km]
-    const double radius = 6378.0;
+    const double radius = 6.378136460000000E+03;
 
     /// Earth's gravitational parameter [km^3/s^2]
     const double mu = 3.986004414498200E+05;
@@ -37,7 +37,7 @@ namespace thames::constants::earth{
     const double J2 = 1.082635854E-03;
 
     /// Earth's rotation rate [rad/s]
-    const double w = 7.2921159E-05;
+    const double w = 7.292115855306587E-05;
 
 }
 
