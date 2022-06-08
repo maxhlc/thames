@@ -228,6 +228,22 @@ namespace thames::settings {
     };
 
     /**
+     * @brief Structure to store execution statistics
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-06-08
+     * 
+     * @tparam T Numeric type
+     */
+    template<class T>
+    struct ExecutionStatistics {
+        T propagationTime;
+
+        // Macro to generate boilerplate to/from JSON
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(ExecutionStatistics, propagationTime)
+    };
+
+    /**
      * @brief Structure to store all parameters
      * 
      * @author Max Hallgarten La Casta
@@ -255,8 +271,11 @@ namespace thames::settings {
         /// State parameters
         std::vector<StateParameters<T>> states;
 
+        /// Execution statistics
+        ExecutionStatistics<T> statistics;
+
         // Macro to generate boilerplate to/from JSON
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(Parameters, metadata, spacecraft, perturbation, propagator, polynomial, states)
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(Parameters, metadata, spacecraft, perturbation, propagator, polynomial, states, statistics)
     };
 
 }

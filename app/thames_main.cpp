@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <chrono>
 #include <stdexcept>
 
 #include "../include/thames.h"
@@ -239,6 +240,9 @@ int main(int argc, char **argv) {
     if (parameters.states[0].datetime != parameters.propagator.startTime)
         throw std::runtime_error("Inconsistent start times provided");
 
+    // Start timer for propagation
+    auto start_propagation = std::chrono::high_resolution_clock::now();
+
     // Propagate
     if (parameters.polynomial.isEnabled) {
         if (parameters.polynomial.type == "Taylor") {
@@ -251,6 +255,13 @@ int main(int argc, char **argv) {
     } else {
         parameters_output = propagate<double>(parameters);
     }
+
+    // Start timer for propagation
+    auto end_propagation = std::chrono::high_resolution_clock::now();
+
+    // Store propagation statistics
+    std::chrono::duration<double> elapsed_propagation = end_propagation - start_propagation;
+    parameters_output.statistics.propagationTime = elapsed_propagation.count();
 
     // Output file
     thames::io::json::save(filepathout, parameters_output);
