@@ -59,7 +59,7 @@ namespace thames::io::json {
         std::time_t now = std::time(0);
         std::tm* now_gmt = std::gmtime(&now);
         char buffer[25];
-        std::strftime(buffer, 25, "%Y-%m-%dT%X.000Z", now_gmt);
+        std::strftime(buffer, 25, "%Y-%m-%dT%X.999Z", now_gmt);
         parameters.metadata.datetimeModified = buffer;
 
         // Construct JSON object

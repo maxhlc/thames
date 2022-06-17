@@ -46,7 +46,7 @@ namespace thames::io::json {
      * @brief Save parameters to JSON
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-31
+     * @date 2022-06-17
      * 
      * @tparam T Numeric type
      * @param[in] filepath Input file path
