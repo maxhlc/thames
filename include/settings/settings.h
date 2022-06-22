@@ -146,7 +146,7 @@ namespace thames::settings {
      * @brief Structure to store propagator parameters
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-30
+     * @date 2022-06-21
      * 
      * @tparam T Numeric type
      */
@@ -170,6 +170,9 @@ namespace thames::settings {
         /// Intermediate output flag
         bool intermediateOutput;
 
+        /// Intermediate timestep
+        T timeStepIntermediate;
+
         /// Fixed-step timestep
         T timeStep;
 
@@ -180,7 +183,7 @@ namespace thames::settings {
         T relativeTolerance;
 
         // Macro to generate boilerplate to/from JSON
-        NLOHMANN_DEFINE_TYPE_INTRUSIVE(PropagatorParameters, startTime, endTime, equations, isNonDimensional, isFixedStep, intermediateOutput, timeStep, absoluteTolerance, relativeTolerance)
+        NLOHMANN_DEFINE_TYPE_INTRUSIVE(PropagatorParameters, startTime, endTime, equations, isNonDimensional, isFixedStep, intermediateOutput, timeStepIntermediate, timeStep, absoluteTolerance, relativeTolerance)
     };
 
     /**
