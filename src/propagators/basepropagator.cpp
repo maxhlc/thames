@@ -238,7 +238,7 @@ namespace thames::propagators::basepropagator {
     }
 
     template<class T>
-    std::vector<std::vector<std::vector<T>>> propagate(const std::vector<T> tvec, const T tstep, const std::vector<std::vector<T>> states, const PropagatorParameters<T> options, const StateTypes statetype) {
+    std::vector<std::vector<std::vector<T>>> BasePropagator<T>::propagate(const std::vector<T> tvec, const T tstep, const std::vector<std::vector<T>> states, const PropagatorParameters<T> options, const StateTypes statetype) {
         // Declare output vectors
         std::vector<std::vector<std::vector<T>>> states_propagated(tvec.size());
 
@@ -251,7 +251,7 @@ namespace thames::propagators::basepropagator {
         }
 
         // Return output vector
-        return states;
+        return states_propagated;
     }
 
     template class BasePropagator<double>;
