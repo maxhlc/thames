@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['integratorparameters_93',['IntegratorParameters',['../structthames_1_1io_1_1json_1_1IntegratorParameters.html',1,'thames::io::json']]],
-  ['intermediateoutput_94',['intermediateOutput',['../structthames_1_1io_1_1json_1_1IntegratorParameters.html#af73297e5aa0b75e8f193f35ee3071724',1,'thames::io::json::IntegratorParameters']]],
+  ['intermediateoutput_94',['intermediateOutput',['../structthames_1_1settings_1_1PropagatorParameters.html#a644db9ea6e1e87e10f69f3fcbadad225',1,'thames::settings::PropagatorParameters']]],
   ['io_2eh_95',['io.h',['../io_8h.html',1,'']]],
-  ['isenabled_96',['isEnabled',['../structthames_1_1io_1_1json_1_1GeopotentialPerturbationParameters.html#ae7bf8bff5fabf4b0625eef81ddeaa080',1,'thames::io::json::GeopotentialPerturbationParameters::isEnabled()'],['../structthames_1_1io_1_1json_1_1AtmospherePerturbationParameters.html#a10b2484a8bd9f5e656a88a997613a8e8',1,'thames::io::json::AtmospherePerturbationParameters::isEnabled()'],['../structthames_1_1io_1_1json_1_1PolynomialParameters.html#ac3f8bea084c97ca7c4e2ff46c835d8c3',1,'thames::io::json::PolynomialParameters::isEnabled()']]],
-  ['isfixedstep_97',['isFixedStep',['../structthames_1_1io_1_1json_1_1IntegratorParameters.html#a26d6dec19f390c295261f7a7643cbc09',1,'thames::io::json::IntegratorParameters::isFixedStep()'],['../structthames_1_1propagators_1_1options_1_1PropagatorOptions.html#a93fa0e797737d56a5b3d05ca5c89f6d4',1,'thames::propagators::options::PropagatorOptions::isfixedStep()']]],
-  ['isinputfile_98',['isInputFile',['../structthames_1_1io_1_1json_1_1Metadata.html#a4bb44d5a46f62af017a970b8c55c9e89',1,'thames::io::json::Metadata']]],
-  ['isnondimensional_99',['isNonDimensional',['../structthames_1_1propagators_1_1options_1_1PropagatorOptions.html#a8146297cfb6fafc1dd1f15c210a9e8da',1,'thames::propagators::options::PropagatorOptions']]]
+  ['isenabled_96',['isEnabled',['../structthames_1_1settings_1_1GeopotentialPerturbationParameters.html#a13e803815885549735fd617da296cc98',1,'thames::settings::GeopotentialPerturbationParameters::isEnabled()'],['../structthames_1_1settings_1_1AtmospherePerturbationParameters.html#aae527c538fb989f56a5eb16746b6b6da',1,'thames::settings::AtmospherePerturbationParameters::isEnabled()'],['../structthames_1_1settings_1_1PolynomialParameters.html#adea8e20f252d93eb748417676d80ca95',1,'thames::settings::PolynomialParameters::isEnabled()']]],
+  ['isfixedstep_97',['isFixedStep',['../structthames_1_1settings_1_1PropagatorParameters.html#aa85648004d9ee80968b394af2b1bb798',1,'thames::settings::PropagatorParameters']]],
+  ['isinputfile_98',['isInputFile',['../structthames_1_1settings_1_1Metadata.html#a9608d1275c55a8577be9e683f8644646',1,'thames::settings::Metadata']]],
+  ['isnondimensional_99',['isNonDimensional',['../structthames_1_1settings_1_1PropagatorParameters.html#af365e46a4a96c5fbbcb91efa7fcc6b57',1,'thames::settings::PropagatorParameters']]]
 ];

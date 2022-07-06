@@ -169,8 +169,10 @@ namespace thames::propagators::basepropagator {
             /**
              * @brief Propagation method (with intermediate output).
              * 
+             * @note A separate propagation is called for each intermediate output interval, therefore any required state conversions occur multiple times.
+             * 
              * @author Max Hallgarten La Casta
-             * @date 2022-06-02
+             * @date 2022-07-06
              * 
              * @param[in] tvec Vector of physical propagation times.
              * @param[in] tstep Initial timestep for propagation.
@@ -200,8 +202,10 @@ namespace thames::propagators::basepropagator {
             /**
              * @brief Propagation method for sets (with intermediate output).
              * 
+             * @note A separate propagation is called for each intermediate output interval, therefore any required state conversions occur multiple times.
+             * 
              * @author Max Hallgarten La Casta
-             * @date 2022-06-22
+             * @date 2022-07-06
              * 
              * @param[in] tvec Vector of physical propagation times.
              * @param[in] tstep Initial timestep for propagation.
@@ -356,8 +360,10 @@ namespace thames::propagators::basepropagator {
             /**
              * @brief Propagation method (with intermediate output).
              * 
+             * @note A separate propagation is called for each intermediate output interval, therefore any required state conversions occur multiple times.
+             * 
              * @author Max Hallgarten La Casta
-             * @date 2022-06-02
+             * @date 2022-07-06
              * 
              * @param[in] tvec Vector of physical propagation times.
              * @param[in] tstep Initial timestep for propagation.
@@ -388,8 +394,10 @@ namespace thames::propagators::basepropagator {
             /**
              * @brief Propagation method for sets of points (with intermediate output).
              * 
+             * @note A separate propagation is called for each intermediate output interval, therefore any required state conversions occur multiple times, plus the polynomials are reconstructed at each output timestep.
+             * 
              * @author Max Hallgarten La Casta
-             * @date 2022-06-02
+             * @date 2022-07-06
              * 
              * @param[in] tvec Vector of physical propagation times.
              * @param[in] tstep Initial timestep for propagation.

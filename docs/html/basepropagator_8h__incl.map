@@ -1,11 +1,13 @@
 <map id="include/propagators/basepropagator.h" name="include/propagators/basepropagator.h">
-<area shape="rect" id="node1" title=" " alt="" coords="339,5,490,47"/>
-<area shape="rect" id="node2" title=" " alt="" coords="20,273,76,300"/>
-<area shape="rect" id="node3" title=" " alt="" coords="208,273,271,300"/>
-<area shape="rect" id="node4" title=" " alt="" coords="418,109,477,136"/>
-<area shape="rect" id="node5" title=" " alt="" coords="501,95,664,151"/>
-<area shape="rect" id="node6" href="$options_8h.html" title=" " alt="" coords="688,109,770,136"/>
-<area shape="rect" id="node7" href="$statetypes_8h.html" title=" " alt="" coords="795,109,978,136"/>
-<area shape="rect" id="node8" href="$dimensional_8h.html" title=" " alt="" coords="136,199,344,225"/>
-<area shape="rect" id="node9" href="$baseperturbation_8h.html" title=" " alt="" coords="37,109,285,136"/>
+<area shape="rect" id="node1" title=" " alt="" coords="401,5,552,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="104,273,160,300"/>
+<area shape="rect" id="node3" title=" " alt="" coords="362,199,439,225"/>
+<area shape="rect" id="node4" title=" " alt="" coords="369,273,432,300"/>
+<area shape="rect" id="node5" title=" " alt="" coords="735,199,794,225"/>
+<area shape="rect" id="node6" title=" " alt="" coords="743,95,906,151"/>
+<area shape="rect" id="node7" href="$statetypes_8h.html" title=" " alt="" coords="930,109,1113,136"/>
+<area shape="rect" id="node8" href="$dimensional_8h.html" title=" " alt="" coords="28,199,236,225"/>
+<area shape="rect" id="node9" href="$baseperturbation_8h.html" title=" " alt="" coords="140,109,388,136"/>
+<area shape="rect" id="node10" href="$settings_8h.html" title=" " alt="" coords="514,109,668,136"/>
+<area shape="rect" id="node11" title=" " alt="" coords="514,199,660,225"/>
 </map>

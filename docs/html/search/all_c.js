@@ -13,6 +13,5 @@ var searchData=
   ['operator_2f_3cdouble_20_3e_143',['operator/&lt;double &gt;',['../namespacethames_1_1vector_1_1arithmeticoverloads.html#a6ed7b62f389837a0981591d5cd600c3d',1,'thames::vector::arithmeticoverloads']]],
   ['operator_2f_3cdouble_2c_203_20_3e_144',['operator/&lt;double, 3 &gt;',['../namespacethames_1_1vector_1_1arithmeticoverloads.html#afd96c1651d9f4036f5de770552c84f70',1,'thames::vector::arithmeticoverloads']]],
   ['optimise_2ecpp_145',['optimise.cpp',['../optimise_8cpp.html',1,'']]],
-  ['optimise_2eh_146',['optimise.h',['../optimise_8h.html',1,'']]],
-  ['options_2eh_147',['options.h',['../options_8h.html',1,'']]]
+  ['optimise_2eh_146',['optimise.h',['../optimise_8h.html',1,'']]]
 ];

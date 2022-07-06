@@ -72,23 +72,27 @@ $(function() {
 <div class="title">json.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;fstream&gt;</code><br />
+<div class="textblock"><code>#include &lt;ctime&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
 <code>#include &lt;iomanip&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;nlohmann/json.hpp&gt;</code><br />
 <code>#include &quot;<a class="el" href="json_8h_source.html">../../include/io/json.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="settings_8h_source.html">../../include/settings/settings.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for json.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="json_8cpp__incl.png" border="0" usemap="#src_2io_2json_8cpp" alt=""/></div>
 <map name="src_2io_2json_8cpp" id="src_2io_2json_8cpp">
-<area shape="rect" title=" " alt="" coords="158,5,273,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,79,107"/>
-<area shape="rect" title=" " alt="" coords="103,80,178,107"/>
-<area shape="rect" title=" " alt="" coords="193,155,251,181"/>
-<area shape="rect" title=" " alt="" coords="369,155,515,181"/>
-<area shape="rect" href="json_8h.html" title=" " alt="" coords="253,80,405,107"/>
-<area shape="rect" title=" " alt="" coords="281,155,344,181"/>
+<area shape="rect" title=" " alt="" coords="241,5,356,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,64,107"/>
+<area shape="rect" title=" " alt="" coords="89,80,162,107"/>
+<area shape="rect" title=" " alt="" coords="187,80,261,107"/>
+<area shape="rect" title=" " alt="" coords="292,229,351,256"/>
+<area shape="rect" title=" " alt="" coords="493,229,640,256"/>
+<area shape="rect" href="json_8h.html" title=" " alt="" coords="336,80,488,107"/>
+<area shape="rect" href="settings_8h.html" title=" " alt="" coords="352,155,507,181"/>
+<area shape="rect" title=" " alt="" coords="398,229,461,256"/>
 </map>
 </div>
 </div>
@@ -105,35 +109,23 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a60e3b7a2eac46562056d2acff67243d0"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a60e3b7a2eac46562056d2acff67243d0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1json.html#a60e3b7a2eac46562056d2acff67243d0">thames::io::json::load</a> (const std::string &amp;filepath, Metadata &amp;metadata, SpacecraftParameters&lt; T &gt; &amp;spacecraft, PerturbationParameters &amp;perturbation, PropagatorParameters &amp;propagator, IntegratorParameters&lt; T &gt; &amp;integrator, StateParameters&lt; T &gt; &amp;state)</td></tr>
-<tr class="memdesc:a60e3b7a2eac46562056d2acff67243d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load parameters from JSON.  <a href="namespacethames_1_1io_1_1json.html#a60e3b7a2eac46562056d2acff67243d0">More...</a><br /></td></tr>
-<tr class="separator:a60e3b7a2eac46562056d2acff67243d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48a2f66b8479aaff7256ae9b3d99cc72"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1json.html#a48a2f66b8479aaff7256ae9b3d99cc72">thames::io::json::load</a> (const std::string &amp;, Metadata &amp;, SpacecraftParameters&lt; double &gt; &amp;, PerturbationParameters &amp;, PropagatorParameters &amp;, IntegratorParameters&lt; double &gt; &amp;, StateParameters&lt; double &gt; &amp;)</td></tr>
-<tr class="separator:a48a2f66b8479aaff7256ae9b3d99cc72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10cf459dfe7e489d1c693129558635d6"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a10cf459dfe7e489d1c693129558635d6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1json.html#a10cf459dfe7e489d1c693129558635d6">thames::io::json::save</a> (const std::string &amp;filepath, const Metadata &amp;metadata, const SpacecraftParameters&lt; T &gt; &amp;spacecraft, const PerturbationParameters &amp;perturbation, const PropagatorParameters &amp;propagator, const IntegratorParameters&lt; T &gt; &amp;integrator, const std::vector&lt; StateParameters&lt; T &gt;&gt; &amp;states)</td></tr>
-<tr class="memdesc:a10cf459dfe7e489d1c693129558635d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save parameters to JSON.  <a href="namespacethames_1_1io_1_1json.html#a10cf459dfe7e489d1c693129558635d6">More...</a><br /></td></tr>
-<tr class="separator:a10cf459dfe7e489d1c693129558635d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec29b3699c7c1f665c839b02a7b480a8"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1json.html#aec29b3699c7c1f665c839b02a7b480a8">thames::io::json::save</a> (const std::string &amp;, const Metadata &amp;, const SpacecraftParameters&lt; double &gt; &amp;, const PerturbationParameters &amp;, const PropagatorParameters &amp;, const IntegratorParameters&lt; double &gt; &amp;, const std::vector&lt; StateParameters&lt; double &gt;&gt; &amp;)</td></tr>
-<tr class="separator:aec29b3699c7c1f665c839b02a7b480a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43df71e9526daa9b5c64af778aa487c9"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a43df71e9526daa9b5c64af778aa487c9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1json.html#a43df71e9526daa9b5c64af778aa487c9">thames::io::json::load</a> (const std::string &amp;filepath, Metadata &amp;metadata, SpacecraftParameters&lt; T &gt; &amp;spacecraft, PerturbationParameters &amp;perturbation, PropagatorParameters &amp;propagator, IntegratorParameters&lt; T &gt; &amp;integrator, PolynomialParameters &amp;polynomial, StateParameters&lt; T &gt; &amp;state)</td></tr>
-<tr class="memdesc:a43df71e9526daa9b5c64af778aa487c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load parameters from JSON.  <a href="namespacethames_1_1io_1_1json.html#a43df71e9526daa9b5c64af778aa487c9">More...</a><br /></td></tr>
-<tr class="separator:a43df71e9526daa9b5c64af778aa487c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a3ca62b2f4bbfe39c9cefd6c30c34d2"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1json.html#a1a3ca62b2f4bbfe39c9cefd6c30c34d2">thames::io::json::load</a> (const std::string &amp;, Metadata &amp;, SpacecraftParameters&lt; double &gt; &amp;, PerturbationParameters &amp;, PropagatorParameters &amp;, IntegratorParameters&lt; double &gt; &amp;, PolynomialParameters &amp;, StateParameters&lt; double &gt; &amp;)</td></tr>
-<tr class="separator:a1a3ca62b2f4bbfe39c9cefd6c30c34d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd987d61281c2f18e8dbde325e8d4913"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:afd987d61281c2f18e8dbde325e8d4913"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1json.html#afd987d61281c2f18e8dbde325e8d4913">thames::io::json::save</a> (const std::string &amp;filepath, const Metadata &amp;metadata, const SpacecraftParameters&lt; T &gt; &amp;spacecraft, const PerturbationParameters &amp;perturbation, const PropagatorParameters &amp;propagator, const IntegratorParameters&lt; T &gt; &amp;integrator, const PolynomialParameters &amp;polynomial, const std::vector&lt; StateParameters&lt; T &gt;&gt; &amp;states)</td></tr>
-<tr class="memdesc:afd987d61281c2f18e8dbde325e8d4913"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save parameters to JSON.  <a href="namespacethames_1_1io_1_1json.html#afd987d61281c2f18e8dbde325e8d4913">More...</a><br /></td></tr>
-<tr class="separator:afd987d61281c2f18e8dbde325e8d4913"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4705e5c07d7fb48ce40c60febe1d3cd"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1json.html#ac4705e5c07d7fb48ce40c60febe1d3cd">thames::io::json::save</a> (const std::string &amp;, const Metadata &amp;, const SpacecraftParameters&lt; double &gt; &amp;, const PerturbationParameters &amp;, const PropagatorParameters &amp;, const IntegratorParameters&lt; double &gt; &amp;, const PolynomialParameters &amp;, const std::vector&lt; StateParameters&lt; double &gt;&gt; &amp;)</td></tr>
-<tr class="separator:ac4705e5c07d7fb48ce40c60febe1d3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c1ac0aced4d6843851f8d5552d3dc84"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a4c1ac0aced4d6843851f8d5552d3dc84"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1json.html#a4c1ac0aced4d6843851f8d5552d3dc84">thames::io::json::load</a> (const std::string &amp;filepath, <a class="el" href="structthames_1_1settings_1_1Parameters.html">thames::settings::Parameters</a>&lt; T &gt; &amp;parameters)</td></tr>
+<tr class="memdesc:a4c1ac0aced4d6843851f8d5552d3dc84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load parameters from JSON.  <a href="namespacethames_1_1io_1_1json.html#a4c1ac0aced4d6843851f8d5552d3dc84">More...</a><br /></td></tr>
+<tr class="separator:a4c1ac0aced4d6843851f8d5552d3dc84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa7d1b545cebb54a09a478f1a859d160"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1json.html#aaa7d1b545cebb54a09a478f1a859d160">thames::io::json::load</a> (const std::string &amp;, <a class="el" href="structthames_1_1settings_1_1Parameters.html">thames::settings::Parameters</a>&lt; double &gt; &amp;)</td></tr>
+<tr class="separator:aaa7d1b545cebb54a09a478f1a859d160"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad391755759f49743b886aef061e074f7"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ad391755759f49743b886aef061e074f7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1json.html#ad391755759f49743b886aef061e074f7">thames::io::json::save</a> (const std::string &amp;filepath, <a class="el" href="structthames_1_1settings_1_1Parameters.html">thames::settings::Parameters</a>&lt; T &gt; parameters)</td></tr>
+<tr class="memdesc:ad391755759f49743b886aef061e074f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save parameters to JSON.  <a href="namespacethames_1_1io_1_1json.html#ad391755759f49743b886aef061e074f7">More...</a><br /></td></tr>
+<tr class="separator:ad391755759f49743b886aef061e074f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8e5cf896f4dac19355ee9592216c021"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1json.html#ac8e5cf896f4dac19355ee9592216c021">thames::io::json::save</a> (const std::string &amp;, <a class="el" href="structthames_1_1settings_1_1Parameters.html">thames::settings::Parameters</a>&lt; double &gt;)</td></tr>
+<tr class="separator:ac8e5cf896f4dac19355ee9592216c021"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 24 2022 17:43:49 for THAMES by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jul 6 2022 15:04:21 for THAMES by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>
