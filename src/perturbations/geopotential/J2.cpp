@@ -24,23 +24,27 @@ SOFTWARE.
 
 #include <array>
 #include <cmath>
+#include <memory>
 #include <vector>
 
 #ifdef THAMES_USE_SMARTUQ
 #include "../../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "J2.h"
-#include "../../vector/geometry.h"
+#include "../../../include/conversions/dimensional.h"
+#include "../../../include/perturbations/geopotential/J2.h"
+#include "../../../include/vector/geometry.h"
 
-namespace thames::perturbations::geopotential{
+namespace thames::perturbations::geopotential {
+
+    using thames::conversions::dimensional::DimensionalFactors;
 
     ///////////
     // Reals //
     ///////////
 
     template <class T>
-    J2<T>::J2(const T& mu, const T& J2, const T& radius) : m_mu(mu), m_J2(J2), m_radius(radius) {
+    J2<T>::J2(const T& mu, const T& J2, const T& radius, const std::shared_ptr<const DimensionalFactors<T>> factors) : BasePerturbation<T>(factors), m_mu(mu), m_J2(J2), m_radius(radius) {
 
     }
 
@@ -54,19 +58,24 @@ namespace thames::perturbations::geopotential{
     ////////////
 
     template <class T>
-    std::array<T, 3> J2<T>::acceleration_total(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const{
+    std::array<T, 3> J2<T>::acceleration_total(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const {
+        // Calculate factors
+        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+        const T J2 = m_J2;
+        const T radius = (m_isNonDimensional) ? m_radius/m_factors->length : m_radius;
+
         // Extract position components
-        T x = R[0], y = R[1], z = R[2];
+        const T x = R[0], y = R[1], z = R[2];
 
         // Calculate range
-        T r = thames::vector::geometry::norm3(R);
+        const T r = thames::vector::geometry::norm3(R);
 
         // Precompute factors
-        T J2_fac1 = -1.5*m_mu*m_J2*pow(m_radius, 2.0)/pow(r, 5.0);
-        T J2_fac2 = 5.0*pow(z, 2.0)/pow(r, 2.0);
+        const T J2_fac1 = -1.5*mu*J2*pow(radius, 2.0)/pow(r, 5.0);
+        const T J2_fac2 = 5*pow(z, 2.0)/pow(r, 2.0);
 
         // Declare and calculate perturbing acceleration vector
-        std::array<T, 3> A = {
+        const std::array<T, 3> A = {
             J2_fac1*x*(1.0 - J2_fac2),
             J2_fac1*y*(1.0 - J2_fac2),
             J2_fac1*z*(3.0 - J2_fac2)
@@ -77,18 +86,23 @@ namespace thames::perturbations::geopotential{
     }
 
     template <class T>
-    T J2<T>::potential(const T& t, const std::array<T, 3>& R) const{
+    T J2<T>::potential(const T& t, const std::array<T, 3>& R) const {
+        // Calculate factors
+        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+        const T J2 = m_J2;
+        const T radius = (m_isNonDimensional) ? m_radius/m_factors->length : m_radius;
+
         // Extract position components
-        T z = R[2];
+        const T z = R[2];
 
         // Calculate range
-        T r = thames::vector::geometry::norm3(R);
+        const T r = thames::vector::geometry::norm3(R);
 
         // Calculate cosine of latitude
-        T cphi = z/r;
+        const T cphi = z/r;
 
         // Calculate perturbing potential
-        T U = 0.5*m_J2*m_mu/pow(r, 3.0)*pow(m_radius, 2.0)*(3.0*pow(cphi, 2.0) - 1.0);
+        const T U = 0.5*J2*mu/pow(r, 3.0)*pow(radius, 2.0)*(3*pow(cphi, 2.0) - 1.0);
 
         // Return perturbing potential
         return U;
@@ -99,19 +113,24 @@ namespace thames::perturbations::geopotential{
     /////////////
 
     template <class T>
-    std::vector<T> J2<T>::acceleration_total(const T& t, const std::vector<T>& R, const std::vector<T>& V) const{
+    std::vector<T> J2<T>::acceleration_total(const T& t, const std::vector<T>& R, const std::vector<T>& V) const {
+        // Calculate factors
+        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+        const T J2 = m_J2;
+        const T radius = (m_isNonDimensional) ? m_radius/m_factors->length : m_radius;
+
         // Extract position components
-        T x = R[0], y = R[1], z = R[2];
+        const T x = R[0], y = R[1], z = R[2];
 
         // Calculate range
-        T r = thames::vector::geometry::norm3(R);
+        const T r = thames::vector::geometry::norm3(R);
 
         // Precompute factors
-        T J2_fac1 = -1.5*m_mu*m_J2*pow(m_radius, 2.0)/pow(r, 5.0);
-        T J2_fac2 = 5.0*pow(z, 2.0)/pow(r, 2.0);
+        const T J2_fac1 = -1.5*mu*J2*pow(radius, 2.0)/pow(r, 5.0);
+        const T J2_fac2 = 5.0*pow(z, 2.0)/pow(r, 2.0);
 
         // Declare and calculate perturbing acceleration vector
-        std::vector<T> A = {
+        const std::vector<T> A = {
             J2_fac1*x*(1.0 - J2_fac2),
             J2_fac1*y*(1.0 - J2_fac2),
             J2_fac1*z*(3.0 - J2_fac2)
@@ -122,18 +141,23 @@ namespace thames::perturbations::geopotential{
     }
 
     template <class T>
-    T J2<T>::potential(const T& t, const std::vector<T>& R) const{
+    T J2<T>::potential(const T& t, const std::vector<T>& R) const {
+        // Calculate factors
+        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+        const T J2 = m_J2;
+        const T radius = (m_isNonDimensional) ? m_radius/m_factors->length : m_radius;
+
         // Extract position components
-        T z = R[2];
+        const T z = R[2];
 
         // Calculate range
-        T r = thames::vector::geometry::norm3(R);
+        const T r = thames::vector::geometry::norm3(R);
 
         // Calculate cosine of latitude
-        T cphi = z/r;
+        const T cphi = z/r;
 
         // Calculate perturbing potential
-        T U = 0.5*m_J2*m_mu/pow(r, 3.0)*pow(m_radius, 2.0)*(3.0*pow(cphi, 2.0) - 1.0);
+        const T U = 0.5*J2*mu/pow(r, 3.0)*pow(radius, 2.0)*(3.0*pow(cphi, 2.0) - 1.0);
 
         // Return perturbing potential
         return U;
@@ -148,9 +172,10 @@ namespace thames::perturbations::geopotential{
     #ifdef THAMES_USE_SMARTUQ
 
     using namespace smartuq::polynomial;
+    using thames::conversions::dimensional::DimensionalFactors;
 
     template<class T, template<class> class P>
-    J2Polynomial<T, P>::J2Polynomial(const T& mu, const T& J2, const T& radius) : m_mu(mu), m_J2(J2), m_radius(radius) {
+    J2Polynomial<T, P>::J2Polynomial(const T& mu, const T& J2, const T& radius, const std::shared_ptr<const DimensionalFactors<T>> factors) : BasePerturbationPolynomial<T, P>(factors), m_mu(mu), m_J2(J2), m_radius(radius) {
 
     }
 
@@ -161,18 +186,23 @@ namespace thames::perturbations::geopotential{
 
     template<class T, template<class> class P>
     std::vector<P<T>> J2Polynomial<T, P>::acceleration_total(const T& t, const std::vector<P<T>>& R, const std::vector<P<T>>& V) const {
+        // Calculate factors
+        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+        const T J2 = m_J2;
+        const T radius = (m_isNonDimensional) ? m_radius/m_factors->length : m_radius;
+
         // Extract position components
-        P<T> x = R[0], y = R[1], z = R[2];
+        const P<T> x = R[0], y = R[1], z = R[2];
 
         // Calculate range
-        P<T> r = thames::vector::geometry::norm3(R);
+        const P<T> r = thames::vector::geometry::norm3(R);
 
         // Precompute factors
-        P<T> J2_fac1 = -1.5*m_mu*m_J2*pow(m_radius, 2)/pow(r, 5);
-        P<T> J2_fac2 = 5.0*pow(z, 2)/pow(r, 2);
+        const P<T> J2_fac1 = -1.5*mu*J2*pow(radius, 2)/pow(r, 5);
+        const P<T> J2_fac2 = 5.0*pow(z, 2)/pow(r, 2);
 
         // Declare and calculate perturbing acceleration vector
-        std::vector<P<T>> A = {
+        const std::vector<P<T>> A = {
             J2_fac1*x*(1.0 - J2_fac2),
             J2_fac1*y*(1.0 - J2_fac2),
             J2_fac1*z*(3.0 - J2_fac2)
@@ -184,17 +214,22 @@ namespace thames::perturbations::geopotential{
 
     template<class T, template<class> class P>
     P<T> J2Polynomial<T, P>::potential(const T& t, const std::vector<P<T>>& R) const {
+        // Calculate factors
+        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+        const T J2 = m_J2;
+        const T radius = (m_isNonDimensional) ? m_radius/m_factors->length : m_radius;
+
         // Extract position components
-        P<T> z = R[2];
+        const P<T> z = R[2];
 
         // Calculate range
-        P<T> r = thames::vector::geometry::norm3(R);
+        const P<T> r = thames::vector::geometry::norm3(R);
 
         // Calculate cosine of latitude
-        P<T> cphi = z/r;
+        const P<T> cphi = z/r;
 
         // Calculate perturbing potential
-        P<T> U = 0.5*m_J2*m_mu/pow(r, 3)*pow(m_radius, 2)*(3.0*pow(cphi, 2) - 1.0);
+        const P<T> U = 0.5*J2*mu/pow(r, 3)*pow(radius, 2)*(3.0*pow(cphi, 2) - 1.0);
 
         // Return perturbing potential
         return U;

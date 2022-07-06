@@ -29,7 +29,7 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "arithmeticoverloads.h"
+#include "../../include/vector/arithmeticoverloads.h"
 
 namespace thames::vector::arithmeticoverloads {
 

@@ -25,7 +25,7 @@ SOFTWARE.
 #include <cmath>
 #include <functional>
 
-#include "optimise.h"
+#include "../../include/util/optimise.h"
 
 namespace thames::util::optimise{
 

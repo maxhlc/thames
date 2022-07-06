@@ -1,0 +1,5 @@
+<map id="thames::propagators::basepropagator::BasePropagator&lt; T &gt;" name="thames::propagators::basepropagator::BasePropagator&lt; T &gt;">
+<area shape="rect" id="node1" title="Base propagator object." alt="" coords="5,39,287,80"/>
+<area shape="rect" id="node2" href="$classthames_1_1propagators_1_1CowellPropagator.html" title="Propagator object for Cowell&#39;s method." alt="" coords="335,5,517,47"/>
+<area shape="rect" id="node3" href="$classthames_1_1propagators_1_1GEqOEPropagator.html" title="Propagator object for GEqOE." alt="" coords="335,71,517,112"/>
+</map>

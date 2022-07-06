@@ -32,8 +32,8 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "polynomial.h"
-#include "../constants/statetypes.h"
+#include "../../include/io/polynomial.h"
+#include "../../include/constants/statetypes.h"
 
 namespace thames::io::polynomial {
 

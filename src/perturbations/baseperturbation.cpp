@@ -23,22 +23,25 @@ SOFTWARE.
 */
 
 #include <array>
+#include <memory>
 #include <vector>
 
 #ifdef THAMES_USE_SMARTUQ
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "baseperturbation.h"
+#include "../../include/perturbations/baseperturbation.h"
 
 namespace thames::perturbations::baseperturbation{
+
+    using thames::conversions::dimensional::DimensionalFactors;
 
     ///////////
     // Reals //
     ///////////
 
     template<class T>
-    BasePerturbation<T>::BasePerturbation(){
+    BasePerturbation<T>::BasePerturbation(const std::shared_ptr<const DimensionalFactors<T>> factors) : m_factors(factors) {
 
     };
 
@@ -46,6 +49,16 @@ namespace thames::perturbations::baseperturbation{
     BasePerturbation<T>::~BasePerturbation(){
 
     };
+
+    template<class T>
+    bool BasePerturbation<T>::get_nondimensional() {
+        return m_isNonDimensional;
+    }
+
+    template<class T>
+    void BasePerturbation<T>::set_nondimensional(bool isNonDimensional) {
+        m_isNonDimensional = isNonDimensional;
+    }
 
     ////////////
     // Arrays //
@@ -112,9 +125,10 @@ namespace thames::perturbations::baseperturbation{
     #ifdef THAMES_USE_SMARTUQ
 
     using namespace smartuq::polynomial;
+    using thames::conversions::dimensional::DimensionalFactors;
     
     template<class T, template<class> class P>
-    BasePerturbationPolynomial<T, P>::BasePerturbationPolynomial(){
+    BasePerturbationPolynomial<T, P>::BasePerturbationPolynomial(const std::shared_ptr<const DimensionalFactors<T>> factors) : m_factors(factors) {
 
     };
 
@@ -122,6 +136,16 @@ namespace thames::perturbations::baseperturbation{
     BasePerturbationPolynomial<T, P>::~BasePerturbationPolynomial(){
 
     };
+
+    template<class T, template<class> class P>
+    bool BasePerturbationPolynomial<T, P>::get_nondimensional() {
+        return m_isNonDimensional;
+    }
+
+    template<class T, template<class> class P>
+    void BasePerturbationPolynomial<T, P>::set_nondimensional(const bool isNonDimensional) {
+        m_isNonDimensional = isNonDimensional;
+    }
 
     template<class T, template<class> class P>
     std::vector<P<T>> BasePerturbationPolynomial<T, P>::acceleration_total(const T& t, const std::vector<P<T>>& R, const std::vector<P<T>>& V) const {

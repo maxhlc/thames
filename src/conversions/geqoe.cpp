@@ -25,18 +25,19 @@ SOFTWARE.
 #include <array>
 #include <cmath>
 #include <functional>
+#include <memory>
 #include <vector>
 
 #ifdef THAMES_USE_SMARTUQ
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "geqoe.h"
-#include "keplerian.h"
-#include "../perturbations/baseperturbation.h"
-#include "../util/root.h"
-#include "../vector/arithmeticoverloads.h"
-#include "../vector/geometry.h"
+#include "../../include/conversions/geqoe.h"
+#include "../../include/conversions/keplerian.h"
+#include "../../include/perturbations/baseperturbation.h"
+#include "../../include/util/root.h"
+#include "../../include/vector/arithmeticoverloads.h"
+#include "../../include/vector/geometry.h"
 
 namespace thames::conversions::geqoe{
 
@@ -48,7 +49,7 @@ namespace thames::conversions::geqoe{
     ////////////
 
     template<class T>
-    std::array<T, 6> cartesian_to_geqoe(const T& t, const std::array<T, 6>& RV, const T& mu, const BasePerturbation<T>* perturbation){
+    std::array<T, 6> cartesian_to_geqoe(const T& t, const std::array<T, 6>& RV, const T& mu, const std::shared_ptr<const BasePerturbation<T>> perturbation){
         // Extract position and velocity vectors
         std::array<T, 3> R = {RV[0], RV[1], RV[2]};
         std::array<T, 3> V = {RV[3], RV[4], RV[5]};
@@ -130,10 +131,10 @@ namespace thames::conversions::geqoe{
         // Return GEqOE state vector
         return geqoe;
     }
-    template std::array<double, 6> cartesian_to_geqoe<double>(const double&, const std::array<double, 6>&, const double&, const BasePerturbation<double>*);
+    template std::array<double, 6> cartesian_to_geqoe<double>(const double&, const std::array<double, 6>&, const double&, const std::shared_ptr<const BasePerturbation<double>> perturbation);
 
     template<class T>
-    std::array<T, 6> geqoe_to_cartesian(const T& t, const std::array<T, 6>& geqoe, const T& mu, const BasePerturbation<T>* perturbation){
+    std::array<T, 6> geqoe_to_cartesian(const T& t, const std::array<T, 6>& geqoe, const T& mu, const std::shared_ptr<const BasePerturbation<T>> perturbation){
         // Extract elements
         T nu = geqoe[0];
         T p1 = geqoe[1];
@@ -203,14 +204,14 @@ namespace thames::conversions::geqoe{
         // Return Cartesian state vector
         return RV;
     }
-    template std::array<double, 6> geqoe_to_cartesian<double>(const double&, const std::array<double, 6>&, const double&, const BasePerturbation<double>*);
+    template std::array<double, 6> geqoe_to_cartesian<double>(const double&, const std::array<double, 6>&, const double&, const std::shared_ptr<const BasePerturbation<double>> perturbation);
 
     /////////////
     // Vectors //
     /////////////
 
     template<class T>
-    std::vector<T> cartesian_to_geqoe(const T& t, const std::vector<T>& RV, const T& mu, const BasePerturbation<T>* perturbation){
+    std::vector<T> cartesian_to_geqoe(const T& t, const std::vector<T>& RV, const T& mu, const std::shared_ptr<const BasePerturbation<T>> perturbation){
         // Extract position and velocity vectors
         std::vector<T> R = {RV[0], RV[1], RV[2]};
         std::vector<T> V = {RV[3], RV[4], RV[5]};
@@ -292,10 +293,10 @@ namespace thames::conversions::geqoe{
         // Return GEqOE state vector
         return geqoe;
     }
-    template std::vector<double> cartesian_to_geqoe<double>(const double& t, const std::vector<double>& RV, const double& mu, const BasePerturbation<double>* perturbation);
+    template std::vector<double> cartesian_to_geqoe<double>(const double& t, const std::vector<double>& RV, const double& mu, const std::shared_ptr<const BasePerturbation<double>> perturbation);
 
     template<class T>
-    std::vector<T> geqoe_to_cartesian(const T& t, const std::vector<T>& geqoe, const T& mu, const BasePerturbation<T>* perturbation){
+    std::vector<T> geqoe_to_cartesian(const T& t, const std::vector<T>& geqoe, const T& mu, const std::shared_ptr<const BasePerturbation<T>> perturbation){
         // Extract elements
         T nu = geqoe[0];
         T p1 = geqoe[1];
@@ -365,7 +366,7 @@ namespace thames::conversions::geqoe{
         // Return Cartesian state vector
         return RV;
     }
-    template std::vector<double> geqoe_to_cartesian<double>(const double&, const std::vector<double>&, const double&, const BasePerturbation<double>*);
+    template std::vector<double> geqoe_to_cartesian<double>(const double&, const std::vector<double>&, const double&, const std::shared_ptr<const BasePerturbation<double>> perturbation);
 
     /////////////////
     // Polynomials //
@@ -376,7 +377,7 @@ namespace thames::conversions::geqoe{
     using namespace smartuq::polynomial;
 
     template<class T, template<class> class P>
-    std::vector<P<T>> cartesian_to_geqoe(const T& t, const std::vector<P<T>>& RV, const T& mu, const BasePerturbationPolynomial<T, P>* perturbation){
+    std::vector<P<T>> cartesian_to_geqoe(const T& t, const std::vector<P<T>>& RV, const T& mu, const std::shared_ptr<const BasePerturbationPolynomial<T, P>> perturbation){
         // Extract position and velocity vectors
         std::vector<P<T>> R = {RV[0], RV[1], RV[2]};
         std::vector<P<T>> V = {RV[3], RV[4], RV[5]};
@@ -458,11 +459,11 @@ namespace thames::conversions::geqoe{
         // Return GEqOE state vector
         return geqoe;
     }
-    template std::vector<taylor_polynomial<double>> cartesian_to_geqoe(const double& t, const std::vector<taylor_polynomial<double>>& RV, const double& mu, const BasePerturbationPolynomial<double, taylor_polynomial>* perturbation);
-    template std::vector<chebyshev_polynomial<double>> cartesian_to_geqoe(const double& t, const std::vector<chebyshev_polynomial<double>>& RV, const double& mu, const BasePerturbationPolynomial<double, chebyshev_polynomial>* perturbation);
+    template std::vector<taylor_polynomial<double>> cartesian_to_geqoe(const double& t, const std::vector<taylor_polynomial<double>>& RV, const double& mu, const std::shared_ptr<const BasePerturbationPolynomial<double, taylor_polynomial>> perturbation);
+    template std::vector<chebyshev_polynomial<double>> cartesian_to_geqoe(const double& t, const std::vector<chebyshev_polynomial<double>>& RV, const double& mu, const std::shared_ptr<const BasePerturbationPolynomial<double, chebyshev_polynomial>> perturbation);
 
     template<class T, template<class> class P>
-    std::vector<P<T>> geqoe_to_cartesian(const T& t, const std::vector<P<T>>& geqoe, const T& mu, const BasePerturbationPolynomial<T, P>* perturbation){
+    std::vector<P<T>> geqoe_to_cartesian(const T& t, const std::vector<P<T>>& geqoe, const T& mu, const std::shared_ptr<const BasePerturbationPolynomial<T, P>> perturbation){
         // Extract elements
         P<T> nu = geqoe[0];
         P<T> p1 = geqoe[1];
@@ -532,8 +533,8 @@ namespace thames::conversions::geqoe{
         // Return Cartesian state vector
         return RV;
     }
-    template std::vector<taylor_polynomial<double>> geqoe_to_cartesian(const double&, const std::vector<taylor_polynomial<double>>&, const double&, const BasePerturbationPolynomial<double, taylor_polynomial>*);
-    template std::vector<chebyshev_polynomial<double>> geqoe_to_cartesian(const double&, const std::vector<chebyshev_polynomial<double>>&, const double&, const BasePerturbationPolynomial<double, chebyshev_polynomial>*);
+    template std::vector<taylor_polynomial<double>> geqoe_to_cartesian(const double&, const std::vector<taylor_polynomial<double>>&, const double&, const std::shared_ptr<const BasePerturbationPolynomial<double, taylor_polynomial>> perturbation);
+    template std::vector<chebyshev_polynomial<double>> geqoe_to_cartesian(const double&, const std::vector<chebyshev_polynomial<double>>&, const double&, const std::shared_ptr<const BasePerturbationPolynomial<double, chebyshev_polynomial>> perturbation);
 
     #endif
 

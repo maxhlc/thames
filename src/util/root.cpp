@@ -29,8 +29,8 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "optimise.h"
-#include "root.h"
+#include "../../include/util/optimise.h"
+#include "../../include/util/root.h"
 
 namespace thames::util::root{
 

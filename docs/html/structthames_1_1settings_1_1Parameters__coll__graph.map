@@ -1,0 +1,8 @@
+<map id="thames::settings::Parameters&lt; T &gt;" name="thames::settings::Parameters&lt; T &gt;">
+<area shape="rect" id="node1" title="Structure to store all parameters." alt="" coords="715,71,965,98"/>
+<area shape="rect" id="node2" href="$structthames_1_1settings_1_1PolynomialParameters.html" title="Structure to store polynomial parameters." alt="" coords="366,5,578,47"/>
+<area shape="rect" id="node3" href="$structthames_1_1settings_1_1Metadata.html" title="Structure to store JSON file metadata." alt="" coords="371,71,573,98"/>
+<area shape="rect" id="node4" href="$structthames_1_1settings_1_1PerturbationParameters.html" title="Structure to store perturbation model parameters." alt="" coords="363,123,581,164"/>
+<area shape="rect" id="node5" href="$structthames_1_1settings_1_1GeopotentialPerturbationParameters.html" title="Structure to store geopotential model parameters." alt="" coords="5,89,228,131"/>
+<area shape="rect" id="node6" href="$structthames_1_1settings_1_1AtmospherePerturbationParameters.html" title="Structure to store atmospheric model parameters." alt="" coords="7,155,226,196"/>
+</map>

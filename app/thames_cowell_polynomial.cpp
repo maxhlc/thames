@@ -29,7 +29,7 @@ SOFTWARE.
 #include <sstream>
 #include <string>
 
-#include "../src/thames.h"
+#include "../include/thames.h"
 
 int main(int argc, char **argv){
     // Set constants
@@ -45,31 +45,25 @@ int main(int argc, char **argv){
     double tstart, tend, tstep = 30;
     int scid, degree;
     thames::constants::statetypes::StateTypes statetype;
-    std::vector<taylor_polynomial<double>> RVpolynomial, RVpolynomial_propagated;
+    std::vector<smartuq::polynomial::taylor_polynomial<double>> RVpolynomial, RVpolynomial_propagated;
     thames::io::polynomial::load(filepathin, tstart, tend, scid, statetype, degree, atol, rtol, RVpolynomial);
 
     // Create propagator options
-    thames::propagators::options::PropagatorOptions<double> options;
-    options.atol = atol;
-    options.rtol = rtol;
+    thames::settings::PropagatorParameters<double> options;
+    options.absoluteTolerance = atol;
+    options.relativeTolerance = rtol;
 
-    // Non-dimensionalise polynomials
-    thames::conversions::dimensional::DimensionalFactors<double> factors;
-    thames::conversions::dimensional::cartesian_nondimensionalise(tstart, RVpolynomial, mu, factors);
-    radius /= factors.length;
-    tend /= factors.time;
-    tstep /= factors.time;
+    // Declare factors
+    auto factors = std::make_shared<thames::conversions::dimensional::DimensionalFactors<double>>();
 
-    // Declare propagator and perturbation
-    thames::perturbations::geopotential::J2Polynomial<double, taylor_polynomial> perturbation(mu, J2, radius);
-    thames::propagators::CowellPropagatorPolynomial<double, taylor_polynomial> propagator(mu, &perturbation);
+    // Declare perturbation
+    auto perturbation = std::make_shared<thames::perturbations::geopotential::J2Polynomial<double, smartuq::polynomial::taylor_polynomial>>(mu, J2, radius, factors);
+
+    // Declare propagator
+    thames::propagators::CowellPropagatorPolynomial<double, smartuq::polynomial::taylor_polynomial> propagator(mu, perturbation, factors);
 
     // Propagate polynomials
     RVpolynomial_propagated = propagator.propagate(tstart, tend, tstep, RVpolynomial, options, statetype);
-
-    // Dimensionalise polynomials
-    thames::conversions::dimensional::cartesian_dimensionalise(tstart, RVpolynomial_propagated, mu, factors);
-    tend *= factors.time;
     
     // Save propagated polynomials
     thames::io::polynomial::save(filepathout, tstart, tend, scid, statetype, degree, atol, rtol, RVpolynomial_propagated);

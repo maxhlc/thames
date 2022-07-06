@@ -31,12 +31,19 @@ option(THAMES_BUILD_MAIN "Build THAMES main" ON)
 option(THAMES_BUILD_STATIC "Build THAMES static library" ON)
 option(THAMES_BUILD_APP "Build THAMES applications" ON)
 option(THAMES_USE_SMARTUQ "Use SMART-UQ" ON)
-option(THAMES_USE_FFTW "Use FFTW" OFF)
 
 # Set output directories
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
+
+# Find packages
+find_package(Boost REQUIRED)
+
+# Fetch packages
+include(FetchContent)
+FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.10.5/json.tar.xz)
+FetchContent_MakeAvailable(json)
 
 # Download/update git submodules
 # Solution from: https://cliutils.gitlab.io/modern-cmake/chapters/projects/submodule.html
@@ -63,17 +70,7 @@ if(THAMES_USE_SMARTUQ)
     add_subdirectory(external/smart-uq external/smart-uq)
     # Add flag to include SMART-UQ
     add_definitions(-DTHAMES_USE_SMARTUQ)
-    # Set FFTW to true
-    set(THAMES_USE_FFTW ON)
 endif(THAMES_USE_SMARTUQ)
-
-# Find FFTW libraries
-if(THAMES_USE_FFTW)
-    find_library(FFTW_LIBRARY fftw3)
-    find_library(FFTWF_LIBRARY fftw3f)
-    find_library(FFTWL_LIBRARY fftw3l)
-    set(FFTW_LIBRARIES "${FFTW_LIBRARY}" "${FFTWF_LIBRARY}" "${FFTWL_LIBRARY}")
-endif(THAMES_USE_FFTW)
 
 # Set C++ compiler flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3")

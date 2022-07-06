@@ -24,7 +24,7 @@ SOFTWARE.
 
 #include <iostream>
 
-#include "thames.h"
+#include "../include/thames.h"
 
 int main() {
     std::cout << "THAMES successfully compiled" << std::endl;

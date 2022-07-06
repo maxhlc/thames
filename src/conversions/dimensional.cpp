@@ -30,9 +30,9 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "dimensional.h"
-#include "keplerian.h"
-#include "../vector/geometry.h"
+#include "../../include/conversions/dimensional.h"
+#include "../../include/conversions/keplerian.h"
+#include "../../include/vector/geometry.h"
 
 namespace thames::conversions::dimensional{
 
@@ -41,38 +41,43 @@ namespace thames::conversions::dimensional{
     ////////////
 
     template<class T>
-    void cartesian_nondimensionalise(T& t, std::array<T, 6>& RV, T& mu, DimensionalFactors<T>& factors){
-        // Calculate factors
-        factors = calculate_factors(RV, mu);
+    std::array<T, 6> cartesian_nondimensionalise(const std::array<T, 6>& RV, const DimensionalFactors<T>& factors){
+        // Declare non-dimensional state vector
+        std::array<T, 6> RVnd(RV);
 
-        // Calculate non-dimensional states
-        t /= factors.time;
-        mu /= factors.grav;
-        RV[0] /= factors.length;
-        RV[1] /= factors.length;
-        RV[2] /= factors.length;
-        RV[3] /= factors.velocity;
-        RV[4] /= factors.velocity;
-        RV[5] /= factors.velocity;
+        // Non-dimensionalise the state vector
+        RVnd[0] /= factors.length;
+        RVnd[1] /= factors.length;
+        RVnd[2] /= factors.length;
+        RVnd[3] /= factors.velocity;
+        RVnd[4] /= factors.velocity;
+        RVnd[5] /= factors.velocity;
+
+        // Return the non-dimensionalised state vector
+        return RVnd;
     }
-    template void cartesian_nondimensionalise<double>(double&, std::array<double, 6>&, double&, DimensionalFactors<double>&);
+    template std::array<double, 6> cartesian_nondimensionalise<double>(const std::array<double, 6>&, const DimensionalFactors<double>&);
 
     template<class T>
-    void cartesian_dimensionalise(T& t, std::array<T, 6>& RV, T& mu, const DimensionalFactors<T>& factors){
-        // Calculate dimensional states
-        t *= factors.time;
-        mu *= factors.grav;
+    std::array<T, 6> cartesian_dimensionalise(const std::array<T, 6>& RVnd, const DimensionalFactors<T>& factors){
+        // Declare dimensional state vector
+        std::array<T, 6> RV(RVnd);
+        
+        // Dimensionalise the state vector
         RV[0] *= factors.length;
         RV[1] *= factors.length;
         RV[2] *= factors.length;
         RV[3] *= factors.velocity;
         RV[4] *= factors.velocity;
         RV[5] *= factors.velocity;
+
+        // Return the dimensionalised state vector
+        return RV;
     }
-    template void cartesian_dimensionalise<double>(double&, std::array<double, 6>&, double&, const DimensionalFactors<double>&);
+    template std::array<double, 6> cartesian_dimensionalise<double>(const std::array<double, 6>&, const DimensionalFactors<double>&);
 
     template<class T>
-    DimensionalFactors<T> calculate_factors(const std::array<T, 6> RV, const T mu){
+    DimensionalFactors<T> calculate_factors(const std::array<T, 6>& RV, const T& mu){
         // Create factors struct
         DimensionalFactors<T> factors;
 
@@ -99,45 +104,50 @@ namespace thames::conversions::dimensional{
         // Return factors
         return factors;
     }
-    template DimensionalFactors<double> calculate_factors(const std::array<double, 6>, const double);
+    template DimensionalFactors<double> calculate_factors(const std::array<double, 6>&, const double&);
 
     /////////////
     // Vectors //
     /////////////
 
     template<class T>
-    void cartesian_nondimensionalise(T& t, std::vector<T>& RV, T& mu, DimensionalFactors<T>& factors){
-        // Calculate factors
-        factors = calculate_factors(RV, mu);
+    std::vector<T> cartesian_nondimensionalise(const std::vector<T>& RV, const DimensionalFactors<T>& factors){
+        // Declare non-dimensional state vector
+        std::vector<T> RVnd(RV);
 
-        // Calculate non-dimensional states
-        t /= factors.time;
-        mu /= factors.grav;
-        RV[0] /= factors.length;
-        RV[1] /= factors.length;
-        RV[2] /= factors.length;
-        RV[3] /= factors.velocity;
-        RV[4] /= factors.velocity;
-        RV[5] /= factors.velocity;
+        // Non-dimensionalise the state vector
+        RVnd[0] /= factors.length;
+        RVnd[1] /= factors.length;
+        RVnd[2] /= factors.length;
+        RVnd[3] /= factors.velocity;
+        RVnd[4] /= factors.velocity;
+        RVnd[5] /= factors.velocity;
+
+        // Return the non-dimensionalised state vector
+        return RVnd;
     }
-    template void cartesian_nondimensionalise<double>(double&, std::vector<double>&, double&, DimensionalFactors<double>&);
+    template std::vector<double> cartesian_nondimensionalise<double>(const std::vector<double>&, const DimensionalFactors<double>&);
 
     template<class T>
-    void cartesian_dimensionalise(T &t, std::vector<T>& RV, T& mu, const DimensionalFactors<T>& factors){
-        // Calculate dimensional states
-        t *= factors.time;
-        mu *= factors.grav;
+    std::vector<T> cartesian_dimensionalise(const std::vector<T>& RVnd, const DimensionalFactors<T>& factors){
+        // Declare dimensional state vector
+        std::vector<T> RV(RVnd);
+        
+        // Dimensionalise the state vector
         RV[0] *= factors.length;
         RV[1] *= factors.length;
         RV[2] *= factors.length;
         RV[3] *= factors.velocity;
         RV[4] *= factors.velocity;
         RV[5] *= factors.velocity;
+
+        // Return the dimensionalised state vector
+        return RV;
     }
-    template void cartesian_dimensionalise<double>(double&, std::vector<double>&, double&, const DimensionalFactors<double>&);
+    template std::vector<double> cartesian_dimensionalise<double>(const std::vector<double>&, const DimensionalFactors<double>&);
 
     template<class T>
-    DimensionalFactors<T> calculate_factors(const std::vector<T> RV, const T mu){
+    DimensionalFactors<T> calculate_factors(const std::vector<T>& RV, const T& mu){
         // Create factors struct
         DimensionalFactors<T> factors;
 
@@ -164,7 +174,7 @@ namespace thames::conversions::dimensional{
         // Return factors
         return factors;
     }
-    template DimensionalFactors<double> calculate_factors(const std::vector<double>, const double);
+    template DimensionalFactors<double> calculate_factors(const std::vector<double>&, const double&);
 
     /////////////////
     // Polynomials //
@@ -175,39 +185,63 @@ namespace thames::conversions::dimensional{
     using namespace smartuq::polynomial;
 
     template<class T, template<class> class P>
-    void cartesian_nondimensionalise(T& t, std::vector<P<T>>& RV, T& mu, DimensionalFactors<T>& factors){
-        // Extract central state vector
-        std::vector<T> RVcentral = {RV[0].get_coeffs()[0], RV[1].get_coeffs()[0], RV[2].get_coeffs()[0],
-                                    RV[0].get_coeffs()[3], RV[4].get_coeffs()[0], RV[5].get_coeffs()[0]};
+    std::vector<P<T>> cartesian_nondimensionalise(const std::vector<P<T>>& RV, const DimensionalFactors<T>& factors){
+        // Declare non-dimensional state vector
+        std::vector<P<T>> RVnd(RV);
 
-        // Calculate factors
-        factors = calculate_factors(RVcentral, mu);
+        // Non-dimensionalise the state vector
+        RVnd[0] /= factors.length;
+        RVnd[1] /= factors.length;
+        RVnd[2] /= factors.length;
+        RVnd[3] /= factors.velocity;
+        RVnd[4] /= factors.velocity;
+        RVnd[5] /= factors.velocity;
 
-        // Calculate non-dimensional states
-        t /= factors.time;
-        mu /= factors.grav;
-        RV[0] /= factors.length;
-        RV[1] /= factors.length;
-        RV[2] /= factors.length;
-        RV[3] /= factors.velocity;
-        RV[4] /= factors.velocity;
-        RV[5] /= factors.velocity;
+        // Return the non-dimensionalised state vector
+        return RVnd;
     }
-    template void cartesian_nondimensionalise(double&, std::vector<taylor_polynomial<double>>&, double&, DimensionalFactors<double>&);
+    template std::vector<taylor_polynomial<double>> cartesian_nondimensionalise(const std::vector<taylor_polynomial<double>>&, const DimensionalFactors<double>&);
+    template std::vector<chebyshev_polynomial<double>> cartesian_nondimensionalise(const std::vector<chebyshev_polynomial<double>>&, const DimensionalFactors<double>&);
 
     template<class T, template<class> class P>
-    void cartesian_dimensionalise(T& t, std::vector<P<T>>& RV, T& mu, DimensionalFactors<T>& factors){
-        // Calculate dimensional states
-        t *= factors.time;
-        mu *= factors.grav;
+    std::vector<P<T>> cartesian_dimensionalise(const std::vector<P<T>>& RVnd, const DimensionalFactors<T>& factors){
+        // Declare dimensional state vector
+        std::vector<P<T>> RV(RVnd);
+
+        // Dimensionalise the state vector
         RV[0] *= factors.length;
         RV[1] *= factors.length;
         RV[2] *= factors.length;
         RV[3] *= factors.velocity;
         RV[4] *= factors.velocity;
         RV[5] *= factors.velocity;
+
+        // Return the dimensionalised state vector
+        return RV;
     }
-    template void cartesian_dimensionalise(double&, std::vector<taylor_polynomial<double>>&, double&, DimensionalFactors<double>&);
+    template std::vector<taylor_polynomial<double>> cartesian_dimensionalise(const std::vector<taylor_polynomial<double>>&, const DimensionalFactors<double>&);
+    template std::vector<chebyshev_polynomial<double>> cartesian_dimensionalise(const std::vector<chebyshev_polynomial<double>>&, const DimensionalFactors<double>&);
+
+    template<class T, template<class> class P>
+    DimensionalFactors<T> calculate_factors(const std::vector<P<T>>& RV, const T& mu) {
+        // Extract central point vector
+        std::vector<T> RVcentral = {
+            RV[0].get_coeffs()[0],
+            RV[1].get_coeffs()[0],
+            RV[2].get_coeffs()[0],
+            RV[3].get_coeffs()[0],
+            RV[4].get_coeffs()[0],
+            RV[5].get_coeffs()[0]
+        };
+
+        // Calculate factors
+        DimensionalFactors<T> factors = calculate_factors(RVcentral, mu);
+
+        // Return factors
+        return factors;
+    }
+    template DimensionalFactors<double> calculate_factors(const std::vector<taylor_polynomial<double>>&, const double&);
+    template DimensionalFactors<double> calculate_factors(const std::vector<chebyshev_polynomial<double>>&, const double&);
 
     #endif
 

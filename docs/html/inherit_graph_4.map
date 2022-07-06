@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbationPolynomial.html" title="Class for the base perturbation for polynomial distributions." alt="" coords="5,85,267,141"/>
+<area shape="rect" id="node2" href="$classthames_1_1perturbations_1_1atmosphere_1_1drag_1_1DragPolynomial.html" title="Class for the perturbation resulting from atmospheric drag." alt="" coords="315,5,572,61"/>
+<area shape="rect" id="node3" href="$classthames_1_1perturbations_1_1geopotential_1_1J2Polynomial.html" title="Class for the perturbation resulting from the J2&#45;term." alt="" coords="341,85,546,141"/>
+<area shape="rect" id="node4" href="$classthames_1_1perturbations_1_1perturbationcombiner_1_1PerturbationCombinerPolynomial.html" title="Class to combine multiple polynomial perturbations." alt="" coords="320,166,567,237"/>
+</map>

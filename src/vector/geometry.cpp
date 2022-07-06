@@ -29,7 +29,7 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "geometry.h"
+#include "../../include/vector/geometry.h"
 
 namespace thames::vector::geometry{
 

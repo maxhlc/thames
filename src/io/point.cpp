@@ -28,8 +28,8 @@ SOFTWARE.
 #include <vector>
 #include <string>
 
-#include "point.h"
-#include "../constants/statetypes.h"
+#include "../../include/io/point.h"
+#include "../../include/constants/statetypes.h"
 
 namespace thames::io::point {
 

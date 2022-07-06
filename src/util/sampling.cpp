@@ -24,7 +24,7 @@ SOFTWARE.
 
 #include <vector>
 
-#include "sampling.h"
+#include "../../include/util/sampling.h"
 
 namespace thames::util::sampling {
 
