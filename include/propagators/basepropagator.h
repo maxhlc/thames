@@ -378,12 +378,12 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method for sets of points.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-06-02
+             * @date 2022-07-08
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
              * @param[in] tstep Initial timestep for propagation.
-             * @param[in] state Initial state.
+             * @param[in] states Initial states.
              * @param[in] options Propagator options.
              * @param[in] statetype State type.
              * @param[in] degree Polynomial degree.

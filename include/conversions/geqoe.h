@@ -117,12 +117,12 @@ namespace thames::conversions::geqoe{
      * @brief Convert from Cartesian state to Generalised Equinoctial Orbital Elements (GEqOE).
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-05-26
+     * @date 2022-07-08
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
      * @param[in] t Current physical time.
-     * @param[in] geqoe GEqOE state.
+     * @param[in] RV Cartesian state.
      * @param[in] mu Gravitational parameter.
      * @param[in] perturbation Perturbation object.
      * @return std::vector<P<T>> GEqOE state.

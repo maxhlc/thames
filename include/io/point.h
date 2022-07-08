@@ -38,7 +38,7 @@ namespace thames::io::point {
      * @todo This function is templated, however the conversion from string to a floating point representation currently only converts to double.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-03-01
+     * @date 2022-07-08
      * 
      * @tparam T Numeric type.
      * @param[in] filepath Filepath to be read.
@@ -46,6 +46,9 @@ namespace thames::io::point {
      * @param[out] tend End time.
      * @param[out] scid Spacecraft identifier.
      * @param[out] statetype State type (e.g. Cartesian, GEqOE, etc.)
+     * @param[out] degree Degree of the polynomials.
+     * @param[out] atol Absolute tolerance.
+     * @param[out] rtol Relative tolerance.
      * @param[out] states State vectors.
      */
     template<class T>
@@ -55,7 +58,7 @@ namespace thames::io::point {
      * @brief Function to save state vectors to a text file.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-03-01
+     * @date 2022-07-08
      * 
      * @tparam T Numeric type.
      * @param[in] filepath Filepath to be read.
@@ -63,6 +66,9 @@ namespace thames::io::point {
      * @param[in] tend End time.
      * @param[in] scid Spacecraft identifier.
      * @param[in] statetype State type (e.g. Cartesian, GEqOE, etc.)
+     * @param[in] degree Degree of the polynomials.
+     * @param[in] atol Absolute tolerance.
+     * @param[in] rtol Relative tolerance.
      * @param[in] states State vectors.
      * @param[in] precision Output precision.
      */

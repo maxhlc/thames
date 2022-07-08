@@ -40,7 +40,7 @@ namespace thames::io::polynomial {
      * @todo This function is templated, however the conversion from string to a floating point representation currently only converts to double.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-03-01
+     * @date 2022-07-08
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -49,7 +49,9 @@ namespace thames::io::polynomial {
      * @param[out] tend End time.
      * @param[out] scid Spacecraft identifier.
      * @param[out] statetype State type (e.g. Cartesian, GEqOE, etc.)
-     * @param[out] degree Degree of the polynomials. 
+     * @param[out] degree Degree of the polynomials.
+     * @param[out] atol Absolute tolerance.
+     * @param[out] rtol Relative tolerance.
      * @param[out] polynomials Polynomial states.
      */
     template<class T, template<class> class P>
@@ -59,7 +61,7 @@ namespace thames::io::polynomial {
      * @brief Save polynomial coefficients.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-03-01
+     * @date 2022-07-08
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -68,7 +70,9 @@ namespace thames::io::polynomial {
      * @param[in] tend End time.
      * @param[in] scid Spacecraft identifier.
      * @param[in] statetype State type (e.g. Cartesian, GEqOE, etc.)
-     * @param[in] degree Degree of the polynomials. 
+     * @param[in] degree Degree of the polynomials.
+     * @param[in] atol Absolute tolerance.
+     * @param[in] rtol Relative tolerance. 
      * @param[in] polynomials Polynomial states.
      * @param[in] precision Output precision.
      */
