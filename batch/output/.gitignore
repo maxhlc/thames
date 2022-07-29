@@ -1,0 +1,4 @@
+# Batch-run output
+*.txt
+*.csv
+*.json
