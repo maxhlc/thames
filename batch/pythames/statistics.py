@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+
+# MIT License
+#
+# Copyright (c) 2021-2022 Max Hallgarten La Casta
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+import dataclasses
+from typing import List
+
+import numpy as np
+import pandas as pd
+
+from .dataclasses import Parameters
+
+def bulk_statistics(parameters: List[Parameters]) -> pd.DataFrame:
+    # Condense parameters in dataframe
+    # TODO: clean up
+    param_df = pd.concat([pd.concat([pd.json_normalize(dataclasses.asdict(ip)).explode("states").drop(["states"], axis=1), pd.json_normalize(dataclasses.asdict(ip)).explode("states")["states"].apply(pd.Series)], axis=1).reset_index(drop=True) for ip in parameters])
+
+    # Expand states, and ensure they are numpy arrays
+    param_df["states"] = param_df["states"].apply(np.array)
+
+    # Extract position and velocity vectors
+    param_df["r"] = param_df["states"].apply(lambda x: x[:, 0:3])
+    param_df["v"] = param_df["states"].apply(lambda x: x[:, 3:6])
+
+    # Select reference solution
+    ref_sol = pd.DataFrame(param_df[~param_df["polynomial.isEnabled"]])
+    # Calculate NTR frame
+    ref_sol["nh"] = ref_sol.apply(lambda x: np.cross(x.r, x.v, axis=1)/np.linalg.norm(np.cross(x.r, x.v, axis=1), axis=1).reshape(-1,1), axis=1)
+    ref_sol["th"] = ref_sol.apply(lambda x: np.cross(x.nh, x.r, axis=1)/np.linalg.norm(np.cross(x.nh, x.r, axis=1), axis=1).reshape(-1,1), axis=1)
+    ref_sol["rh"] = ref_sol.apply(lambda x: x.r/np.linalg.norm(x.r, axis=1).reshape(-1,1), axis=1)
+
+    # Join reference solution
+    param_df = param_df.join(ref_sol[["r", "v", "nh", "th", "rh"]], rsuffix="_ref")
+
+    # Calculate solution errors
+    param_df["dr"] = param_df["r"] - param_df["r_ref"]
+    param_df["dv"] = param_df["v"] - param_df["v_ref"]
+    param_df["ne"] = param_df.apply(lambda x: np.sum(x.dr*x.nh,axis=1).reshape(-1,1), axis=1)
+    param_df["te"] = param_df.apply(lambda x: np.sum(x.dr*x.th,axis=1).reshape(-1,1), axis=1)
+    param_df["re"] = param_df.apply(lambda x: np.sum(x.dr*x.rh,axis=1).reshape(-1,1), axis=1)
+
+    # Calculate RMSEs
+    for val in ["dr", "dv", "ne", "te", "re"]:
+        param_df[f"{val}_rms"] = param_df[val].apply(lambda x: np.sqrt(np.mean(np.linalg.norm(x, axis=1)**2)))
+
+    # Return bulk statistics
+    return param_df
