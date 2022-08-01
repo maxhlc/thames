@@ -44,24 +44,29 @@ def bulk_statistics(parameters: List[Parameters]) -> pd.DataFrame:
 
     # Select reference solution
     ref_sol = pd.DataFrame(param_df[~param_df["polynomial.isEnabled"]])
-    # Calculate NTR frame
-    ref_sol["nh"] = ref_sol.apply(lambda x: np.cross(x.r, x.v, axis=1)/np.linalg.norm(np.cross(x.r, x.v, axis=1), axis=1).reshape(-1,1), axis=1)
-    ref_sol["th"] = ref_sol.apply(lambda x: np.cross(x.nh, x.r, axis=1)/np.linalg.norm(np.cross(x.nh, x.r, axis=1), axis=1).reshape(-1,1), axis=1)
+    # Calculate RSW frame
     ref_sol["rh"] = ref_sol.apply(lambda x: x.r/np.linalg.norm(x.r, axis=1).reshape(-1,1), axis=1)
+    ref_sol["wh"] = ref_sol.apply(lambda x: np.cross(x.r, x.v, axis=1)/np.linalg.norm(np.cross(x.r, x.v, axis=1), axis=1).reshape(-1,1), axis=1)
+    ref_sol["sh"] = ref_sol.apply(lambda x: np.cross(x.wh, x.r, axis=1)/np.linalg.norm(np.cross(x.wh, x.r, axis=1), axis=1).reshape(-1,1), axis=1)
 
     # Join reference solution
-    param_df = param_df.join(ref_sol[["r", "v", "nh", "th", "rh"]], rsuffix="_ref")
+    param_df = param_df.join(ref_sol[["r", "v", "rh", "wh", "sh"]], rsuffix="_ref")
 
     # Calculate solution errors
     param_df["dr"] = param_df["r"] - param_df["r_ref"]
     param_df["dv"] = param_df["v"] - param_df["v_ref"]
-    param_df["ne"] = param_df.apply(lambda x: np.sum(x.dr*x.nh,axis=1).reshape(-1,1), axis=1)
-    param_df["te"] = param_df.apply(lambda x: np.sum(x.dr*x.th,axis=1).reshape(-1,1), axis=1)
-    param_df["re"] = param_df.apply(lambda x: np.sum(x.dr*x.rh,axis=1).reshape(-1,1), axis=1)
+    param_df["rsw"] = param_df.apply(lambda x: np.column_stack((np.sum(x.dr*x.rh, axis=1), np.sum(x.dr*x.sh, axis=1), np.sum(x.dr*x.wh, axis=1))), axis=1)
 
     # Calculate RMSEs
-    for val in ["dr", "dv", "ne", "te", "re"]:
-        param_df[f"{val}_rms"] = param_df[val].apply(lambda x: np.sqrt(np.mean(np.linalg.norm(x, axis=1)**2)))
+    param_df["dr_rms"] = param_df["dr"].apply(lambda x: np.sqrt(np.mean(np.linalg.norm(x, axis=1)**2)))
+    param_df["dv_rms"] = param_df["dv"].apply(lambda x: np.sqrt(np.mean(np.linalg.norm(x, axis=1)**2)))
+    param_df["rsw_r_rms"] = param_df["rsw"].apply(lambda x: np.sqrt(np.mean(x[:,0]**2)))
+    param_df["rsw_s_rms"] = param_df["rsw"].apply(lambda x: np.sqrt(np.mean(x[:,1]**2)))
+    param_df["rsw_w_rms"] = param_df["rsw"].apply(lambda x: np.sqrt(np.mean(x[:,2]**2)))
+
+    # Calculate mean RSW vector, and dominant error direction
+    param_df["rsw_mean"] = param_df["rsw"].apply(lambda x: np.mean(x, axis=0))
+    param_df["rsw_dom"] = param_df["rsw_mean"].apply(lambda x: np.argmax(np.abs(x)))
 
     # Return bulk statistics
     return param_df
