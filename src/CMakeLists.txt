@@ -31,8 +31,6 @@ set(THAMES_SOURCE
     conversions/universal.cpp
     # Input/output
     io/json.cpp
-    io/point.cpp
-    io/polynomial.cpp
     # Perturbations
     perturbations/atmosphere/atmospheremodel.cpp
     perturbations/atmosphere/drag.cpp
@@ -71,8 +69,6 @@ set(THAMES_HEADERS
     # Input/output
     ../include/io/io.h
     ../include/io/json.h
-    ../include/io/point.h
-    ../include/io/polynomial.h
     # Perturbations
     ../include/perturbations/atmosphere/atmospheremodel.h
     ../include/perturbations/atmosphere/drag.h
