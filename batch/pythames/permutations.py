@@ -54,9 +54,9 @@ METADATA_DEFAULT = {
 }
 
 SPACECRAFTPARAMETERS_DEFAULT = {
-    "mass": [0],
-    "dragArea": [0],
-    "Cd": [0]
+    "mass": [200],
+    "dragArea": [15e-6],
+    "Cd": [2.2]
 }
 
 GEOPOTENTIALPERTURBATIONPARAMETERS_DEFAULT = {

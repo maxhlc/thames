@@ -76,6 +76,16 @@ def main():
         equations=["Cowell", "GEqOE"]
     )
 
+    # Generate perturbation sets
+    geopotential = pythames.dataclasses.GeopotentialPerturbationParameters(True, "J2", 0, 0)
+    atmosphere = pythames.dataclasses.AtmospherePerturbationParameters(True, "Wertz")
+    perturbation = pythames.permutations.dataclass_permutations(
+        pythames.dataclasses.PerturbationParameters,
+        pythames.permutations.PERTURBATIONPARAMETERS_DEFAULT,
+        geopotential=[geopotential],
+        atmosphere=[atmosphere]
+    )
+
     # Generate state sets
     states = pythames.permutations.dataclass_permutations(
         pythames.dataclasses.StateParameters,
@@ -97,12 +107,14 @@ def main():
         pythames.dataclasses.Parameters,
         pythames.permutations.PARAMETERS_DEFAULT,
         propagator=propagator,
+        perturbation=perturbation,
         states=[states]
     )
     parameters_polynomial = pythames.permutations.dataclass_permutations(
         pythames.dataclasses.Parameters,
         pythames.permutations.PARAMETERS_DEFAULT,
         propagator=propagator_polynomial,
+        perturbation=perturbation,
         states=[states],
         polynomial=polynomial
     )
@@ -127,7 +139,7 @@ def main():
         "polynomial.isEnabled",
         "polynomial.maxDegree",
         "datetime",
-        "dr_rms","dv_rms","ne_rms","te_rms","re_rms",
+        "dr_rms","dv_rms","rsw_r_rms","rsw_s_rms","rsw_w_rms","rsw_dom",
         "statistics.propagationTime"
     ]
     
