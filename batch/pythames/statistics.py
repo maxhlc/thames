@@ -36,7 +36,7 @@ def bulk_statistics(parameters: List[Parameters]) -> pd.DataFrame:
     param_df = pd.concat([pd.concat([pd.json_normalize(dataclasses.asdict(ip)).explode("states").drop(["states"], axis=1), pd.json_normalize(dataclasses.asdict(ip)).explode("states")["states"].apply(pd.Series)], axis=1).reset_index(drop=True) for ip in parameters])
 
     # Expand states, and ensure they are numpy arrays
-    param_df["states"] = param_df["states"].apply(np.array)
+    param_df["states"] = param_df["states"].apply(lambda x: np.array(x, dtype=np.float))
 
     # Extract position and velocity vectors
     param_df["r"] = param_df["states"].apply(lambda x: x[:, 0:3])
