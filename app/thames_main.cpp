@@ -45,11 +45,11 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
     if (parameters.perturbation.atmosphere.isEnabled) {
         // Select atmosphere model
         if (parameters.perturbation.atmosphere.model == "USSA76") {
-            auto atmospheremodel = thames::perturbations::atmosphere::models::USSA76;
+            auto atmospheremodel = std::make_shared<thames::perturbations::atmosphere::models::USSA76AtmosphereModel<T>>();
             auto atmosphereperturbation = std::make_shared<thames::perturbations::atmosphere::drag::Drag<T>>(radius, w, parameters.spacecraft.Cd, parameters.spacecraft.dragArea, parameters.spacecraft.mass, atmospheremodel, factors);
             perturbation->add_model(atmosphereperturbation);
         } else if (parameters.perturbation.atmosphere.model == "Wertz") {
-            auto atmospheremodel = thames::perturbations::atmosphere::models::WERTZ;
+            auto atmospheremodel = std::make_shared<thames::perturbations::atmosphere::models::WertzAtmosphereModel<T>>();
             auto atmosphereperturbation = std::make_shared<thames::perturbations::atmosphere::drag::Drag<T>>(radius, w, parameters.spacecraft.Cd, parameters.spacecraft.dragArea, parameters.spacecraft.mass, atmospheremodel, factors);
             perturbation->add_model(atmosphereperturbation);
         } else {
@@ -137,11 +137,11 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
     if (parameters.perturbation.atmosphere.isEnabled) {
         // Select atmosphere model
         if (parameters.perturbation.atmosphere.model == "USSA76") {
-            auto atmospheremodel = thames::perturbations::atmosphere::models::USSA76;
+            auto atmospheremodel = std::make_shared<thames::perturbations::atmosphere::models::USSA76AtmosphereModelPolynomial<T, P>>();
             auto atmosphereperturbation = std::make_shared<thames::perturbations::atmosphere::drag::DragPolynomial<T, P>>(radius, w, parameters.spacecraft.Cd, parameters.spacecraft.dragArea, parameters.spacecraft.mass, atmospheremodel, factors);
             perturbation->add_model(atmosphereperturbation);
         } else if (parameters.perturbation.atmosphere.model == "Wertz") {
-            auto atmospheremodel = thames::perturbations::atmosphere::models::WERTZ;
+            auto atmospheremodel = std::make_shared<thames::perturbations::atmosphere::models::WertzAtmosphereModelPolynomial<T, P>>();
             auto atmosphereperturbation = std::make_shared<thames::perturbations::atmosphere::drag::DragPolynomial<T, P>>(radius, w, parameters.spacecraft.Cd, parameters.spacecraft.dragArea, parameters.spacecraft.mass, atmospheremodel, factors);
             perturbation->add_model(atmosphereperturbation);
         } else {

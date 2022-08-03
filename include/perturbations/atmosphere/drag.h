@@ -25,14 +25,13 @@ SOFTWARE.
 #ifndef THAMES_PERTURBATIONS_ATMOSPHERE_DRAG
 #define THAMES_PERTURBATIONS_ATMOSPHERE_DRAG
 
-#include "atmospheremodel.h"
+#include "baseatmospheremodel.h"
 #include "../baseperturbation.h"
 #include "../../conversions/dimensional.h"
 
 namespace thames::perturbations::atmosphere::drag {
 
-    using thames::perturbations::atmosphere::models::AtmosphereModel;
-    using thames::perturbations::atmosphere::models::AtmosphereModels;
+    using thames::perturbations::atmosphere::models::BaseAtmosphereModel;
     using thames::perturbations::baseperturbation::BasePerturbation;
     using thames::conversions::dimensional::DimensionalFactors;
 
@@ -40,7 +39,7 @@ namespace thames::perturbations::atmosphere::drag {
      * @brief Class for the perturbation resulting from atmospheric drag.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-06-07
+     * @date 2022-08-02
      * 
      * @tparam T Numeric type.
      */
@@ -71,7 +70,7 @@ namespace thames::perturbations::atmosphere::drag {
             const T m_m;
 
             /// Atmosphere model
-            AtmosphereModel<T> m_model;
+            const std::shared_ptr<const BaseAtmosphereModel<T>> m_model;
 
         public:
 
@@ -79,7 +78,7 @@ namespace thames::perturbations::atmosphere::drag {
              * @brief Construct a new Drag object.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-27
+             * @date 2022-08-02
              * 
              * @param[in] radius Central body radius.
              * @param[in] w Central body rotation rate.
@@ -89,7 +88,7 @@ namespace thames::perturbations::atmosphere::drag {
              * @param[in] model Atmosphere model.
              * @param[in] factors Dimensional factors.
              */
-            Drag(const T& radius, const T& w, const T& Cd, const T& A, const T& m, const AtmosphereModels& model, const std::shared_ptr<const DimensionalFactors<T>> factors);
+            Drag(const T& radius, const T& w, const T& Cd, const T& A, const T& m, const std::shared_ptr<const BaseAtmosphereModel<T>> model, const std::shared_ptr<const DimensionalFactors<T>> factors);
 
             /**
              * @brief Destroy the Drag object.
@@ -121,7 +120,7 @@ namespace thames::perturbations::atmosphere::drag {
              * @brief Calculate perturbing acceleration resulting from drag. 
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-06-07
+             * @date 2022-08-02
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
@@ -151,7 +150,7 @@ namespace thames::perturbations::atmosphere::drag {
              * @brief Calculate perturbing acceleration resulting from drag. 
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-06-07
+             * @date 2022-08-02
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
@@ -164,14 +163,14 @@ namespace thames::perturbations::atmosphere::drag {
 
     #ifdef THAMES_USE_SMARTUQ
 
-    using thames::perturbations::atmosphere::models::AtmosphereModelPolynomial;
+    using thames::perturbations::atmosphere::models::BaseAtmosphereModelPolynomial;
     using thames::perturbations::baseperturbation::BasePerturbationPolynomial;
 
     /**
      * @brief Class for the perturbation resulting from atmospheric drag.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-06-07
+     * @date 2022-08-02
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -203,7 +202,7 @@ namespace thames::perturbations::atmosphere::drag {
             const T m_m;
 
             /// Atmosphere model
-            AtmosphereModelPolynomial<T, P> m_model;
+            const std::shared_ptr<const BaseAtmosphereModelPolynomial<T, P>> m_model;
 
         public:
 
@@ -211,7 +210,7 @@ namespace thames::perturbations::atmosphere::drag {
              * @brief Construct a new Drag object for use with polynomials.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-05-27
+             * @date 2022-08-02
              * 
              * @param[in] radius Central body radius.
              * @param[in] w Central body rotation rate.
@@ -221,7 +220,7 @@ namespace thames::perturbations::atmosphere::drag {
              * @param[in] model Atmosphere model.
              * @param[in] factors Dimensional factors.
              */
-            DragPolynomial(const T& radius, const T& w, const T& Cd, const T& A, const T& m, const AtmosphereModels& model, const std::shared_ptr<const DimensionalFactors<T>> factors);
+            DragPolynomial(const T& radius, const T& w, const T& Cd, const T& A, const T& m, const std::shared_ptr<const BaseAtmosphereModelPolynomial<T, P>> model, const std::shared_ptr<const DimensionalFactors<T>> factors);
 
             /**
              * @brief Destroy the Drag object for use with polynomials.
@@ -253,7 +252,7 @@ namespace thames::perturbations::atmosphere::drag {
              * @brief Calculate perturbing acceleration resulting from drag. 
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-06-07
+             * @date 2022-08-02
              * 
              * @param[in] t Current physical time.
              * @param[in] R Position vector.
