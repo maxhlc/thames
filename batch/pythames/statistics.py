@@ -57,6 +57,10 @@ def bulk_statistics(parameters: List[Parameters]) -> pd.DataFrame:
     param_df["dv"] = param_df["v"] - param_df["v_ref"]
     param_df["rsw"] = param_df.apply(lambda x: np.column_stack((np.sum(x.dr*x.rh, axis=1), np.sum(x.dr*x.sh, axis=1), np.sum(x.dr*x.wh, axis=1))), axis=1)
 
+    # Calculate maximum errors
+    param_df["dr_max"] = param_df["dr"].apply(lambda x: np.max(np.linalg.norm(x, axis=1)))
+    param_df["dv_max"] = param_df["dv"].apply(lambda x: np.max(np.linalg.norm(x, axis=1)))
+
     # Calculate RMSEs
     param_df["dr_rms"] = param_df["dr"].apply(lambda x: np.sqrt(np.mean(np.linalg.norm(x, axis=1)**2)))
     param_df["dv_rms"] = param_df["dv"].apply(lambda x: np.sqrt(np.mean(np.linalg.norm(x, axis=1)**2)))

@@ -139,7 +139,8 @@ def main():
         "polynomial.isEnabled",
         "polynomial.maxDegree",
         "datetime",
-        "dr_rms","dv_rms","rsw_r_rms","rsw_s_rms","rsw_w_rms","rsw_dom",
+        "dr_rms","dv_rms", "dr_max", "dv_max",
+        "rsw_r_rms","rsw_s_rms","rsw_w_rms","rsw_dom",
         "statistics.propagationTime"
     ]
     
