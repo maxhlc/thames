@@ -39,8 +39,9 @@ def main():
     # Set filepaths
     BATCH_PARENT_DIR = os.path.dirname(os.path.realpath(__file__))
     COMMAND = os.path.join(BATCH_PARENT_DIR, "..", "bin", "thames_main")
-    BATCH_OUTPUT_DIR = os.path.join(BATCH_PARENT_DIR, "output", datetime.datetime.utcnow().strftime("%Y%m%d_%H%M%S"))
-    CSV_OUTPUT_PATH = os.path.join(BATCH_OUTPUT_DIR, "bulk.csv")
+    DATETIME = datetime.datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+    BATCH_OUTPUT_DIR = os.path.join(BATCH_PARENT_DIR, "output", DATETIME)
+    CSV_OUTPUT_PATH = os.path.join(BATCH_OUTPUT_DIR, f"{DATETIME}_bulk.csv")
 
     ## Define batch parameters
     # Generate samples
