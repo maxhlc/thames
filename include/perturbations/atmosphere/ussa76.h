@@ -110,7 +110,7 @@ namespace thames::perturbations::atmosphere::models {
      * Values from Curtis, 2014
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-08-02
+     * @date 2022-08-22
      * 
      * @tparam T Numeric type
      * @tparam P Polynomial type
@@ -139,10 +139,12 @@ namespace thames::perturbations::atmosphere::models {
             ~USSA76AtmosphereModelPolynomial();
 
             /**
-             * @brief Calculate density using a pre-computed polynomial representation of the density profile
+             * @brief Calculate density using exponential interpolation
+             * 
+             * @warning Not implemented
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-08-02
+             * @date 2022-08-22
              * 
              * @param[in] alt Altitude [km]
              * @return P<T> Atmospheric density [kg/m^3]
