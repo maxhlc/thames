@@ -36,6 +36,7 @@ set(THAMES_SOURCE
     perturbations/atmosphere/drag.cpp
     perturbations/atmosphere/ussa76.cpp
     perturbations/atmosphere/wertz.cpp
+    perturbations/atmosphere/wertzp.cpp
     perturbations/geopotential/J2.cpp
     perturbations/baseperturbation.cpp
     perturbations/perturbationcombiner.cpp
@@ -76,6 +77,7 @@ set(THAMES_HEADERS
     ../include/perturbations/atmosphere/drag.h
     ../include/perturbations/atmosphere/ussa76.h
     ../include/perturbations/atmosphere/wertz.h
+    ../include/perturbations/atmosphere/wertzp.h
     ../include/perturbations/geopotential/J2.h
     ../include/perturbations/baseperturbation.h
     ../include/perturbations/perturbationcombiner.h
