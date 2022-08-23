@@ -37,7 +37,7 @@ namespace thames::perturbations::atmosphere::models {
      * Polynomial approximation using values from Vallado, 2013
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-08-22
+     * @date 2022-08-23
      * 
      * @tparam Numeric type
      */
@@ -47,10 +47,10 @@ namespace thames::perturbations::atmosphere::models {
         private:
 
             // Polynomial approximation domain [km]
-            std::vector<T> m_domain = {250.0, 1000.0};
+            const std::vector<T> m_domain = {250.0, 1000.0};
 
             // Polynomial coefficients
-            std::vector<T> m_coeff = {-29.91193741, -5.39085723, 1.37374917, 0.79993813, 0.15368597, -0.44942173};
+            const std::vector<T> m_coeff = {-29.91193741, -5.39085723, 1.37374917, 0.79993813, 0.15368597, -0.44942173};
 
         public:
 
@@ -95,7 +95,7 @@ namespace thames::perturbations::atmosphere::models {
      * Polynomial approximation using values from Vallado, 2013
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-08-22
+     * @date 2022-08-23
      * 
      * @tparam T Numeric type
      * @tparam P Polynomial type
@@ -106,10 +106,10 @@ namespace thames::perturbations::atmosphere::models {
         private:
 
             // Polynomial approximation domain [km]
-            std::vector<T> m_domain = {250.0, 1000.0};
+            const std::vector<T> m_domain = {250.0, 1000.0};
 
             // Polynomial coefficients
-            std::vector<T> m_coeff = {-29.91193741, -5.39085723, 1.37374917, 0.79993813, 0.15368597, -0.44942173};
+            const std::vector<T> m_coeff = {-29.91193741, -5.39085723, 1.37374917, 0.79993813, 0.15368597, -0.44942173};
 
         public:
 
