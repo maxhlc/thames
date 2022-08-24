@@ -29,7 +29,7 @@ SOFTWARE.
 #include "../../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "../../../include/perturbations/atmosphere/wertzp.h"
+#include "../../../include/perturbations/atmosphere/wertzp5.h"
 
 namespace thames::perturbations::atmosphere::models {
 
@@ -38,17 +38,17 @@ namespace thames::perturbations::atmosphere::models {
     ///////////
 
     template<class T>
-    WertzPAtmosphereModel<T>::WertzPAtmosphereModel() {
+    WertzP5AtmosphereModel<T>::WertzP5AtmosphereModel() {
 
     }
 
     template<class T>
-    WertzPAtmosphereModel<T>::~WertzPAtmosphereModel() {
+    WertzP5AtmosphereModel<T>::~WertzP5AtmosphereModel() {
 
     }
 
     template<class T>
-    T WertzPAtmosphereModel<T>::density(T alt) const {
+    T WertzP5AtmosphereModel<T>::density(T alt) const {
         // Scale altitude
         const T altscaled = 2.0*(alt - m_domain[0])/(m_domain[1] - m_domain[0]) - 1.0;
 
@@ -63,7 +63,7 @@ namespace thames::perturbations::atmosphere::models {
         return rho;
     }
 
-    template class WertzPAtmosphereModel<double>;
+    template class WertzP5AtmosphereModel<double>;
 
     /////////////////
     // Polynomials //
@@ -74,18 +74,18 @@ namespace thames::perturbations::atmosphere::models {
     using namespace smartuq::polynomial;
 
     template<class T, template <class> class P>
-    WertzPAtmosphereModelPolynomial<T, P>::WertzPAtmosphereModelPolynomial() {
+    WertzP5AtmosphereModelPolynomial<T, P>::WertzP5AtmosphereModelPolynomial() {
 
     }
 
     template<class T, template <class> class P>
-    WertzPAtmosphereModelPolynomial<T, P>::~WertzPAtmosphereModelPolynomial() {
+    WertzP5AtmosphereModelPolynomial<T, P>::~WertzP5AtmosphereModelPolynomial() {
 
     }
 
     
     template<class T, template <class> class P>
-    P<T> WertzPAtmosphereModelPolynomial<T, P>::density(P<T> alt) const {
+    P<T> WertzP5AtmosphereModelPolynomial<T, P>::density(P<T> alt) const {
         // Scale altitude
         const P<T> altscaled = 2.0*(alt - m_domain[0])/(m_domain[1] - m_domain[0]) - 1.0;
 
@@ -100,8 +100,8 @@ namespace thames::perturbations::atmosphere::models {
         return rho;
     }
 
-    template class WertzPAtmosphereModelPolynomial<double, taylor_polynomial>;
-    template class WertzPAtmosphereModelPolynomial<double, chebyshev_polynomial>;
+    template class WertzP5AtmosphereModelPolynomial<double, taylor_polynomial>;
+    template class WertzP5AtmosphereModelPolynomial<double, chebyshev_polynomial>;
 
     #endif
 

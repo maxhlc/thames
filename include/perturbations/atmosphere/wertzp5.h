@@ -22,8 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef THAMES_PERTURBATIONS_ATMOSPHERE_WERTZP
-#define THAMES_PERTURBATIONS_ATMOSPHERE_WERTZP
+#ifndef THAMES_PERTURBATIONS_ATMOSPHERE_WERTZP5
+#define THAMES_PERTURBATIONS_ATMOSPHERE_WERTZP5
 
 #include <vector>
 
@@ -37,12 +37,12 @@ namespace thames::perturbations::atmosphere::models {
      * Polynomial approximation using values from Vallado, 2013
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-08-23
+     * @date 2022-08-24
      * 
      * @tparam Numeric type
      */
     template<class T>
-    class WertzPAtmosphereModel : public BaseAtmosphereModel<T> {
+    class WertzP5AtmosphereModel : public BaseAtmosphereModel<T> {
 
         private:
 
@@ -58,17 +58,17 @@ namespace thames::perturbations::atmosphere::models {
              * @brief Construct a new Approximate Wertz Atmosphere Model object
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-08-22
+             * @date 2022-08-24
              */
-            WertzPAtmosphereModel();
+            WertzP5AtmosphereModel();
 
             /**
              * @brief Destroy the Approximate Wertz Atmosphere Model object
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-08-22
+             * @date 2022-08-24
              */
-            ~WertzPAtmosphereModel();
+            ~WertzP5AtmosphereModel();
 
             /**
              * @brief Calculate density using a polynomial approximation of the density profile
@@ -77,7 +77,7 @@ namespace thames::perturbations::atmosphere::models {
              * @return T Atmospheric density [kg/m^3]
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-08-22
+             * @date 2022-08-24
              */
             T density(T alt) const override;
 
@@ -95,13 +95,13 @@ namespace thames::perturbations::atmosphere::models {
      * Polynomial approximation using values from Vallado, 2013
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-08-23
+     * @date 2022-08-24
      * 
      * @tparam T Numeric type
      * @tparam P Polynomial type
      */
     template<class T, template <class> class P>
-    class WertzPAtmosphereModelPolynomial : public BaseAtmosphereModelPolynomial<T, P> {
+    class WertzP5AtmosphereModelPolynomial : public BaseAtmosphereModelPolynomial<T, P> {
         
         private:
 
@@ -117,23 +117,23 @@ namespace thames::perturbations::atmosphere::models {
              * @brief Construct a new Approximate Wertz Atmosphere Model Polynomial object
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-08-22
+             * @date 2022-08-24
              */
-            WertzPAtmosphereModelPolynomial();
+            WertzP5AtmosphereModelPolynomial();
 
             /**
              * @brief Destroy the Approximate Wertz Atmosphere Model Polynomial object
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-08-22
+             * @date 2022-08-24
              */
-            ~WertzPAtmosphereModelPolynomial();
+            ~WertzP5AtmosphereModelPolynomial();
 
             /**
              * @brief Calculate density using a polynomial approximation of the density profile
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-08-22
+             * @date 2022-08-24
              * 
              * @param[in] alt Altitude [km]
              * @return P<T> Atmospheric density [kg/m^3]

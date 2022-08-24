@@ -29,7 +29,7 @@ SOFTWARE.
 #include "atmosphere/drag.h"
 #include "atmosphere/ussa76.h"
 #include "atmosphere/wertz.h"
-#include "atmosphere/wertzp.h"
+#include "atmosphere/wertzp5.h"
 #include "geopotential/J2.h"
 #include "baseperturbation.h"
 #include "perturbationcombiner.h"
