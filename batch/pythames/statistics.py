@@ -38,12 +38,16 @@ def bulk_statistics(parameters: List[Parameters]) -> pd.DataFrame:
     # Expand states, and ensure they are numpy arrays
     param_df["states"] = param_df["states"].apply(lambda x: np.array(x, dtype=np.float))
 
+    # Calculate the number of samples
+    param_df["n_samples"] = param_df["states"].apply(lambda x: len(x))
+
     # Extract position and velocity vectors
     param_df["r"] = param_df["states"].apply(lambda x: x[:, 0:3])
     param_df["v"] = param_df["states"].apply(lambda x: x[:, 3:6])
 
     # Select reference solution
     ref_sol = pd.DataFrame(param_df[~param_df["polynomial.isEnabled"]])
+    
     # Calculate RSW frame
     ref_sol["rh"] = ref_sol.apply(lambda x: x.r/np.linalg.norm(x.r, axis=1).reshape(-1,1), axis=1)
     ref_sol["wh"] = ref_sol.apply(lambda x: np.cross(x.r, x.v, axis=1)/np.linalg.norm(np.cross(x.r, x.v, axis=1), axis=1).reshape(-1,1), axis=1)
