@@ -231,12 +231,19 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
 }
 
 int main(int argc, char **argv) {
-    // Throw error if incorrect number of arguments are provided
-    if (argc != 3)
-        throw std::runtime_error("Incorrect number of arguments provided");
+    // Declare filepath strings
+    std::string filepathin, filepathout;
 
-    // Store filepaths as strings
-    std::string filepathin(argv[1]), filepathout(argv[2]);
+    // Use either default input/output filepaths (if no arguments are provided) or specified filepaths
+    if (argc == 1) {
+        filepathin = "input.json";
+        filepathout = "output.json";
+    } else if (argc == 3) {
+        filepathin = argv[1];
+        filepathout = argv[2];
+    } else {
+        throw std::runtime_error("Incorrect number of arguments provided");
+    }
 
     // Load input file
     thames::settings::Parameters<double> parameters, parameters_output;
