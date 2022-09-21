@@ -125,10 +125,9 @@ namespace thames::perturbations::atmosphere::drag {
         std::vector<T> W = {0, 0, w};
         std::vector<T> Vrel = V - thames::vector::geometry::cross3(W, R);
         T vrel = thames::vector::geometry::norm3(Vrel);
-        std::vector<T> uv = Vrel/vrel;
 
         // Calculate acceleration due to drag
-        std::vector<T> Ad = -0.5*Cd*A*massfac*pow(vrel, 2)*uv;
+        std::vector<T> Ad = -0.5*Cd*A*massfac*vrel*Vrel;
 
         // Return acceleration
         return Ad;
@@ -184,10 +183,9 @@ namespace thames::perturbations::atmosphere::drag {
         std::vector<P<T>> W = {poly, poly, w*(poly+1)};
         std::vector<P<T>> Vrel = V - thames::vector::geometry::cross3(W, R);
         P<T> vrel = thames::vector::geometry::norm3(Vrel);
-        std::vector<P<T>> uv = Vrel/vrel;
 
         // Calculate acceleration due to drag
-        std::vector<P<T>> Ad = -0.5*Cd*A*massfac*pow(vrel, 2)*uv;
+        std::vector<P<T>> Ad = -0.5*Cd*A*massfac*vrel*Vrel;
 
         // Return acceleration
         return Ad;
