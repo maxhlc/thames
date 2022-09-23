@@ -109,7 +109,7 @@ namespace thames::perturbations::atmosphere::models {
             const std::vector<T> m_domain = {250.0, 1000.0};
 
             // Polynomial coefficients
-            const std::vector<T> m_coeff = {-29.91193741, -5.39085723, 1.37374917, 0.79993813, 0.15368597, -0.44942173};
+            const std::vector<T> m_coeff = {-29.41808788, -5.10257202};
 
         public:
 
