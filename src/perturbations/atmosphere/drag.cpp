@@ -30,7 +30,7 @@ SOFTWARE.
 #include "../../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "../../../include/perturbations/atmosphere/atmospheremodel.h"
+#include "../../../include/perturbations/atmosphere/baseatmospheremodel.h"
 #include "../../../include/perturbations/atmosphere/drag.h"
 #include "../../../include/perturbations/atmosphere/ussa76.h"
 #include "../../../include/perturbations/baseperturbation.h"
@@ -39,13 +39,13 @@ SOFTWARE.
 
 namespace thames::perturbations::atmosphere::drag {
 
-    using thames::perturbations::atmosphere::models::AtmosphereModel;
+    using thames::perturbations::atmosphere::models::BaseAtmosphereModel;
     using thames::perturbations::baseperturbation::BasePerturbation;
 
     using namespace thames::vector::arithmeticoverloads;
 
     template<class T>
-    Drag<T>::Drag(const T& radius, const T& w, const T& Cd, const T& A, const T& m, const AtmosphereModels& model, const std::shared_ptr<const DimensionalFactors<T>> factors) : BasePerturbation<T>(factors), m_radius(radius), m_w(w), m_Cd(Cd), m_A(A), m_m(m), m_model(AtmosphereModel<T>(model)) {
+    Drag<T>::Drag(const T& radius, const T& w, const T& Cd, const T& A, const T& m, const std::shared_ptr<const BaseAtmosphereModel<T>> model, const std::shared_ptr<const DimensionalFactors<T>> factors) : BasePerturbation<T>(factors), m_radius(radius), m_w(w), m_Cd(Cd), m_A(A), m_m(m), m_model(model) {
 
     }
 
@@ -74,7 +74,7 @@ namespace thames::perturbations::atmosphere::drag {
         // Calculate atmospheric density (including conversion to kg/km^3)
         if (m_isNonDimensional)
             alt *= m_factors->length;
-        T rho = m_model.density(alt) * 1e9;
+        T rho = m_model->density(alt) * 1e9;
         
         // Calculate factors which include mass (cancelled via rho/mass) and non-dimensionalise as required
         T massfac = rho/m_m;
@@ -114,7 +114,7 @@ namespace thames::perturbations::atmosphere::drag {
         // Calculate atmospheric density (including conversion to kg/km^3)
         if (m_isNonDimensional)
             alt *= m_factors->length;
-        T rho = m_model.density(alt) * 1e9;
+        T rho = m_model->density(alt) * 1e9;
         
         // Calculate factors which include mass (cancelled via rho/mass) and non-dimensionalise as required
         T massfac = rho/m_m;
@@ -125,10 +125,9 @@ namespace thames::perturbations::atmosphere::drag {
         std::vector<T> W = {0, 0, w};
         std::vector<T> Vrel = V - thames::vector::geometry::cross3(W, R);
         T vrel = thames::vector::geometry::norm3(Vrel);
-        std::vector<T> uv = Vrel/vrel;
 
         // Calculate acceleration due to drag
-        std::vector<T> Ad = -0.5*Cd*A*massfac*pow(vrel, 2)*uv;
+        std::vector<T> Ad = -0.5*Cd*A*massfac*vrel*Vrel;
 
         // Return acceleration
         return Ad;
@@ -141,7 +140,7 @@ namespace thames::perturbations::atmosphere::drag {
     using namespace smartuq::polynomial;
 
     template<class T, template <class> class P>
-    DragPolynomial<T, P>::DragPolynomial(const T& radius, const T& w, const T& Cd, const T& A, const T& m, const AtmosphereModels& model, const std::shared_ptr<const DimensionalFactors<T>> factors) : BasePerturbationPolynomial<T, P>(factors), m_radius(radius), m_w(w), m_Cd(Cd), m_A(A), m_m(m), m_model(AtmosphereModelPolynomial<T, P>(model)) {
+    DragPolynomial<T, P>::DragPolynomial(const T& radius, const T& w, const T& Cd, const T& A, const T& m, const std::shared_ptr<const BaseAtmosphereModelPolynomial<T, P>> model, const std::shared_ptr<const DimensionalFactors<T>> factors) : BasePerturbationPolynomial<T, P>(factors), m_radius(radius), m_w(w), m_Cd(Cd), m_A(A), m_m(m), m_model(model) {
 
     }
 
@@ -170,7 +169,7 @@ namespace thames::perturbations::atmosphere::drag {
         // Calculate atmospheric density (including conversion to kg/km^3)
         if (m_isNonDimensional)
             alt *= m_factors->length;
-        P<T> rho = m_model.density(alt) * 1e9;
+        P<T> rho = m_model->density(alt) * 1e9;
         
         // Calculate factors which include mass (cancelled via rho/mass) and non-dimensionalise as required
         P<T> massfac = rho/m_m;
@@ -184,10 +183,9 @@ namespace thames::perturbations::atmosphere::drag {
         std::vector<P<T>> W = {poly, poly, w*(poly+1)};
         std::vector<P<T>> Vrel = V - thames::vector::geometry::cross3(W, R);
         P<T> vrel = thames::vector::geometry::norm3(Vrel);
-        std::vector<P<T>> uv = Vrel/vrel;
 
         // Calculate acceleration due to drag
-        std::vector<P<T>> Ad = -0.5*Cd*A*massfac*pow(vrel, 2)*uv;
+        std::vector<P<T>> Ad = -0.5*Cd*A*massfac*vrel*Vrel;
 
         // Return acceleration
         return Ad;

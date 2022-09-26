@@ -27,40 +27,132 @@ SOFTWARE.
 
 #include <vector>
 
-/**
- * @brief Wertz Exponential Atmospheric Model
- * 
- * Values from Vallado, 2013
- * 
- * @author Max Hallgarten La Casta
- * @date 2022-06-07
- * 
- */
-namespace thames::perturbations::atmosphere::models::wertz {
+#include "baseatmospheremodel.h"
 
-    /// Geometric altitudes [km]
-    const std::vector<double> geo = {
-          0,  25,  30,  40,  50,  60,   70,
-         80,  90, 100, 110, 120, 130,  140,
-        150, 180, 200, 250, 300, 350,  400,
-        450, 500, 600, 700, 800, 900, 1000
+namespace thames::perturbations::atmosphere::models {
+
+    /**
+     * @brief Wertz Exponential Atmospheric Model
+     * 
+     * Values from Vallado, 2013
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-08-02
+     * 
+     * @tparam Numeric type
+     */
+    template<class T>
+    class WertzAtmosphereModel : public BaseAtmosphereModel<T> {
+
+        private:
+
+            /// Geometric altitudes [km]
+            const std::vector<T> m_geo = {
+                0,    25,  30,  40,  50,  60,   70,
+                80,   90, 100, 110, 120, 130,  140,
+                150, 180, 200, 250, 300, 350,  400,
+                450, 500, 600, 700, 800, 900, 1000
+            };
+
+            /// Atmospheric densities [kg/m^3]
+            const std::vector<T> m_rho = {
+                1.225E+00, 3.899E-02, 1.774E-02, 3.972E-03, 1.057E-03, 3.206E-04, 8.770E-05,
+                1.905E-05, 3.396E-06, 5.297E-07, 9.661E-08, 2.438E-08, 8.484E-09, 3.845E-09,
+                2.070E-09, 5.464E-10, 2.789E-10, 7.248E-11, 2.418E-11, 9.518E-12, 3.725E-12,
+                1.585E-12, 6.967E-13, 1.454E-13, 3.614E-14, 1.170E-14, 5.245E-15, 3.019E-15
+            };
+
+            /// Scale heights [km]
+            const std::vector<T> m_scale = {
+                7.249,   6.349,  6.682,  7.554,   8.382,   7.714,   6.549,
+                5.799,   5.382,  5.877,  7.263,   9.473,  12.636,  16.149,
+                22.523, 29.740, 37.105, 45.546,  53.628,  53.298,  58.515,
+                60.828, 63.822, 71.835, 88.667, 124.640, 181.050, 268.000
+            };
+
+        public:
+
+            /**
+             * @brief Construct a new Wertz Atmosphere Model object
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-08-02
+             */
+            WertzAtmosphereModel();
+
+            /**
+             * @brief Destroy the Wertz Atmosphere Model object
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-08-02
+             */
+            ~WertzAtmosphereModel();
+
+            /**
+             * @brief Calculate density using exponetial interpolation
+             * 
+             * @param[in] alt Altitude [km]
+             * @return T Atmospheric density [kg/m^3]
+             */
+            T density(T alt) const override;
+
     };
 
-    /// Atmospheric densities [kg/m^3]
-    const std::vector<double> rho = {
-        1.225E+00, 3.899E-02, 1.774E-02, 3.972E-03, 1.057E-03, 3.206E-04, 8.770E-05,
-        1.905E-05, 3.396E-06, 5.297E-07, 9.661E-08, 2.438E-08, 8.484E-09, 3.845E-09,
-        2.070E-09, 5.464E-10, 2.789E-10, 7.248E-11, 2.418E-11, 9.518E-12, 3.725E-12,
-        1.585E-12, 6.967E-13, 1.454E-13, 3.614E-14, 1.170E-14, 5.245E-15, 3.019E-15
+    /////////////////
+    // Polynomials //
+    /////////////////
+
+    #ifdef THAMES_USE_SMARTUQ
+
+    /**
+     * @brief Wertz Exponential Atmospheric Model (Polynomial)
+     * 
+     * Values from Vallado, 2013
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-08-22
+     * 
+     * @tparam T Numeric type
+     * @tparam P Polynomial type
+     */
+    template<class T, template <class> class P>
+    class WertzAtmosphereModelPolynomial : public BaseAtmosphereModelPolynomial<T, P> {
+        
+        private:
+
+        public:
+
+            /**
+             * @brief Construct a new Wertz Atmosphere Model Polynomial object
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-08-02
+             */
+            WertzAtmosphereModelPolynomial();
+
+            /**
+             * @brief Destroy the Wertz Atmosphere Model Polynomial object
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-08-02
+             */
+            ~WertzAtmosphereModelPolynomial();
+
+            /**
+             * @brief Calculate density using exponential interpolation
+             * 
+             * @warning Not implemented
+             * 
+             * @author Max Hallgarten La Casta
+             * @date 2022-08-22
+             * 
+             * @param[in] alt Altitude [km]
+             * @return P<T> Atmospheric density [kg/m^3]
+             */
+            P<T> density(P<T> alt) const override;
     };
 
-    /// Scale heights [km]
-    const std::vector<double> scale = {
-         7.249,  6.349,  6.682,  7.554,   8.382,   7.714,   6.549,
-         5.799,  5.382,  5.877,  7.263,   9.473,  12.636,  16.149,
-        22.523, 29.740, 37.105, 45.546,  53.628,  53.298,  58.515,
-        60.828, 63.822, 71.835, 88.667, 124.640, 181.050, 268.000
-    };
+    #endif
 
 }
 

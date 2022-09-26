@@ -26,7 +26,5 @@ SOFTWARE.
 #define THAMES_IO
 
 #include "json.h"
-#include "point.h"
-#include "polynomial.h"
 
 #endif

@@ -1,0 +1,7 @@
+<map id="thames::perturbations::atmosphere::models::BaseAtmosphereModel&lt; T &gt;" name="thames::perturbations::atmosphere::models::BaseAtmosphereModel&lt; T &gt;">
+<area shape="rect" id="node1" title="Base Atmosphere Model." alt="" coords="5,125,224,181"/>
+<area shape="rect" id="node2" href="$classthames_1_1perturbations_1_1atmosphere_1_1models_1_1USSA76AtmosphereModel.html" title="US Standard Atmosphere 1976." alt="" coords="273,5,511,61"/>
+<area shape="rect" id="node3" href="$classthames_1_1perturbations_1_1atmosphere_1_1models_1_1WertzAtmosphereModel.html" title="Wertz Exponential Atmospheric Model." alt="" coords="280,85,504,141"/>
+<area shape="rect" id="node4" href="$classthames_1_1perturbations_1_1atmosphere_1_1models_1_1WertzP1AtmosphereModel.html" title="Approximate Wertz Exponential Atmospheric Model." alt="" coords="272,165,512,221"/>
+<area shape="rect" id="node5" href="$classthames_1_1perturbations_1_1atmosphere_1_1models_1_1WertzP5AtmosphereModel.html" title="Approximate Wertz Exponential Atmospheric Model." alt="" coords="272,245,512,301"/>
+</map>

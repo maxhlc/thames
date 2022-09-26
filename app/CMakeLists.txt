@@ -21,45 +21,7 @@
 # SOFTWARE.
 
 if(THAMES_BUILD_APP)
-    # Add executable for Cowell for discrete points
-    add_executable(thames_cowell_discrete_point thames_cowell_discrete_point.cpp)
-    # Link executables
-    target_link_libraries(thames_cowell_discrete_point thames)
-
-    if(THAMES_USE_SMARTUQ)
-        # Add executable for Cowell for polynomials
-        add_executable(thames_cowell_polynomial thames_cowell_polynomial.cpp)
-        # Link executables
-        target_link_libraries(thames_cowell_polynomial thames)
-    endif(THAMES_USE_SMARTUQ)
-
-    if(THAMES_USE_SMARTUQ)
-        # Add executable for Cowell for discrete points via polynomials
-        add_executable(thames_cowell_polynomial_point thames_cowell_polynomial_point.cpp)
-        # Link executables
-        target_link_libraries(thames_cowell_polynomial_point thames)
-    endif(THAMES_USE_SMARTUQ)
-
-    # Add executable for GEqOE for discrete points
-    add_executable(thames_geqoe_discrete_point thames_geqoe_discrete_point.cpp)
-    # Link executables
-    target_link_libraries(thames_geqoe_discrete_point thames)
-
-    if(THAMES_USE_SMARTUQ)
-        # Add executable for GEqOE via polynomials
-        add_executable(thames_geqoe_polynomial thames_geqoe_polynomial.cpp)
-        # Link executables
-        target_link_libraries(thames_geqoe_polynomial thames)
-    endif(THAMES_USE_SMARTUQ)
-
-    if(THAMES_USE_SMARTUQ)
-        # Add executable for GEqOE for discrete points via polynomials
-        add_executable(thames_geqoe_polynomial_point thames_geqoe_polynomial_point.cpp)
-        # Link executables
-        target_link_libraries(thames_geqoe_polynomial_point thames)
-    endif(THAMES_USE_SMARTUQ)
-
-    # Add executable for general propagation
+    # Add executable for propagation
     add_executable(${PROJECT_NAME}_main thames_main.cpp)
     target_link_libraries(${PROJECT_NAME}_main ${PROJECT_NAME})
 

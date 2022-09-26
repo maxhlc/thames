@@ -31,11 +31,13 @@ set(THAMES_SOURCE
     conversions/universal.cpp
     # Input/output
     io/json.cpp
-    io/point.cpp
-    io/polynomial.cpp
     # Perturbations
-    perturbations/atmosphere/atmospheremodel.cpp
+    perturbations/atmosphere/baseatmospheremodel.cpp
     perturbations/atmosphere/drag.cpp
+    perturbations/atmosphere/ussa76.cpp
+    perturbations/atmosphere/wertz.cpp
+    perturbations/atmosphere/wertzp1.cpp
+    perturbations/atmosphere/wertzp5.cpp
     perturbations/geopotential/J2.cpp
     perturbations/baseperturbation.cpp
     perturbations/perturbationcombiner.cpp
@@ -71,13 +73,13 @@ set(THAMES_HEADERS
     # Input/output
     ../include/io/io.h
     ../include/io/json.h
-    ../include/io/point.h
-    ../include/io/polynomial.h
     # Perturbations
-    ../include/perturbations/atmosphere/atmospheremodel.h
+    ../include/perturbations/atmosphere/baseatmospheremodel.h
     ../include/perturbations/atmosphere/drag.h
     ../include/perturbations/atmosphere/ussa76.h
     ../include/perturbations/atmosphere/wertz.h
+    ../include/perturbations/atmosphere/wertzp1.h
+    ../include/perturbations/atmosphere/wertzp5.h
     ../include/perturbations/geopotential/J2.h
     ../include/perturbations/baseperturbation.h
     ../include/perturbations/perturbationcombiner.h
