@@ -1,0 +1,7 @@
+<map id="thames::perturbations::atmosphere::models::BaseAtmosphereModelPolynomial&lt; T, P &gt;" name="thames::perturbations::atmosphere::models::BaseAtmosphereModelPolynomial&lt; T, P &gt;">
+<area shape="rect" id="node1" title="Base Atmosphere Model." alt="" coords="5,148,260,219"/>
+<area shape="rect" id="node2" href="$classthames_1_1perturbations_1_1atmosphere_1_1models_1_1USSA76AtmosphereModelPolynomial.html" title="US Standard Atmosphere 1976 (Polynomial)" alt="" coords="308,5,583,76"/>
+<area shape="rect" id="node3" href="$classthames_1_1perturbations_1_1atmosphere_1_1models_1_1WertzAtmosphereModelPolynomial.html" title="Wertz Exponential Atmospheric Model (Polynomial)" alt="" coords="316,100,575,171"/>
+<area shape="rect" id="node4" href="$classthames_1_1perturbations_1_1atmosphere_1_1models_1_1WertzP1AtmosphereModelPolynomial.html" title="Approximate Wertz Exponential Atmospheric Model (Polynomial)" alt="" coords="308,195,583,265"/>
+<area shape="rect" id="node5" href="$classthames_1_1perturbations_1_1atmosphere_1_1models_1_1WertzP5AtmosphereModelPolynomial.html" title="Approximate Wertz Exponential Atmospheric Model (Polynomial)" alt="" coords="308,289,583,360"/>
+</map>

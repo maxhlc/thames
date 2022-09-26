@@ -1,11 +1,9 @@
 var searchData=
 [
-  ['_7ebaseperturbation_318',['~BasePerturbation',['../classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbation.html#a12098cf0e36796d336233bfab8397cdc',1,'thames::perturbations::baseperturbation::BasePerturbation']]],
-  ['_7ebaseperturbationpolynomial_319',['~BasePerturbationPolynomial',['../classthames_1_1perturbations_1_1baseperturbation_1_1BasePerturbationPolynomial.html#af804bfb5506937a3dbcb1a86b47e51b2',1,'thames::perturbations::baseperturbation::BasePerturbationPolynomial']]],
-  ['_7ecowellpropagatorpolynomial_320',['~CowellPropagatorPolynomial',['../classthames_1_1propagators_1_1CowellPropagatorPolynomial.html#a2887588f0f5701d0ba27e6e9a57066c8',1,'thames::propagators::CowellPropagatorPolynomial']]],
-  ['_7ecowellpropagatorpolynomialdynamics_321',['~CowellPropagatorPolynomialDynamics',['../classthames_1_1propagators_1_1CowellPropagatorPolynomialDynamics.html#a8ea24c881f15f4f6133b81d2c109290c',1,'thames::propagators::CowellPropagatorPolynomialDynamics']]],
-  ['_7egeqoepropagatorpolynomial_322',['~GEqOEPropagatorPolynomial',['../classthames_1_1propagators_1_1GEqOEPropagatorPolynomial.html#a01069fefeaa6b25e794638b5d6c2dacd',1,'thames::propagators::GEqOEPropagatorPolynomial']]],
-  ['_7egeqoepropagatorpolynomialdynamics_323',['~GEqOEPropagatorPolynomialDynamics',['../classthames_1_1propagators_1_1GEqOEPropagatorPolynomialDynamics.html#a3b5e413a97ab47ba28477aff756ac578',1,'thames::propagators::GEqOEPropagatorPolynomialDynamics']]],
-  ['_7ej2_324',['~J2',['../classthames_1_1perturbations_1_1geopotential_1_1J2.html#ae62c27aeca966e2599a6ee1fe5f85d00',1,'thames::perturbations::geopotential::J2']]],
-  ['_7ej2polynomial_325',['~J2Polynomial',['../classthames_1_1perturbations_1_1geopotential_1_1J2Polynomial.html#a8ac613d0d686df390b75350905050f60',1,'thames::perturbations::geopotential::J2Polynomial']]]
+  ['wertzatmospheremodel_478',['WertzAtmosphereModel',['../classthames_1_1perturbations_1_1atmosphere_1_1models_1_1WertzAtmosphereModel.html#a46b4afa6de666752ab167a62964e19fd',1,'thames::perturbations::atmosphere::models::WertzAtmosphereModel']]],
+  ['wertzatmospheremodelpolynomial_479',['WertzAtmosphereModelPolynomial',['../classthames_1_1perturbations_1_1atmosphere_1_1models_1_1WertzAtmosphereModelPolynomial.html#aa6ef7fa8460d8cab1871b7a685f97e52',1,'thames::perturbations::atmosphere::models::WertzAtmosphereModelPolynomial']]],
+  ['wertzp1atmospheremodel_480',['WertzP1AtmosphereModel',['../classthames_1_1perturbations_1_1atmosphere_1_1models_1_1WertzP1AtmosphereModel.html#a4d2cf905e6f8baa1a05483bc43a55cbf',1,'thames::perturbations::atmosphere::models::WertzP1AtmosphereModel']]],
+  ['wertzp1atmospheremodelpolynomial_481',['WertzP1AtmosphereModelPolynomial',['../classthames_1_1perturbations_1_1atmosphere_1_1models_1_1WertzP1AtmosphereModelPolynomial.html#a0141738c6cd03fe8b73b13cd2f1faf9c',1,'thames::perturbations::atmosphere::models::WertzP1AtmosphereModelPolynomial']]],
+  ['wertzp5atmospheremodel_482',['WertzP5AtmosphereModel',['../classthames_1_1perturbations_1_1atmosphere_1_1models_1_1WertzP5AtmosphereModel.html#a74a8c525002d5702e3912248e71a7b1e',1,'thames::perturbations::atmosphere::models::WertzP5AtmosphereModel']]],
+  ['wertzp5atmospheremodelpolynomial_483',['WertzP5AtmosphereModelPolynomial',['../classthames_1_1perturbations_1_1atmosphere_1_1models_1_1WertzP5AtmosphereModelPolynomial.html#adbb5958d9f1b164047b8552ffa91d5e1',1,'thames::perturbations::atmosphere::models::WertzP5AtmosphereModelPolynomial']]]
 ];
