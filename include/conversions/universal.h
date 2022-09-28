@@ -34,11 +34,13 @@ SOFTWARE.
 #endif
 
 #include "../constants/statetypes.h"
+#include "../../include/conversions/dimensional.h"
 #include "../perturbations/baseperturbation.h"
 
 namespace thames::conversions::universal {
 
     using thames::constants::statetypes::StateTypes;
+    using thames::conversions::dimensional::DimensionalFactors;
     using thames::perturbations::baseperturbation::BasePerturbation;
 
     ////////////
@@ -63,6 +65,36 @@ namespace thames::conversions::universal {
     template<class T>
     std::array<T, 6> convert_state(const T& t, const std::array<T, 6>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const std::shared_ptr<const BasePerturbation<T>> perturbation);
 
+    /**
+     * @brief Universal state non-dimensionalisation.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @param[in] state State.
+     * @param[in] statetype State type.
+     * @param[in] factors Structure containing the factors for non-dimensionalisation.
+     * @return std::array<T, 6> Non-dimensional state.
+     */
+    template<class T>
+    std::array<T, 6> nondimensionalise_state(const std::array<T, 6>& state, const StateTypes& statetype, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Universal state dimensionalisation.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @param[in] statend State.
+     * @param[in] statetype State type.
+     * @param[in] factors Structure containing the factors for dimensionalisation.
+     * @return std::array<T, 6> Dimensional state.
+     */
+    template<class T>
+    std::array<T, 6> dimensionalise_state(const std::array<T, 6>& statend, const StateTypes& statetype, const DimensionalFactors<T>& factors);
+
     /////////////
     // Vectors //
     /////////////
@@ -84,6 +116,36 @@ namespace thames::conversions::universal {
      */
     template<class T>
     std::vector<T> convert_state(const T& t, const std::vector<T>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const std::shared_ptr<const BasePerturbation<T>> perturbation);
+
+    /**
+     * @brief Universal state non-dimensionalisation.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @param[in] state State.
+     * @param[in] statetype State type.
+     * @param[in] factors Structure containing the factors for non-dimensionalisation.
+     * @return std::vector<T> Non-dimensional state.
+     */
+    template<class T>
+    std::vector<T> nondimensionalise_state(const std::vector<T>& state, const StateTypes& statetype, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Universal state dimensionalisation.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @param[in] statend State.
+     * @param[in] statetype State type.
+     * @param[in] factors Structure containing the factors for dimensionalisation.
+     * @return std::vector<T> Dimensional state.
+     */
+    template<class T>
+    std::vector<T> dimensionalise_state(const std::vector<T>& statend, const StateTypes& statetype, const DimensionalFactors<T>& factors);
 
     /////////////////
     // Polynomials //
@@ -111,6 +173,38 @@ namespace thames::conversions::universal {
      */
     template<class T, template <class> class P>
     std::vector<P<T>> convert_state(const T& t, const std::vector<P<T>>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const std::shared_ptr<const BasePerturbationPolynomial<T, P>> perturbation);
+
+    /**
+     * @brief Universal state non-dimensionalisation.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] state State.
+     * @param[in] statetype State type.
+     * @param[in] factors Structure containing the factors for non-dimensionalisation.
+     * @return std::vector<P<T>> Non-dimensional state.
+     */
+    template<class T, template <class> class P>
+    std::vector<P<T>> nondimensionalise_state(const std::vector<P<T>>& state, const StateTypes& statetype, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Universal state dimensionalisation.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] statend Non-dimensional state.
+     * @param[in] statetype State type.
+     * @param[in] factors Structure containing the factors for dimensionalisation.
+     * @return std::vector<P<T>> Dimensional state.
+     */
+    template<class T, template <class> class P>
+    std::vector<P<T>> dimensionalise_state(const std::vector<P<T>>& statend, const StateTypes& statetype, const DimensionalFactors<T>& factors);
 
     #endif
 

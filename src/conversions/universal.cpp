@@ -31,6 +31,7 @@ SOFTWARE.
 #endif
 
 #include "../../include/constants/statetypes.h"
+#include "../../include/conversions/dimensional.h"
 #include "../../include/conversions/geqoe.h"
 #include "../../include/conversions/keplerian.h"
 #include "../../include/conversions/universal.h"
@@ -42,6 +43,7 @@ namespace thames::conversions::universal {
     using thames::constants::statetypes::CARTESIAN;
     using thames::constants::statetypes::GEQOE;
     using thames::constants::statetypes::KEPLERIAN;
+    using thames::conversions::dimensional::DimensionalFactors;
     using thames::perturbations::baseperturbation::BasePerturbation;
 
     ////////////
@@ -75,6 +77,44 @@ namespace thames::conversions::universal {
     }
     template std::array<double, 6> convert_state(const double&, const std::array<double, 6>&, const double&, const StateTypes&, const StateTypes&, const std::shared_ptr<const BasePerturbation<double>> perturbation);
 
+    template<class T>
+    std::array<T, 6> nondimensionalise_state(const std::array<T, 6>& state, const StateTypes& statetype, const DimensionalFactors<T>& factors) {
+        // Switch through state types
+        switch (statetype) {
+            case CARTESIAN:
+                return thames::conversions::dimensional::cartesian_nondimensionalise(state, factors);
+                break;
+            
+            case GEQOE:
+                return thames::conversions::dimensional::geqoe_nondimensionalise(state, factors);
+                break;
+        
+            default:
+                throw std::runtime_error("Unsupported non-dimensionalisation");
+                break;
+        }
+    }
+    template std::array<double, 6> nondimensionalise_state(const std::array<double, 6>& state, const StateTypes& statetype, const DimensionalFactors<double>& factors);
+
+    template<class T>
+    std::array<T, 6> dimensionalise_state(const std::array<T, 6>& statend, const StateTypes& statetype, const DimensionalFactors<T>& factors) {
+        // Switch through state types
+        switch (statetype) {
+            case CARTESIAN:
+                return thames::conversions::dimensional::cartesian_dimensionalise(statend, factors);
+                break;
+            
+            case GEQOE:
+                return thames::conversions::dimensional::geqoe_dimensionalise(statend, factors);
+                break;
+        
+            default:
+                throw std::runtime_error("Unsupported dimensionalisation");
+                break;
+        }
+    }
+    template std::array<double, 6> dimensionalise_state(const std::array<double, 6>& statend, const StateTypes& statetype, const DimensionalFactors<double>& factors);
+
     /////////////
     // Vectors //
     /////////////
@@ -106,6 +146,44 @@ namespace thames::conversions::universal {
     }
     template std::vector<double> convert_state(const double&, const std::vector<double>&, const double&, const StateTypes&, const StateTypes&, const std::shared_ptr<const BasePerturbation<double>> perturbation);
 
+    template<class T>
+    std::vector<T> nondimensionalise_state(const std::vector<T>& state, const StateTypes& statetype, const DimensionalFactors<T>& factors) {
+        // Switch through state types
+        switch (statetype) {
+            case CARTESIAN:
+                return thames::conversions::dimensional::cartesian_nondimensionalise(state, factors);
+                break;
+            
+            case GEQOE:
+                return thames::conversions::dimensional::geqoe_nondimensionalise(state, factors);
+                break;
+        
+            default:
+                throw std::runtime_error("Unsupported non-dimensionalisation");
+                break;
+        }
+    }
+    template std::vector<double> nondimensionalise_state(const std::vector<double>& state, const StateTypes& statetype, const DimensionalFactors<double>& factors);
+
+    template<class T>
+    std::vector<T> dimensionalise_state(const std::vector<T>& statend, const StateTypes& statetype, const DimensionalFactors<T>& factors) {
+        // Switch through state types
+        switch (statetype) {
+            case CARTESIAN:
+                return thames::conversions::dimensional::cartesian_dimensionalise(statend, factors);
+                break;
+            
+            case GEQOE:
+                return thames::conversions::dimensional::geqoe_dimensionalise(statend, factors);
+                break;
+        
+            default:
+                throw std::runtime_error("Unsupported dimensionalisation");
+                break;
+        }
+    }
+    template std::vector<double> dimensionalise_state(const std::vector<double>& statend, const StateTypes& statetype, const DimensionalFactors<double>& factors);
+
     /////////////////
     // Polynomials //
     /////////////////
@@ -135,6 +213,46 @@ namespace thames::conversions::universal {
     }
     template std::vector<taylor_polynomial<double>> convert_state(const double&, const std::vector<taylor_polynomial<double>>&, const double&, const StateTypes&, const StateTypes&, const std::shared_ptr<const BasePerturbationPolynomial<double, taylor_polynomial>>);
     template std::vector<chebyshev_polynomial<double>> convert_state(const double&, const std::vector<chebyshev_polynomial<double>>&, const double&, const StateTypes&, const StateTypes&, const std::shared_ptr<const BasePerturbationPolynomial<double, chebyshev_polynomial>>);
+
+    template<class T, template <class> class P>
+    std::vector<P<T>> nondimensionalise_state(const std::vector<P<T>>& state, const StateTypes& statetype, const DimensionalFactors<T>& factors) {
+        // Switch through state types
+        switch (statetype) {
+            case CARTESIAN:
+                return thames::conversions::dimensional::cartesian_nondimensionalise(state, factors);
+                break;
+            
+            case GEQOE:
+                return thames::conversions::dimensional::geqoe_nondimensionalise(state, factors);
+                break;
+        
+            default:
+                throw std::runtime_error("Unsupported non-dimensionalisation");
+                break;
+        }
+    }
+    template std::vector<taylor_polynomial<double>> nondimensionalise_state(const std::vector<taylor_polynomial<double>>& state, const StateTypes& statetype, const DimensionalFactors<double>& factors);
+    template std::vector<chebyshev_polynomial<double>> nondimensionalise_state(const std::vector<chebyshev_polynomial<double>>& state, const StateTypes& statetype, const DimensionalFactors<double>& factors);
+
+    template<class T, template <class> class P>
+    std::vector<P<T>> dimensionalise_state(const std::vector<P<T>>& statend, const StateTypes& statetype, const DimensionalFactors<T>& factors) {
+        // Switch through state types
+        switch (statetype) {
+            case CARTESIAN:
+                return thames::conversions::dimensional::cartesian_dimensionalise(statend, factors);
+                break;
+            
+            case GEQOE:
+                return thames::conversions::dimensional::geqoe_dimensionalise(statend, factors);
+                break;
+        
+            default:
+                throw std::runtime_error("Unsupported dimensionalisation");
+                break;
+        }
+    }
+    template std::vector<taylor_polynomial<double>> dimensionalise_state(const std::vector<taylor_polynomial<double>>& statend, const StateTypes& statetype, const DimensionalFactors<double>& factors);
+    template std::vector<chebyshev_polynomial<double>> dimensionalise_state(const std::vector<chebyshev_polynomial<double>>& statend, const StateTypes& statetype, const DimensionalFactors<double>& factors);
 
     #endif
 

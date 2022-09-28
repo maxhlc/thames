@@ -54,7 +54,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator object.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-06-02
+     * @date 2022-09-28
      * 
      * @tparam T Numeric type.
      */
@@ -122,7 +122,7 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-06-02
+             * @date 2022-09-28
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -154,7 +154,7 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-06-02
+             * @date 2022-09-28
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -300,7 +300,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator abstract object for polynomial propagations.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-06-02
+     * @date 2022-09-28
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -345,7 +345,7 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-06-02
+             * @date 2022-09-28
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.

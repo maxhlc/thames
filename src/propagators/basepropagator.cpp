@@ -91,7 +91,7 @@ namespace thames::propagators::basepropagator {
             tstep /= m_factors->time;
 
             // Scale state
-            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
+            state = thames::conversions::universal::nondimensionalise_state(state, statetype, *m_factors);
         }
 
         // Calculate gravitational parameters
@@ -124,7 +124,7 @@ namespace thames::propagators::basepropagator {
 
         // Re-dimensionalise
         if (options.isNonDimensional) {
-            state = thames::conversions::dimensional::cartesian_dimensionalise(state, *m_factors);
+            state = thames::conversions::universal::dimensionalise_state(state, statetype, *m_factors);
         }
 
         // Return final state
@@ -165,7 +165,7 @@ namespace thames::propagators::basepropagator {
             tstep /= m_factors->time;
 
             // Scale state
-            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
+            state = thames::conversions::universal::nondimensionalise_state(state, statetype, *m_factors);
         }
 
         // Calculate gravitational parameters
@@ -198,7 +198,7 @@ namespace thames::propagators::basepropagator {
 
         // Re-dimensionalise
         if (options.isNonDimensional) {
-            state = thames::conversions::dimensional::cartesian_dimensionalise(state, *m_factors);
+            state = thames::conversions::universal::dimensionalise_state(state, statetype, *m_factors);
         }
 
         // Return final state
@@ -312,7 +312,7 @@ namespace thames::propagators::basepropagator {
             tstep /= m_factors->time;
 
             // Scale state
-            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
+            state = thames::conversions::universal::nondimensionalise_state(state, statetype, *m_factors);
         }
 
         // Calculate gravitational parameters
@@ -347,7 +347,7 @@ namespace thames::propagators::basepropagator {
         
         // Re-dimensionalise
         if (options.isNonDimensional) {
-            statefinal = thames::conversions::dimensional::cartesian_dimensionalise(statefinal, *m_factors);
+            statefinal = thames::conversions::universal::dimensionalise_state(statefinal, statetype, *m_factors);
         }
 
         // Return final state
