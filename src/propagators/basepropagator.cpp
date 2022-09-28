@@ -35,8 +35,8 @@ SOFTWARE.
 #endif
 
 #include "../../include/constants/statetypes.h"
-#include "../../include/conversions/cartesian.h"
 #include "../../include/conversions/dimensional.h"
+#include "../../include/conversions/polynomial.h"
 #include "../../include/conversions/universal.h"
 #include "../../include/propagators/basepropagator.h"
 #include "../../include/settings/settings.h"
@@ -380,10 +380,10 @@ namespace thames::propagators::basepropagator {
         // Generate polynomials
         std::vector<P<T>> statepolynomial;
         std::vector<T> lower, upper;
-        thames::conversions::cartesian::cartesian_to_polynomial(states, degree, statepolynomial, lower, upper);
+        thames::conversions::polynomial::states_to_polynomial(states, degree, statepolynomial, lower, upper);
 
         // Calculate sample points
-        std::vector<std::vector<T>> samples = thames::conversions::cartesian::state_to_sample(states, lower, upper);
+        std::vector<std::vector<T>> samples = thames::conversions::polynomial::state_to_sample(states, lower, upper);
 
         // Propagate polynomials
         statepolynomial = propagate(tstart, tend, tstep, statepolynomial, options, statetype);
@@ -410,10 +410,10 @@ namespace thames::propagators::basepropagator {
         // Generate polynomials
         std::vector<P<T>> statepolynomial;
         std::vector<T> lower, upper;
-        thames::conversions::cartesian::cartesian_to_polynomial(states, degree, statepolynomial, lower, upper);
+        thames::conversions::polynomial::states_to_polynomial(states, degree, statepolynomial, lower, upper);
 
         // Calculate sample points
-        std::vector<std::vector<T>> samples = thames::conversions::cartesian::state_to_sample(states, lower, upper);
+        std::vector<std::vector<T>> samples = thames::conversions::polynomial::state_to_sample(states, lower, upper);
 
         // Propagate state between times
         for (std::size_t ii = 0; ii < tvec.size() - 1; ii++) {

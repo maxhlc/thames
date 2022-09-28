@@ -28,10 +28,10 @@ SOFTWARE.
 #include "../../external/smart-uq/include/Polynomial/smartuq_polynomial.h"
 #endif
 
-#include "../../include/conversions/cartesian.h"
+#include "../../include/conversions/polynomial.h"
 
-namespace thames::conversions::cartesian {
-
+namespace thames::conversions::polynomial {
+ 
     template<class T>
     void states_to_bounds(const std::vector<std::vector<T>>& states, std::vector<T>& lower, std::vector<T>& upper){
         // Resize vectors for minimum and maximum values
@@ -99,41 +99,47 @@ namespace thames::conversions::cartesian {
     using namespace smartuq::polynomial;
 
     template<class T, template<class> class P>
-    void cartesian_to_polynomial(const std::vector<T>& RV, const std::vector<T>& RVunc, int degree, std::vector<P<T>>& RVPolynomial) {
+    void states_to_polynomial(const std::vector<T>& state, const std::vector<T>& stateunc, int degree, std::vector<P<T>>& statepolynomial) {
         // Clear polynomial vector
-        RVPolynomial.clear();
+        statepolynomial.clear();
 
-        // Iterate through Cartesian state variables
-        for(unsigned int ii=0; ii<6; ii++){
+        // Calculate number of state variables
+        unsigned int n = state.size();
+
+        // Iterate through state variables
+        for(unsigned int ii=0; ii<n; ii++){
             // Generate polynomial
-            RVPolynomial.push_back(P<T>(6, degree, ii, RV[ii]-RVunc[ii], RV[ii]+RVunc[ii]));
+            statepolynomial.push_back(P<T>(n, degree, ii, state[ii]-stateunc[ii], state[ii]+stateunc[ii]));
 
             // Initialise fast multiplication
-            RVPolynomial[ii].initialize_M(6, degree);  
+            statepolynomial[ii].initialize_M(n, degree);  
         }
     }
-    template void cartesian_to_polynomial(const std::vector<double>& RV, const std::vector<double>& RVunc, int degree, std::vector<taylor_polynomial<double>>& RVPolynomial);
-    template void cartesian_to_polynomial(const std::vector<double>& RV, const std::vector<double>& RVunc, int degree, std::vector<chebyshev_polynomial<double>>& RVPolynomial);
+    template void states_to_polynomial(const std::vector<double>&, const std::vector<double>&, int, std::vector<taylor_polynomial<double>>&);
+    template void states_to_polynomial(const std::vector<double>&, const std::vector<double>&, int, std::vector<chebyshev_polynomial<double>>&);
 
     template<class T, template<class> class P>
-    void cartesian_to_polynomial(const std::vector<std::vector<T>>& RVs, int degree, std::vector<P<T>>& RVPolynomial, std::vector<T>& lower, std::vector<T>& upper) {
+    void states_to_polynomial(const std::vector<std::vector<T>>& states, int degree, std::vector<P<T>>& statepolynomial, std::vector<T>& lower, std::vector<T>& upper) {
         // Clear polynomial vector
-        RVPolynomial.clear();
+        statepolynomial.clear();
 
         // Calculate bounds of Cartesian states
-        states_to_bounds(RVs, lower, upper);
+        states_to_bounds(states, lower, upper);
+
+        // Calculate number of state variables
+        unsigned int n = states[0].size();
 
         // Iterate through Cartesian state variables
-        for(unsigned int ii=0; ii<6; ii++){
+        for(unsigned int ii=0; ii<n; ii++){
             // Generate polynomial
-            RVPolynomial.push_back(P<T>(6, degree, ii, lower[ii], upper[ii]));
+            statepolynomial.push_back(P<T>(n, degree, ii, lower[ii], upper[ii]));
 
             // Initialise fast multiplication
-            RVPolynomial[ii].initialize_M(6, degree);  
+            statepolynomial[ii].initialize_M(n, degree);  
         }
     }
-    template void cartesian_to_polynomial(const std::vector<std::vector<double>>&, int, std::vector<taylor_polynomial<double>>&, std::vector<double>&, std::vector<double>&);
-    template void cartesian_to_polynomial(const std::vector<std::vector<double>>&, int, std::vector<chebyshev_polynomial<double>>&, std::vector<double>&, std::vector<double>&);
+    template void states_to_polynomial(const std::vector<std::vector<double>>&, int, std::vector<taylor_polynomial<double>>&, std::vector<double>&, std::vector<double>&);
+    template void states_to_polynomial(const std::vector<std::vector<double>>&, int, std::vector<chebyshev_polynomial<double>>&, std::vector<double>&, std::vector<double>&);
 
     #endif
 

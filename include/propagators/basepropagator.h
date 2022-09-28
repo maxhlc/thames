@@ -378,7 +378,7 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method for sets of points.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-07-08
+             * @date 2022-09-28
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -397,7 +397,7 @@ namespace thames::propagators::basepropagator {
              * @note A separate propagation is called for each intermediate output interval, therefore any required state conversions occur multiple times, plus the polynomials are reconstructed at each output timestep.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-07-06
+             * @date 2022-09-28
              * 
              * @param[in] tvec Vector of physical propagation times.
              * @param[in] tstep Initial timestep for propagation.

@@ -31,7 +31,6 @@ SOFTWARE.
 #endif
 
 #include "../../include/constants/statetypes.h"
-#include "../../include/conversions/cartesian.h"
 #include "../../include/conversions/geqoe.h"
 #include "../../include/conversions/keplerian.h"
 #include "../../include/conversions/universal.h"
