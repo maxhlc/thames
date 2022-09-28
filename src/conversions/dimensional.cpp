@@ -56,7 +56,7 @@ namespace thames::conversions::dimensional{
         // Return the non-dimensionalised state vector
         return RVnd;
     }
-    template std::array<double, 6> cartesian_nondimensionalise<double>(const std::array<double, 6>&, const DimensionalFactors<double>&);
+    template std::array<double, 6> cartesian_nondimensionalise(const std::array<double, 6>&, const DimensionalFactors<double>&);
 
     template<class T>
     std::array<T, 6> cartesian_dimensionalise(const std::array<T, 6>& RVnd, const DimensionalFactors<T>& factors){
@@ -74,7 +74,33 @@ namespace thames::conversions::dimensional{
         // Return the dimensionalised state vector
         return RV;
     }
-    template std::array<double, 6> cartesian_dimensionalise<double>(const std::array<double, 6>&, const DimensionalFactors<double>&);
+    template std::array<double, 6> cartesian_dimensionalise(const std::array<double, 6>&, const DimensionalFactors<double>&);
+
+    template<class T>
+    std::array<T, 6> geqoe_nondimensionalise(const std::array<T, 6>& geqoe, const DimensionalFactors<T>& factors){
+        // Declare non-dimensional state vector
+        std::array<T, 6> geqoend(geqoe);
+
+        // Non-dimensionalise the state vector
+        geqoend[0] *= factors.time;
+
+        // Return the non-dimensionalised state vector
+        return geqoend;
+    }
+    template std::array<double, 6> geqoe_nondimensionalise(const std::array<double, 6>&, const DimensionalFactors<double>&);
+
+    template<class T>
+    std::array<T, 6> geqoe_dimensionalise(const std::array<T, 6>& geqoend, const DimensionalFactors<T>& factors){
+        // Declare dimensional state vector
+        std::array<T, 6> geqoe(geqoend);
+
+        // Non-dimensionalise the state vector
+        geqoe[0] /= factors.time;
+
+        // Return the dimensionalised state vector
+        return geqoe;
+    }
+    template std::array<double, 6> geqoe_dimensionalise(const std::array<double, 6>&, const DimensionalFactors<double>&);
 
     template<class T>
     DimensionalFactors<T> calculate_factors(const std::array<T, 6>& RV, const T& mu){
@@ -126,7 +152,7 @@ namespace thames::conversions::dimensional{
         // Return the non-dimensionalised state vector
         return RVnd;
     }
-    template std::vector<double> cartesian_nondimensionalise<double>(const std::vector<double>&, const DimensionalFactors<double>&);
+    template std::vector<double> cartesian_nondimensionalise(const std::vector<double>&, const DimensionalFactors<double>&);
 
     template<class T>
     std::vector<T> cartesian_dimensionalise(const std::vector<T>& RVnd, const DimensionalFactors<T>& factors){
@@ -144,7 +170,33 @@ namespace thames::conversions::dimensional{
         // Return the dimensionalised state vector
         return RV;
     }
-    template std::vector<double> cartesian_dimensionalise<double>(const std::vector<double>&, const DimensionalFactors<double>&);
+    template std::vector<double> cartesian_dimensionalise(const std::vector<double>&, const DimensionalFactors<double>&);
+
+    template<class T>
+    std::vector<T> geqoe_nondimensionalise(const std::vector<T>& geqoe, const DimensionalFactors<T>& factors){
+        // Declare non-dimensional state vector
+        std::vector<T> geqoend(geqoe);
+
+        // Non-dimensionalise the state vector
+        geqoend[0] *= factors.time;
+
+        // Return the non-dimensionalised state vector
+        return geqoend;
+    }
+    template std::vector<double> geqoe_nondimensionalise(const std::vector<double>&, const DimensionalFactors<double>&);
+
+    template<class T>
+    std::vector<T> geqoe_dimensionalise(const std::vector<T>& geqoend, const DimensionalFactors<T>& factors){
+        // Declare dimensional state vector
+        std::vector<T> geqoe(geqoend);
+
+        // Non-dimensionalise the state vector
+        geqoe[0] /= factors.time;
+
+        // Return the dimensionalised state vector
+        return geqoe;
+    }
+    template std::vector<double> geqoe_dimensionalise(const std::vector<double>&, const DimensionalFactors<double>&);
 
     template<class T>
     DimensionalFactors<T> calculate_factors(const std::vector<T>& RV, const T& mu){
@@ -221,6 +273,34 @@ namespace thames::conversions::dimensional{
     }
     template std::vector<taylor_polynomial<double>> cartesian_dimensionalise(const std::vector<taylor_polynomial<double>>&, const DimensionalFactors<double>&);
     template std::vector<chebyshev_polynomial<double>> cartesian_dimensionalise(const std::vector<chebyshev_polynomial<double>>&, const DimensionalFactors<double>&);
+
+    template<class T, template<class> class P>
+    std::vector<P<T>> geqoe_nondimensionalise(const std::vector<P<T>>& geqoe, const DimensionalFactors<T>& factors){
+        // Declare non-dimensional state vector
+        std::vector<P<T>> geqoend(geqoe);
+
+        // Non-dimensionalise the state vector
+        geqoend[0] *= factors.time;
+
+        // Return the non-dimensionalised state vector
+        return geqoend;
+    }
+    template std::vector<taylor_polynomial<double>> geqoe_nondimensionalise(const std::vector<taylor_polynomial<double>>&, const DimensionalFactors<double>&);
+    template std::vector<chebyshev_polynomial<double>> geqoe_nondimensionalise(const std::vector<chebyshev_polynomial<double>>&, const DimensionalFactors<double>&);
+
+    template<class T, template<class> class P>
+    std::vector<P<T>> geqoe_dimensionalise(const std::vector<P<T>>& geqoend, const DimensionalFactors<T>& factors){
+        // Declare dimensional state vector
+        std::vector<P<T>> geqoe(geqoend);
+
+        // Non-dimensionalise the state vector
+        geqoe[0] /= factors.time;
+
+        // Return the dimensionalised state vector
+        return geqoe;
+    }
+    template std::vector<taylor_polynomial<double>> geqoe_dimensionalise(const std::vector<taylor_polynomial<double>>&, const DimensionalFactors<double>&);
+    template std::vector<chebyshev_polynomial<double>> geqoe_dimensionalise(const std::vector<chebyshev_polynomial<double>>&, const DimensionalFactors<double>&);
 
     template<class T, template<class> class P>
     DimensionalFactors<T> calculate_factors(const std::vector<P<T>>& RV, const T& mu) {

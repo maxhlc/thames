@@ -76,6 +76,34 @@ namespace thames::conversions::dimensional{
     std::array<T, 6> cartesian_dimensionalise(const std::array<T, 6>& RVnd, const DimensionalFactors<T>& factors);
 
     /**
+     * @brief Non-dimensionalise GEqOE state.
+     *
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @param[in] geqoe Dimensional GEqOE state vector.
+     * @param[in] factors Structure containing the factors for non-dimensionalisation.
+     * @return std::array<T, 6> Non-dimensional GEqOE state vector.
+     */
+    template<class T>
+    std::array<T, 6> geqoe_nondimensionalise(const std::array<T, 6>& geqoe, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Dimensionalise GEqOE state.
+     *
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @param[in] geqoend Non-dimensional GEqOE state vector.
+     * @param[in] factors Structure containing the factors for dimensionalisation.
+     * @return std::array<T, 6> Dimensional GEqOE state vector.
+     */ 
+    template<class T>
+    std::array<T, 6> geqoe_dimensionalise(const std::array<T, 6>& geqoend, const DimensionalFactors<T>& factors);
+
+    /**
      * @brief Calculate non-dimensionalisation factors.
      * 
      * @author Max Hallgarten La Casta
@@ -120,6 +148,34 @@ namespace thames::conversions::dimensional{
      */ 
     template<class T>
     std::vector<T> cartesian_dimensionalise(const std::vector<T>& RVnd, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Non-dimensionalise GEqOE state.
+     *
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @param[in] geqoe Dimensional GEqOE state vector.
+     * @param[in] factors Structure containing the factors for non-dimensionalisation.
+     * @return std::array<T, 6> Non-dimensional GEqOE state vector.
+     */
+    template<class T>
+    std::vector<T> geqoe_nondimensionalise(const std::vector<T>& geqoe, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Dimensionalise GEqOE state.
+     *
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @param[in] geqoend Non-dimensional GEqOE state vector.
+     * @param[in] factors Structure containing the factors for dimensionalisation.
+     * @return std::array<T, 6> Dimensional GEqOE state vector.
+     */ 
+    template<class T>
+    std::vector<T> geqoe_dimensionalise(const std::vector<T>& geqoend, const DimensionalFactors<T>& factors);
 
     /**
      * @brief Calculate non-dimensionalisation factors.
@@ -170,6 +226,36 @@ namespace thames::conversions::dimensional{
      */
     template<class T, template<class> class P>
     std::vector<P<T>> cartesian_dimensionalise(const std::vector<P<T>>& RVnd, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Non-dimensionalise GEqOE state polynomial.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] geqoe Dimensional GEqOE state vector.
+     * @param[in] factors Structure containing the factors for dimensionalisation.
+     * @return std::vector<P<T>> Non-dimensional GEqOE state vector.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> geqoe_nondimensionalise(const std::vector<P<T>>& geqoe, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Dimensionalise GEqOE state polynomial.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] RVnd Non-dimensional GEqOE state vector.
+     * @param[in] factors Structure containing the factors for dimensionalisation.
+     * @return std::vector<P<T>> Dimensional GEqOE state vector.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> geqoe_dimensionalise(const std::vector<P<T>>& geqoend, const DimensionalFactors<T>& factors);   
 
     /**
      * @brief Calculate non-dimensionalisation factors.
