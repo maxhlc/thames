@@ -43,61 +43,9 @@ namespace thames::conversions::universal {
     using thames::conversions::dimensional::DimensionalFactors;
     using thames::perturbations::baseperturbation::BasePerturbation;
 
-    ////////////
-    // Arrays //
-    ////////////
-
-    /**
-     * @brief Universal state conversion.
-     * 
-     * @author Max Hallgarten La Casta
-     * @date 2022-05-26
-     * 
-     * @tparam T Numeric type.
-     * @param[in] t Time.
-     * @param[in] state State.
-     * @param[in] mu Gravitational parameter.
-     * @param[in] statetype1 Input state type.
-     * @param[in] statetype2 Output state type.
-     * @param[in] perturbation Perturbation object.
-     * @return std::array<T, 6> Output state.
-     */
-    template<class T>
-    std::array<T, 6> convert_state(const T& t, const std::array<T, 6>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const std::shared_ptr<const BasePerturbation<T>> perturbation);
-
-    /**
-     * @brief Universal state non-dimensionalisation.
-     * 
-     * @author Max Hallgarten La Casta
-     * @date 2022-09-28
-     * 
-     * @tparam T Numeric type.
-     * @param[in] state State.
-     * @param[in] statetype State type.
-     * @param[in] factors Structure containing the factors for non-dimensionalisation.
-     * @return std::array<T, 6> Non-dimensional state.
-     */
-    template<class T>
-    std::array<T, 6> nondimensionalise_state(const std::array<T, 6>& state, const StateTypes& statetype, const DimensionalFactors<T>& factors);
-
-    /**
-     * @brief Universal state dimensionalisation.
-     * 
-     * @author Max Hallgarten La Casta
-     * @date 2022-09-28
-     * 
-     * @tparam T Numeric type.
-     * @param[in] statend State.
-     * @param[in] statetype State type.
-     * @param[in] factors Structure containing the factors for dimensionalisation.
-     * @return std::array<T, 6> Dimensional state.
-     */
-    template<class T>
-    std::array<T, 6> dimensionalise_state(const std::array<T, 6>& statend, const StateTypes& statetype, const DimensionalFactors<T>& factors);
-
-    /////////////
-    // Vectors //
-    /////////////
+    ///////////
+    // Reals //
+    ///////////
 
     /**
      * @brief Universal state conversion.

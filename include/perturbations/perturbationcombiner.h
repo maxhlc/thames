@@ -108,65 +108,6 @@ namespace thames::perturbations::perturbationcombiner {
              */
             void add_model(const std::shared_ptr<BasePerturbation<T>>& model);
 
-            ////////////
-            // Arrays //
-            ////////////
-
-            /**
-             * @brief Total perturbing acceleration
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-20
-             * 
-             * @param[in] t Current physical time
-             * @param[in] R Position vector
-             * @param[in] V Velocity vector
-             * @return std::array<T, 3> Total perturbing acceleration
-             */
-            std::array<T, 3> acceleration_total(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const override;
-
-            /**
-             * @brief Non-potential perturbing acceleration
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-20
-             * 
-             * @param[in] t Current physical time
-             * @param[in] R Position vector
-             * @param[in] V Velocity vector
-             * @return std::array<T, 3> Non-potential perturbing acceleration
-             */
-            std::array<T, 3> acceleration_nonpotential(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const override;
-
-            /**
-             * @brief Perturbing potential
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-20
-             * 
-             * @param[in] t Current physical time
-             * @param[in] R Position vector
-             * @return T Perturbing potential
-             */
-            T potential(const T& t, const std::array<T, 3>& R) const override;
-
-            /**
-             * @brief Time derivative of the perturbing potential
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-20
-             * 
-             * @param[in] t Current physical time
-             * @param[in] R Position vector
-             * @param[in] V Velocity vector
-             * @return T Time derivative of the perturbing potential
-             */
-            T potential_derivative(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const override;
-
-            /////////////
-            // Vectors //
-            /////////////
-
             /**
              * @brief Total perturbing acceleration
              * 

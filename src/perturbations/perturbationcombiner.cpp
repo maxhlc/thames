@@ -37,6 +37,10 @@ namespace thames::perturbations::perturbationcombiner {
 
     using namespace thames::vector::arithmeticoverloads;
 
+    ///////////
+    // Reals //
+    ///////////
+
     template<class T>
     PerturbationCombiner<T>::PerturbationCombiner(const std::shared_ptr<const DimensionalFactors<T>> factors) : BasePerturbation<T>(factors) {
         // Ensure all underlying models have same non-dimensional flag
@@ -69,66 +73,6 @@ namespace thames::perturbations::perturbationcombiner {
         // Add model to class vector
         m_models.push_back(model);
     }
-
-    ////////////
-    // Arrays //
-    ////////////
-
-    template<class T>
-    std::array<T, 3> PerturbationCombiner<T>::acceleration_total(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const {
-        /// Declare zero total acceleration
-        std::array<T, 3> F = {0.0, 0.0, 0.0};
-
-        // Iterate through underlying models to add to the total acceleration
-        for (auto model : m_models)
-            F = F + model->acceleration_total(t, R, V);
-
-        // Return acceleration
-        return F;
-    }
-
-    template<class T>
-    std::array<T, 3> PerturbationCombiner<T>::acceleration_nonpotential(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const {
-        /// Declare zero non-potential acceleration
-        std::array<T, 3> F = {0.0, 0.0, 0.0};
-
-        // Iterate through underlying models to add to the non-potential acceleration
-        for (auto model : m_models)
-            F = F + model->acceleration_nonpotential(t, R, V);
-
-        // Return acceleration
-        return F;
-    }
-
-    template<class T>
-    T PerturbationCombiner<T>::potential(const T& t, const std::array<T, 3>& R) const {
-        /// Declare zero potential
-        T U = 0.0;
-
-        // Iterate through underlying models to add to the potential
-        for (auto model : m_models)
-            U += model->potential(t, R);
-
-        // Return potential
-        return U;
-    }
-
-    template<class T>
-    T PerturbationCombiner<T>::potential_derivative(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const {
-        /// Declare zero potential derivative
-        T Ut = 0.0;
-
-        // Iterate through underlying models to add to the potential derivative
-        for (auto model : m_models)
-            Ut += model->potential_derivative(t, R, V);
-
-        // Return potential derivative
-        return Ut;
-    }
-
-    /////////////
-    // Vectors //
-    /////////////
 
     template<class T>
     std::vector<T> PerturbationCombiner<T>::acceleration_total(const T& t, const std::vector<T>& R, const std::vector<T>& V) const {

@@ -92,39 +92,6 @@ namespace thames::perturbations::geopotential{
              */
             ~J2();
 
-            ////////////
-            // Arrays //
-            ////////////
-
-            /**
-             * @brief Calculate perturbing acceleration resulting from the J2-term. 
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-01-25
-             * 
-             * @param[in] t Current physical time.
-             * @param[in] R Position vector.
-             * @param[in] V Velocity vector.
-             * @return std::array<T, 3> Total perturbing acceleration due to the J2-term.
-             */
-            std::array<T, 3> acceleration_total(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const override;
-
-            /**
-             * @brief Calculate perturbing potential resulting from the J2-term. 
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-01-25
-             * 
-             * @param[in] t Current physical time.
-             * @param[in] R Position vector.
-             * @return T Perturbing potential due to the J2-term.
-             */
-            T potential(const T& t, const std::array<T, 3>& R) const override;
-
-            /////////////
-            // Vectors //
-            /////////////
-
             /**
              * @brief Calculate perturbing acceleration resulting from the J2-term. 
              * 

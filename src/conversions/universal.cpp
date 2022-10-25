@@ -46,78 +46,9 @@ namespace thames::conversions::universal {
     using thames::conversions::dimensional::DimensionalFactors;
     using thames::perturbations::baseperturbation::BasePerturbation;
 
-    ////////////
-    // Arrays //
-    ////////////
-
-    template<class T>
-    std::array<T, 6> convert_state(const T& t, const std::array<T, 6>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const std::shared_ptr<const BasePerturbation<T>> perturbation) {
-        // Return input directly if the two types match
-        if (statetype1 == statetype2)
-            return state;
-
-        // Cartesian -> GEqOE
-        if (statetype1 == CARTESIAN && statetype2 == GEQOE)
-            return thames::conversions::geqoe::cartesian_to_geqoe(t, state, mu, perturbation);
-
-        // GEqOE -> Cartesian
-        if (statetype1 == GEQOE && statetype2 == CARTESIAN)
-            return thames::conversions::geqoe::geqoe_to_cartesian(t, state, mu, perturbation);
-
-        // Cartesian -> Keplerian
-        if (statetype1 == CARTESIAN && statetype2 == KEPLERIAN)
-            return thames::conversions::keplerian::cartesian_to_keplerian(state, mu);
-
-        // Keplerian -> Cartesian
-        if (statetype1 == KEPLERIAN && statetype2 == CARTESIAN)
-            return thames::conversions::keplerian::keplerian_to_cartesian(state, mu);
-
-        // Throw error if combinations not accepted
-        throw std::runtime_error("Unsupported state conversion");
-    }
-    template std::array<double, 6> convert_state(const double&, const std::array<double, 6>&, const double&, const StateTypes&, const StateTypes&, const std::shared_ptr<const BasePerturbation<double>> perturbation);
-
-    template<class T>
-    std::array<T, 6> nondimensionalise_state(const std::array<T, 6>& state, const StateTypes& statetype, const DimensionalFactors<T>& factors) {
-        // Switch through state types
-        switch (statetype) {
-            case CARTESIAN:
-                return thames::conversions::dimensional::cartesian_nondimensionalise(state, factors);
-                break;
-            
-            case GEQOE:
-                return thames::conversions::dimensional::geqoe_nondimensionalise(state, factors);
-                break;
-        
-            default:
-                throw std::runtime_error("Unsupported non-dimensionalisation");
-                break;
-        }
-    }
-    template std::array<double, 6> nondimensionalise_state(const std::array<double, 6>& state, const StateTypes& statetype, const DimensionalFactors<double>& factors);
-
-    template<class T>
-    std::array<T, 6> dimensionalise_state(const std::array<T, 6>& statend, const StateTypes& statetype, const DimensionalFactors<T>& factors) {
-        // Switch through state types
-        switch (statetype) {
-            case CARTESIAN:
-                return thames::conversions::dimensional::cartesian_dimensionalise(statend, factors);
-                break;
-            
-            case GEQOE:
-                return thames::conversions::dimensional::geqoe_dimensionalise(statend, factors);
-                break;
-        
-            default:
-                throw std::runtime_error("Unsupported dimensionalisation");
-                break;
-        }
-    }
-    template std::array<double, 6> dimensionalise_state(const std::array<double, 6>& statend, const StateTypes& statetype, const DimensionalFactors<double>& factors);
-
-    /////////////
-    // Vectors //
-    /////////////
+    ///////////
+    // Reals //
+    ///////////
 
     template<class T>
     std::vector<T> convert_state(const T& t, const std::vector<T>& state, const T& mu, const StateTypes& statetype1, const StateTypes& statetype2, const std::shared_ptr<const BasePerturbation<T>> perturbation) {

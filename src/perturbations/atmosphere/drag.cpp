@@ -55,46 +55,6 @@ namespace thames::perturbations::atmosphere::drag {
     }
 
     template<class T>
-    std::array<T, 3> Drag<T>::acceleration_total(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const {
-        return acceleration_nonpotential(t, R, V);
-    }
-
-    template<class T>
-    std::array<T, 3> Drag<T>::acceleration_nonpotential(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const {
-        // Calculate factors
-        T radius = (m_isNonDimensional) ? m_radius/(m_factors->length) : m_radius;
-        T w = (m_isNonDimensional) ? m_w*(m_factors->time) : m_w;
-        T Cd = m_Cd;
-        T A = (m_isNonDimensional) ? m_A/std::pow(m_factors->length, 2) : m_A;
-
-        // Calculate altitude
-        T r = thames::vector::geometry::norm3(R);
-        T alt = r - radius;
-
-        // Calculate atmospheric density (including conversion to kg/km^3)
-        if (m_isNonDimensional)
-            alt *= m_factors->length;
-        T rho = m_model->density(alt) * 1e9;
-        
-        // Calculate factors which include mass (cancelled via rho/mass) and non-dimensionalise as required
-        T massfac = rho/m_m;
-        if (m_isNonDimensional)
-            massfac *= std::pow(m_factors->length, 3);
-
-        // Calculate velocity relative to the atmosphere
-        std::array<T, 3> W = {0, 0, w};
-        std::array<T, 3> Vrel = V - thames::vector::geometry::cross3(W, R);
-        T vrel = thames::vector::geometry::norm3(Vrel);
-        std::array<T, 3> uv = Vrel/vrel;
-
-        // Calculate acceleration due to drag
-        std::array<T, 3> Ad = -0.5*Cd*A*massfac*pow(vrel, 2)*uv;
-
-        // Return acceleration
-        return Ad;
-    }
-
-    template<class T>
     std::vector<T> Drag<T>::acceleration_total(const T& t, const std::vector<T>& R, const std::vector<T>& V) const {
         return acceleration_nonpotential(t, R, V);
     }

@@ -48,135 +48,14 @@ namespace thames::propagators {
     using thames::perturbations::baseperturbation::BasePerturbation;
     using namespace thames::vector::arithmeticoverloads;
 
+    ///////////
+    // Reals //
+    ///////////
+
     template<class T>
     GEqOEPropagator<T>::GEqOEPropagator(const T& mu, const std::shared_ptr<BasePerturbation<T>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors) : BasePropagator<T>(mu, perturbation, factors, GEQOE) {
 
     }
-
-    ////////////
-    // Arrays //
-    ////////////
-
-    template<class T>
-    void GEqOEPropagator<T>::derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t) const {
-        // Calculate factors
-        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
-
-        // Extract elements
-        T nu = geqoe[0];
-        T p1 = geqoe[1];
-        T p2 = geqoe[2];
-        T L = geqoe[3];
-        T q1 = geqoe[4];
-        T q2 = geqoe[5];
-
-        // Calculate generalised eccentric longitude
-        std::function<T (T)> fk = [p1, p2, L](T k) {return (k + p1*cos(k) - p2*sin(k) - L);};
-        std::function<T (T)> dfk = [p1, p2, L](T k) {return (1 - p1*sin(k) - p2*cos(k));};
-        T k = thames::util::root::newton_raphson(fk, dfk, L);
-        T sink = sin(k);
-        T cosk = cos(k);
-
-        // Calculate generalised semi-major axis
-        T a = pow(mu/pow(nu, 2.0), 1.0/3.0);
-
-        // Calculate range and range rate
-        T r = a*(1.0 - p1*sink - p2*cosk);
-        T drdt = sqrt(mu*a)/r*(p2*sink - p1*cosk);
-
-        // Calculate trig of the true longitude
-        T alpha = 1.0/(1.0 + sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0)));
-        T sinl = a/r*(alpha*p1*p2*cosk + (1.0 - alpha*pow(p2, 2.0))*sink - p1);
-        T cosl = a/r*(alpha*p1*p2*sink + (1.0 - alpha*pow(p1, 2.0))*cosk - p2);
-
-        // Calculate equinocital reference frame unit vectors
-        T efac = 1.0/(1.0 + pow(q1, 2.0) + pow(q2, 2.0));
-        std::array<T, 3> ex = {
-            efac*(1.0 - pow(q1, 2.0) + pow(q2, 2.0)),
-            efac*(2.0*q1*q2),
-            efac*(-2.0*q1)
-        };
-        std::array<T, 3> ey = {
-            efac*(2.0*q1*q2),
-            efac*(1.0 + pow(q1, 2.0) - pow(q2, 2.0)),
-            efac*(2.0*q2)
-        };
-
-        // Calculate orbital basis vectors
-        std::array<T, 3> er = ex*cosl + ey*sinl;
-        std::array<T, 3> ef = ey*cosl - ex*sinl;
-
-        // Calculate position
-        std::array<T, 3> R = r*er;
-
-        // Calculate generalised angular momentum
-        T c = pow(pow(mu, 2.0)/nu, 1.0/3.0)*sqrt(1.0 - pow(p1, 2.0) - pow(p2, 2.0));
-
-        // Calculate angular momentum
-        T h = sqrt(pow(c, 2.0) - 2.0*pow(r, 2.0)*m_perturbation->potential(t, R));
-
-        // Calculate velocity
-        std::array<T, 3> V = drdt*er + h/r*ef;
-
-        // Calculate perturbations
-        T U = m_perturbation->potential(t, R);
-        T Ut = m_perturbation->potential_derivative(t, R, V);
-        std::array<T, 3> F = m_perturbation->acceleration_total(t, R, V);
-        std::array<T, 3> P = m_perturbation->acceleration_nonpotential(t, R, V);
-
-        // Calculate time derivative of total energy
-        T edot = Ut + thames::vector::geometry::dot3(P, V);
-
-        // Calculate time derivative of nu
-        T nudot = -3.0*pow(nu/pow(mu, 2.0), 1.0/3.0)*edot;
-
-        // Calculate trig of the true longitude
-        T cl = thames::vector::geometry::dot3(er, ex);
-        T sl = thames::vector::geometry::dot3(er, ey);
-
-        // Calculate equinoctial reference frame velocity components
-        T hwh = q1*cl - q2*sl;
-
-        // Calculate angular momentum
-        std::array<T, 3> H = thames::vector::geometry::cross3(R, V);
-        std::array<T, 3> eh = H/h;
-
-        // Calculate the generalised semi-latus rectum
-        T p = pow(c, 2.0)/mu;
-
-        // Calculate perturbation components
-        T Fr = thames::vector::geometry::dot3(F, er);
-        T Fh = thames::vector::geometry::dot3(F, eh);
-
-        // Calculate non-dimensional quantities
-        T zeta = r/p;
-        T zetatilde = 1 + zeta;
-
-        // Calculate time derivatives of the second and third elements
-        T p1dot = p2*((h - c)/pow(r, 2.0) - r/h*hwh*Fh) + 1.0/c*(r*drdt/c*p1 + zetatilde*p2 + zeta*cl)*(2.0*U - r*Fr) + r/mu*(zeta*p1 + zetatilde*sl)*edot;
-        T p2dot = p1*(r/h*hwh*Fh - (h-c)/pow(r, 2.0)) + 1.0/c*(r*drdt/c*p2 - zetatilde*p1 - zeta*sl)*(2.0*U - r*Fr) + r/mu*(zeta*p2 + zetatilde*cl)*edot;
-
-        // Calculate time derivative of the generalised mean longitude
-        T Ldot = nu + (h - c)/pow(r, 2.0) - r/h*hwh*Fh + (r*drdt*c/pow(mu, 2.0)*zetatilde*alpha)*edot + 1.0/c*(1.0/alpha + alpha*(1.0 - r/a))*(2.0*U - r*Fr);
-
-        // Calculate time derivatives of the remaining elements
-        T q1dot = r/(2.0*h)*Fh*(1.0 + pow(q1, 2.0) + pow(q2, 2.0))*sl;
-        T q2dot = r/(2.0*h)*Fh*(1.0 + pow(q1, 2.0) + pow(q2, 2.0))*cl;
-
-        // Store derivatives
-        geqoedot = {
-            nudot,
-            p1dot,
-            p2dot,
-            Ldot,
-            q1dot,
-            q2dot
-        };
-    }
-
-    /////////////
-    // Vectors //
-    /////////////
 
     template<class T>
     void GEqOEPropagator<T>::derivative(const std::vector<T>& geqoe, std::vector<T>& geqoedot, const T t) const {

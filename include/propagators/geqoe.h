@@ -86,26 +86,6 @@ namespace thames::propagators {
              */
             GEqOEPropagator(const T& mu, const std::shared_ptr<BasePerturbation<T>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors);
 
-            ////////////
-            // Arrays //
-            ////////////
-
-            /**
-             * @brief State derivative for propagation using Generalised Equinoctial Orbital Elements (GEqOE).
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] geqoe GEqOE state.
-             * @param[out] geqoedot Time derivative of the GEqOE state.
-             * @param[in] t Current physical time.
-             */
-            void derivative(const std::array<T, 6>& geqoe, std::array<T, 6>& geqoedot, const T t) const override;
-
-            /////////////
-            // Vectors //
-            /////////////
-
             /**
              * @brief State derivative for propagation using Generalised Equinoctial Orbital Elements (GEqOE).
              * 
