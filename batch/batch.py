@@ -119,14 +119,17 @@ def main():
         states=[states],
         polynomial=polynomial
     )
-    parameters = parameters_point + parameters_polynomial
 
-    # Sort permutations
-    parameters = sorted(parameters, key=lambda x: (x.propagator.timeStep, x.propagator.absoluteTolerance, -x.polynomial.maxDegree))
+    # Sort polynomial permutations
+    parameters_polynomial = sorted(parameters_polynomial, key=lambda x: (x.propagator.timeStep, x.propagator.absoluteTolerance, -x.polynomial.maxDegree))
 
-    ## Execute batch propagations 
-    # Execute propagations
-    param_prop = pythames.interface.batch_run(COMMAND, parameters, batchpath=BATCH_OUTPUT_DIR, parallel=True)
+    ## Execute batch propagations
+    # Execute point propagations
+    param_prop_point = pythames.interface.batch_run(COMMAND, parameters_point, batchpath=BATCH_OUTPUT_DIR, parallel=True)
+    # Execute polynomial propagations
+    param_prop_polynomial = pythames.interface.batch_run(COMMAND, parameters_polynomial, batchpath=BATCH_OUTPUT_DIR, parallel=True, timeout=10)
+    # Merge results
+    param_prop = param_prop_point + param_prop_polynomial
 
     ## Calculate statistics
     # Calculate bulk statistics

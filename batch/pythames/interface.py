@@ -24,8 +24,9 @@
 
 import datetime
 import multiprocessing
+import subprocess
 import os
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 import uuid
 
 import tqdm
@@ -54,12 +55,16 @@ def load(filepath: str) -> Parameters:
     # Return parameters
     return parameters
 
-def run(command: str, parametersin: Parameters, filepathin: str, filepathout: str) -> Parameters:
+def run(command: str, parametersin: Parameters, filepathin: str, filepathout: str, timeout: float) -> Parameters:
     # Save input file
     save(filepathin, parametersin)
 
-    # Run command
-    os.system(f"{command} {filepathin} {filepathout}")
+    # Run command with timeout, discarding the standard output and error. 
+    try:
+        subprocess.run([command, filepathin, filepathout], timeout=timeout, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    # Return None if the process times out
+    except subprocess.TimeoutExpired:
+        return None
 
     # Load output file
     parametersout = load(filepathout)
@@ -67,11 +72,11 @@ def run(command: str, parametersin: Parameters, filepathin: str, filepathout: st
     # Return parameters
     return parametersout
 
-def worker_run(input: Tuple[str, Parameters, str, str]) -> Parameters:
+def worker_run(input: Tuple[str, Parameters, str, str, float]) -> Parameters:
     # Run command
     return run(*input)
 
-def batch_run(command: str, parametersin: List[Parameters], batchpath=None, parallel=False) -> List[Parameters]:
+def batch_run(command: str, parametersin: List[Parameters], batchpath: Optional[str] = None, parallel: Optional[bool] = False, timeout: Optional[float] = 3600) -> List[Parameters]:
     # Declare output list
     parametersout = []
 
@@ -90,7 +95,7 @@ def batch_run(command: str, parametersin: List[Parameters], batchpath=None, para
     filepaths = [os.path.join(batchpath, f"{id}.json") for id in ids]
 
     # Generate inputs
-    inputs = zip([command]*nlen, parametersin, filepaths, filepaths)
+    inputs = zip([command]*nlen, parametersin, filepaths, filepaths, [timeout]*nlen)
 
     # Iterate through input parameters
     if parallel:
@@ -100,7 +105,7 @@ def batch_run(command: str, parametersin: List[Parameters], batchpath=None, para
                 # Iterate through permutations
                 for iparamout in pool.imap_unordered(worker_run, inputs):
                     # Store propagated state
-                    parametersout.append(iparamout)
+                    if iparamout is not None: parametersout.append(iparamout)
 
                     # Update progress bar
                     pbar.update(1)
