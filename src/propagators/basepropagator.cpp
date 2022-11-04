@@ -70,20 +70,13 @@ namespace thames::propagators::basepropagator {
 
     template<class T>
     std::vector<T> BasePropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> state, const PropagatorParameters<T> options, const StateTypes statetype) {
-        // Check that input is Cartesian state
-        if(statetype != CARTESIAN)
-            throw std::runtime_error("Unsupported state type");
-
-        // Set non-dimensional flag
-        m_isNonDimensional = options.isNonDimensional;
-
-        // Set perturbation non-dimensional flag
-        m_perturbation->set_nondimensional(options.isNonDimensional);
-
         // Non-dimensionalise
         if (options.isNonDimensional) {
             // Update factors
-            *m_factors = thames::conversions::dimensional::calculate_factors(state, m_mu);
+            // TODO: clean-up
+            m_perturbation->set_nondimensional(true);
+            std::vector<T> state_cartesian = thames::conversions::universal::convert_state<T>(tstart, state, m_mu, statetype, CARTESIAN, m_perturbation);
+            *m_factors = thames::conversions::dimensional::calculate_factors(state_cartesian, m_mu);
 
             // Scale times
             tstart /= m_factors->time;
@@ -96,6 +89,12 @@ namespace thames::propagators::basepropagator {
 
         // Calculate gravitational parameters
         const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+
+        // Set non-dimensional flag
+        m_isNonDimensional = options.isNonDimensional;
+
+        // Set perturbation non-dimensional flag
+        m_perturbation->set_nondimensional(options.isNonDimensional);
 
         // Convert state
         state = thames::conversions::universal::convert_state<T>(tstart, state, mu, statetype, m_propstatetype, m_perturbation);
@@ -216,21 +215,14 @@ namespace thames::propagators::basepropagator {
     }
 
     template<class T, template<class> class P>
-    std::vector<P<T>> BasePropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, const PropagatorParameters<T> options, const StateTypes statetype) {
-        // Check that input is Cartesian state
-        if(statetype != thames::constants::statetypes::CARTESIAN)
-            throw std::runtime_error("Unsupported state type");
-
-        // Set non-dimensional flag
-        m_dyn->m_isNonDimensional = options.isNonDimensional;
-
-        // Set perturbation non-dimensional flag
-        m_perturbation->set_nondimensional(options.isNonDimensional);
-        
+    std::vector<P<T>> BasePropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, const PropagatorParameters<T> options, const StateTypes statetype) {       
         // Non-dimensionalise
         if (options.isNonDimensional) {
             // Update factors
-            *m_factors = thames::conversions::dimensional::calculate_factors(state, m_mu);
+            // TODO: clean-up
+            m_perturbation->set_nondimensional(true);
+            std::vector<P<T>> state_cartesian = thames::conversions::universal::convert_state<T, P>(tstart, state, m_mu, statetype, CARTESIAN, m_perturbation);
+            *m_factors = thames::conversions::dimensional::calculate_factors(state_cartesian, m_mu);
 
             // Scale times
             tstart /= m_factors->time;
@@ -243,6 +235,12 @@ namespace thames::propagators::basepropagator {
 
         // Calculate gravitational parameters
         const T mu = (options.isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+
+        // Set non-dimensional flag
+        m_dyn->m_isNonDimensional = options.isNonDimensional;
+
+        // Set perturbation non-dimensional flag
+        m_perturbation->set_nondimensional(options.isNonDimensional);
 
         // Convert state
         state = thames::conversions::universal::convert_state<T, P>(tstart, state, mu, statetype, m_propstatetype, m_perturbation);
@@ -289,6 +287,7 @@ namespace thames::propagators::basepropagator {
         states_propagated[0] = state;
 
         // Propagate state between times
+        // TODO: store intermediate in propagation state
         for (std::size_t ii = 0; ii < tvec.size() - 1; ii++) {
             states_propagated[ii+1] = propagate(tvec[ii], tvec[ii+1], tstep, states_propagated[ii], options, statetype);
         }
@@ -334,20 +333,31 @@ namespace thames::propagators::basepropagator {
         states_propagated[0] = states;
 
         // Generate polynomials
-        std::vector<P<T>> statepolynomial;
+        std::vector<P<T>> statepolynomial, statepolynomial_temp;
         std::vector<T> lower, upper;
         thames::conversions::polynomial::states_to_polynomial(states, degree, statepolynomial, lower, upper);
 
         // Calculate sample points
         std::vector<std::vector<T>> samples = thames::conversions::polynomial::state_to_sample(states, lower, upper);
 
+        // Update factors
+        *m_factors = thames::conversions::dimensional::calculate_factors(statepolynomial, m_mu);
+
+        // Convert to state polynomial to propagation state type
+        m_perturbation->set_nondimensional(false);
+        statepolynomial = thames::conversions::universal::convert_state<T, P>(tvec[0], statepolynomial, m_mu, statetype, m_propstatetype, m_perturbation);
+
         // Propagate state between times
         for (std::size_t ii = 0; ii < tvec.size() - 1; ii++) {
             // Update polynomials
-            statepolynomial = propagate(tvec[ii], tvec[ii+1], tstep, statepolynomial, options, statetype);
+            statepolynomial = propagate(tvec[ii], tvec[ii+1], tstep, statepolynomial, options, m_propstatetype);
+
+            // Copy and convert current polynomial
+            m_perturbation->set_nondimensional(false);
+            statepolynomial_temp = thames::conversions::universal::convert_state<T, P>(tvec[ii+1], statepolynomial, m_mu, m_propstatetype, statetype, m_perturbation);
 
             // Sample polynomials and store
-            states_propagated[ii+1] = thames::util::polynomials::evaluate_polynomials(statepolynomial, samples);
+            states_propagated[ii+1] = thames::util::polynomials::evaluate_polynomials(statepolynomial_temp, samples);
         }
 
         // Return propagated states
