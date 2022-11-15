@@ -22,25 +22,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef THAMES_CONVERSIONS_CARTESIAN
-#define THAMES_CONVERSIONS_CARTESIAN
+#ifndef THAMES_CONVERSIONS_POLYNOMIAL
+#define THAMES_CONVERSIONS_POLYNOMIAL
 
-#include <vector>
-
-namespace thames::conversions::cartesian {
-
-    /////////////////
-    // Polynomials //
-    /////////////////
+namespace thames::conversions::polynomial {
 
     /**
-     * @brief Calculate lower and upper bounds for each state variable in a set of Cartesian state vectors.
+     * @brief Calculate lower and upper bounds for each state variable in a set of state vectors.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-17
+     * @date 2022-09-28
      * 
      * @tparam T Numeric type.
-     * @param[in] states Cartesian state vectors. 
+     * @param[in] states State vectors. 
      * @param[out] lower Minimum of each state variable. 
      * @param[out] upper Maximum of each state variable.
      */
@@ -48,13 +42,13 @@ namespace thames::conversions::cartesian {
     void states_to_bounds(const std::vector<std::vector<T>>& states, std::vector<T>& lower, std::vector<T>& upper);
 
     /**
-     * @brief Calculate sample vector of a Cartesian state, given lower and upper bounds.
+     * @brief Calculate sample vector of a state, given lower and upper bounds.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-18
+     * @date 2022-09-28
      * 
      * @tparam T Numeric type.
-     * @param[in] state Cartesian state vector. 
+     * @param[in] state State vector. 
      * @param[in] lower Minimum of each state variable. 
      * @param[in] upper Maximum of each state variable.
      * @return std::vector<T> Sample vector.
@@ -63,10 +57,13 @@ namespace thames::conversions::cartesian {
     std::vector<T> state_to_sample(const std::vector<T>& state, const std::vector<T>& lower, const std::vector<T>& upper);
 
     /**
-     * @brief Calculate sample vectors of a Cartesian state, given lower and upper bounds.
+     * @brief Calculate sample vectors of states, given lower and upper bounds.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
      * 
      * @tparam T Numeric type.
-     * @param[in] states Cartesian state vectors. 
+     * @param[in] states State vectors. 
      * @param[in] lower Minimum of each state variable. 
      * @param[in] upper Maximum of each state variable.
      * @return std::vector<std::vector<T>> Sample vectors.
@@ -77,37 +74,37 @@ namespace thames::conversions::cartesian {
     #ifdef THAMES_USE_SMARTUQ
 
     /**
-     * @brief Generate vector of polynomials representing Cartesian state, and its uncertainty.
+     * @brief Generate vector of polynomials representing the state, and its uncertainty.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-01-31
+     * @date 2022-09-28
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
-     * @param[in] RV Cartesian state.
-     * @param[in] RVunc Cartesian state uncertainty.
+     * @param[in] state State.
+     * @param[in] stateunc State uncertainty.
      * @param[in] degree Polynomial degree.
-     * @param[out] RVPolynomial Polynomial Cartesian state.
+     * @param[out] statepolynomial Polynomial state.
      */
     template<class T, template<class> class P>
-    void cartesian_to_polynomial(const std::vector<T>& RV, const std::vector<T>& RVunc, int degree, std::vector<P<T>>& RVPolynomial);
+    void states_to_polynomial(const std::vector<T>& state, const std::vector<T>& stateunc, int degree, std::vector<P<T>>& statepolynomial);
     
     /**
-     * @brief Generate vector of polynomials representing Cartesian state, and its uncertainty, from a set of Cartesian states.
+     * @brief Generate vector of polynomials representing the state, and its uncertainty, from a set of states.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-02-18
+     * @date 2022-09-28
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
-     * @param[in] RVs Cartesian states.
+     * @param[in] states States.
      * @param[in] degree Polynomial degree.
-     * @param[out] RVPolynomial Polynomial Cartesian state.
+     * @param[out] statepolynomial Polynomial state.
      * @param[out] lower Minimum of each state variable. 
      * @param[out] upper Maximum of each state variable.
      */
     template<class T, template<class> class P>
-    void cartesian_to_polynomial(const std::vector<std::vector<T>>& RVs, int degree, std::vector<P<T>>& RVPolynomial, std::vector<T>& lower, std::vector<T>& upper);
+    void states_to_polynomial(const std::vector<std::vector<T>>& states, int degree, std::vector<P<T>>& statepolynomial, std::vector<T>& lower, std::vector<T>& upper);
 
     #endif
 

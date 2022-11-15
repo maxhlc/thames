@@ -35,8 +35,8 @@ SOFTWARE.
 #endif
 
 #include "../../include/constants/statetypes.h"
-#include "../../include/conversions/cartesian.h"
 #include "../../include/conversions/dimensional.h"
+#include "../../include/conversions/polynomial.h"
 #include "../../include/conversions/universal.h"
 #include "../../include/propagators/basepropagator.h"
 #include "../../include/settings/settings.h"
@@ -48,6 +48,10 @@ namespace thames::propagators::basepropagator {
     using thames::constants::statetypes::CARTESIAN;
     using thames::settings::PropagatorParameters;
 
+    ///////////
+    // Reals //
+    ///////////
+
     template<class T>
     BasePropagator<T>::BasePropagator(const T& mu, const std::shared_ptr<BasePerturbation<T>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors, const StateTypes propstatetype) : m_mu(mu), m_perturbation(perturbation), m_factors(factors), m_propstatetype(propstatetype) {
 
@@ -58,84 +62,6 @@ namespace thames::propagators::basepropagator {
 
     }
 
-    ////////////
-    // Arrays //
-    ////////////
-
-    template<class T>
-    void BasePropagator<T>::derivative(const std::array<T, 6>& RV, std::array<T, 6>& RVdot, const T t) const {
-        // Throw error if derivative is not implemented in dervied propagators
-        throw std::runtime_error("Derivative must be defined");
-    }
-
-    template<class T>
-    std::array<T, 6> BasePropagator<T>::propagate(T tstart, T tend, T tstep, std::array<T, 6> state, const PropagatorParameters<T> options, const StateTypes statetype) {
-        // Check that input is Cartesian state
-        if(statetype != CARTESIAN)
-            throw std::runtime_error("Unsupported state type");
-
-        // Set non-dimensional flag
-        m_isNonDimensional = options.isNonDimensional;
-
-        // Set perturbation non-dimensional flag
-        m_perturbation->set_nondimensional(options.isNonDimensional);
-
-        // Non-dimensionalise
-        if (options.isNonDimensional) {
-            // Update factors
-            *m_factors = thames::conversions::dimensional::calculate_factors(state, m_mu);
-
-            // Scale times
-            tstart /= m_factors->time;
-            tend /= m_factors->time;
-            tstep /= m_factors->time;
-
-            // Scale state
-            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
-        }
-
-        // Calculate gravitational parameters
-        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
-
-        // Convert state
-        state = thames::conversions::universal::convert_state<T>(tstart, state, mu, statetype, m_propstatetype, m_perturbation);
-
-        // Declare state derivative
-        auto func = [this](const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t){return derivative(x, dxdt, t);};
-
-        // Propagate according to the fixed flag
-        if(options.isFixedStep){
-            // Declare stepper
-            boost::numeric::odeint::runge_kutta4<std::array<T, 6>> stepper;
-
-            // Propagate orbit
-            boost::numeric::odeint::integrate_const(stepper, func, state, tstart, tend, tstep);
-        } else {
-            // Declare stepper
-            boost::numeric::odeint::runge_kutta_cash_karp54<std::array<T, 6>> stepper;
-            auto steppercontrolled = boost::numeric::odeint::make_controlled(options.absoluteTolerance, options.relativeTolerance, stepper);
-
-            // Propagate orbit
-            boost::numeric::odeint::integrate_adaptive(steppercontrolled, func, state, tstart, tend, tstep);
-        }
-
-        // Convert state
-        state = thames::conversions::universal::convert_state<T>(tend, state, mu, m_propstatetype, statetype, m_perturbation);
-
-        // Re-dimensionalise
-        if (options.isNonDimensional) {
-            state = thames::conversions::dimensional::cartesian_dimensionalise(state, *m_factors);
-        }
-
-        // Return final state
-        return state;
-
-    }
-
-    /////////////
-    // Vectors //
-    /////////////
-
     template<class T>
     void BasePropagator<T>::derivative(const std::vector<T>& RV, std::vector<T>& RVdot, const T t) const {
         // Throw error if derivative is not implemented in dervied propagators
@@ -144,20 +70,13 @@ namespace thames::propagators::basepropagator {
 
     template<class T>
     std::vector<T> BasePropagator<T>::propagate(T tstart, T tend, T tstep, std::vector<T> state, const PropagatorParameters<T> options, const StateTypes statetype) {
-        // Check that input is Cartesian state
-        if(statetype != CARTESIAN)
-            throw std::runtime_error("Unsupported state type");
-
-        // Set non-dimensional flag
-        m_isNonDimensional = options.isNonDimensional;
-
-        // Set perturbation non-dimensional flag
-        m_perturbation->set_nondimensional(options.isNonDimensional);
-
         // Non-dimensionalise
         if (options.isNonDimensional) {
             // Update factors
-            *m_factors = thames::conversions::dimensional::calculate_factors(state, m_mu);
+            // TODO: clean-up
+            m_perturbation->set_nondimensional(true);
+            std::vector<T> state_cartesian = thames::conversions::universal::convert_state<T>(tstart, state, m_mu, statetype, CARTESIAN, m_perturbation);
+            *m_factors = thames::conversions::dimensional::calculate_factors(state_cartesian, m_mu);
 
             // Scale times
             tstart /= m_factors->time;
@@ -165,11 +84,17 @@ namespace thames::propagators::basepropagator {
             tstep /= m_factors->time;
 
             // Scale state
-            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
+            state = thames::conversions::universal::nondimensionalise_state(state, statetype, *m_factors);
         }
 
         // Calculate gravitational parameters
         const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+
+        // Set non-dimensional flag
+        m_isNonDimensional = options.isNonDimensional;
+
+        // Set perturbation non-dimensional flag
+        m_perturbation->set_nondimensional(options.isNonDimensional);
 
         // Convert state
         state = thames::conversions::universal::convert_state<T>(tstart, state, mu, statetype, m_propstatetype, m_perturbation);
@@ -198,7 +123,7 @@ namespace thames::propagators::basepropagator {
 
         // Re-dimensionalise
         if (options.isNonDimensional) {
-            state = thames::conversions::dimensional::cartesian_dimensionalise(state, *m_factors);
+            state = thames::conversions::universal::dimensionalise_state(state, statetype, *m_factors);
         }
 
         // Return final state
@@ -290,21 +215,14 @@ namespace thames::propagators::basepropagator {
     }
 
     template<class T, template<class> class P>
-    std::vector<P<T>> BasePropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, const PropagatorParameters<T> options, const StateTypes statetype) {
-        // Check that input is Cartesian state
-        if(statetype != thames::constants::statetypes::CARTESIAN)
-            throw std::runtime_error("Unsupported state type");
-
-        // Set non-dimensional flag
-        m_dyn->m_isNonDimensional = options.isNonDimensional;
-
-        // Set perturbation non-dimensional flag
-        m_perturbation->set_nondimensional(options.isNonDimensional);
-        
+    std::vector<P<T>> BasePropagatorPolynomial<T, P>::propagate(T tstart, T tend, T tstep, std::vector<P<T>> state, const PropagatorParameters<T> options, const StateTypes statetype) {       
         // Non-dimensionalise
         if (options.isNonDimensional) {
             // Update factors
-            *m_factors = thames::conversions::dimensional::calculate_factors(state, m_mu);
+            // TODO: clean-up
+            m_perturbation->set_nondimensional(true);
+            std::vector<P<T>> state_cartesian = thames::conversions::universal::convert_state<T, P>(tstart, state, m_mu, statetype, CARTESIAN, m_perturbation);
+            *m_factors = thames::conversions::dimensional::calculate_factors(state_cartesian, m_mu);
 
             // Scale times
             tstart /= m_factors->time;
@@ -312,11 +230,17 @@ namespace thames::propagators::basepropagator {
             tstep /= m_factors->time;
 
             // Scale state
-            state = thames::conversions::dimensional::cartesian_nondimensionalise(state, *m_factors);
+            state = thames::conversions::universal::nondimensionalise_state(state, statetype, *m_factors);
         }
 
         // Calculate gravitational parameters
         const T mu = (options.isNonDimensional) ? m_mu/m_factors->grav : m_mu;
+
+        // Set non-dimensional flag
+        m_dyn->m_isNonDimensional = options.isNonDimensional;
+
+        // Set perturbation non-dimensional flag
+        m_perturbation->set_nondimensional(options.isNonDimensional);
 
         // Convert state
         state = thames::conversions::universal::convert_state<T, P>(tstart, state, mu, statetype, m_propstatetype, m_perturbation);
@@ -347,7 +271,7 @@ namespace thames::propagators::basepropagator {
         
         // Re-dimensionalise
         if (options.isNonDimensional) {
-            statefinal = thames::conversions::dimensional::cartesian_dimensionalise(statefinal, *m_factors);
+            statefinal = thames::conversions::universal::dimensionalise_state(statefinal, statetype, *m_factors);
         }
 
         // Return final state
@@ -363,6 +287,7 @@ namespace thames::propagators::basepropagator {
         states_propagated[0] = state;
 
         // Propagate state between times
+        // TODO: store intermediate in propagation state
         for (std::size_t ii = 0; ii < tvec.size() - 1; ii++) {
             states_propagated[ii+1] = propagate(tvec[ii], tvec[ii+1], tstep, states_propagated[ii], options, statetype);
         }
@@ -380,10 +305,10 @@ namespace thames::propagators::basepropagator {
         // Generate polynomials
         std::vector<P<T>> statepolynomial;
         std::vector<T> lower, upper;
-        thames::conversions::cartesian::cartesian_to_polynomial(states, degree, statepolynomial, lower, upper);
+        thames::conversions::polynomial::states_to_polynomial(states, degree, statepolynomial, lower, upper);
 
         // Calculate sample points
-        std::vector<std::vector<T>> samples = thames::conversions::cartesian::state_to_sample(states, lower, upper);
+        std::vector<std::vector<T>> samples = thames::conversions::polynomial::state_to_sample(states, lower, upper);
 
         // Propagate polynomials
         statepolynomial = propagate(tstart, tend, tstep, statepolynomial, options, statetype);
@@ -408,20 +333,31 @@ namespace thames::propagators::basepropagator {
         states_propagated[0] = states;
 
         // Generate polynomials
-        std::vector<P<T>> statepolynomial;
+        std::vector<P<T>> statepolynomial, statepolynomial_temp;
         std::vector<T> lower, upper;
-        thames::conversions::cartesian::cartesian_to_polynomial(states, degree, statepolynomial, lower, upper);
+        thames::conversions::polynomial::states_to_polynomial(states, degree, statepolynomial, lower, upper);
 
         // Calculate sample points
-        std::vector<std::vector<T>> samples = thames::conversions::cartesian::state_to_sample(states, lower, upper);
+        std::vector<std::vector<T>> samples = thames::conversions::polynomial::state_to_sample(states, lower, upper);
+
+        // Update factors
+        *m_factors = thames::conversions::dimensional::calculate_factors(statepolynomial, m_mu);
+
+        // Convert to state polynomial to propagation state type
+        m_perturbation->set_nondimensional(false);
+        statepolynomial = thames::conversions::universal::convert_state<T, P>(tvec[0], statepolynomial, m_mu, statetype, m_propstatetype, m_perturbation);
 
         // Propagate state between times
         for (std::size_t ii = 0; ii < tvec.size() - 1; ii++) {
             // Update polynomials
-            statepolynomial = propagate(tvec[ii], tvec[ii+1], tstep, statepolynomial, options, statetype);
+            statepolynomial = propagate(tvec[ii], tvec[ii+1], tstep, statepolynomial, options, m_propstatetype);
+
+            // Copy and convert current polynomial
+            m_perturbation->set_nondimensional(false);
+            statepolynomial_temp = thames::conversions::universal::convert_state<T, P>(tvec[ii+1], statepolynomial, m_mu, m_propstatetype, statetype, m_perturbation);
 
             // Sample polynomials and store
-            states_propagated[ii+1] = thames::util::polynomials::evaluate_polynomials(statepolynomial, samples);
+            states_propagated[ii+1] = thames::util::polynomials::evaluate_polynomials(statepolynomial_temp, samples);
         }
 
         // Return propagated states

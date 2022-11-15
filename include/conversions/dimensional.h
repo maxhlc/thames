@@ -28,7 +28,7 @@ SOFTWARE.
 #include <array>
 #include <vector>
 
-namespace thames::conversions::dimensional{
+namespace thames::conversions::dimensional {
 
     /**
      * @brief Structure to contain factors for (non)dimensionalisation of Cartesian states.
@@ -43,55 +43,9 @@ namespace thames::conversions::dimensional{
         T grav = 1.0;
     };
 
-    ////////////
-    // Arrays //
-    ////////////
-
-    /**
-     * @brief Non-dimensionalise Cartesian state.
-     *
-     * @author Max Hallgarten La Casta
-     * @date 2022-04-29
-     * 
-     * @tparam T Numeric type.
-     * @param[in] RV Dimensional Cartesian state vector.
-     * @param[in] factors Structure containing the factors for non-dimensionalisation.
-     * @return std::array<T, 6> Non-dimensional Cartesian state vector.
-     */
-    template<class T>
-    std::array<T, 6> cartesian_nondimensionalise(const std::array<T, 6>& RV, const DimensionalFactors<T>& factors);
-
-    /**
-     * @brief Dimensionalise Cartesian state.
-     *
-     * @author Max Hallgarten La Casta
-     * @date 2022-04-29
-     * 
-     * @tparam T Numeric type.
-     * @param[in] RVnd Non-dimensional Cartesian state vector.
-     * @param[in] factors Structure containing the factors for dimensionalisation.
-     * @return std::array<T, 6> Dimensional Cartesian state vector.
-     */ 
-    template<class T>
-    std::array<T, 6> cartesian_dimensionalise(const std::array<T, 6>& RVnd, const DimensionalFactors<T>& factors);
-
-    /**
-     * @brief Calculate non-dimensionalisation factors.
-     * 
-     * @author Max Hallgarten La Casta
-     * @date 2022-05-03
-     * 
-     * @tparam T Numeric type.
-     * @param[in] RV Cartesian state vector. 
-     * @param[in] mu Gravitational parameter.
-     * @return DimensionalFactors<T> Non-dimensionalisation factors.
-     */
-    template<class T>
-    DimensionalFactors<T> calculate_factors(const std::array<T, 6>& RV, const T& mu);
-
-    /////////////
-    // Vectors //
-    /////////////
+    ///////////
+    // Reals //
+    ///////////
 
     /**
      * @brief Non-dimensionalise Cartesian state.
@@ -120,6 +74,34 @@ namespace thames::conversions::dimensional{
      */ 
     template<class T>
     std::vector<T> cartesian_dimensionalise(const std::vector<T>& RVnd, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Non-dimensionalise GEqOE state.
+     *
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @param[in] geqoe Dimensional GEqOE state vector.
+     * @param[in] factors Structure containing the factors for non-dimensionalisation.
+     * @return std::vector<T, 6> Non-dimensional GEqOE state vector.
+     */
+    template<class T>
+    std::vector<T> geqoe_nondimensionalise(const std::vector<T>& geqoe, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Dimensionalise GEqOE state.
+     *
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @param[in] geqoend Non-dimensional GEqOE state vector.
+     * @param[in] factors Structure containing the factors for dimensionalisation.
+     * @return std::vector<T, 6> Dimensional GEqOE state vector.
+     */ 
+    template<class T>
+    std::vector<T> geqoe_dimensionalise(const std::vector<T>& geqoend, const DimensionalFactors<T>& factors);
 
     /**
      * @brief Calculate non-dimensionalisation factors.
@@ -170,6 +152,36 @@ namespace thames::conversions::dimensional{
      */
     template<class T, template<class> class P>
     std::vector<P<T>> cartesian_dimensionalise(const std::vector<P<T>>& RVnd, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Non-dimensionalise GEqOE state polynomial.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] geqoe Dimensional GEqOE state vector.
+     * @param[in] factors Structure containing the factors for dimensionalisation.
+     * @return std::vector<P<T>> Non-dimensional GEqOE state vector.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> geqoe_nondimensionalise(const std::vector<P<T>>& geqoe, const DimensionalFactors<T>& factors);
+
+    /**
+     * @brief Dimensionalise GEqOE state polynomial.
+     * 
+     * @author Max Hallgarten La Casta
+     * @date 2022-09-28
+     * 
+     * @tparam T Numeric type.
+     * @tparam P Polynomial type.
+     * @param[in] RVnd Non-dimensional GEqOE state vector.
+     * @param[in] factors Structure containing the factors for dimensionalisation.
+     * @return std::vector<P<T>> Dimensional GEqOE state vector.
+     */
+    template<class T, template<class> class P>
+    std::vector<P<T>> geqoe_dimensionalise(const std::vector<P<T>>& geqoend, const DimensionalFactors<T>& factors);   
 
     /**
      * @brief Calculate non-dimensionalisation factors.

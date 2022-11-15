@@ -30,88 +30,9 @@ SOFTWARE.
 
 namespace thames::vector::arithmeticoverloads {
 
-    ////////////
-    // Arrays //
-    ////////////
-
-    /**
-     * @brief Element-wise addition of two arrays.
-     * 
-     * @author Max Hallgarten La Casta
-     * @date 2022-01-20
-     * 
-     * @tparam T Numeric type.
-     * @tparam S Array size.
-     * @param[in] a First array.
-     * @param[in] b Second array.
-     * @return std::array<T, S> Output array.
-     */
-    template<class T, std::size_t S>
-    std::array<T, S> operator+(const std::array<T, S>& a, const std::array<T, S>& b);
-
-    /**
-     * @brief Element-wise subtraction of two arrays.
-     * 
-     * @author Max Hallgarten La Casta
-     * @date 2022-01-20
-     * 
-     * @tparam T Numeric type.
-     * @tparam S Array size.
-     * @param[in] a First array.
-     * @param[in] b Second array.
-     * @return std::array<T, S> Output array.
-     */
-    template<class T, std::size_t S>
-    std::array<T, S> operator-(const std::array<T, S>& a, const std::array<T, S>& b);
-
-    /**
-     * @brief Scalar multiplication of an array.
-     * 
-     * @author Max Hallgarten La Casta
-     * @date 2022-01-20
-     * 
-     * @tparam T Numeric type.
-     * @tparam S Array size.
-     * @param[in] a Scalar.
-     * @param[in] b Array.
-     * @return std::array<T, S> Output array.
-     */
-    template<class T, std::size_t S>
-    std::array<T, S> operator*(const T& a, const std::array<T, S>& b);
-
-    /**
-     * @brief Scalar multiplication of an array.
-     * 
-     * @author Max Hallgarten La Casta
-     * @date 2022-01-20
-     * 
-     * @tparam T Numeric type.
-     * @tparam S Array size.
-     * @param[in] b Array.
-     * @param[in] a Scalar.
-     * @return std::array<T, S> Output array.
-     */
-    template<class T, std::size_t S>
-    std::array<T, S> operator*(const std::array<T, S>& b, const T& a);
-
-    /**
-     * @brief Scalar division of an array.
-     * 
-     * @author Max Hallgarten La Casta
-     * @date 2022-01-20
-     * 
-     * @tparam T Numeric type.
-     * @tparam S Array size.
-     * @param[in] b Array.
-     * @param[in] a Scalar.
-     * @return std::array<T, S> Output array.
-     */
-    template<class T, std::size_t S>
-    std::array<T, S> operator/(const std::array<T, S>& b, const T& a);
-
-    /////////////
-    // Vectors //
-    /////////////
+    ///////////
+    // Reals //
+    ///////////
 
     /**
      * @brief Element-wise addition of two vectors.

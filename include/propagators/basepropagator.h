@@ -54,7 +54,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator object.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-06-02
+     * @date 2022-09-28
      * 
      * @tparam T Numeric type.
      */
@@ -102,42 +102,6 @@ namespace thames::propagators::basepropagator {
              */
             ~BasePropagator();
 
-            ////////////
-            // Arrays //
-            ////////////
-
-            /**
-             * @brief State derivative method.
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] x State.
-             * @param[out] dxdt State derivative.
-             * @param[in] t Current time.
-             */
-            virtual void derivative(const std::array<T, 6>& x, std::array<T, 6>& dxdt, const T t) const;
-
-            /**
-             * @brief Propagation method.
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-06-02
-             * 
-             * @param[in] tstart Propagation start time in physical time.
-             * @param[in] tend Propagation end time in physical time.
-             * @param[in] tstep Initial timestep for propagation.
-             * @param[in] state Initial state.
-             * @param[in] options Propagator options.
-             * @param[in] statetype State type.
-             * @return std::array<T, 6> Final state.
-             */
-            virtual std::array<T, 6> propagate(T tstart, T tend, T tstep, std::array<T, 6> state, const PropagatorParameters<T> options, const StateTypes statetype);
-
-            /////////////
-            // Vectors //
-            /////////////
-
             /**
              * @brief State derivative method.
              * 
@@ -154,7 +118,7 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-06-02
+             * @date 2022-11-04
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -300,7 +264,7 @@ namespace thames::propagators::basepropagator {
      * @brief Base propagator abstract object for polynomial propagations.
      * 
      * @author Max Hallgarten La Casta
-     * @date 2022-06-02
+     * @date 2022-09-28
      * 
      * @tparam T Numeric type.
      * @tparam P Polynomial type.
@@ -345,7 +309,7 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-06-02
+             * @date 2022-11-04
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -363,7 +327,7 @@ namespace thames::propagators::basepropagator {
              * @note A separate propagation is called for each intermediate output interval, therefore any required state conversions occur multiple times.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-07-06
+             * @date 2022-11-04
              * 
              * @param[in] tvec Vector of physical propagation times.
              * @param[in] tstep Initial timestep for propagation.
@@ -378,7 +342,7 @@ namespace thames::propagators::basepropagator {
              * @brief Propagation method for sets of points.
              * 
              * @author Max Hallgarten La Casta
-             * @date 2022-07-08
+             * @date 2022-09-28
              * 
              * @param[in] tstart Propagation start time in physical time.
              * @param[in] tend Propagation end time in physical time.
@@ -394,10 +358,8 @@ namespace thames::propagators::basepropagator {
             /**
              * @brief Propagation method for sets of points (with intermediate output).
              * 
-             * @note A separate propagation is called for each intermediate output interval, therefore any required state conversions occur multiple times, plus the polynomials are reconstructed at each output timestep.
-             * 
              * @author Max Hallgarten La Casta
-             * @date 2022-07-06
+             * @date 2022-11-04
              * 
              * @param[in] tvec Vector of physical propagation times.
              * @param[in] tstep Initial timestep for propagation.

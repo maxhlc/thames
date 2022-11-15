@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>THAMES: include/io/polynomial.h Source File</title>
+<title>THAMES: include/conversions/polynomial.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_a00b633439466cbb1729245c7f66f564.html">io</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_c3a4fcea44da01ca5cca282c340cde41.html">conversions</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -93,37 +93,41 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">SOFTWARE.</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#ifndef THAMES_IO_POLYNOMIAL</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define THAMES_IO_POLYNOMIAL</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#ifndef THAMES_CONVERSIONS_POLYNOMIAL</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define THAMES_CONVERSIONS_POLYNOMIAL</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;../constants/statetypes.h&quot;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacethames_1_1io_1_1polynomial.html">thames::io::polynomial</a> {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">    #ifdef THAMES_USE_SMARTUQ</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">template</span>&lt;<span class="keyword">class</span>&gt; <span class="keyword">class </span>P&gt;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacethames_1_1io_1_1polynomial.html#aa8fa31beffa474403c180387cbbae409">load</a>(<span class="keyword">const</span> std::string filepath, T&amp; tstart, T&amp; tend, <span class="keywordtype">int</span>&amp; scid, <a class="code" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a>&amp; statetype, <span class="keywordtype">int</span>&amp; degree, T&amp; atol, T&amp; rtol, std::vector&lt;P&lt;T&gt;&gt;&amp; polynomials);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">template</span>&lt;<span class="keyword">class</span>&gt; <span class="keyword">class </span>P&gt;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacethames_1_1io_1_1polynomial.html#ae0c283cf7a9b2c259c6991e98ba383c3">save</a>(<span class="keyword">const</span> std::string filepath, <span class="keyword">const</span> T&amp; tstart, <span class="keyword">const</span> T&amp; tend, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; scid, <span class="keyword">const</span> <a class="code" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a>&amp; statetype, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; degree, <span class="keyword">const</span> T&amp; atol, <span class="keyword">const</span> T&amp; rtol, <span class="keyword">const</span> std::vector&lt;P&lt;T&gt;&gt;&amp; polynomials, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> precision = 15);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">    #endif</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacethames_1_1conversions_1_1polynomial.html">thames::conversions::polynomial</a> {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacethames_1_1conversions_1_1polynomial.html#ae93c1893fd527b3953476f1a5756b7b9">states_to_bounds</a>(<span class="keyword">const</span> std::vector&lt;std::vector&lt;T&gt;&gt;&amp; states, std::vector&lt;T&gt;&amp; lower, std::vector&lt;T&gt;&amp; upper);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::vector&lt;T&gt; <a class="code" href="namespacethames_1_1conversions_1_1polynomial.html#a10d676544faede84117e766cf514d1e2">state_to_sample</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; state, <span class="keyword">const</span> std::vector&lt;T&gt;&amp; lower, <span class="keyword">const</span> std::vector&lt;T&gt;&amp; upper);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    std::vector&lt;std::vector&lt;T&gt;&gt; <a class="code" href="namespacethames_1_1conversions_1_1polynomial.html#a10d676544faede84117e766cf514d1e2">state_to_sample</a>(<span class="keyword">const</span> std::vector&lt;std::vector&lt;T&gt;&gt;&amp; states, <span class="keyword">const</span> std::vector&lt;T&gt;&amp; lower, <span class="keyword">const</span> std::vector&lt;T&gt;&amp; upper);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">    #ifdef THAMES_USE_SMARTUQ</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">template</span>&lt;<span class="keyword">class</span>&gt; <span class="keyword">class </span>P&gt;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacethames_1_1conversions_1_1polynomial.html#a6afa91d78ceda797feeb410e42d016c3">states_to_polynomial</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; state, <span class="keyword">const</span> std::vector&lt;T&gt;&amp; stateunc, <span class="keywordtype">int</span> degree, std::vector&lt;P&lt;T&gt;&gt;&amp; statepolynomial);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T, <span class="keyword">template</span>&lt;<span class="keyword">class</span>&gt; <span class="keyword">class </span>P&gt;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="namespacethames_1_1conversions_1_1polynomial.html#a6afa91d78ceda797feeb410e42d016c3">states_to_polynomial</a>(<span class="keyword">const</span> std::vector&lt;std::vector&lt;T&gt;&gt;&amp; states, <span class="keywordtype">int</span> degree, std::vector&lt;P&lt;T&gt;&gt;&amp; statepolynomial, std::vector&lt;T&gt;&amp; lower, std::vector&lt;T&gt;&amp; upper);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="anamespacethames_1_1io_1_1polynomial_html"><div class="ttname"><a href="namespacethames_1_1io_1_1polynomial.html">thames::io::polynomial</a></div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8cpp_source.html#l00038">polynomial.cpp:38</a></div></div>
-<div class="ttc" id="anamespacethames_1_1constants_1_1statetypes_html_a559f5b2d50449e79b1c3df82bdd49323"><div class="ttname"><a href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a></div><div class="ttdeci">StateTypes</div><div class="ttdoc">Enumeration to store types of state.</div><div class="ttdef"><b>Definition:</b> <a href="statetypes_8h_source.html#l00031">statetypes.h:31</a></div></div>
-<div class="ttc" id="anamespacethames_1_1io_1_1polynomial_html_ae0c283cf7a9b2c259c6991e98ba383c3"><div class="ttname"><a href="namespacethames_1_1io_1_1polynomial.html#ae0c283cf7a9b2c259c6991e98ba383c3">thames::io::polynomial::save</a></div><div class="ttdeci">void save(const std::string filepath, const T &amp;tstart, const T &amp;tend, const int &amp;scid, const thames::constants::statetypes::StateTypes &amp;statetype, const int &amp;degree, const T &amp;atol, const T &amp;rtol, const std::vector&lt; P&lt; T &gt;&gt; &amp;polynomials, const unsigned int precision)</div><div class="ttdoc">Save polynomial coefficients.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8cpp_source.html#l00128">polynomial.cpp:128</a></div></div>
-<div class="ttc" id="anamespacethames_1_1io_1_1polynomial_html_aa8fa31beffa474403c180387cbbae409"><div class="ttname"><a href="namespacethames_1_1io_1_1polynomial.html#aa8fa31beffa474403c180387cbbae409">thames::io::polynomial::load</a></div><div class="ttdeci">void load(const std::string filepath, T &amp;tstart, T &amp;tend, int &amp;scid, thames::constants::statetypes::StateTypes &amp;statetype, int &amp;degree, T &amp;atol, T &amp;rtol, std::vector&lt; P&lt; T &gt;&gt; &amp;polynomials)</div><div class="ttdoc">Load polynomial coefficients.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8cpp_source.html#l00045">polynomial.cpp:45</a></div></div>
+<div class="ttc" id="anamespacethames_1_1conversions_1_1polynomial_html"><div class="ttname"><a href="namespacethames_1_1conversions_1_1polynomial.html">thames::conversions::polynomial</a></div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8cpp_source.html#l00033">polynomial.cpp:33</a></div></div>
+<div class="ttc" id="anamespacethames_1_1conversions_1_1polynomial_html_ae93c1893fd527b3953476f1a5756b7b9"><div class="ttname"><a href="namespacethames_1_1conversions_1_1polynomial.html#ae93c1893fd527b3953476f1a5756b7b9">thames::conversions::polynomial::states_to_bounds</a></div><div class="ttdeci">void states_to_bounds(const std::vector&lt; std::vector&lt; T &gt;&gt; &amp;states, std::vector&lt; T &gt; &amp;lower, std::vector&lt; T &gt; &amp;upper)</div><div class="ttdoc">Calculate lower and upper bounds for each state variable in a set of state vectors.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8cpp_source.html#l00036">polynomial.cpp:36</a></div></div>
+<div class="ttc" id="anamespacethames_1_1conversions_1_1polynomial_html_a6afa91d78ceda797feeb410e42d016c3"><div class="ttname"><a href="namespacethames_1_1conversions_1_1polynomial.html#a6afa91d78ceda797feeb410e42d016c3">thames::conversions::polynomial::states_to_polynomial</a></div><div class="ttdeci">void states_to_polynomial(const std::vector&lt; T &gt; &amp;state, const std::vector&lt; T &gt; &amp;stateunc, int degree, std::vector&lt; P&lt; T &gt;&gt; &amp;statepolynomial)</div><div class="ttdoc">Generate vector of polynomials representing the state, and its uncertainty.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8cpp_source.html#l00102">polynomial.cpp:102</a></div></div>
+<div class="ttc" id="anamespacethames_1_1conversions_1_1polynomial_html_a10d676544faede84117e766cf514d1e2"><div class="ttname"><a href="namespacethames_1_1conversions_1_1polynomial.html#a10d676544faede84117e766cf514d1e2">thames::conversions::polynomial::state_to_sample</a></div><div class="ttdeci">std::vector&lt; T &gt; state_to_sample(const std::vector&lt; T &gt; &amp;state, const std::vector&lt; T &gt; &amp;lower, const std::vector&lt; T &gt; &amp;upper)</div><div class="ttdoc">Calculate sample vector of a state, given lower and upper bounds.</div><div class="ttdef"><b>Definition:</b> <a href="polynomial_8cpp_source.html#l00064">polynomial.cpp:64</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jul 8 2022 11:16:52 for THAMES by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 15 2022 10:25:57 for THAMES by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>

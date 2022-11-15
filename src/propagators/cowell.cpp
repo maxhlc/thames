@@ -59,42 +59,6 @@ namespace thames::propagators {
 
     }
 
-    ////////////
-    // Arrays //
-    ////////////
-
-    template<class T>
-    void CowellPropagator<T>::derivative(const std::array<T, 6>& RV, std::array<T, 6>& RVdot, const T t) const {
-        // Calculate factors
-        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
-
-        // Extract Cartesian state vectors
-        std::array<T, 3> R = {RV[0], RV[1], RV[2]};
-        std::array<T, 3> V = {RV[3], RV[4], RV[5]};
-
-        // Calculate range
-        T r = thames::vector::geometry::norm3(R);
-
-        // Calculate perturbing acceleration
-        std::array<T, 3> F = m_perturbation->acceleration_total(t, R, V);
-
-        // Calculate central body acceleration
-        std::array<T, 3> G = -mu/pow(r, 3.0)*R;
-
-        // Calculate acceleration
-        std::array<T, 3> A = G + F;
-
-        // Store state derivative
-        for(unsigned int ii=0; ii<3; ii++){
-            RVdot[ii] = V[ii];
-            RVdot[ii+3] = A[ii];
-        }
-    }
-
-    /////////////
-    // Vectors //
-    /////////////
-
     template<class T>
     void CowellPropagator<T>::derivative(const std::vector<T>& RV, std::vector<T>& RVdot, const T t) const {
         // Calculate factors

@@ -90,26 +90,6 @@ namespace thames::propagators {
              */
             CowellPropagator(const T& mu, std::shared_ptr<BasePerturbation<T>> perturbation, const std::shared_ptr<DimensionalFactors<T>> factors);
 
-            ////////////
-            // Arrays //
-            ////////////
-
-            /**
-             * @brief State derivative for Cowell's method propagation.
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-13
-             * 
-             * @param[in] RV Cartesian state.
-             * @param[out] RVdot Time derivative of the Cartesian state.
-             * @param[in] t Current physical time.
-             */
-            void derivative(const std::array<T, 6>& RV, std::array<T, 6>& RVdot, const T t) const override;
-
-            /////////////
-            // Vectors //
-            /////////////
-
             /**
              * @brief State derivative for Cowell's method propagation.
              * 

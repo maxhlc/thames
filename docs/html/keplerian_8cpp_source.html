@@ -101,38 +101,38 @@ $(function() {
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;../../include/vector/arithmeticoverloads.h&quot;</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;../../include/vector/geometry.h&quot;</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="namespacethames_1_1conversions_1_1keplerian.html">   33</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacethames_1_1conversions_1_1keplerian.html">thames::conversions::keplerian</a>{</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="namespacethames_1_1conversions_1_1keplerian.html">   33</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacethames_1_1conversions_1_1keplerian.html">thames::conversions::keplerian</a> {</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">using namespace </span><a class="code" href="namespacethames_1_1vector_1_1arithmeticoverloads.html">thames::vector::arithmeticoverloads</a>;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// Arrays //</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// Reals //</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="namespacethames_1_1conversions_1_1keplerian.html#abb1fc20660ef99283328bfb9a7fb656f">   42</a></span>&#160;    std::array&lt;T, 6&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#abb1fc20660ef99283328bfb9a7fb656f">cartesian_to_keplerian</a>(<span class="keyword">const</span> std::array&lt;T, 6&gt;&amp; RV, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>){</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="namespacethames_1_1conversions_1_1keplerian.html#af44a41eb4494596704e430ac3edde04b">   42</a></span>&#160;    std::vector&lt;T&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#af44a41eb4494596704e430ac3edde04b">cartesian_to_keplerian</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; RV, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>){</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="comment">// Extract position and velocity vectors</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        std::array&lt;T, 3&gt; R = {RV[0], RV[1], RV[2]};</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        std::array&lt;T, 3&gt; V = {RV[3], RV[4], RV[5]};</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        std::vector&lt;T&gt; R = {RV[0], RV[1], RV[2]};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        std::vector&lt;T&gt; V = {RV[3], RV[4], RV[5]};</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="comment">// Declare units vectors</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">const</span> std::array&lt;T, 3&gt; K = {0.0, 0.0, 1.0};</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">const</span> std::vector&lt;T&gt; K = {0.0, 0.0, 1.0};</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="comment">// Set constants</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> atol = 1e-12;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="comment">// Calculate state magnitudes</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        T r = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a3b6f05fb01298ec95de77b1bab3d410f">thames::vector::geometry::norm3</a>(R);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        T v = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a3b6f05fb01298ec95de77b1bab3d410f">thames::vector::geometry::norm3</a>(V);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        T r = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a6c92048345ef2db8805518378648810c">thames::vector::geometry::norm3</a>(R);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        T v = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a6c92048345ef2db8805518378648810c">thames::vector::geometry::norm3</a>(V);</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="comment">// Calculate semi-major axis</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        T sma = 1.0/(2.0/r - pow(v, 2.0)/<a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="comment">// Calculate angular momentum vector and magnitude</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        std::array&lt;T, 3&gt; H = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#af02d159a67f9e22259afb9131e51d509">thames::vector::geometry::cross3</a>(R, V);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        T h = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a3b6f05fb01298ec95de77b1bab3d410f">thames::vector::geometry::norm3</a>(H);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        std::vector&lt;T&gt; H = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a06c367f7b190e988220197d0a87be22f">thames::vector::geometry::cross3</a>(R, V);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        T h = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a6c92048345ef2db8805518378648810c">thames::vector::geometry::norm3</a>(H);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="comment">// Calculate eccentricity vector and magnitude</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        std::array&lt;T, 3&gt; E = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#af02d159a67f9e22259afb9131e51d509">thames::vector::geometry::cross3</a>(V, H)/<a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a> - R/r;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        T e = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a3b6f05fb01298ec95de77b1bab3d410f">thames::vector::geometry::norm3</a>(E);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        std::vector&lt;T&gt; E = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a06c367f7b190e988220197d0a87be22f">thames::vector::geometry::cross3</a>(V, H)/<a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a> - R/r;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        T e = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a6c92048345ef2db8805518378648810c">thames::vector::geometry::norm3</a>(E);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="comment">// Calculate inclination</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        T inc = acos(H[2]/h);</div>
@@ -142,8 +142,8 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordtype">bool</span> inc_near = fabs(inc) &lt; atol;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="comment">// Calculate right ascension of the ascending node</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        std::array&lt;T, 3&gt; N = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#af02d159a67f9e22259afb9131e51d509">thames::vector::geometry::cross3</a>(K, H);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        T n = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a3b6f05fb01298ec95de77b1bab3d410f">thames::vector::geometry::norm3</a>(N);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        std::vector&lt;T&gt; N = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a06c367f7b190e988220197d0a87be22f">thames::vector::geometry::cross3</a>(K, H);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        T n = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a6c92048345ef2db8805518378648810c">thames::vector::geometry::norm3</a>(N);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        T raan;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">if</span> (inc_near) {</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            raan = 0.0;</div>
@@ -164,7 +164,7 @@ $(function() {
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                aop = 2.0*M_PI - aop;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            }</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            aop = acos(<a class="code" href="namespacethames_1_1vector_1_1geometry.html#a1c2bec8dee571dc6ac298d8ac1a91aba">thames::vector::geometry::dot3</a>(N, E)/(n*e));</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            aop = acos(<a class="code" href="namespacethames_1_1vector_1_1geometry.html#a1e5caec6699f34c1dc3c5d6ca46ff51f">thames::vector::geometry::dot3</a>(N, E)/(n*e));</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordflow">if</span>(E[2] &lt; 0.0){</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                aop = 2.0*M_PI - aop;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            }</div>
@@ -178,19 +178,19 @@ $(function() {
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                ta = 2.0*M_PI - ta;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            }</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (e_near) {</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            ta = acos(<a class="code" href="namespacethames_1_1vector_1_1geometry.html#a1c2bec8dee571dc6ac298d8ac1a91aba">thames::vector::geometry::dot3</a>(N, R)/(n*r));</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            ta = acos(<a class="code" href="namespacethames_1_1vector_1_1geometry.html#a1e5caec6699f34c1dc3c5d6ca46ff51f">thames::vector::geometry::dot3</a>(N, R)/(n*r));</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keywordflow">if</span> (R[2] &lt; 0.0) {</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                ta = 2.0*M_PI - ta;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            }</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            ta = acos(<a class="code" href="namespacethames_1_1vector_1_1geometry.html#a1c2bec8dee571dc6ac298d8ac1a91aba">thames::vector::geometry::dot3</a>(E, R)/(e*r));</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="namespacethames_1_1vector_1_1geometry.html#a1c2bec8dee571dc6ac298d8ac1a91aba">thames::vector::geometry::dot3</a>(R, V) &lt; 0.0) {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            ta = acos(<a class="code" href="namespacethames_1_1vector_1_1geometry.html#a1e5caec6699f34c1dc3c5d6ca46ff51f">thames::vector::geometry::dot3</a>(E, R)/(e*r));</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="namespacethames_1_1vector_1_1geometry.html#a1e5caec6699f34c1dc3c5d6ca46ff51f">thames::vector::geometry::dot3</a>(R, V) &lt; 0.0) {</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                ta = 2.0*M_PI - ta;</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            }</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        }</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="comment">// Store elements in the Keplerian elements vector</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        std::array&lt;T, 6&gt; keplerian = {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        std::vector&lt;T&gt; keplerian = {</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            sma,</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            e,</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            inc,</div>
@@ -202,10 +202,10 @@ $(function() {
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="comment">// Return Keplerian elements vector</span></div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordflow">return</span> keplerian;</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    }</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keyword">template</span> std::array&lt;double, 6&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#afa327f1e54e2d18f69c3405944f2df5b">cartesian_to_keplerian&lt;double&gt;</a>(<span class="keyword">const</span> std::array&lt;double, 6&gt;&amp;, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp;);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keyword">template</span> std::vector&lt;double&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#a0855103133750aa714eda64e66f3dc17">cartesian_to_keplerian&lt;double&gt;</a>(<span class="keyword">const</span> std::vector&lt;double&gt;&amp;, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp;);</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="namespacethames_1_1conversions_1_1keplerian.html#a92c34df4e7879d7948759d25dc2fd3d5">  139</a></span>&#160;    std::array&lt;T, 6&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#a92c34df4e7879d7948759d25dc2fd3d5">keplerian_to_cartesian</a>(<span class="keyword">const</span> std::array&lt;T, 6&gt;&amp; keplerian, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>){</div>
+<div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="namespacethames_1_1conversions_1_1keplerian.html#ace08620357b8c3b2305f02a08d6162cf">  139</a></span>&#160;    std::vector&lt;T&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#ace08620357b8c3b2305f02a08d6162cf">keplerian_to_cartesian</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; keplerian, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>){</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="comment">// Extract Keplerian elements</span></div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        T sma = keplerian[0];</div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        T e = keplerian[1];</div>
@@ -227,14 +227,14 @@ $(function() {
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        T r = sma*(1.0 - pow(e, 2.0))/(1.0 + e*cta);</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="comment">// Calculate position and velocity vectors in the orbital frame</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        std::array&lt;T, 3&gt; o = {</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        std::vector&lt;T&gt; o = {</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            r*cta,</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            r*sta,</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            0.0</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        };</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        T fac = sqrt(<a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>*sma)/r;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        std::array&lt;T, 3&gt; dodt = {</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        std::vector&lt;T&gt; dodt = {</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            -fac*sin(E),</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            fac*sqrt(1.0 - pow(e, 2.0))*cos(E),</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            0.0</div>
@@ -250,7 +250,7 @@ $(function() {
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        ang[2][1] = caop*sinc;</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        <span class="comment">// Transform the position and velocity vectors to the inertial frame</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        std::array&lt;T, 6&gt; RV;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        std::vector&lt;T&gt; RV(6);</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> ii=0; ii&lt;3; ii++){</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            RV[ii] = o[0]*ang[ii][0] + o[1]*ang[ii][1];</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            RV[ii+3] = dodt[0]*ang[ii][0] + dodt[1]*ang[ii][1];</div>
@@ -259,179 +259,23 @@ $(function() {
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <span class="comment">// Return Cartesian state</span></div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="keywordflow">return</span> RV;</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    }</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keyword">template</span> std::array&lt;double, 6&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#a713771f310636225f3ec6ec408fb9a34">keplerian_to_cartesian&lt;double&gt;</a>(<span class="keyword">const</span> std::array&lt;double, 6&gt;&amp;, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp;);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keyword">template</span> std::vector&lt;double&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#ab4b4762945abc63d22a48e0bad08bf99">keplerian_to_cartesian&lt;double&gt;</a>(<span class="keyword">const</span> std::vector&lt;double&gt;&amp;, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp;);</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="comment">// Vectors //</span></div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="namespacethames_1_1conversions_1_1keplerian.html#af44a41eb4494596704e430ac3edde04b">  200</a></span>&#160;    std::vector&lt;T&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#abb1fc20660ef99283328bfb9a7fb656f">cartesian_to_keplerian</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; RV, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>){</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="comment">// Extract position and velocity vectors</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        std::vector&lt;T&gt; R = {RV[0], RV[1], RV[2]};</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        std::vector&lt;T&gt; V = {RV[3], RV[4], RV[5]};</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        </div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="comment">// Declare units vectors</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <span class="keyword">const</span> std::vector&lt;T&gt; K = {0.0, 0.0, 1.0};</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        <span class="comment">// Set constants</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span> atol = 1e-12;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="comment">// Calculate state magnitudes</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        T r = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a3b6f05fb01298ec95de77b1bab3d410f">thames::vector::geometry::norm3</a>(R);</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        T v = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a3b6f05fb01298ec95de77b1bab3d410f">thames::vector::geometry::norm3</a>(V);</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        <span class="comment">// Calculate semi-major axis</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        T sma = 1.0/(2.0/r - pow(v, 2.0)/<a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>);</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        <span class="comment">// Calculate angular momentum vector and magnitude</span></div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        std::vector&lt;T&gt; H = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#af02d159a67f9e22259afb9131e51d509">thames::vector::geometry::cross3</a>(R, V);</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        T h = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a3b6f05fb01298ec95de77b1bab3d410f">thames::vector::geometry::norm3</a>(H);</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        <span class="comment">// Calculate eccentricity vector and magnitude</span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        std::vector&lt;T&gt; E = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#af02d159a67f9e22259afb9131e51d509">thames::vector::geometry::cross3</a>(V, H)/<a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a> - R/r;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        T e = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a3b6f05fb01298ec95de77b1bab3d410f">thames::vector::geometry::norm3</a>(E);</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="comment">// Calculate inclination</span></div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        T inc = acos(H[2]/h);</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <span class="comment">// Check for circular and equatorial orbits</span></div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="keywordtype">bool</span> e_near = fabs(e) &lt; atol;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keywordtype">bool</span> inc_near = fabs(inc) &lt; atol;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        <span class="comment">// Calculate right ascension of the ascending node</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        std::vector&lt;T&gt; N = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#af02d159a67f9e22259afb9131e51d509">thames::vector::geometry::cross3</a>(K, H);</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        T n = <a class="code" href="namespacethames_1_1vector_1_1geometry.html#a3b6f05fb01298ec95de77b1bab3d410f">thames::vector::geometry::norm3</a>(N);</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        T raan;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keywordflow">if</span> (inc_near) {</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            raan = 0.0;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            raan = acos(N[0]/n);</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            <span class="keywordflow">if</span>(N[1] &lt; 0.0){</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                raan = 2.0*M_PI - raan;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            }</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        }</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="comment">// Calculate argument of periapsis</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        T aop;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        <span class="keywordflow">if</span> (inc_near &amp; e_near) {</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            aop = 0.0;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (inc_near) {</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            aop = atan2(E[1], E[0]);</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            <span class="keywordflow">if</span>(H[2] &lt; 0.0){</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                aop = 2.0*M_PI - aop;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            }</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            aop = acos(<a class="code" href="namespacethames_1_1vector_1_1geometry.html#a1c2bec8dee571dc6ac298d8ac1a91aba">thames::vector::geometry::dot3</a>(N, E)/(n*e));</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            <span class="keywordflow">if</span>(E[2] &lt; 0.0){</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                aop = 2.0*M_PI - aop;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            }</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        }</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        <span class="comment">// Calculate true anomaly</span></div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        T ta;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <span class="keywordflow">if</span> (inc_near &amp; e_near) {</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            ta = acos(R[0]/r);</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            <span class="keywordflow">if</span> (V[0] &gt; 0.0) {</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                ta = 2.0*M_PI - ta;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            }</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (e_near) {</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            ta = acos(<a class="code" href="namespacethames_1_1vector_1_1geometry.html#a1c2bec8dee571dc6ac298d8ac1a91aba">thames::vector::geometry::dot3</a>(N, R)/(n*r));</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            <span class="keywordflow">if</span> (R[2] &lt; 0.0) {</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                ta = 2.0*M_PI - ta;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            }</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            ta = acos(<a class="code" href="namespacethames_1_1vector_1_1geometry.html#a1c2bec8dee571dc6ac298d8ac1a91aba">thames::vector::geometry::dot3</a>(E, R)/(e*r));</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="namespacethames_1_1vector_1_1geometry.html#a1c2bec8dee571dc6ac298d8ac1a91aba">thames::vector::geometry::dot3</a>(R, V) &lt; 0.0) {</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                ta = 2.0*M_PI - ta;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            }</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        }</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <span class="comment">// Store elements in the Keplerian elements vector</span></div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        std::vector&lt;T&gt; keplerian = {</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;            sma,</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;            e,</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;            inc,</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            raan,</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            aop,</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            ta</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        };</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        <span class="comment">// Return Keplerian elements vector</span></div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        <span class="keywordflow">return</span> keplerian;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    }</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keyword">template</span> std::vector&lt;double&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#afa327f1e54e2d18f69c3405944f2df5b">cartesian_to_keplerian&lt;double&gt;</a>(<span class="keyword">const</span> std::vector&lt;double&gt;&amp;, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp;);</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00297"></a><span class="lineno"><a class="line" href="namespacethames_1_1conversions_1_1keplerian.html#ace08620357b8c3b2305f02a08d6162cf">  297</a></span>&#160;    std::vector&lt;T&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#a92c34df4e7879d7948759d25dc2fd3d5">keplerian_to_cartesian</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; keplerian, <span class="keyword">const</span> T&amp; <a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>){</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <span class="comment">// Extract Keplerian elements</span></div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        T sma = keplerian[0];</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        T e = keplerian[1];</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        T inc = keplerian[2];</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        T raan = keplerian[3];</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        T aop = keplerian[4];</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        T ta = keplerian[5];</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        <span class="comment">// Calculate angle trigs</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        T cinc = cos(inc), sinc = sin(inc);</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        T craan = cos(raan), sraan = sin(raan);</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        T caop = cos(aop), saop = sin(aop);</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        T cta = cos(ta), sta = sin(ta);</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <span class="comment">// Calculate eccentric anomaly</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        T E = 2.0*atan(sqrt((1.0 - e)/(1.0 + e))*tan(ta/2.0));</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        <span class="comment">// Calculate radial distance</span></div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        T r = sma*(1.0 - pow(e, 2.0))/(1.0 + e*cta);</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <span class="comment">// Calculate position and velocity vectors in the orbital frame</span></div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        std::vector&lt;T&gt; o = {</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;            r*cta,</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;            r*sta,</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            0.0</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        };</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        T fac = sqrt(<a class="code" href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">mu</a>*sma)/r;</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        std::vector&lt;T&gt; dodt = {</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            -fac*sin(E),</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            fac*sqrt(1.0 - pow(e, 2.0))*cos(E),</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;            0.0</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        };</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        <span class="comment">// Calculate rotation angles</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        T ang[3][2];</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        ang[0][0] = caop*craan - saop*cinc*sraan;</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        ang[0][1] = -saop*craan - caop*cinc*sraan;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        ang[1][0] = caop*sraan + saop*cinc*craan;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        ang[1][1] = caop*cinc*craan - saop*sraan;</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        ang[2][0] = saop*sinc;</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        ang[2][1] = caop*sinc;</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        <span class="comment">// Transform the position and velocity vectors to the inertial frame</span></div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        std::vector&lt;T&gt; RV(6);</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> ii=0; ii&lt;3; ii++){</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;            RV[ii] = o[0]*ang[ii][0] + o[1]*ang[ii][1];</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            RV[ii+3] = dodt[0]*ang[ii][0] + dodt[1]*ang[ii][1];</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        }</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        <span class="comment">// Return Cartesian state</span></div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="keywordflow">return</span> RV;</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    }</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    <span class="keyword">template</span> std::vector&lt;double&gt; <a class="code" href="namespacethames_1_1conversions_1_1keplerian.html#a713771f310636225f3ec6ec408fb9a34">keplerian_to_cartesian&lt;double&gt;</a>(<span class="keyword">const</span> std::vector&lt;double&gt;&amp;, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp;);</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;}</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html_afa327f1e54e2d18f69c3405944f2df5b"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html#afa327f1e54e2d18f69c3405944f2df5b">thames::conversions::keplerian::cartesian_to_keplerian&lt; double &gt;</a></div><div class="ttdeci">template std::array&lt; double, 6 &gt; cartesian_to_keplerian&lt; double &gt;(const std::array&lt; double, 6 &gt; &amp;, const double &amp;)</div></div>
-<div class="ttc" id="anamespacethames_1_1vector_1_1geometry_html_a1c2bec8dee571dc6ac298d8ac1a91aba"><div class="ttname"><a href="namespacethames_1_1vector_1_1geometry.html#a1c2bec8dee571dc6ac298d8ac1a91aba">thames::vector::geometry::dot3</a></div><div class="ttdeci">T dot3(const std::array&lt; T, 3 &gt; &amp;a, const std::array&lt; T, 3 &gt; &amp;b)</div><div class="ttdoc">Function to calculate the dot product of two vectors with three elements.</div><div class="ttdef"><b>Definition:</b> <a href="geometry_8cpp_source.html#l00041">geometry.cpp:41</a></div></div>
-<div class="ttc" id="anamespacethames_1_1vector_1_1geometry_html_a3b6f05fb01298ec95de77b1bab3d410f"><div class="ttname"><a href="namespacethames_1_1vector_1_1geometry.html#a3b6f05fb01298ec95de77b1bab3d410f">thames::vector::geometry::norm3</a></div><div class="ttdeci">T norm3(const std::array&lt; T, 3 &gt; &amp;a)</div><div class="ttdoc">Function to calculate the length of a vector with three elements.</div><div class="ttdef"><b>Definition:</b> <a href="geometry_8cpp_source.html#l00048">geometry.cpp:48</a></div></div>
-<div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html_a713771f310636225f3ec6ec408fb9a34"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html#a713771f310636225f3ec6ec408fb9a34">thames::conversions::keplerian::keplerian_to_cartesian&lt; double &gt;</a></div><div class="ttdeci">template std::array&lt; double, 6 &gt; keplerian_to_cartesian&lt; double &gt;(const std::array&lt; double, 6 &gt; &amp;, const double &amp;)</div></div>
+<div class="ttc" id="anamespacethames_1_1vector_1_1geometry_html_a06c367f7b190e988220197d0a87be22f"><div class="ttname"><a href="namespacethames_1_1vector_1_1geometry.html#a06c367f7b190e988220197d0a87be22f">thames::vector::geometry::cross3</a></div><div class="ttdeci">void cross3(const std::vector&lt; T &gt; &amp;a, const std::vector&lt; T &gt; &amp;b, std::vector&lt; T &gt; &amp;vecout)</div><div class="ttdoc">Calculate the cross product of two vectors with three elements.</div><div class="ttdef"><b>Definition:</b> <a href="geometry_8cpp_source.html#l00055">geometry.cpp:55</a></div></div>
 <div class="ttc" id="anamespacethames_1_1vector_1_1arithmeticoverloads_html"><div class="ttname"><a href="namespacethames_1_1vector_1_1arithmeticoverloads.html">thames::vector::arithmeticoverloads</a></div><div class="ttdef"><b>Definition:</b> <a href="arithmeticoverloads_8cpp_source.html#l00034">arithmeticoverloads.cpp:34</a></div></div>
-<div class="ttc" id="anamespacethames_1_1vector_1_1geometry_html_af02d159a67f9e22259afb9131e51d509"><div class="ttname"><a href="namespacethames_1_1vector_1_1geometry.html#af02d159a67f9e22259afb9131e51d509">thames::vector::geometry::cross3</a></div><div class="ttdeci">void cross3(const std::array&lt; T, 3 &gt; &amp;a, const std::array&lt; T, 3 &gt; &amp;b, std::array&lt; T, 3 &gt; &amp;vecout)</div><div class="ttdoc">Calculate the cross product of two vectors with three elements.</div><div class="ttdef"><b>Definition:</b> <a href="geometry_8cpp_source.html#l00055">geometry.cpp:55</a></div></div>
-<div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html_a92c34df4e7879d7948759d25dc2fd3d5"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html#a92c34df4e7879d7948759d25dc2fd3d5">thames::conversions::keplerian::keplerian_to_cartesian</a></div><div class="ttdeci">std::array&lt; T, 6 &gt; keplerian_to_cartesian(const std::array&lt; T, 6 &gt; &amp;keplerian, const T &amp;mu)</div><div class="ttdoc">Convert from traditional Keplerian elements to Cartesian state.</div><div class="ttdef"><b>Definition:</b> <a href="keplerian_8cpp_source.html#l00139">keplerian.cpp:139</a></div></div>
-<div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html_abb1fc20660ef99283328bfb9a7fb656f"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html#abb1fc20660ef99283328bfb9a7fb656f">thames::conversions::keplerian::cartesian_to_keplerian</a></div><div class="ttdeci">std::array&lt; T, 6 &gt; cartesian_to_keplerian(const std::array&lt; T, 6 &gt; &amp;RV, const T &amp;mu)</div><div class="ttdoc">Convert from Cartesian state to traditional Keplerian elements.</div><div class="ttdef"><b>Definition:</b> <a href="keplerian_8cpp_source.html#l00042">keplerian.cpp:42</a></div></div>
+<div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html_af44a41eb4494596704e430ac3edde04b"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html#af44a41eb4494596704e430ac3edde04b">thames::conversions::keplerian::cartesian_to_keplerian</a></div><div class="ttdeci">std::vector&lt; T &gt; cartesian_to_keplerian(const std::vector&lt; T &gt; &amp;RV, const T &amp;mu)</div><div class="ttdoc">Convert from Cartesian state to traditional Keplerian elements.</div><div class="ttdef"><b>Definition:</b> <a href="keplerian_8cpp_source.html#l00042">keplerian.cpp:42</a></div></div>
+<div class="ttc" id="anamespacethames_1_1vector_1_1geometry_html_a6c92048345ef2db8805518378648810c"><div class="ttname"><a href="namespacethames_1_1vector_1_1geometry.html#a6c92048345ef2db8805518378648810c">thames::vector::geometry::norm3</a></div><div class="ttdeci">T norm3(const std::vector&lt; T &gt; &amp;a)</div><div class="ttdoc">Function to calculate the length of a vector with three elements.</div><div class="ttdef"><b>Definition:</b> <a href="geometry_8cpp_source.html#l00048">geometry.cpp:48</a></div></div>
 <div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html">thames::conversions::keplerian</a></div><div class="ttdef"><b>Definition:</b> <a href="keplerian_8cpp_source.html#l00033">keplerian.cpp:33</a></div></div>
+<div class="ttc" id="anamespacethames_1_1vector_1_1geometry_html_a1e5caec6699f34c1dc3c5d6ca46ff51f"><div class="ttname"><a href="namespacethames_1_1vector_1_1geometry.html#a1e5caec6699f34c1dc3c5d6ca46ff51f">thames::vector::geometry::dot3</a></div><div class="ttdeci">T dot3(const std::vector&lt; T &gt; &amp;a, const std::vector&lt; T &gt; &amp;b)</div><div class="ttdoc">Function to calculate the dot product of two vectors with three elements.</div><div class="ttdef"><b>Definition:</b> <a href="geometry_8cpp_source.html#l00041">geometry.cpp:41</a></div></div>
+<div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html_a0855103133750aa714eda64e66f3dc17"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html#a0855103133750aa714eda64e66f3dc17">thames::conversions::keplerian::cartesian_to_keplerian&lt; double &gt;</a></div><div class="ttdeci">template std::vector&lt; double &gt; cartesian_to_keplerian&lt; double &gt;(const std::vector&lt; double &gt; &amp;, const double &amp;)</div></div>
+<div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html_ace08620357b8c3b2305f02a08d6162cf"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html#ace08620357b8c3b2305f02a08d6162cf">thames::conversions::keplerian::keplerian_to_cartesian</a></div><div class="ttdeci">std::vector&lt; T &gt; keplerian_to_cartesian(const std::vector&lt; T &gt; &amp;keplerian, const T &amp;mu)</div><div class="ttdoc">Convert from traditional Keplerian elements to Cartesian state.</div><div class="ttdef"><b>Definition:</b> <a href="keplerian_8cpp_source.html#l00139">keplerian.cpp:139</a></div></div>
 <div class="ttc" id="anamespacethames_1_1constants_1_1earth_html_af14ba7df5ed2e621ca4d7021ef544156"><div class="ttname"><a href="namespacethames_1_1constants_1_1earth.html#af14ba7df5ed2e621ca4d7021ef544156">thames::constants::earth::mu</a></div><div class="ttdeci">const double mu</div><div class="ttdoc">Earth's gravitational parameter [km^3/s^2].</div><div class="ttdef"><b>Definition:</b> <a href="earth_8h_source.html#l00034">earth.h:34</a></div></div>
+<div class="ttc" id="anamespacethames_1_1conversions_1_1keplerian_html_ab4b4762945abc63d22a48e0bad08bf99"><div class="ttname"><a href="namespacethames_1_1conversions_1_1keplerian.html#ab4b4762945abc63d22a48e0bad08bf99">thames::conversions::keplerian::keplerian_to_cartesian&lt; double &gt;</a></div><div class="ttdeci">template std::vector&lt; double &gt; keplerian_to_cartesian&lt; double &gt;(const std::vector&lt; double &gt; &amp;, const double &amp;)</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 26 2022 15:01:03 for THAMES by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 15 2022 10:25:57 for THAMES by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>

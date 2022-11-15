@@ -53,65 +53,6 @@ namespace thames::perturbations::geopotential {
 
     }
 
-    ////////////
-    // Arrays //
-    ////////////
-
-    template <class T>
-    std::array<T, 3> J2<T>::acceleration_total(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const {
-        // Calculate factors
-        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
-        const T J2 = m_J2;
-        const T radius = (m_isNonDimensional) ? m_radius/m_factors->length : m_radius;
-
-        // Extract position components
-        const T x = R[0], y = R[1], z = R[2];
-
-        // Calculate range
-        const T r = thames::vector::geometry::norm3(R);
-
-        // Precompute factors
-        const T J2_fac1 = -1.5*mu*J2*pow(radius, 2.0)/pow(r, 5.0);
-        const T J2_fac2 = 5*pow(z, 2.0)/pow(r, 2.0);
-
-        // Declare and calculate perturbing acceleration vector
-        const std::array<T, 3> A = {
-            J2_fac1*x*(1.0 - J2_fac2),
-            J2_fac1*y*(1.0 - J2_fac2),
-            J2_fac1*z*(3.0 - J2_fac2)
-        };
-
-        // Return perturbing acceleration vector
-        return A;
-    }
-
-    template <class T>
-    T J2<T>::potential(const T& t, const std::array<T, 3>& R) const {
-        // Calculate factors
-        const T mu = (m_isNonDimensional) ? m_mu/m_factors->grav : m_mu;
-        const T J2 = m_J2;
-        const T radius = (m_isNonDimensional) ? m_radius/m_factors->length : m_radius;
-
-        // Extract position components
-        const T z = R[2];
-
-        // Calculate range
-        const T r = thames::vector::geometry::norm3(R);
-
-        // Calculate cosine of latitude
-        const T cphi = z/r;
-
-        // Calculate perturbing potential
-        const T U = 0.5*J2*mu/pow(r, 3.0)*pow(radius, 2.0)*(3*pow(cphi, 2.0) - 1.0);
-
-        // Return perturbing potential
-        return U;
-    }
-
-    /////////////
-    // Vectors //
-    /////////////
-
     template <class T>
     std::vector<T> J2<T>::acceleration_total(const T& t, const std::vector<T>& R, const std::vector<T>& V) const {
         // Calculate factors

@@ -77,11 +77,19 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
     }
 
     // Import states
-    std::vector<std::vector<T>> states = parameters.states[0].states;
-    std::vector<std::vector<T>> states_propagated;
     T tstart = parameters.propagator.startTime;
     T tend = parameters.propagator.endTime;
     T tstep = parameters.propagator.timeStep;
+    std::vector<T> tvec;
+    if (parameters.propagator.intermediateOutput) {
+        T tstepinter = parameters.propagator.timeStepIntermediate;
+        unsigned int nstepinter = (unsigned int) ceil((tend - tstart)/tstepinter) + 1;
+        tvec = thames::util::sampling::linspace(tstart, tend, nstepinter);
+    } else {
+        tvec = {tstart, tend};
+    }
+    std::vector<std::vector<T>> states = parameters.states[0].states;
+    std::vector<std::vector<std::vector<T>>> states_propagated(tvec.size());
 
     // Import state type
     thames::constants::statetypes::StateTypes statetype;
@@ -100,12 +108,12 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
         // Set up propagator
         auto propagator = thames::propagators::CowellPropagator<T>(mu, perturbation, factors);
         // Propagate
-        states_propagated = propagator.propagate(tstart, tend, tstep, states, parameters.propagator, statetype);
+        states_propagated = propagator.propagate(tvec, tstep, states, parameters.propagator, statetype);
     } else if (parameters.propagator.equations == "GEqOE") {
         // Set up propagator
         auto propagator = thames::propagators::GEqOEPropagator<T>(mu, perturbation, factors);
         // Propagate
-        states_propagated = propagator.propagate(tstart, tend, tstep, states, parameters.propagator, statetype);        
+        states_propagated = propagator.propagate(tvec, tstep, states, parameters.propagator, statetype);        
     } else {
         throw std::runtime_error("Unsupported propagator requested");
     }
@@ -118,10 +126,12 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
 
     // Update output states
     thames::settings::StateParameters<T> state_output;
-    state_output.datetime = tend;
-    state_output.states = states_propagated;
-    state_output.statetype = parameters.states[0].statetype;
-    parameters_output.states.push_back(state_output);
+    for (std::size_t ii=1; ii<states_propagated.size(); ii++) {
+        state_output.datetime = tvec[ii];
+        state_output.states = states_propagated[ii];
+        state_output.statetype = parameters.states[0].statetype;
+        parameters_output.states.push_back(state_output);
+    }
 
     // Return parameters
     return parameters_output;
@@ -177,11 +187,19 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
     }
 
     // Import states
-    std::vector<std::vector<T>> states = parameters.states[0].states;
-    std::vector<std::vector<T>> states_propagated;
     T tstart = parameters.propagator.startTime;
     T tend = parameters.propagator.endTime;
     T tstep = parameters.propagator.timeStep;
+    std::vector<T> tvec;
+    if (parameters.propagator.intermediateOutput) {
+        T tstepinter = parameters.propagator.timeStepIntermediate;
+        unsigned int nstepinter = (unsigned int) ceil((tend - tstart)/tstepinter) + 1;
+        tvec = thames::util::sampling::linspace(tstart, tend, nstepinter);
+    } else {
+        tvec = {tstart, tend};
+    }
+    std::vector<std::vector<T>> states = parameters.states[0].states;
+    std::vector<std::vector<std::vector<T>>> states_propagated(tvec.size());
 
     // Import polynomial parameters
     unsigned int degree = parameters.polynomial.maxDegree;
@@ -203,12 +221,12 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
         // Set up propagator
         auto propagator = thames::propagators::CowellPropagatorPolynomial<T, P>(mu, perturbation, factors);
         // Propagate
-        states_propagated = propagator.propagate(tstart, tend, tstep, states, parameters.propagator, statetype, degree);
+        states_propagated = propagator.propagate(tvec, tstep, states, parameters.propagator, statetype, degree);
     } else if (parameters.propagator.equations == "GEqOE") {
         // Set up propagator
         auto propagator = thames::propagators::GEqOEPropagatorPolynomial<T, P>(mu, perturbation, factors);
         // Propagate
-        states_propagated = propagator.propagate(tstart, tend, tstep, states, parameters.propagator, statetype, degree);        
+        states_propagated = propagator.propagate(tvec, tstep, states, parameters.propagator, statetype, degree);        
     } else {
         throw std::runtime_error("Unsupported propagator requested");
     }
@@ -221,10 +239,12 @@ thames::settings::Parameters<T> propagate(const thames::settings::Parameters<T>&
 
     // Update output states
     thames::settings::StateParameters<T> state_output;
-    state_output.datetime = tend;
-    state_output.states = states_propagated;
-    state_output.statetype = parameters.states[0].statetype;
-    parameters_output.states.push_back(state_output);
+    for (std::size_t ii=1; ii<states_propagated.size(); ii++) {
+        state_output.datetime = tvec[ii];
+        state_output.states = states_propagated[ii];
+        state_output.statetype = parameters.states[0].statetype;
+        parameters_output.states.push_back(state_output);
+    }
 
     // Return parameters
     return parameters_output;

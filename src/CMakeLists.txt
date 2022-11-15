@@ -24,10 +24,10 @@
 # TODO: cleaner implementation
 set(THAMES_SOURCE
     # Conversions
-    conversions/cartesian.cpp
     conversions/dimensional.cpp
     conversions/geqoe.cpp
     conversions/keplerian.cpp
+    conversions/polynomial.cpp
     conversions/universal.cpp
     # Input/output
     io/json.cpp
@@ -64,11 +64,11 @@ set(THAMES_HEADERS
     ../include/constants/earth.h
     ../include/constants/statetypes.h
     # Conversions
-    ../include/conversions/cartesian.h
     ../include/conversions/conversions.h
     ../include/conversions/dimensional.h
     ../include/conversions/geqoe.h
     ../include/conversions/keplerian.h
+    ../include/conversions/polynomial.h
     ../include/conversions/universal.h
     # Input/output
     ../include/io/io.h

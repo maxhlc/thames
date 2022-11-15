@@ -99,40 +99,6 @@ namespace thames::perturbations::atmosphere::drag {
              */
             ~Drag();
 
-            ////////////
-            // Arrays //
-            ////////////
-
-            /**
-             * @brief Calculate perturbing acceleration resulting from drag. 
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-05-17
-             * 
-             * @param[in] t Current physical time.
-             * @param[in] R Position vector.
-             * @param[in] V Velocity vector.
-             * @return std::array<T, 3> Total perturbing acceleration due to drag.
-             */
-            std::array<T, 3> acceleration_total(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const override;
-
-            /**
-             * @brief Calculate perturbing acceleration resulting from drag. 
-             * 
-             * @author Max Hallgarten La Casta
-             * @date 2022-08-02
-             * 
-             * @param[in] t Current physical time.
-             * @param[in] R Position vector.
-             * @param[in] V Velocity vector.
-             * @return std::array<T, 3> Non-potential perturbing acceleration due to drag.
-             */
-            std::array<T, 3> acceleration_nonpotential(const T& t, const std::array<T, 3>& R, const std::array<T, 3>& V) const override;
-
-            /////////////
-            // Vectors //
-            /////////////
-
             /**
              * @brief Calculate perturbing acceleration resulting from drag. 
              * 
@@ -230,10 +196,6 @@ namespace thames::perturbations::atmosphere::drag {
              * 
              */
             ~DragPolynomial();
-
-            ////////////
-            // Arrays //
-            ////////////
 
             /**
              * @brief Calculate perturbing acceleration resulting from drag. 

@@ -77,20 +77,21 @@ $(function() {
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;../../external/smart-uq/include/Polynomial/smartuq_polynomial.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="statetypes_8h_source.html">../constants/statetypes.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="dimensional_8h_source.html">../../include/conversions/dimensional.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="baseperturbation_8h_source.html">../perturbations/baseperturbation.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for universal.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="universal_8h__incl.png" border="0" usemap="#include_2conversions_2universal_8h" alt=""/></div>
 <map name="include_2conversions_2universal_8h" id="include_2conversions_2universal_8h">
-<area shape="rect" title=" " alt="" coords="250,5,400,47"/>
-<area shape="rect" title=" " alt="" coords="120,273,176,300"/>
-<area shape="rect" title=" " alt="" coords="33,199,110,225"/>
-<area shape="rect" title=" " alt="" coords="399,273,462,300"/>
-<area shape="rect" title=" " alt="" coords="356,95,528,151"/>
-<area shape="rect" href="statetypes_8h.html" title=" " alt="" coords="552,109,735,136"/>
-<area shape="rect" href="baseperturbation_8h.html" title=" " alt="" coords="84,109,332,136"/>
-<area shape="rect" href="dimensional_8h.html" title=" " alt="" coords="185,199,393,225"/>
+<area shape="rect" title=" " alt="" coords="326,5,477,47"/>
+<area shape="rect" title=" " alt="" coords="90,288,146,315"/>
+<area shape="rect" title=" " alt="" coords="335,206,412,233"/>
+<area shape="rect" title=" " alt="" coords="262,288,325,315"/>
+<area shape="rect" title=" " alt="" coords="490,95,662,151"/>
+<area shape="rect" href="statetypes_8h.html" title=" " alt="" coords="686,109,869,136"/>
+<area shape="rect" href="dimensional_8h.html" title=" " alt="" coords="30,199,205,240"/>
+<area shape="rect" href="baseperturbation_8h.html" title=" " alt="" coords="116,109,364,136"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -120,23 +121,35 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3a064a4e72df71c10d51e567182e9247"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a3a064a4e72df71c10d51e567182e9247"><td class="memTemplItemLeft" align="right" valign="top">std::array&lt; T, 6 &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1universal.html#a3a064a4e72df71c10d51e567182e9247">thames::conversions::universal::convert_state</a> (const T &amp;t, const std::array&lt; T, 6 &gt; &amp;state, const T &amp;mu, const StateTypes &amp;statetype1, const StateTypes &amp;statetype2, const std::shared_ptr&lt; const BasePerturbation&lt; T &gt;&gt; perturbation)</td></tr>
-<tr class="memdesc:a3a064a4e72df71c10d51e567182e9247"><td class="mdescLeft">&#160;</td><td class="mdescRight">Universal state conversion.  <a href="namespacethames_1_1conversions_1_1universal.html#a3a064a4e72df71c10d51e567182e9247">More...</a><br /></td></tr>
-<tr class="separator:a3a064a4e72df71c10d51e567182e9247"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bbca76e3baedda34d9f850835df7946"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:a8bbca76e3baedda34d9f850835df7946"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1universal.html#a8bbca76e3baedda34d9f850835df7946">thames::conversions::universal::convert_state</a> (const T &amp;t, const std::vector&lt; T &gt; &amp;state, const T &amp;mu, const StateTypes &amp;statetype1, const StateTypes &amp;statetype2, const std::shared_ptr&lt; const BasePerturbation&lt; T &gt;&gt; perturbation)</td></tr>
 <tr class="memdesc:a8bbca76e3baedda34d9f850835df7946"><td class="mdescLeft">&#160;</td><td class="mdescRight">Universal state conversion.  <a href="namespacethames_1_1conversions_1_1universal.html#a8bbca76e3baedda34d9f850835df7946">More...</a><br /></td></tr>
 <tr class="separator:a8bbca76e3baedda34d9f850835df7946"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad03b043cc07e8870d517d34c5892420d"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ad03b043cc07e8870d517d34c5892420d"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1universal.html#ad03b043cc07e8870d517d34c5892420d">thames::conversions::universal::nondimensionalise_state</a> (const std::vector&lt; T &gt; &amp;state, const StateTypes &amp;statetype, const DimensionalFactors&lt; T &gt; &amp;factors)</td></tr>
+<tr class="memdesc:ad03b043cc07e8870d517d34c5892420d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Universal state non-dimensionalisation.  <a href="namespacethames_1_1conversions_1_1universal.html#ad03b043cc07e8870d517d34c5892420d">More...</a><br /></td></tr>
+<tr class="separator:ad03b043cc07e8870d517d34c5892420d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65b6056a8f141160dd16b015cb96dd3d"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a65b6056a8f141160dd16b015cb96dd3d"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1universal.html#a65b6056a8f141160dd16b015cb96dd3d">thames::conversions::universal::dimensionalise_state</a> (const std::vector&lt; T &gt; &amp;statend, const StateTypes &amp;statetype, const DimensionalFactors&lt; T &gt; &amp;factors)</td></tr>
+<tr class="memdesc:a65b6056a8f141160dd16b015cb96dd3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Universal state dimensionalisation.  <a href="namespacethames_1_1conversions_1_1universal.html#a65b6056a8f141160dd16b015cb96dd3d">More...</a><br /></td></tr>
+<tr class="separator:a65b6056a8f141160dd16b015cb96dd3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2856997d395ffbdb794665abf1f08feb"><td class="memTemplParams" colspan="2">template&lt;class T , template&lt; class &gt; class P&gt; </td></tr>
 <tr class="memitem:a2856997d395ffbdb794665abf1f08feb"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; P&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1universal.html#a2856997d395ffbdb794665abf1f08feb">thames::conversions::universal::convert_state</a> (const T &amp;t, const std::vector&lt; P&lt; T &gt;&gt; &amp;state, const T &amp;mu, const StateTypes &amp;statetype1, const StateTypes &amp;statetype2, const std::shared_ptr&lt; const BasePerturbationPolynomial&lt; T, P &gt;&gt; perturbation)</td></tr>
 <tr class="memdesc:a2856997d395ffbdb794665abf1f08feb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Universal state conversion.  <a href="namespacethames_1_1conversions_1_1universal.html#a2856997d395ffbdb794665abf1f08feb">More...</a><br /></td></tr>
 <tr class="separator:a2856997d395ffbdb794665abf1f08feb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3874da697f677ffc185b558d7fe43883"><td class="memTemplParams" colspan="2">template&lt;class T , template&lt; class &gt; class P&gt; </td></tr>
+<tr class="memitem:a3874da697f677ffc185b558d7fe43883"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; P&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1universal.html#a3874da697f677ffc185b558d7fe43883">thames::conversions::universal::nondimensionalise_state</a> (const std::vector&lt; P&lt; T &gt;&gt; &amp;state, const StateTypes &amp;statetype, const DimensionalFactors&lt; T &gt; &amp;factors)</td></tr>
+<tr class="memdesc:a3874da697f677ffc185b558d7fe43883"><td class="mdescLeft">&#160;</td><td class="mdescRight">Universal state non-dimensionalisation.  <a href="namespacethames_1_1conversions_1_1universal.html#a3874da697f677ffc185b558d7fe43883">More...</a><br /></td></tr>
+<tr class="separator:a3874da697f677ffc185b558d7fe43883"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a56235fd34ebe0aad9ec3f43d8500ff"><td class="memTemplParams" colspan="2">template&lt;class T , template&lt; class &gt; class P&gt; </td></tr>
+<tr class="memitem:a4a56235fd34ebe0aad9ec3f43d8500ff"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; P&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1universal.html#a4a56235fd34ebe0aad9ec3f43d8500ff">thames::conversions::universal::dimensionalise_state</a> (const std::vector&lt; P&lt; T &gt;&gt; &amp;statend, const StateTypes &amp;statetype, const DimensionalFactors&lt; T &gt; &amp;factors)</td></tr>
+<tr class="memdesc:a4a56235fd34ebe0aad9ec3f43d8500ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Universal state dimensionalisation.  <a href="namespacethames_1_1conversions_1_1universal.html#a4a56235fd34ebe0aad9ec3f43d8500ff">More...</a><br /></td></tr>
+<tr class="separator:a4a56235fd34ebe0aad9ec3f43d8500ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 26 2022 15:01:03 for THAMES by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 15 2022 10:25:57 for THAMES by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>
