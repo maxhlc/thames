@@ -140,7 +140,7 @@ class thames::propagators::basepropagator::BasePropagatorPolynomial&lt; T, P &gt
 
 <p>Base propagator abstract object for polynomial propagations. </p>
 <dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-06-02</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-09-28</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Numeric type. </td></tr>
@@ -149,7 +149,7 @@ class thames::propagators::basepropagator::BasePropagatorPolynomial&lt; T, P &gt
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="basepropagator_8h_source.html#l00309">309</a> of file <a class="el" href="basepropagator_8h_source.html">basepropagator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="basepropagator_8h_source.html#l00273">273</a> of file <a class="el" href="basepropagator_8h_source.html">basepropagator.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae471813d3f9a740e4005f997f0b9d1a9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae471813d3f9a740e4005f997f0b9d1a9">&#9670;&nbsp;</a></span>BasePropagatorPolynomial()</h2>
@@ -211,7 +211,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="basepropagator_8cpp_source.html#l00288">288</a> of file <a class="el" href="basepropagator_8cpp_source.html">basepropagator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="basepropagator_8cpp_source.html#l00213">213</a> of file <a class="el" href="basepropagator_8cpp_source.html">basepropagator.cpp</a>.</p>
 
 </div>
 </div>
@@ -265,7 +265,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 <p>Propagation method (with intermediate output). </p>
 <dl class="section note"><dt>Note</dt><dd>A separate propagation is called for each intermediate output interval, therefore any required state conversions occur multiple times.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-07-06</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-11-04</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">tvec</td><td>Vector of physical propagation times. </td></tr>
@@ -278,7 +278,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;std::vector&lt;P&lt;T&gt;&gt;&gt; Final state. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="basepropagator_8cpp_source.html#l00358">358</a> of file <a class="el" href="basepropagator_8cpp_source.html">basepropagator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="basepropagator_8cpp_source.html#l00282">282</a> of file <a class="el" href="basepropagator_8cpp_source.html">basepropagator.cpp</a>.</p>
 
 </div>
 </div>
@@ -335,9 +335,8 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 </div><div class="memdoc">
 
 <p>Propagation method for sets of points (with intermediate output). </p>
-<dl class="section note"><dt>Note</dt><dd>A separate propagation is called for each intermediate output interval, therefore any required state conversions occur multiple times, plus the polynomials are reconstructed at each output timestep.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-07-06</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-11-04</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">tvec</td><td>Vector of physical propagation times. </td></tr>
@@ -351,7 +350,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;std::vector&lt;std::vector&lt;T&gt;&gt;&gt; Final state. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="basepropagator_8cpp_source.html#l00399">399</a> of file <a class="el" href="basepropagator_8cpp_source.html">basepropagator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="basepropagator_8cpp_source.html#l00324">324</a> of file <a class="el" href="basepropagator_8cpp_source.html">basepropagator.cpp</a>.</p>
 
 </div>
 </div>
@@ -415,7 +414,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 
 <p>Propagation method for sets of points. </p>
 <dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-07-08</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-09-28</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">tstart</td><td>Propagation start time in physical time. </td></tr>
@@ -430,7 +429,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;std::vector&lt;T&gt;&gt; Final state. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="basepropagator_8cpp_source.html#l00375">375</a> of file <a class="el" href="basepropagator_8cpp_source.html">basepropagator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="basepropagator_8cpp_source.html#l00300">300</a> of file <a class="el" href="basepropagator_8cpp_source.html">basepropagator.cpp</a>.</p>
 
 </div>
 </div>
@@ -488,7 +487,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 
 <p>Propagation method. </p>
 <dl class="section author"><dt>Author</dt><dd>Max Hallgarten La Casta </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2022-06-02</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-11-04</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">tstart</td><td>Propagation start time in physical time. </td></tr>
@@ -502,7 +501,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;P&lt;T&gt;&gt; Final state. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="basepropagator_8cpp_source.html#l00293">293</a> of file <a class="el" href="basepropagator_8cpp_source.html">basepropagator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="basepropagator_8cpp_source.html#l00218">218</a> of file <a class="el" href="basepropagator_8cpp_source.html">basepropagator.cpp</a>.</p>
 
 </div>
 </div>
@@ -531,7 +530,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 
 <p>Dynamics object. </p>
 
-<p class="definition">Definition at line <a class="el" href="basepropagator_8h_source.html#l00323">323</a> of file <a class="el" href="basepropagator_8h_source.html">basepropagator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="basepropagator_8h_source.html#l00287">287</a> of file <a class="el" href="basepropagator_8h_source.html">basepropagator.h</a>.</p>
 
 </div>
 </div>
@@ -559,7 +558,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 
 <p>Dimensional factors. </p>
 
-<p class="definition">Definition at line <a class="el" href="basepropagator_8h_source.html#l00320">320</a> of file <a class="el" href="basepropagator_8h_source.html">basepropagator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="basepropagator_8h_source.html#l00284">284</a> of file <a class="el" href="basepropagator_8h_source.html">basepropagator.h</a>.</p>
 
 </div>
 </div>
@@ -587,7 +586,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 
 <p>Gravitational parameter. </p>
 
-<p class="definition">Definition at line <a class="el" href="basepropagator_8h_source.html#l00314">314</a> of file <a class="el" href="basepropagator_8h_source.html">basepropagator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="basepropagator_8h_source.html#l00278">278</a> of file <a class="el" href="basepropagator_8h_source.html">basepropagator.h</a>.</p>
 
 </div>
 </div>
@@ -615,7 +614,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 
 <p>Perturbation object. </p>
 
-<p class="definition">Definition at line <a class="el" href="basepropagator_8h_source.html#l00317">317</a> of file <a class="el" href="basepropagator_8h_source.html">basepropagator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="basepropagator_8h_source.html#l00281">281</a> of file <a class="el" href="basepropagator_8h_source.html">basepropagator.h</a>.</p>
 
 </div>
 </div>
@@ -643,7 +642,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 
 <p>State type for propagation. </p>
 
-<p class="definition">Definition at line <a class="el" href="basepropagator_8h_source.html#l00326">326</a> of file <a class="el" href="basepropagator_8h_source.html">basepropagator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="basepropagator_8h_source.html#l00290">290</a> of file <a class="el" href="basepropagator_8h_source.html">basepropagator.h</a>.</p>
 
 </div>
 </div>
@@ -654,7 +653,7 @@ template&lt;class T , template&lt; class &gt; class P&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 26 2022 15:01:03 for THAMES by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 15 2022 10:25:58 for THAMES by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>

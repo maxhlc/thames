@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>THAMES: src/io/polynomial.cpp File Reference</title>
+<title>THAMES: src/conversions/polynomial.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_c184e51c84f2c3f0345bbc8a0d75d3e1.html">io</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7525d6432cd0d075dffa0aef6bc30566.html">conversions</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -72,28 +72,18 @@ $(function() {
 <div class="title">polynomial.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;fstream&gt;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;iomanip&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
+<div class="textblock"><code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;../../external/smart-uq/include/Polynomial/smartuq_polynomial.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="polynomial_8h_source.html">../../include/io/polynomial.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="statetypes_8h_source.html">../../include/constants/statetypes.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="polynomial_8h_source.html">../../include/conversions/polynomial.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for polynomial.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="polynomial_8cpp__incl.png" border="0" usemap="#src_2io_2polynomial_8cpp" alt=""/></div>
-<map name="src_2io_2polynomial_8cpp" id="src_2io_2polynomial_8cpp">
-<area shape="rect" title=" " alt="" coords="307,5,468,32"/>
-<area shape="rect" title=" " alt="" coords="5,95,79,121"/>
-<area shape="rect" title=" " alt="" coords="103,95,183,121"/>
-<area shape="rect" title=" " alt="" coords="207,95,282,121"/>
-<area shape="rect" title=" " alt="" coords="324,184,387,211"/>
-<area shape="rect" title=" " alt="" coords="437,184,495,211"/>
-<area shape="rect" title=" " alt="" coords="680,80,852,136"/>
-<area shape="rect" href="polynomial_8h.html" title=" " alt="" coords="356,95,555,121"/>
-<area shape="rect" href="statetypes_8h.html" title=" " alt="" coords="540,184,723,211"/>
+<div class="center"><img src="polynomial_8cpp__incl.png" border="0" usemap="#src_2conversions_2polynomial_8cpp" alt=""/></div>
+<map name="src_2conversions_2polynomial_8cpp" id="src_2conversions_2polynomial_8cpp">
+<area shape="rect" title=" " alt="" coords="65,5,291,32"/>
+<area shape="rect" title=" " alt="" coords="5,95,68,121"/>
+<area shape="rect" title=" " alt="" coords="92,80,264,136"/>
+<area shape="rect" href="polynomial_8h.html" title=" " alt="" coords="288,87,463,129"/>
 </map>
 </div>
 </div>
@@ -103,34 +93,52 @@ Include dependency graph for polynomial.cpp:</div>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacethames"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames.html">thames</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespacethames_1_1io"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io.html">thames::io</a></td></tr>
+<tr class="memitem:namespacethames_1_1conversions"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions.html">thames::conversions</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespacethames_1_1io_1_1polynomial"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1polynomial.html">thames::io::polynomial</a></td></tr>
+<tr class="memitem:namespacethames_1_1conversions_1_1polynomial"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1polynomial.html">thames::conversions::polynomial</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa8fa31beffa474403c180387cbbae409"><td class="memTemplParams" colspan="2">template&lt;class T , template&lt; class &gt; class P&gt; </td></tr>
-<tr class="memitem:aa8fa31beffa474403c180387cbbae409"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1polynomial.html#aa8fa31beffa474403c180387cbbae409">thames::io::polynomial::load</a> (const std::string filepath, T &amp;tstart, T &amp;tend, int &amp;scid, <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> &amp;statetype, int &amp;degree, T &amp;atol, T &amp;rtol, std::vector&lt; P&lt; T &gt;&gt; &amp;polynomials)</td></tr>
-<tr class="memdesc:aa8fa31beffa474403c180387cbbae409"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load polynomial coefficients.  <a href="namespacethames_1_1io_1_1polynomial.html#aa8fa31beffa474403c180387cbbae409">More...</a><br /></td></tr>
-<tr class="separator:aa8fa31beffa474403c180387cbbae409"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3218240f08de686afccf3a42f7feeac5"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1polynomial.html#a3218240f08de686afccf3a42f7feeac5">thames::io::polynomial::load</a> (const std::string, double &amp;, double &amp;, int &amp;, <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> &amp;, int &amp;, double &amp;, double &amp;, std::vector&lt; taylor_polynomial&lt; double &gt;&gt; &amp;)</td></tr>
-<tr class="separator:a3218240f08de686afccf3a42f7feeac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71b8ca5958c4240173af91321e6cae65"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1polynomial.html#a71b8ca5958c4240173af91321e6cae65">thames::io::polynomial::load</a> (const std::string, double &amp;, double &amp;, int &amp;, <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> &amp;, int &amp;, double &amp;, double &amp;, std::vector&lt; chebyshev_polynomial&lt; double &gt;&gt; &amp;)</td></tr>
-<tr class="separator:a71b8ca5958c4240173af91321e6cae65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0c283cf7a9b2c259c6991e98ba383c3"><td class="memTemplParams" colspan="2">template&lt;class T , template&lt; class &gt; class P&gt; </td></tr>
-<tr class="memitem:ae0c283cf7a9b2c259c6991e98ba383c3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1polynomial.html#ae0c283cf7a9b2c259c6991e98ba383c3">thames::io::polynomial::save</a> (const std::string filepath, const T &amp;tstart, const T &amp;tend, const int &amp;scid, const <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> &amp;statetype, const int &amp;degree, const T &amp;atol, const T &amp;rtol, const std::vector&lt; P&lt; T &gt;&gt; &amp;polynomials, const unsigned int precision=15)</td></tr>
-<tr class="memdesc:ae0c283cf7a9b2c259c6991e98ba383c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save polynomial coefficients.  <a href="namespacethames_1_1io_1_1polynomial.html#ae0c283cf7a9b2c259c6991e98ba383c3">More...</a><br /></td></tr>
-<tr class="separator:ae0c283cf7a9b2c259c6991e98ba383c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a336f9df55a4072c6146a14c63107972f"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1polynomial.html#a336f9df55a4072c6146a14c63107972f">thames::io::polynomial::save</a> (const std::string, const double &amp;, const double &amp;, const int &amp;, const <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> &amp;, const int &amp;, const double &amp;, const double &amp;, const std::vector&lt; taylor_polynomial&lt; double &gt;&gt; &amp;, const unsigned int)</td></tr>
-<tr class="separator:a336f9df55a4072c6146a14c63107972f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fbe3007ff6e6e8cd3c0e22886312236"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1io_1_1polynomial.html#a7fbe3007ff6e6e8cd3c0e22886312236">thames::io::polynomial::save</a> (const std::string, const double &amp;, const double &amp;, const int &amp;, const <a class="el" href="namespacethames_1_1constants_1_1statetypes.html#a559f5b2d50449e79b1c3df82bdd49323">thames::constants::statetypes::StateTypes</a> &amp;, const int &amp;, const double &amp;, const double &amp;, const std::vector&lt; chebyshev_polynomial&lt; double &gt;&gt; &amp;, const unsigned int)</td></tr>
-<tr class="separator:a7fbe3007ff6e6e8cd3c0e22886312236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae93c1893fd527b3953476f1a5756b7b9"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ae93c1893fd527b3953476f1a5756b7b9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1polynomial.html#ae93c1893fd527b3953476f1a5756b7b9">thames::conversions::polynomial::states_to_bounds</a> (const std::vector&lt; std::vector&lt; T &gt;&gt; &amp;states, std::vector&lt; T &gt; &amp;lower, std::vector&lt; T &gt; &amp;upper)</td></tr>
+<tr class="memdesc:ae93c1893fd527b3953476f1a5756b7b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate lower and upper bounds for each state variable in a set of state vectors.  <a href="namespacethames_1_1conversions_1_1polynomial.html#ae93c1893fd527b3953476f1a5756b7b9">More...</a><br /></td></tr>
+<tr class="separator:ae93c1893fd527b3953476f1a5756b7b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d8714bb2a61480db5897fc568deb6e3"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1polynomial.html#a2d8714bb2a61480db5897fc568deb6e3">thames::conversions::polynomial::states_to_bounds</a> (const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;states, std::vector&lt; double &gt; &amp;lower, std::vector&lt; double &gt; &amp;upper)</td></tr>
+<tr class="separator:a2d8714bb2a61480db5897fc568deb6e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10d676544faede84117e766cf514d1e2"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a10d676544faede84117e766cf514d1e2"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1polynomial.html#a10d676544faede84117e766cf514d1e2">thames::conversions::polynomial::state_to_sample</a> (const std::vector&lt; T &gt; &amp;state, const std::vector&lt; T &gt; &amp;lower, const std::vector&lt; T &gt; &amp;upper)</td></tr>
+<tr class="memdesc:a10d676544faede84117e766cf514d1e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate sample vector of a state, given lower and upper bounds.  <a href="namespacethames_1_1conversions_1_1polynomial.html#a10d676544faede84117e766cf514d1e2">More...</a><br /></td></tr>
+<tr class="separator:a10d676544faede84117e766cf514d1e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeadfda7d01e543b8dd9caf5fc0fcc019"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1polynomial.html#aeadfda7d01e543b8dd9caf5fc0fcc019">thames::conversions::polynomial::state_to_sample</a> (const std::vector&lt; double &gt; &amp;, const std::vector&lt; double &gt; &amp;, const std::vector&lt; double &gt; &amp;)</td></tr>
+<tr class="separator:aeadfda7d01e543b8dd9caf5fc0fcc019"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab635f13f480983f130019c7bf3387052"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ab635f13f480983f130019c7bf3387052"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1polynomial.html#ab635f13f480983f130019c7bf3387052">thames::conversions::polynomial::state_to_sample</a> (const std::vector&lt; std::vector&lt; T &gt;&gt; &amp;states, const std::vector&lt; T &gt; &amp;lower, const std::vector&lt; T &gt; &amp;upper)</td></tr>
+<tr class="memdesc:ab635f13f480983f130019c7bf3387052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate sample vectors of states, given lower and upper bounds.  <a href="namespacethames_1_1conversions_1_1polynomial.html#ab635f13f480983f130019c7bf3387052">More...</a><br /></td></tr>
+<tr class="separator:ab635f13f480983f130019c7bf3387052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad53915ed9e33e6404f4977e37c32a4ab"><td class="memItemLeft" align="right" valign="top">template std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1polynomial.html#ad53915ed9e33e6404f4977e37c32a4ab">thames::conversions::polynomial::state_to_sample</a> (const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;, const std::vector&lt; double &gt; &amp;, const std::vector&lt; double &gt; &amp;)</td></tr>
+<tr class="separator:ad53915ed9e33e6404f4977e37c32a4ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6afa91d78ceda797feeb410e42d016c3"><td class="memTemplParams" colspan="2">template&lt;class T , template&lt; class &gt; class P&gt; </td></tr>
+<tr class="memitem:a6afa91d78ceda797feeb410e42d016c3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1polynomial.html#a6afa91d78ceda797feeb410e42d016c3">thames::conversions::polynomial::states_to_polynomial</a> (const std::vector&lt; T &gt; &amp;state, const std::vector&lt; T &gt; &amp;stateunc, int degree, std::vector&lt; P&lt; T &gt;&gt; &amp;statepolynomial)</td></tr>
+<tr class="memdesc:a6afa91d78ceda797feeb410e42d016c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate vector of polynomials representing the state, and its uncertainty.  <a href="namespacethames_1_1conversions_1_1polynomial.html#a6afa91d78ceda797feeb410e42d016c3">More...</a><br /></td></tr>
+<tr class="separator:a6afa91d78ceda797feeb410e42d016c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b775605de1722cd4ca475a8436e8a52"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1polynomial.html#a3b775605de1722cd4ca475a8436e8a52">thames::conversions::polynomial::states_to_polynomial</a> (const std::vector&lt; double &gt; &amp;, const std::vector&lt; double &gt; &amp;, int, std::vector&lt; taylor_polynomial&lt; double &gt;&gt; &amp;)</td></tr>
+<tr class="separator:a3b775605de1722cd4ca475a8436e8a52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63d3cc3d3c4700ee29eb9aadadeae637"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1polynomial.html#a63d3cc3d3c4700ee29eb9aadadeae637">thames::conversions::polynomial::states_to_polynomial</a> (const std::vector&lt; double &gt; &amp;, const std::vector&lt; double &gt; &amp;, int, std::vector&lt; chebyshev_polynomial&lt; double &gt;&gt; &amp;)</td></tr>
+<tr class="separator:a63d3cc3d3c4700ee29eb9aadadeae637"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af096db1605f5be032b0f7e7fec229ff7"><td class="memTemplParams" colspan="2">template&lt;class T , template&lt; class &gt; class P&gt; </td></tr>
+<tr class="memitem:af096db1605f5be032b0f7e7fec229ff7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1polynomial.html#af096db1605f5be032b0f7e7fec229ff7">thames::conversions::polynomial::states_to_polynomial</a> (const std::vector&lt; std::vector&lt; T &gt;&gt; &amp;states, int degree, std::vector&lt; P&lt; T &gt;&gt; &amp;statepolynomial, std::vector&lt; T &gt; &amp;lower, std::vector&lt; T &gt; &amp;upper)</td></tr>
+<tr class="memdesc:af096db1605f5be032b0f7e7fec229ff7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate vector of polynomials representing the state, and its uncertainty, from a set of states.  <a href="namespacethames_1_1conversions_1_1polynomial.html#af096db1605f5be032b0f7e7fec229ff7">More...</a><br /></td></tr>
+<tr class="separator:af096db1605f5be032b0f7e7fec229ff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaabf6f0d0f508171bdbe957fe5ade3c3"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1polynomial.html#aaabf6f0d0f508171bdbe957fe5ade3c3">thames::conversions::polynomial::states_to_polynomial</a> (const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;, int, std::vector&lt; taylor_polynomial&lt; double &gt;&gt; &amp;, std::vector&lt; double &gt; &amp;, std::vector&lt; double &gt; &amp;)</td></tr>
+<tr class="separator:aaabf6f0d0f508171bdbe957fe5ade3c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbf59935a10d3736b8175b2ac297905d"><td class="memItemLeft" align="right" valign="top">template void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacethames_1_1conversions_1_1polynomial.html#afbf59935a10d3736b8175b2ac297905d">thames::conversions::polynomial::states_to_polynomial</a> (const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;, int, std::vector&lt; chebyshev_polynomial&lt; double &gt;&gt; &amp;, std::vector&lt; double &gt; &amp;, std::vector&lt; double &gt; &amp;)</td></tr>
+<tr class="separator:afbf59935a10d3736b8175b2ac297905d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jul 8 2022 11:16:53 for THAMES by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 15 2022 10:25:57 for THAMES by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>
